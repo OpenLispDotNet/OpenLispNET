@@ -5,6 +5,6 @@ namespace OpenLisp.Core.Interfaces
 {
     public interface ILispExpression<T>
     {
-        IList<ILispSymbol<T>> LispExpression { get; set; }
+        IList<ILispSymbol<T>> OpenLispExpression { get; set; }
     }
 }
