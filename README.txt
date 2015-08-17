@@ -19,3 +19,8 @@ Please read the following items:
 
     * https://github.com/kanaka/mal/blob/master/cs/
 	* http://www-formal.stanford.edu/jmc/recursive/recursive.html
+
+Requirements
+============
+    * .NET 4.5.2+
+	* Roslyn
