@@ -51,12 +51,14 @@
     <Compile Include="DataTypes\Errors\Throwable\OpenLispException.cs" />
     <Compile Include="DataTypes\OpenLispAtom.cs" />
     <Compile Include="DataTypes\OpenLispConstant.cs" />
+    <Compile Include="DataTypes\OpenLispFunc.cs" />
     <Compile Include="DataTypes\OpenLispHashMap.cs" />
     <Compile Include="DataTypes\OpenLispInt.cs" />
     <Compile Include="DataTypes\OpenLispList.cs" />
     <Compile Include="DataTypes\OpenLispString.cs" />
     <Compile Include="DataTypes\OpenLispSymbol.cs" />
     <Compile Include="DataTypes\OpenLispVector.cs" />
+    <Compile Include="Env.cs" />
     <Compile Include="Interfaces\ILispExpression.cs" />
     <Compile Include="Interfaces\ILispSymbol.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
