@@ -54,6 +54,7 @@
     <Compile Include="DataTypes\OpenLispList.cs" />
     <Compile Include="DataTypes\OpenLispString.cs" />
     <Compile Include="DataTypes\OpenLispSymbol.cs" />
+    <Compile Include="DataTypes\OpenLispVector.cs" />
     <Compile Include="Interfaces\ILispExpression.cs" />
     <Compile Include="Interfaces\ILispSymbol.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
