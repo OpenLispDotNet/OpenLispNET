@@ -50,6 +50,7 @@
     <Compile Include="DataTypes\Errors\OpenLispThrowable.cs" />
     <Compile Include="DataTypes\Errors\Throwable\OpenLispException.cs" />
     <Compile Include="DataTypes\OpenLispConstant.cs" />
+    <Compile Include="DataTypes\OpenLispHashMap.cs" />
     <Compile Include="DataTypes\OpenLispInt.cs" />
     <Compile Include="DataTypes\OpenLispList.cs" />
     <Compile Include="DataTypes\OpenLispString.cs" />
