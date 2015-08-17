@@ -40,14 +40,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataTypes\Errors\OpenLispContinue.cs" />
+    <Compile Include="DataTypes\Errors\OpenLispError.cs" />
+    <Compile Include="DataTypes\Errors\OpenLispThrowable.cs" />
+    <Compile Include="DataTypes\Errors\Throwable\OpenLispException.cs" />
     <Compile Include="Interfaces\ILispExpression.cs" />
     <Compile Include="Interfaces\ILispSymbol.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StaticClasses\OpenLispSymbols.cs" />
+    <Compile Include="StaticClasses\OpenLispTypes.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AbstractClasses\" />
-    <Folder Include="DataTypes\" />
     <Folder Include="Enums\" />
     <Folder Include="SealedClasses\" />
   </ItemGroup>
