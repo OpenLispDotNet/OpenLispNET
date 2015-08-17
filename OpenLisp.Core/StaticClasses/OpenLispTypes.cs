@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using DeepEqual.Syntax;
 
 namespace OpenLisp.Core.StaticClasses
 {
@@ -8,6 +10,12 @@ namespace OpenLisp.Core.StaticClasses
         {
             Type typeA = a.GetType();
             Type typeB = b.GetType();
+
+            if (!(typeA == typeB) || !(a.IsDeepEqual(b)))
+            {
+                return false;
+            }
+            return true;
         }
     }
 }
