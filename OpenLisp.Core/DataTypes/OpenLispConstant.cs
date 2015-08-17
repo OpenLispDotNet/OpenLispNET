@@ -6,6 +6,8 @@ namespace OpenLisp.Core.DataTypes
     {
         private readonly string _value;
 
+        public string Value => _value;
+
         public OpenLispConstant(string name)
         {
             _value = name;
