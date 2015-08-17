@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using OpenLisp.Core.StaticClasses;
 
 namespace OpenLisp.Core.Tests
 {
@@ -9,7 +10,15 @@ namespace OpenLisp.Core.Tests
         [TestMethod]
         public static void OpenLispEqualBTest()
         {
+            // Arrange
+            string testString1 = "This is a test!";
+            string testString2 = "This is a test!";
 
+            // Act
+            var truth = OpenLispTypes.OpenLispEqualB(testString1, testString2);
+
+            // Assert
+            Assert.AreEqual(true, truth);
         }
     }
 }

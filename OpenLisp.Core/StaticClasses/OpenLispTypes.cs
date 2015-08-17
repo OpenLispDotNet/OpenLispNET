@@ -11,7 +11,7 @@ namespace OpenLisp.Core.StaticClasses
             Type typeA = a.GetType();
             Type typeB = b.GetType();
 
-            if (!(typeA == typeB) || !(a.IsDeepEqual(b)))
+            if (!(typeA == typeB) && !(a.IsDeepEqual(b)))
             {
                 return false;
             }
