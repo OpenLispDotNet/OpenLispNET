@@ -7,9 +7,9 @@ namespace OpenLisp.Core
 {
     public class Env
     {
-        private Env _outer = null;
+        private readonly Env _outer = null;
 
-        private Dictionary<string, OpenLispVal> _data = new Dictionary<string, OpenLispVal>();
+        private readonly Dictionary<string, OpenLispVal> _data = new Dictionary<string, OpenLispVal>();
 
         public Env(Env outer)
         {
