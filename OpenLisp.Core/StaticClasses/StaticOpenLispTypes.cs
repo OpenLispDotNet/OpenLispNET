@@ -4,7 +4,7 @@ using DeepEqual.Syntax;
 
 namespace OpenLisp.Core.StaticClasses
 {
-    public static class OpenLispTypes
+    public static class StaticOpenLispTypes
     {
         public static bool OpenLispEqualB(object a, object b)
         {

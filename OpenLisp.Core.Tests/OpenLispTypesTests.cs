@@ -15,7 +15,7 @@ namespace OpenLisp.Core.Tests
             string testString2 = "This is a test!";
 
             // Act
-            var truth = OpenLispTypes.OpenLispEqualB(testString1, testString2);
+            var truth = StaticOpenLispTypes.OpenLispEqualB(testString1, testString2);
 
             // Assert
             Assert.AreEqual(true, truth);
