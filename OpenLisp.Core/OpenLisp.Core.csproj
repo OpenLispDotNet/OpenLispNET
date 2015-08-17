@@ -49,6 +49,7 @@
     <Compile Include="DataTypes\Errors\OpenLispError.cs" />
     <Compile Include="DataTypes\Errors\OpenLispThrowable.cs" />
     <Compile Include="DataTypes\Errors\Throwable\OpenLispException.cs" />
+    <Compile Include="DataTypes\OpenLispConstant.cs" />
     <Compile Include="Interfaces\ILispExpression.cs" />
     <Compile Include="Interfaces\ILispSymbol.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

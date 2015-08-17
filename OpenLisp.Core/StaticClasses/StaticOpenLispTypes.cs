@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using DeepEqual.Syntax;
+using OpenLisp.Core.DataTypes;
 
 namespace OpenLisp.Core.StaticClasses
 {
@@ -17,5 +18,11 @@ namespace OpenLisp.Core.StaticClasses
             }
             return true;
         }
+
+        public static OpenLispConstant Nil = new OpenLispConstant("nil");
+
+        public static OpenLispConstant True = new OpenLispConstant("true");
+
+        public static OpenLispConstant False = new OpenLispConstant("false");
     }
 }
