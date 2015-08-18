@@ -6,13 +6,17 @@ namespace OpenLisp.Core.DataTypes
 {
     public class OpenLispInt : OpenLispVal
     {
-        private readonly Int64 _value;
+        private Int64 _value;
 
-        public Int64 Value => _value;
+        public Int64 Value
+        {
+            get { return _value; }
+            set { _value = value; }
+        }
 
         public OpenLispInt(Int64 value)
         {
-            _value = value;
+            Value = value;
         }
 
         public new OpenLispInt Copy()
@@ -22,12 +26,12 @@ namespace OpenLisp.Core.DataTypes
 
         public override string ToString()
         {
-            return _value.ToString();
+            return Value.ToString();
         }
 
         public override string ToString(bool printReadably)
         {
-            return _value.ToString();
+            return Value.ToString();
         }
 
         public static OpenLispConstant operator <(OpenLispInt a, OpenLispInt b)
@@ -37,17 +41,17 @@ namespace OpenLisp.Core.DataTypes
 
         public static OpenLispConstant operator <=(OpenLispInt a, OpenLispInt b)
         {
-            return a.Value < b.Value ? StaticOpenLispTypes.True : StaticOpenLispTypes.False;
+            return a.Value <= b.Value ? StaticOpenLispTypes.True : StaticOpenLispTypes.False;
         }
 
         public static OpenLispConstant operator >(OpenLispInt a, OpenLispInt b)
         {
-            return a.Value < b.Value ? StaticOpenLispTypes.True : StaticOpenLispTypes.False;
+            return a.Value > b.Value ? StaticOpenLispTypes.True : StaticOpenLispTypes.False;
         }
 
         public static OpenLispConstant operator >=(OpenLispInt a, OpenLispInt b)
         {
-            return a.Value < b.Value ? StaticOpenLispTypes.True : StaticOpenLispTypes.False;
+            return a.Value >= b.Value ? StaticOpenLispTypes.True : StaticOpenLispTypes.False;
         }
 
         public static OpenLispInt operator +(OpenLispInt a, OpenLispInt b)

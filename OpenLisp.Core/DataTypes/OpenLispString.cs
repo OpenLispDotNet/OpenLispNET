@@ -1,4 +1,5 @@
 ﻿using OpenLisp.Core.AbstractClasses;
+using OpenLisp.Core.DataTypes.Errors.Throwable;
 
 namespace OpenLisp.Core.DataTypes
 {
@@ -6,11 +7,19 @@ namespace OpenLisp.Core.DataTypes
     {
         private string _value;
 
-        public string Value => _value;
+        public string Value
+        {
+            get
+            {
+                if (string.IsNullOrWhiteSpace(_value)) throw new OpenLispException("Value is null, empty, or white-space.");
+                return _value;
+            }
+            set { _value = value; }
+        }
 
         public OpenLispString(string value)
         {
-            _value = value;
+            Value = value;
         }
 
         public new OpenLispString Copy()
@@ -18,21 +27,21 @@ namespace OpenLisp.Core.DataTypes
             return this;
         }
 
-        public override string ToString() => "\"" + _value + "\"";
+        public override string ToString() => "\"" + Value + "\"";
 
         public override string ToString(bool printReadably)
         {
-            if (_value.Length > 0 && _value[0] == '\u029e')
+            if (Value.Length > 0 && Value[0] == '\u029e')
             {   
-                return ":" + _value.Substring(1);
+                return ":" + Value.Substring(1);
             }
             if (printReadably)
             {
-                return "\"" + _value.Replace("\\", "\\\\")
+                return "\"" + Value.Replace("\\", "\\\\")
                     .Replace("\"", "\\\"")
                     .Replace("\n", "\\n") + "\"";
             }
-            return _value;
+            return Value;
         }
     }
 }

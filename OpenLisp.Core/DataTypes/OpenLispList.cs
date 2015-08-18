@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using OpenLisp.Core.AbstractClasses;
+using OpenLisp.Core.DataTypes.Errors.Throwable;
 using OpenLisp.Core.StaticClasses;
 
 namespace OpenLisp.Core.DataTypes
@@ -13,9 +14,17 @@ namespace OpenLisp.Core.DataTypes
 
         private List<OpenLispVal> _value;
 
-        public List<OpenLispVal> Value => _value;
+        public List<OpenLispVal> Value
+        {
+            get
+            {
+                if (_value == null) throw new OpenLispException("Value is null.");
+                return _value;
+            }
+            set { _value = value; }
+        }
 
-        public int Size => _value.Count;
+        public int Size => Value.Count;
 
         public override bool ListQ()
         {
@@ -24,17 +33,17 @@ namespace OpenLisp.Core.DataTypes
 
         public OpenLispList()
         {
-            _value = new List<OpenLispVal>();
+            Value = new List<OpenLispVal>();
         }
 
         public OpenLispList(List<OpenLispVal> value)
         {
-            _value = value;
+            Value = value;
         }
 
         public OpenLispList(params OpenLispVal[] values)
         {
-            _value = new List<OpenLispVal>();
+            Value = new List<OpenLispVal>();
 
             Conj(values);
         }
@@ -46,41 +55,41 @@ namespace OpenLisp.Core.DataTypes
             //    _value.Add(v);
             //}
 
-            _value.AddRange(values.ToList());
+            Value.AddRange(values.ToList());
 
             return this;
         }
 
         public override string ToString()
         {
-            return Start + Printer.Join(_value, " ", true) + End;
+            return Start + Printer.Join(Value, " ", true) + End;
         }
 
         public override string ToString(bool printReadably)
         {
-            return Start + Printer.Join(_value, " ", printReadably) + End;
+            return Start + Printer.Join(Value, " ", printReadably) + End;
         }
 
         public OpenLispVal Nth(int index)
         {
-            return _value.Count > index ? _value[index] : StaticOpenLispTypes.Nil;
+            return Value.Count > index ? Value[index] : StaticOpenLispTypes.Nil;
         }
 
-        public OpenLispVal this[int index] => _value.Count > index ? _value[index] : StaticOpenLispTypes.Nil;
+        public OpenLispVal this[int index] => Value.Count > index ? Value[index] : StaticOpenLispTypes.Nil;
 
         public OpenLispList Rest()
         {
-            return Size > 0 ? new OpenLispList(_value.GetRange(1, _value.Count - 1)) : new OpenLispList();
+            return Size > 0 ? new OpenLispList(Value.GetRange(1, Value.Count - 1)) : new OpenLispList();
         }
 
         public virtual OpenLispList Slice(int start)
         {
-            return new OpenLispList(_value.GetRange(start, _value.Count - 1));
+            return new OpenLispList(Value.GetRange(start, Value.Count - 1));
         }
 
         public virtual OpenLispList Slice(int start, int end)
         {
-            return new OpenLispList(_value.GetRange(start, end - start));
+            return new OpenLispList(Value.GetRange(start, end - start));
         }
     }
 }

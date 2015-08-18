@@ -1,4 +1,5 @@
 ﻿using OpenLisp.Core.AbstractClasses;
+using OpenLisp.Core.DataTypes.Errors.Throwable;
 
 namespace OpenLisp.Core.DataTypes
 {
@@ -8,23 +9,27 @@ namespace OpenLisp.Core.DataTypes
 
         public OpenLispVal Value
         {
-            get { return _value; }
+            get
+            {
+                if (_value == null) throw new OpenLispException("Value is null.");
+                return _value;
+            }
             set { _value = value; }
         }
 
         public OpenLispAtom(OpenLispVal value)
         {
-            _value = value;
+            Value = value;
         }
 
         public override string ToString()
         {
-            return "(atom " + StaticClasses.Printer.PrStr(_value, true) + ")";
+            return "(atom " + StaticClasses.Printer.PrStr(Value, true) + ")";
         }
 
         public override string ToString(bool printReadably)
         {
-            return "(atom " + StaticClasses.Printer.PrStr(_value, printReadably) + ")";
+            return "(atom " + StaticClasses.Printer.PrStr(Value, printReadably) + ")";
         }
     }
 }
