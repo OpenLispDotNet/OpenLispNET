@@ -1,5 +1,6 @@
 ﻿using System;
 using OpenLisp.Core.DataTypes;
+using OpenLisp.Terminal;
 
 namespace OpenLisp.Core.StaticClasses.Funcs
 {
@@ -25,7 +26,7 @@ namespace OpenLisp.Core.StaticClasses.Funcs
 
         public static OpenLispFunc OpenLispReadLine = new OpenLispFunc(x =>
         {
-            var line = readline.
+            var line = new Line
         });
     }
 }

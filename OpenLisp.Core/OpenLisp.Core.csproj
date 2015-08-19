@@ -62,6 +62,7 @@
     <Compile Include="Interfaces\ILispExpression.cs" />
     <Compile Include="Interfaces\ILispSymbol.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReadLine.cs" />
     <Compile Include="StaticClasses\Funcs\NumberFuncs.cs" />
     <Compile Include="StaticClasses\Funcs\ScalarFuncs.cs" />
     <Compile Include="StaticClasses\Funcs\StringFuncs.cs" />
@@ -75,6 +76,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OpenLisp.Terminal\OpenLisp.Terminal.csproj">
+      <Project>{66e6ca76-71ec-481c-b92e-f56cd284a72d}</Project>
+      <Name>OpenLisp.Terminal</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
