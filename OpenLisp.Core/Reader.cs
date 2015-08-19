@@ -18,7 +18,7 @@ namespace OpenLisp.Core
 
         public class TokensReader
         {
-            List<string> _tokens;
+            readonly List<string> _tokens;
             int _position;
             public TokensReader(List<string> t)
             {
@@ -121,7 +121,12 @@ namespace OpenLisp.Core
             return new OpenLispHashMap(lst);
         }
 
-
+        /// <summary>
+        /// This recursived static method recursive processes
+        /// OpenLisp.NET S-Expressions and tokenizes them.
+        /// </summary>
+        /// <param name="rdr"></param>
+        /// <returns></returns>
         public static OpenLispVal ReadForm(TokensReader rdr)
         {
             string token = rdr.Peek();
