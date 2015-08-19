@@ -64,6 +64,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StaticClasses\Funcs\NumberFuncs.cs" />
     <Compile Include="StaticClasses\Funcs\ScalarFuncs.cs" />
+    <Compile Include="StaticClasses\Funcs\StringFuncs.cs" />
     <Compile Include="StaticClasses\OpenLispSymbols.cs" />
     <Compile Include="StaticClasses\Printer.cs" />
     <Compile Include="StaticClasses\StaticOpenLispTypes.cs" />
