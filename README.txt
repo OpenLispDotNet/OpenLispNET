@@ -2,6 +2,17 @@ OpenLisp.NET
 v0.0.1
 The Wizard & The Wyrd, LLC
 
+rev: August 19, 2015
+
+Vision
+======
+"Create a modern portable LISP Machine using custom hardware and OpenList.NET."
+
+The goal of OpenLisp.NET is to form the basis of an OpenLisp.NET EMACS-like environment as the primary shell of an
+operating system created on CosmosOS (https://github.com/CosmosOS/Cosmos).  The target hardware for this project
+includes, as primary build targets, an NetDuino and RaspberryPI, and other tiny devices.  Amongst these devices,
+we will support virtual machines with the goal of creating a portable OpenLisp.NET operating system.
+
 Summary
 =======
 OpenLisp.NET is a tiny Clojure-like LISP written in C# and targeting the .NET platform.
@@ -20,7 +31,7 @@ Please read the following items:
   * https://github.com/kanaka/mal/blob/master/cs/
   * http://www-formal.stanford.edu/jmc/recursive/recursive.html
 
-Requirements
-============
+Current Requirements
+====================
   * .NET 4.5.2+
   * Roslyn

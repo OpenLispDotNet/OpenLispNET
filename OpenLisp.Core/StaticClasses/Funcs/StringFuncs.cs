@@ -32,7 +32,7 @@ namespace OpenLisp.Core.StaticClasses.Funcs
             return line == null ? (OpenLispVal) StaticOpenLispTypes.Nil : new OpenLispString(line);
         });
 
-        static public OpenLispFunc ReadString = new OpenLispFunc(x =>
+        public static OpenLispFunc ReadString = new OpenLispFunc(x =>
             Reader.ReadStr(((OpenLispString)x[0]).Value));
 
         public static OpenLispFunc Slurp = new OpenLispFunc(x =>
