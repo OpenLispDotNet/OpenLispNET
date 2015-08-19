@@ -24,12 +24,26 @@ A valid question!  OpenLisp.NET is primarily an internal research project with t
 LISP in managed code targeting .NET/CoreCLR.  Should the research prove fruitful, OpenLisp.NET may be used as an internal
 scripting language, or as a standalone language.  Eventually, OpenLisp.NET should be able to emit IL assemblies.
 
+System Components
+=================
+
+IoC Logic
+=========
+Clients are constructed by ClientProviders.
+Services are constructed by ServiceProviders.
+Contracts are constructed by ContractProviders.
+ClientProviders are constructed by Injectors that provide Contracts that are agreed upon between Client and ServiceProvider.
+ServiceProviders are constructed by Injectors that provie Contracts that are agreed upon between ServiceProvider and Client.
+ContractProviders are constructed by Injectors and provided to Clients and Services.
+Clients and Services communicate via ServiceBuses constructed by Injectors.
+
 Any References?
 ===============
 Please read the following items:
 
   * https://github.com/kanaka/mal/blob/master/cs/
   * http://www-formal.stanford.edu/jmc/recursive/recursive.html
+  * https://en.wikipedia.org/wiki/Dependency_injection
 
 Current Requirements
 ====================

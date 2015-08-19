@@ -106,6 +106,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Enums\" />
+    <Folder Include="Interfaces\IoC\Clients\" />
     <Folder Include="Interfaces\IoC\Injectors\" />
     <Folder Include="Interfaces\IoC\ServiceBuses\" />
     <Folder Include="Interfaces\IoC\Services\" />
