@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using OpenLisp.Core.Interfaces.IoC.Contracts;
+using OpenLisp.Core.Interfaces.IoC.Providers;
 
 namespace OpenLisp.Core.Interfaces.IoC
 {
@@ -12,5 +13,11 @@ namespace OpenLisp.Core.Interfaces.IoC
         IQueueContract IncomingQueue { get; set; }
 
         IQueueContract OutgoingQueue { get; set; }
+
+        IEnumerable<IServiceProvider> Services { get; set; }
+
+        IEnumerable<IProvider> Providers { get; set; }
+
+        IEnumerable<IContract> Contracts { get; set; }
     }
 }
