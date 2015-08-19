@@ -1,4 +1,5 @@
 ﻿using System;
+using OpenLisp.Core.AbstractClasses;
 using OpenLisp.Core.DataTypes;
 using OpenLisp.Terminal;
 
@@ -26,7 +27,11 @@ namespace OpenLisp.Core.StaticClasses.Funcs
 
         public static OpenLispFunc OpenLispReadLine = new OpenLispFunc(x =>
         {
-            var line = new Line
+            var line = ReadLine.LineReader(((OpenLispString)x[0]).Value);
+            return line == null ? (OpenLispVal) StaticOpenLispTypes.Nil : new OpenLispString(line);
         });
+
+        public static OpenLispFunc ReadString = new OpenLispFunc(x =>
+            Reader.R)
     }
 }
