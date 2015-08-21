@@ -8,14 +8,28 @@ namespace OpenLisp.Core.DataTypes
     {
         private Dictionary<string, OpenLispVal> _value;
 
+        private Dictionary<OpenLispString, OpenLispVal> _secondaryFormValue = null;
+
         public Dictionary<string, OpenLispVal> Value
         {
             get
             {
-                if (_value == null) throw new OpenLispException("Value is null.");
+                if (_value == null)
+                    throw new OpenLispException("Value is null.");
                 return _value;
             }
             set { _value = value; }
+        }
+
+        public Dictionary<OpenLispString, OpenLispVal> SecondaryValue
+        {
+            get
+            {
+                if (_secondaryFormValue == null)
+                    throw new OpenLispException("SecondaryValue is null.");
+                return _secondaryFormValue;
+            }
+            set { _secondaryFormValue = value; }
         }
 
         public new OpenLispHashMap Copy()
@@ -30,6 +44,7 @@ namespace OpenLisp.Core.DataTypes
         public OpenLispHashMap(OpenLispList listValue)
         {
             Value = new Dictionary<string, OpenLispVal>();
+            AssocBang(listValue);
         }
 
         public override string ToString()
