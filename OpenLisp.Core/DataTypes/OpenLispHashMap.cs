@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using OpenLisp.Core.AbstractClasses;
 using OpenLisp.Core.DataTypes.Errors.Throwable;
 
@@ -30,6 +31,14 @@ namespace OpenLisp.Core.DataTypes
                 return _secondaryFormValue;
             }
             set { _secondaryFormValue = value; }
+        }
+
+        public IEnumerable<string> Keys
+        {
+            get
+            {
+                return Value.Select(kv => kv.Key).ToList();
+            }
         }
 
         public new OpenLispHashMap Copy()

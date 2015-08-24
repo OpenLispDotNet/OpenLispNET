@@ -14,14 +14,11 @@ namespace OpenLisp.Core.StaticClasses.Funcs
         public static OpenLispFunc ContainsQ = new OpenLispFunc(x =>
         {
             OpenLispString key = new OpenLispString(((OpenLispString)x[1]).Value);
-            IDictionary<string, OpenLispVal> dict = new Dictionary<string, OpenLispVal>();
-            dict = (((OpenLispHashMap)x[0]).Value);
+            IDictionary<string, OpenLispVal> dict = (((OpenLispHashMap)x[0]).Value);
 
-            //OpenLispConstant result = dict.Contains<OpenLispString>(key) ? StaticOpenLispTypes.True : StaticOpenLispTypes.False;
-            OpenLispConstant result = dict.Contains(key.ToString()) ? StaticOpenLispTypes.True : StaticOpenLispTypes.False;
-            //var result = dict.Contains<string, T>(key.Value) ? StaticOpenLispTypes.True : StaticOpenLispTypes.False;         
+            OpenLispConstant result = dict.Keys.Contains(key.ToString()) ? StaticOpenLispTypes.True : StaticOpenLispTypes.False;
 
-            return StaticOpenLispTypes.True;
+            return result;
         });
     }
 
