@@ -16,9 +16,62 @@ namespace OpenLisp.Core.StaticClasses.Funcs
             OpenLispString key = new OpenLispString(((OpenLispString)x[1]).Value);
             IDictionary<string, OpenLispVal> dict = (((OpenLispHashMap)x[0]).Value);
 
-            OpenLispConstant result = dict.Keys.Contains(key.ToString()) ? StaticOpenLispTypes.True : StaticOpenLispTypes.False;
+            //OpenLispConstant result = dict.Keys.Contains(key.ToString()) ? StaticOpenLispTypes.True : StaticOpenLispTypes.False;
+            OpenLispConstant result = dict.ContainsKey(key.ToString()) ? StaticOpenLispTypes.True : StaticOpenLispTypes.False;
 
             return result;
+        });
+
+        public static OpenLispFunc Assoc = new OpenLispFunc(x =>
+        {
+            var newHm = ((OpenLispHashMap)x[0]).Copy();
+
+            return newHm.AssocBang(x.Slice(1));
+        });
+
+        public static OpenLispFunc Dissoc = new OpenLispFunc(x =>
+        {
+            var newHm = ((OpenLispHashMap)x[0]).Copy();
+
+            return newHm.DissocBang(x.Slice(1));
+        });
+
+        public static OpenLispFunc Get = new OpenLispFunc(x =>
+        {
+            string key = ((OpenLispString) x[1]).Value;
+
+            if (x[0] == StaticOpenLispTypes.Nil) return StaticOpenLispTypes.Nil;
+
+            var dict = ((OpenLispHashMap)x[0]).Value;
+            return dict.ContainsKey(key) ? dict[key] : StaticOpenLispTypes.Nil;
+        });
+
+        public static OpenLispFunc Keys = new OpenLispFunc(x =>
+        {
+            var dict = ((OpenLispHashMap)x[0]).Value;
+
+            OpenLispList keyList = new OpenLispList();
+
+            foreach (var key in dict.Keys)
+            {
+                keyList.Conj(new OpenLispString(key));
+            }
+
+            return keyList;
+        });
+
+        public static OpenLispFunc Values = new OpenLispFunc(x =>
+        {
+            var dict = ((OpenLispHashMap)x[0]).Value;
+
+            OpenLispList valueList = new OpenLispList();
+
+            foreach (var value in dict.Values)
+            {
+                valueList.Conj(value);
+            }
+
+            return valueList;
         });
     }
 
