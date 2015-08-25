@@ -99,6 +99,7 @@
     <Compile Include="ReadLine.cs" />
     <Compile Include="StaticClasses\Funcs\CollectionFuncs.cs" />
     <Compile Include="StaticClasses\Funcs\HashMapFuncs.cs" />
+    <Compile Include="StaticClasses\Funcs\ListFuncs.cs" />
     <Compile Include="StaticClasses\Funcs\NumberFuncs.cs" />
     <Compile Include="StaticClasses\Funcs\ScalarFuncs.cs" />
     <Compile Include="StaticClasses\Funcs\SequenceFuncs.cs" />
