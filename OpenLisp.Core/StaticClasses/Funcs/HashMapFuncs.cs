@@ -1,8 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using OpenLisp.Core.DataTypes;
+﻿using System.Collections.Generic;
 using System.Linq;
 using OpenLisp.Core.AbstractClasses;
+using OpenLisp.Core.DataTypes;
 
 namespace OpenLisp.Core.StaticClasses.Funcs
 {

@@ -2,7 +2,6 @@
 using System.IO;
 using OpenLisp.Core.AbstractClasses;
 using OpenLisp.Core.DataTypes;
-using OpenLisp.Terminal;
 
 namespace OpenLisp.Core.StaticClasses.Funcs
 {
