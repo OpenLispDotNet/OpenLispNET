@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using DeepEqual.Syntax;
 using OpenLisp.Core.AbstractClasses;
 using OpenLisp.Core.DataTypes;
@@ -52,7 +51,7 @@ namespace OpenLisp.Core.StaticClasses
 
             for (int i = 0; i < ((OpenLispList) a).Size; i++)
             {
-                if (StaticOpenLispTypes.OpenLispEqualQ(((OpenLispList) a)[i], ((OpenLispList) b)[i]))
+                if (OpenLispEqualQ(((OpenLispList) a)[i], ((OpenLispList) b)[i]))
                     continue;
 
                 return false;

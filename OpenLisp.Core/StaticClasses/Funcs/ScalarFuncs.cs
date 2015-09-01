@@ -24,6 +24,9 @@ namespace OpenLisp.Core.StaticClasses.Funcs
             ? StaticOpenLispTypes.True
             : StaticOpenLispTypes.False);
 
+        public static OpenLispFunc Symbol = new OpenLispFunc(x => 
+            new OpenLispSymbol((OpenLispString)x[0]));
+
         public static OpenLispFunc Keyword = new OpenLispFunc(x =>
         {
             var t = x[0] as OpenLispString;

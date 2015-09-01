@@ -106,7 +106,8 @@
     <Compile Include="StaticClasses\Funcs\ScalarFuncs.cs" />
     <Compile Include="StaticClasses\Funcs\SequenceFuncs.cs" />
     <Compile Include="StaticClasses\Funcs\StringFuncs.cs" />
-    <Compile Include="StaticClasses\NameSpace.cs" />
+    <Compile Include="StaticClasses\Funcs\ThrowFuncs.cs" />
+    <Compile Include="StaticClasses\CoreNameSpace.cs" />
     <Compile Include="StaticClasses\OpenLispSymbols.cs" />
     <Compile Include="StaticClasses\Printer.cs" />
     <Compile Include="StaticClasses\StaticOpenLispTypes.cs" />
