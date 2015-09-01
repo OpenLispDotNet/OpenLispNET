@@ -111,6 +111,7 @@
     <Compile Include="StaticClasses\CoreNameSpace.cs" />
     <Compile Include="StaticClasses\OpenLispSymbols.cs" />
     <Compile Include="StaticClasses\Printer.cs" />
+    <Compile Include="StaticClasses\Repl.cs" />
     <Compile Include="StaticClasses\StaticOpenLispTypes.cs" />
   </ItemGroup>
   <ItemGroup>

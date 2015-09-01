@@ -60,6 +60,11 @@ namespace OpenLisp.Core.DataTypes
             set { _env = value; }
         }
 
+        public Env GenEnv(OpenLispList args)
+        {
+            return new Env(Env, FParams, args);
+        }
+
         public OpenLispList FParams
         {
             get

@@ -56,6 +56,11 @@ namespace OpenLisp.Core.DataTypes
             AssocBang(listValue);
         }
 
+        public OpenLispHashMap(Dictionary<string, OpenLispVal> val)
+        {
+            Value = val;
+        }
+
         public override string ToString()
         {
             return "{" + StaticClasses.Printer.Join(Value, " ", true) + "}";
