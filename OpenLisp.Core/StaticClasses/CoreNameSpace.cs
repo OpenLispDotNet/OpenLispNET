@@ -81,6 +81,14 @@ namespace OpenLisp.Core.StaticClasses
             {"apply",       ListFuncs.Apply},
             {"map",         ListFuncs.Map},
 
+            {"with-meta",   MetadataFuncs.WithMeta},
+            {"meta",        MetadataFuncs.Meta},
+
+            {"atom",        new OpenLispFunc(x => new OpenLispAtom(x[0]))},
+            {"atom?",       AtomFuncs.AtomQ},
+            {"deref",       AtomFuncs.Deref},
+            {"reset!",      AtomFuncs.ResetBang},
+            {"swap!",       AtomFuncs.SwapBang}
         };
     }
 }
