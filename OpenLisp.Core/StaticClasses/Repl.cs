@@ -299,7 +299,7 @@ namespace OpenLisp.Core.StaticClasses
                     string line;
                     try
                     {
-                        line = ReadLine.LineReader("user> ");
+                        line = ReadLine.LineReader("user> ");                        
                         if (line != null)
                         {
                             if (line == "")
