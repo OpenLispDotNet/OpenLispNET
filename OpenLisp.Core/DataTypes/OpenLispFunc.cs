@@ -34,7 +34,6 @@ namespace OpenLisp.Core.DataTypes
         {
             get
             {
-                if (_lambda == null) throw new OpenLispException("Lambda is null.");
                 return _lambda;
             }
             set { _lambda = value; }
@@ -44,7 +43,6 @@ namespace OpenLisp.Core.DataTypes
         {
             get
             {
-                if (_ast == null) throw new OpenLispException("Ast is null.");
                 return _ast;
             }
             set { _ast = value; }
@@ -54,7 +52,6 @@ namespace OpenLisp.Core.DataTypes
         {
             get
             {
-                if (_env == null) throw new OpenLispException("Env is null.");
                 return _env;
             }
             set { _env = value; }
@@ -69,7 +66,6 @@ namespace OpenLisp.Core.DataTypes
         {
             get
             {
-                if (_fparams == null) throw new OpenLispException("FParams is null.");
                 return _fparams;
             }
             set { _fparams = value; }

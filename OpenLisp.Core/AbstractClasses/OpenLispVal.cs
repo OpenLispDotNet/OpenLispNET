@@ -1,4 +1,7 @@
-﻿namespace OpenLisp.Core.AbstractClasses
+﻿using System;
+using OpenLisp.Core.DataTypes;
+
+namespace OpenLisp.Core.AbstractClasses
 {
     public abstract class OpenLispVal
     {
@@ -23,6 +26,16 @@
         public virtual bool ListQ()
         {
             return false;
+        }
+
+        /// <summary>
+        /// An explicit conversion from OpenLispVal to an OpenLispString.
+        /// </summary>
+        /// <param name="v"></param>
+        public static explicit operator OpenLispVal(string v)
+        {
+            //throw new NotImplementedException();
+            return new OpenLispString(v);
         }
     }
 }
