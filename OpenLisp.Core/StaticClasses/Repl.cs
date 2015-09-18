@@ -89,7 +89,7 @@ namespace OpenLisp.Core.StaticClasses
             return ast;
         }
 
-        static OpenLispVal EvalAst(OpenLispVal ast, Env env)
+        public static OpenLispVal EvalAst(OpenLispVal ast, Env env)
         {
             var key = ast as OpenLispSymbol;
 
@@ -121,7 +121,7 @@ namespace OpenLisp.Core.StaticClasses
             return newList;
         }
 
-        static OpenLispVal Eval(OpenLispVal origAst, Env env)
+        public static OpenLispVal Eval(OpenLispVal origAst, Env env)
         {
             while (true)
             {
@@ -253,12 +253,12 @@ namespace OpenLisp.Core.StaticClasses
             }
         }
 
-        static string Print(OpenLispVal exp)
+        public static string Print(OpenLispVal exp)
         {
             return Printer.PrStr(exp, true);
         }
 
-        static void Main(string[] args)
+        public static void ReplMain(string[] args)
         {
             var replEnv = new Env(null);
 
