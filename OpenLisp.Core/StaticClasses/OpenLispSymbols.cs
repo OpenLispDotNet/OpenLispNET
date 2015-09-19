@@ -2,7 +2,7 @@
 
 namespace OpenLisp.Core.StaticClasses
 {
-    public static class OpenLispSymbols
+    public static partial class OpenLispSymbols
     {
         public static readonly string EqualB             = @"=";
         public static readonly string Throw              = @"throw";

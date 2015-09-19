@@ -8,7 +8,7 @@ using OpenLisp.Core.StaticClasses.Funcs;
 
 namespace OpenLisp.Core.StaticClasses
 {
-    public static class CoreNameSpace
+    public static partial class CoreNameSpace
     {
         public static IDictionary<string, OpenLispVal> Ns = new Dictionary<string, OpenLispVal>
         {

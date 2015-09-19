@@ -26,11 +26,64 @@ A valid question!  OpenLisp.NET is primarily an internal research project with t
 LISP in managed code targeting .NET/CoreCLR.  Should the research prove fruitful, OpenLisp.NET may be used as an internal
 scripting language, or as a standalone language.  Eventually, OpenLisp.NET should be able to emit IL assemblies.
 
+Language Extensibiity
+=====================
+The OpenLisp.Core.StaticClasses contain two partial static classes that are the extension points for the OpenLisp.NET language:
+
+	* public static partial class OpenLispSymbols
+	Contains public static readonly string literals like @"nil?", etc. 
+
+	* public static partial class CoreNameSpace
+	public static IDictionary<string, OpenLispVal> Ns contains keys matching the OpenLispSymbols whose values
+	are static methods inheriting from the OpenLispVal class; i.e.,
+
+	        {"nil?",        ScalarFuncs.NilQ},
+            {"true?",       ScalarFuncs.TrueQ},
+            {"false?",      ScalarFuncs.FalseQ},
+            {"symbol",      ScalarFuncs.Symbol},
+            {"symbol?",     ScalarFuncs.SymbolQ},
+            {"keyword",     ScalarFuncs.Keyword},
+            {"keyword?",    ScalarFuncs.KeywordQ},
+
+	This dictionary acts like a function lookup table.  Language extensions will have to add new key/value pairs
+	so that the Ast can be parsed and walked to invoke methods.
+
+	Here is an example from the ScalarFuncs static class:
+
+			using OpenLisp.Core.DataTypes;
+
+			namespace OpenLisp.Core.StaticClasses.Funcs
+			{
+				public class ScalarFuncs
+				{
+					public static OpenLispFunc NilQ = new OpenLispFunc(x => x[0] 
+						== StaticOpenLispTypes.Nil 
+						? StaticOpenLispTypes.True 
+						: StaticOpenLispTypes.False);
+						
+				// snipped for brevity
+				}
+			}
+			
+	The usual pattern is to assign a new keyword's static method to a new OpenLispFunc, etc.	
+
+Opening this namespace and these classes in 3rd party assemblies allows for language additions.
+TODO: provide an easy method for dynamically loading assemblies via reflection without needing to recompile the REPL
+
+Planned Extensions
+==================
+An intersting field of development is Software-Defined Networking.  Giving the power of a Lisp,
+creating a SDN Language Extension via a new assembly should prove interesting; in particular, we will be
+implementing the standard SDN architecture at:
+
+  * https://en.wikipedia.org/wiki/Software-defined_networking#Architectural_components	
+
 System Components
 =================
+TODO: Add architecture diagrams.
 
-IoC Logic
-=========
+IoC Logic (revisit this)
+========================
 Clients are constructed by ClientProviders.
 Services are constructed by ServiceProviders.
 Contracts are constructed by ContractProviders.
