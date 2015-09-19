@@ -15,7 +15,9 @@ we will support virtual machines with the goal of creating a portable OpenLisp.N
 
 Summary
 =======
-OpenLisp.NET is a tiny Clojure-like LISP written in C# and targeting the .NET platform.
+OpenLisp.NET aims to be compatible with the Common Lisp standard library while providing first class for .NET objects.
+OpenLisp.NET is a tiny Clojure-like LISP written in C# and targeting the .NET platform; meaning: OpenLisp.NET will use Software 
+Transactional Memory and have first class support for actor based concurrency and immutable collections.
 The OpenLisp.Core library contains all datatypes, interfaces, classes, utility functions to parse OpenLisp S-Expressions.
 
 Why another LISP?
