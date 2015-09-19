@@ -37,5 +37,10 @@ namespace OpenLisp.Core.AbstractClasses
             //throw new NotImplementedException();
             return new OpenLispString(v);
         }
+
+        public static explicit operator OpenLispVal(int v)
+        {
+            return new OpenLispInt(v);
+        }
     }
 }

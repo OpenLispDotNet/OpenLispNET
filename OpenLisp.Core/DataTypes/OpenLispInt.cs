@@ -73,5 +73,10 @@ namespace OpenLisp.Core.DataTypes
         {
             return new OpenLispInt(a.Value / b.Value);
         }
+
+        public static explicit operator OpenLispString(OpenLispInt v)
+        {
+            return new OpenLispString(v.ToString());
+        }
     }
 }

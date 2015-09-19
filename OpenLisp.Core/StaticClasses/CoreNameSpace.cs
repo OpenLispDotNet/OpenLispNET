@@ -19,7 +19,7 @@ namespace OpenLisp.Core.StaticClasses
 
             {"throw",       ThrowFuncs.OpenLispThrow},
 
-            { "nil?",       ScalarFuncs.NilQ},
+            {"nil?",        ScalarFuncs.NilQ},
             {"true?",       ScalarFuncs.TrueQ},
             {"false?",      ScalarFuncs.FalseQ},
             {"symbol",      ScalarFuncs.Symbol},
@@ -58,6 +58,7 @@ namespace OpenLisp.Core.StaticClasses
             {"list?",       CollectionFuncs.ListQ},
 
             {"vector",      new OpenLispFunc(x => new OpenLispVector(x.Value))},
+            {"vector?",     CollectionFuncs.VectorQ},
 
             {"hash-map",    new OpenLispFunc(x => new OpenLispHashMap(x))},
             {"map?",        HashMapFuncs.HashMapQ},
