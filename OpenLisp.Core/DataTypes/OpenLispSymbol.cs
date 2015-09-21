@@ -11,7 +11,7 @@ namespace OpenLisp.Core.DataTypes
         {
             get
             {
-                if (string.IsNullOrWhiteSpace(_value)) throw new OpenLispException("Value is null, empty, or white-space.");
+                //if (string.IsNullOrWhiteSpace(_value)) throw new OpenLispException("Value is null, empty, or white-space.");
                 return _value;
             }
             set { _value = value; }
