@@ -102,5 +102,26 @@ Please read the following items:
 
 Current Requirements
 ====================
-  * .NET 4.5.2+
+  * .NET 4.5+
+  * .NET 3.5 for Cosmos
   * Roslyn
+  * Visual Studio 2015
+
+Known Issues
+============
+  * Cosmos is having trouble building the Kernel on Windows 8.1,
+	and complains about a call to native code with a missing plug:
+
+2>	Error: Exception: System.Exception: Native code encountered, plug required. Please see https://github.com/CosmosOS/Cosmos/wiki/Plugs). System.String  System.Exception.StripFileInfo(System.String, System.Boolean).
+2>	 Called from :
+2>	System.Exception::System.String GetStackTrace(Boolean)
+2>	System.Exception::System.String get_StackTrace()
+2>	OpenLisp.Core.StaticClasses.Repl::Void ReplMain(System.String[])
+2>	OpenLisp.Machine.Kernel.Kernel::Void Run()
+2>	Cosmos.System.Kernel::Void Run()
+2>	   at Cosmos.IL2CPU.ILScanner.ScanMethod(MethodBase aMethod, Boolean aIsPlug, String sourceItem) in c:\Data\Sources\OpenSource\Cosmos\source\Cosmos.IL2CPU\ILScanner.cs:line 525
+2>	   at Cosmos.IL2CPU.ILScanner.ScanQueue() in c:\Data\Sources\OpenSource\Cosmos\source\Cosmos.IL2CPU\ILScanner.cs:line 670
+2>	   at Cosmos.IL2CPU.ILScanner.Execute(MethodBase aStartMethod) in c:\Data\Sources\OpenSource\Cosmos\source\Cosmos.IL2CPU\ILScanner.cs:line 255
+2>	   at Cosmos.IL2CPU.CompilerEngine.Execute() in c:\Data\Sources\OpenSource\Cosmos\source\Cosmos.IL2CPU\CompilerEngine.cs:line 238
+
+	This appears to be due to the stack tracing in the OpenLisp.NET REPL.
