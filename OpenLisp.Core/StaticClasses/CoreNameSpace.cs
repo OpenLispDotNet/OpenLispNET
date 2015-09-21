@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using DeepEqual.Syntax;
 using OpenLisp.Core.AbstractClasses;
 using OpenLisp.Core.DataTypes;
 using OpenLisp.Core.StaticClasses.Funcs;
@@ -12,10 +13,17 @@ namespace OpenLisp.Core.StaticClasses
     {
         public static IDictionary<string, OpenLispVal> Ns = new Dictionary<string, OpenLispVal>
         {
+#if !NOTYPEEQUALITY
             {"=",           new OpenLispFunc(x => 
                                 StaticOpenLispTypes.OpenLispEqualQ(x[0], x[1]) 
                                     ? StaticOpenLispTypes.True 
                                     : StaticOpenLispTypes.False)},
+#elif NOTYPEEQUALITY
+            {"=",           new OpenLispFunc(x => 
+                                (x[0].ToString() == x[1].ToString())
+                                    ? StaticOpenLispTypes.True
+                                    : StaticOpenLispTypes.False)},
+#endif
 
             {"throw",       ThrowFuncs.OpenLispThrow},
 

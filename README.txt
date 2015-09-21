@@ -109,9 +109,7 @@ Current Requirements
 
 Known Issues
 ============
-  * Cosmos is having trouble building the Kernel on Windows 8.1,
-	and complains about a call to native code with a missing plug:
-
+  * Cosmos is having trouble building the Kernel on Windows 8.1, and complains about a call to native code with a missing plug:
 2>	Error: Exception: System.Exception: Native code encountered, plug required. Please see https://github.com/CosmosOS/Cosmos/wiki/Plugs). System.String  System.Exception.StripFileInfo(System.String, System.Boolean).
 2>	 Called from :
 2>	System.Exception::System.String GetStackTrace(Boolean)
@@ -124,4 +122,53 @@ Known Issues
 2>	   at Cosmos.IL2CPU.ILScanner.Execute(MethodBase aStartMethod) in c:\Data\Sources\OpenSource\Cosmos\source\Cosmos.IL2CPU\ILScanner.cs:line 255
 2>	   at Cosmos.IL2CPU.CompilerEngine.Execute() in c:\Data\Sources\OpenSource\Cosmos\source\Cosmos.IL2CPU\CompilerEngine.cs:line 238
 
-	This appears to be due to the stack tracing in the OpenLisp.NET REPL.
+	A conditional NOSTACKTRACE compilation flag has been added to prevent stack traces in the OpenLisp.Machine OS.
+
+
+  * Cosmos does not support threading via native threads since threading must be implemented by the OS developer:
+5>	Error: Exception: System.Exception: Native code encountered, plug required. Please see https://github.com/CosmosOS/Cosmos/wiki/Plugs). System.Threading.Thread  System.Threading.Thread.GetCurrentThreadNative().
+5>	 Called from :
+5>	System.Threading.Thread::System.Threading.Thread get_CurrentThread()
+5>	OpenLisp.Terminal.LineEditor::System.String Edit(System.String, System.String)
+5>	OpenLisp.Core.ReadLine::System.String LineReader(System.String)
+5>	OpenLisp.Core.StaticClasses.Repl::Void ReplMain(System.String[])
+5>	OpenLisp.Machine.Kernel.Kernel::Void Run()
+5>	Cosmos.System.Kernel::Void Run()
+5>	   at Cosmos.IL2CPU.ILScanner.ScanMethod(MethodBase aMethod, Boolean aIsPlug, String sourceItem) in c:\Data\Sources\OpenSource\Cosmos\source\Cosmos.IL2CPU\ILScanner.cs:line 525
+5>	   at Cosmos.IL2CPU.ILScanner.ScanQueue() in c:\Data\Sources\OpenSource\Cosmos\source\Cosmos.IL2CPU\ILScanner.cs:line 670
+5>	   at Cosmos.IL2CPU.ILScanner.Execute(MethodBase aStartMethod) in c:\Data\Sources\OpenSource\Cosmos\source\Cosmos.IL2CPU\ILScanner.cs:line 255
+5>	   at Cosmos.IL2CPU.CompilerEngine.Execute() in c:\Data\Sources\OpenSource\Cosmos\source\Cosmos.IL2CPU\CompilerEngine.cs:line 238
+
+	A conditional NONATIVETHREADS compilation flag has been added to prevent native thread calls in the OpenLisp.Machine OS.
+
+
+  * Cosmos has problems with the Type object's calls to native code, and requires a plug:
+6>	Error: Exception: System.Exception: Native code encountered, plug required. Please see https://github.com/CosmosOS/Cosmos/wiki/Plugs). System.Boolean  System.Type.op_Inequality(System.Type, System.Type).
+6>	 Called from :
+6>	OpenLisp.Core.StaticClasses.StaticOpenLispTypes::Boolean OpenLispEqualQ(OpenLisp.Core.AbstractClasses.OpenLispVal, OpenLisp.Core.AbstractClasses.OpenLispVal)
+6>	OpenLisp.Core.StaticClasses.CoreNameSpace+<>c::OpenLisp.Core.AbstractClasses.OpenLispVal <.cctor>b__1_0(OpenLisp.Core.DataTypes.OpenLispList)
+6>	OpenLisp.Core.StaticClasses.CoreNameSpace::Void .cctor()
+6>	OpenLisp.Core.StaticClasses.CoreNameSpace
+6>	   at Cosmos.IL2CPU.ILScanner.ScanMethod(MethodBase aMethod, Boolean aIsPlug, String sourceItem) in c:\Data\Sources\OpenSource\Cosmos\source\Cosmos.IL2CPU\ILScanner.cs:line 525
+6>	   at Cosmos.IL2CPU.ILScanner.ScanQueue() in c:\Data\Sources\OpenSource\Cosmos\source\Cosmos.IL2CPU\ILScanner.cs:line 670
+6>	   at Cosmos.IL2CPU.ILScanner.Execute(MethodBase aStartMethod) in c:\Data\Sources\OpenSource\Cosmos\source\Cosmos.IL2CPU\ILScanner.cs:line 255
+6>	   at Cosmos.IL2CPU.CompilerEngine.Execute() in c:\Data\Sources\OpenSource\Cosmos\source\Cosmos.IL2CPU\CompilerEngine.cs:line 238
+
+	A conditional NOTYPEEQUALITY compilation flag has been added to prevent native Type equality calls.
+
+
+  * Cosmos doesn't implement the Mkrefany OpCode, and this OpCode is found in System.Reflection.Emit:
+5>	Error: Exception: System.NotImplementedException: OpCode 'Mkrefany' not implemented! Encountered in method System.Object CompareExchange[Object](System.Object ByRef, System.Object, System.Object)
+5>	   at Cosmos.IL2CPU.ILOpCodes.OpType.GetNumberOfStackPops(MethodBase aMethod) in c:\Data\Sources\OpenSource\Cosmos\source\Cosmos.IL2CPU\ILOpCodes\OpType.cs:line 52
+5>	   at Cosmos.IL2CPU.ILOpCode.InitStackAnalysis(MethodBase aMethod) in c:\Data\Sources\OpenSource\Cosmos\source\Cosmos.IL2CPU\ILOpCode.cs:line 296
+5>	   at Cosmos.IL2CPU.ILReader.ProcessMethod(MethodBase aMethod) in c:\Data\Sources\OpenSource\Cosmos\source\Cosmos.IL2CPU\ILReader.cs:line 407
+5>	   at Cosmos.IL2CPU.ILScanner.ScanMethod(MethodBase aMethod, Boolean aIsPlug, String sourceItem) in c:\Data\Sources\OpenSource\Cosmos\source\Cosmos.IL2CPU\ILScanner.cs:line 545
+5>	   at Cosmos.IL2CPU.ILScanner.ScanQueue() in c:\Data\Sources\OpenSource\Cosmos\source\Cosmos.IL2CPU\ILScanner.cs:line 670
+5>	   at Cosmos.IL2CPU.ILScanner.Execute(MethodBase aStartMethod) in c:\Data\Sources\OpenSource\Cosmos\source\Cosmos.IL2CPU\ILScanner.cs:line 255
+5>	   at Cosmos.IL2CPU.CompilerEngine.Execute() in c:\Data\Sources\OpenSource\Cosmos\source\Cosmos.IL2CPU\CompilerEngine.cs:line 238
+
+	The Cosmos Mkrefany throws a NotImplementedException().  The Mono project has an implementation of a Mkrefany test in ILASM:
+	* https://github.com/corngood/mono/blob/ef186403b5e95a5c95c38f1f19d0c8d061f2ac37/mono/tests/generic-mkrefany.2.il
+
+	Here is Mono's Mkrefany implementation:
+	* https://github.com/corngood/mono/blob/ef186403b5e95a5c95c38f1f19d0c8d061f2ac37/mcs/class/corlib/System.Reflection.Emit/OpCodes.cs

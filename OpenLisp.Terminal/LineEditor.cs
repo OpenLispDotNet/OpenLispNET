@@ -83,8 +83,9 @@ namespace OpenLisp.Terminal
         bool _done = false;
 
         // The thread where the Editing started taking place
+#if !NONATIVETHREADS
         Thread _editThread;
-
+#endif
         // Our object that tracks history
         History _history;
 
@@ -802,7 +803,9 @@ namespace OpenLisp.Terminal
             a.Cancel = true;
 
             // Interrupt the editor
+#if !NONATIVETHREADS
             _editThread.Abort();
+#endif
         }
 
         void HandleChar(char c)
@@ -895,7 +898,9 @@ namespace OpenLisp.Terminal
 
         public string Edit(string prompt, string initial)
         {
+#if !NONATIVETHREADS
             _editThread = Thread.CurrentThread;
+#endif
             _searching = 0;
             Console.CancelKeyPress += InterruptEdit;
 
@@ -917,7 +922,9 @@ namespace OpenLisp.Terminal
                 catch (ThreadAbortException)
                 {
                     _searching = 0;
+#if !NONATIVETHREADS
                     Thread.ResetAbort();
+#endif
                     Console.WriteLine();
                     SetPrompt(prompt);
                     SetText("");
