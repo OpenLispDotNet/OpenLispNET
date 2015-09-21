@@ -139,7 +139,7 @@ Known Issues
 5>	   at Cosmos.IL2CPU.ILScanner.Execute(MethodBase aStartMethod) in c:\Data\Sources\OpenSource\Cosmos\source\Cosmos.IL2CPU\ILScanner.cs:line 255
 5>	   at Cosmos.IL2CPU.CompilerEngine.Execute() in c:\Data\Sources\OpenSource\Cosmos\source\Cosmos.IL2CPU\CompilerEngine.cs:line 238
 
-	A conditional NONATIVETHREADS compilation flag has been added to prevent native thread calls in the OpenLisp.Machine OS.
+	A conditional NONATIVETHREADS compilation flag has been added to wrap native thread calls in the OpenLisp.Machine OS.
 
 
   * Cosmos has problems with the Type object's calls to native code, and requires a plug:
@@ -154,7 +154,7 @@ Known Issues
 6>	   at Cosmos.IL2CPU.ILScanner.Execute(MethodBase aStartMethod) in c:\Data\Sources\OpenSource\Cosmos\source\Cosmos.IL2CPU\ILScanner.cs:line 255
 6>	   at Cosmos.IL2CPU.CompilerEngine.Execute() in c:\Data\Sources\OpenSource\Cosmos\source\Cosmos.IL2CPU\CompilerEngine.cs:line 238
 
-	A conditional NOTYPEEQUALITY compilation flag has been added to prevent native Type equality calls.
+	A conditional NOTYPEEQUALITY compilation flag has been added to wrap native Type equality calls.
 
 
   * Cosmos doesn't implement the Mkrefany OpCode, and this OpCode is found in System.Reflection.Emit:
