@@ -6,7 +6,7 @@ rev: September 19, 2015
 
 Vision
 ======
-"Create a modern portable LISP Machine using custom hardware and OpenList.NET."
+"Create a modern portable LISP Machine using commodity hardware and OpenList.NET."
 
 The goal of OpenLisp.NET is to form the basis of an OpenLisp.NET EMACS-like environment as the primary shell of an
 operating system created on CosmosOS (https://github.com/CosmosOS/Cosmos).  The target hardware for this project
