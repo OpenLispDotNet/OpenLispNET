@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.Immutable;
 using OpenLisp.Core.AbstractClasses;
 
 namespace OpenLisp.Core.DataTypes
@@ -12,7 +13,7 @@ namespace OpenLisp.Core.DataTypes
             End = "]";
         }
 
-        public OpenLispVector(List<OpenLispVal> val)
+        public OpenLispVector(ImmutableList<OpenLispVal> val)
             : base(val)
         {
             Start = "[";

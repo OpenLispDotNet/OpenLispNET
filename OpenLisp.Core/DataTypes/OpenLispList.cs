@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using OpenLisp.Core.AbstractClasses;
 using OpenLisp.Core.DataTypes.Errors.Throwable;
@@ -12,9 +13,9 @@ namespace OpenLisp.Core.DataTypes
 
         public string End = ")";
 
-        private List<OpenLispVal> _value;
+        private ImmutableList<OpenLispVal> _value;
 
-        public List<OpenLispVal> Value
+        public ImmutableList<OpenLispVal> Value
         {
             get
             {
@@ -33,17 +34,17 @@ namespace OpenLisp.Core.DataTypes
 
         public OpenLispList()
         {
-            Value = new List<OpenLispVal>();
+            Value = ImmutableList<OpenLispVal>.Empty;
         }
 
-        public OpenLispList(List<OpenLispVal> value)
+        public OpenLispList(ImmutableList<OpenLispVal> value)
         {
             Value = value;
         }
 
         public OpenLispList(params OpenLispVal[] values)
         {
-            Value = new List<OpenLispVal>();
+            Value = ImmutableList<OpenLispVal>.Empty;
 
             Conj(values);
         }
@@ -55,7 +56,7 @@ namespace OpenLisp.Core.DataTypes
             //    _value.Add(v);
             //}
 
-            Value.AddRange(values.ToList());
+            Value.AddRange(values.ToImmutableList());
 
             return this;
         }

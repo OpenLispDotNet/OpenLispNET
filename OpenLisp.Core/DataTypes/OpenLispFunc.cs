@@ -36,7 +36,7 @@ namespace OpenLisp.Core.DataTypes
             {
                 return _lambda;
             }
-            set { _lambda = value; }
+            private set { _lambda = value; }
         }
 
         public OpenLispVal Ast
@@ -45,7 +45,7 @@ namespace OpenLisp.Core.DataTypes
             {
                 return _ast;
             }
-            set { _ast = value; }
+            private set { _ast = value; }
         }
 
         public Env Env
@@ -54,7 +54,7 @@ namespace OpenLisp.Core.DataTypes
             {
                 return _env;
             }
-            set { _env = value; }
+            private set { _env = value; }
         }
 
         public Env GenEnv(OpenLispList args)
@@ -68,13 +68,13 @@ namespace OpenLisp.Core.DataTypes
             {
                 return _fparams;
             }
-            set { _fparams = value; }
+            private set { _fparams = value; }
         }
 
         public bool Macro
         {
             get { return _macro; }
-            set { _macro = value; }
+            private set { _macro = value; }
         }
 
         public override string ToString() => Ast != null

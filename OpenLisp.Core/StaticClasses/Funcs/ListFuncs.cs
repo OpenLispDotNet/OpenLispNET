@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using OpenLisp.Core.AbstractClasses;
 using OpenLisp.Core.DataTypes;
@@ -10,7 +11,8 @@ namespace OpenLisp.Core.StaticClasses.Funcs
         public static OpenLispFunc Apply = new OpenLispFunc(x =>
         {
             var f = (OpenLispFunc)x[0];
-            var dataList = new List<OpenLispVal>();
+            //var dataList = new List<OpenLispVal>();
+            var dataList = ImmutableList<OpenLispVal>.Empty;
 
             dataList.AddRange(x.Slice(1, x.Size - 1).Value);
             dataList.AddRange(((OpenLispList)x[x.Size - 1]).Value);
@@ -22,7 +24,7 @@ namespace OpenLisp.Core.StaticClasses.Funcs
         {
             OpenLispFunc f = (OpenLispFunc)x[0];
             var sourceList = ((OpenLispList)x[1]).Value;
-            var newList = sourceList.Select(t => f.Apply(new OpenLispList(t))).ToList();
+            var newList = sourceList.Select(t => f.Apply(new OpenLispList(t))).ToImmutableList();
 
             return new OpenLispList(newList);
         });

@@ -11,7 +11,7 @@ namespace OpenLisp.Core.DataTypes
         public Int64 Value
         {
             get { return _value; }
-            set { _value = value; }
+            private set { _value = value; }
         }
 
         public OpenLispInt(Int64 value)
