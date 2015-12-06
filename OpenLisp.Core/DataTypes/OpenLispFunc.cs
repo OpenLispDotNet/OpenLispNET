@@ -74,7 +74,8 @@ namespace OpenLisp.Core.DataTypes
         public bool Macro
         {
             get { return _macro; }
-            private set { _macro = value; }
+            //private set { _macro = value; }
+            set { _macro = value; }
         }
 
         public override string ToString() => Ast != null

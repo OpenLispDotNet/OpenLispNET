@@ -14,7 +14,8 @@ namespace OpenLisp.Core.DataTypes
                 if (_value == null) throw new OpenLispException("Value is null.");
                 return _value;
             }
-            private set { _value = value; }
+            //private set { _value = value; }
+            set { _value = value; }
         }
 
         public OpenLispAtom(OpenLispVal value)

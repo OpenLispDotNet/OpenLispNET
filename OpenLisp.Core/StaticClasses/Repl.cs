@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.IO;
 using System.Linq;
 using OpenLisp.Core.AbstractClasses;
@@ -106,7 +107,7 @@ namespace OpenLisp.Core.StaticClasses
                 if (map == null) return ast;
                 var newDict =
                     map.Value.ToDictionary<KeyValuePair<string, OpenLispVal>, string, OpenLispVal>(
-                        entry => entry.Key, entry => Eval((OpenLispVal) entry.Value, env));
+                        entry => entry.Key, entry => Eval((OpenLispVal) entry.Value, env)).ToImmutableDictionary();
                 return new OpenLispHashMap(newDict);
             }
 
