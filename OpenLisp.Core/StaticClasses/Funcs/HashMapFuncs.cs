@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
 using OpenLisp.Core.AbstractClasses;
 using OpenLisp.Core.DataTypes;
@@ -84,7 +83,7 @@ namespace OpenLisp.Core.StaticClasses.Funcs
     {
         public static OpenLispFunc ContainsQ = new OpenLispFunc(x =>
         {
-            ImmutableDictionary<string, OpenLispVal> dict = (((OpenLispHashMap)x[0]).Value);
+            Dictionary<string, OpenLispVal> dict = (((OpenLispHashMap)x[0]).Value);
 
             //T1 key = default(T1);
             //T2 value = default(T2);
@@ -93,7 +92,7 @@ namespace OpenLisp.Core.StaticClasses.Funcs
             //ImmutableList<string> dictKeys = dict.Select(a => a.Key).ToImmutableList();
             //ImmutableList<OpenLispVal> dictValues = dict.Select(b => b.Value).ToImmutableList();
 
-            return dict.Select(z => z.Key is T1).ToImmutableList().Any()
+            return dict.Select(z => z.Key is T1).ToList().Any()
                 ? StaticOpenLispTypes.True
                 : (dict.Any(kv => kv.Value is T2) ? StaticOpenLispTypes.True : StaticOpenLispTypes.False);
         });

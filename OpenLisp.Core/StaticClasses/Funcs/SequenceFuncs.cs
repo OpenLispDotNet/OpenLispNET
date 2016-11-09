@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Collections.Immutable;
 using OpenLisp.Core.AbstractClasses;
 using OpenLisp.Core.DataTypes;
 using OpenLisp.Core.DataTypes.Errors.Throwable;
@@ -19,7 +18,7 @@ namespace OpenLisp.Core.StaticClasses.Funcs
 
             listData.AddRange(((OpenLispList) x[1]).Value);
 
-            return new OpenLispList(listData.ToImmutableList());
+            return new OpenLispList(listData);
         });
 
         public static OpenLispFunc Concat = new OpenLispFunc(x =>
@@ -34,7 +33,7 @@ namespace OpenLisp.Core.StaticClasses.Funcs
                 listData.AddRange(((OpenLispList) x[i]).Value);
             }
 
-            return new OpenLispList(listData.ToImmutableList());
+            return new OpenLispList(listData);
         });
 
         public static OpenLispFunc Nth = new OpenLispFunc(x =>
@@ -77,7 +76,7 @@ namespace OpenLisp.Core.StaticClasses.Funcs
                     newList.Add(x[i]);
                 }
 
-                return new OpenLispVector(newList.ToImmutableList());
+                return new OpenLispVector(newList);
             }
 
             for (int i = 1; i < x.Size; i++)
@@ -85,7 +84,7 @@ namespace OpenLisp.Core.StaticClasses.Funcs
                 newList.Insert(0, x[i]);
             }
 
-            return new OpenLispList(newList.ToImmutableList());
+            return new OpenLispList(newList);
         });
     }
 }

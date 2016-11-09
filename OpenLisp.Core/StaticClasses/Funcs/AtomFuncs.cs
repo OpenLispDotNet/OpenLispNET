@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.IO;
 using OpenLisp.Core.AbstractClasses;
 using OpenLisp.Core.DataTypes;
@@ -26,7 +25,7 @@ namespace OpenLisp.Core.StaticClasses.Funcs
 
             newList.AddRange(x.Slice(2).Value);
 
-            return dataAtom.Value = (f.Apply(new OpenLispList(newList.ToImmutableList())));
+            return dataAtom.Value = (f.Apply(new OpenLispList(newList)));
         });
     }
 }
