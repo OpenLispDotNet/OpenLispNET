@@ -199,9 +199,9 @@ namespace OpenLisp.Core.StaticClasses
                             var exception = e as OpenLispException;
                             exc = exception != null
                                 ? (OpenLispVal) exception.Value
-#if !NOSTACKTRACE
+#if NOSTACKTRACE
                                 : new OpenLispString(e.StackTrace);
-#elif NOSTACKTRACE
+#elif !NOSTACKTRACE
                                 : new OpenLispString("Stack Trace not yet available in OS.");
 #endif
                             return Eval(((OpenLispList)a2)[2],
@@ -342,9 +342,9 @@ namespace OpenLisp.Core.StaticClasses
                     catch (Exception e)
                     {
                         Console.WriteLine("Error: " + e.Message);
-#if !NOSTACKTRACE
+#if NOSTACKTRACE
                         Console.WriteLine(e.StackTrace);
-#elif NOSTACKTRACE
+#elif !NOSTACKTRACE
                         Console.WriteLine("Stack Trace not yet available in OS.");
 #endif
                         continue;
