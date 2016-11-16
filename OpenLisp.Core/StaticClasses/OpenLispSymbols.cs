@@ -1,5 +1,13 @@
 ﻿using System.Security.Policy;
 
+/*
+ * OpenLISP can have new OpenLispSymbols by adding
+ * more public static readonly string members to this
+ * class.
+ * 
+ * In your project, be sure to use the same namespace
+ * and semantics for your additions to OpenLispSymbols. 
+ */ 
 namespace OpenLisp.Core.StaticClasses
 {
     public static partial class OpenLispSymbols

@@ -9,6 +9,14 @@ using OpenLisp.Core.StaticClasses.Funcs;
 
 namespace OpenLisp.Core.StaticClasses
 {
+    /*
+     * This partial class can be extended with new namespace members.
+     * 
+     * The Ns member contains a IDictionary of string format OpenLispSymbols
+     * with attached OpenLispFunc, a descendent of OpenLispVal.
+     * 
+     * To extend the core Ns, simply add new elements to the IDictionary.
+     */
     public static partial class CoreNameSpace
     {
         public static IDictionary<string, OpenLispVal> Ns = new Dictionary<string, OpenLispVal>
