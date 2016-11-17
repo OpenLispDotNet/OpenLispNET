@@ -268,6 +268,7 @@ namespace OpenLisp.Core.StaticClasses
 
             Func<string, OpenLispVal> Re = (string str) => Eval(Read(str), replEnv);
 
+            //foreach (var entry in CoreNameSpace.Ns)
             foreach (var entry in CoreNameSpace.Ns)
             {
                 replEnv.Set(new OpenLispSymbol(entry.Key), entry.Value);

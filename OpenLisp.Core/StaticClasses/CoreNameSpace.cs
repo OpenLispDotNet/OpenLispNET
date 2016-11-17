@@ -22,6 +22,9 @@ namespace OpenLisp.Core.StaticClasses
         private static volatile CoreNameSpace _instance;
         private static object _syncRoot = new object();
 
+        /// <summary>
+        /// Default private constructor.
+        /// </summary>
         private CoreNameSpace()
         {
 
@@ -57,6 +60,8 @@ namespace OpenLisp.Core.StaticClasses
 
         /// <summary>
         /// Contains the singleton of the Ns object.
+        /// 
+        /// All get and set operations implemented using double-check locking.
         /// 
         /// Before setting the value of this property, you must first
         /// get the default instance.
