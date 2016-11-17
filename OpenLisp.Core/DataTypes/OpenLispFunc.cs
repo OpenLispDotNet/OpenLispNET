@@ -78,6 +78,12 @@ namespace OpenLisp.Core.DataTypes
             set { _macro = value; }
         }
 
+        /// <summary>
+        /// Returns a string representation of an OpenLispFunc.
+        /// 
+        /// TODO: create a parameterized version that can override "builtin_function" per package.
+        /// </summary>
+        /// <returns></returns>
         public override string ToString() => Ast != null
             ? "<fn* " + Printer.PrStr(FParams, true) +
               " " + Printer.PrStr(Ast, true) + ">"
