@@ -12,7 +12,7 @@ namespace OpenLisp.Core.StaticClasses
 {
     public static class Repl
     {
-        static void OnPrintEvent(EventArgs e) => PrintEvent?.Invoke(null, e);
+        static void OnPrintEvent(object sender, EventArgs e) => PrintEvent?.Invoke(sender, e);
 
         public static event EventHandler PrintEvent;
 
@@ -332,7 +332,7 @@ namespace OpenLisp.Core.StaticClasses
                     {
                         //Console.WriteLine(Print(Re(line)));
                         var p = Print(Re(line));
-                        OnPrintEvent(new PrintEventArgs(p));
+                        OnPrintEvent("REPL", new PrintEventArgs(p));
                         Console.WriteLine(p);
                     }
                     catch (OpenLispContinue)
