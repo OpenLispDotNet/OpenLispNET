@@ -60,6 +60,7 @@
     <Compile Include="DataTypes\OpenLispSymbol.cs" />
     <Compile Include="DataTypes\OpenLispVector.cs" />
     <Compile Include="Env.cs" />
+    <Compile Include="Events\Args\PrintEventArgs.cs" />
     <Compile Include="Interfaces\IBaseLogic.cs" />
     <Compile Include="Interfaces\ILispExpression.cs" />
     <Compile Include="Interfaces\ILispProvider.cs" />

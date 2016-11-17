@@ -6,11 +6,16 @@ using OpenLisp.Core.AbstractClasses;
 using OpenLisp.Core.DataTypes;
 using OpenLisp.Core.DataTypes.Errors;
 using OpenLisp.Core.DataTypes.Errors.Throwable;
+using OpenLisp.Core.Events.Args;
 
 namespace OpenLisp.Core.StaticClasses
 {
     public static class Repl
     {
+        static void OnPrintEvent(EventArgs e) => PrintEvent?.Invoke(null, e);
+
+        public static event EventHandler PrintEvent;
+
         /// <summary>
         /// Use the Reader to read a string and return an OpenLispVal.
         /// </summary>
@@ -325,7 +330,10 @@ namespace OpenLisp.Core.StaticClasses
 
                     try
                     {
-                        Console.WriteLine(Print(Re(line)));
+                        //Console.WriteLine(Print(Re(line)));
+                        var p = Print(Re(line));
+                        OnPrintEvent(new PrintEventArgs(p));
+                        Console.WriteLine(p);
                     }
                     catch (OpenLispContinue)
                     {
@@ -342,9 +350,9 @@ namespace OpenLisp.Core.StaticClasses
                     catch (Exception e)
                     {
                         Console.WriteLine("Error: " + e.Message);
-#if NOSTACKTRACE
+#if TRACE
                         Console.WriteLine(e.StackTrace);
-#elif !NOSTACKTRACE
+#elif !TRACE
                         Console.WriteLine("Stack Trace not yet available in OS.");
 #endif
                         continue;
