@@ -12,9 +12,11 @@ namespace OpenLisp.Core.StaticClasses
 {
     public static class Repl
     {
-        static void OnPrintEvent(object sender, EventArgs e) => PrintEvent?.Invoke(sender, e);
+        static void OnPrintEvent(object sender, PrintEventArgs e) => PrintEvent?.Invoke(sender, e);
+        static void OnInputEvent(object sender, PrintEventArgs e) => InputEvent?.Invoke(sender, e);
 
-        public static event EventHandler PrintEvent;
+        public static event EventHandler<PrintEventArgs> PrintEvent;
+        public static event EventHandler<PrintEventArgs> InputEvent; 
 
         /// <summary>
         /// Use the Reader to read a string and return an OpenLispVal.
@@ -321,6 +323,8 @@ namespace OpenLisp.Core.StaticClasses
                         {
                             break;
                         }
+
+                        OnInputEvent("USER", new PrintEventArgs(line));
                     }
                     catch (IOException e)
                     {
