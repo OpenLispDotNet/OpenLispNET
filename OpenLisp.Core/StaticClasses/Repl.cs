@@ -347,7 +347,7 @@ namespace OpenLisp.Core.StaticClasses
                     catch (OpenLispException e)
                     {
                         Console.WriteLine("Error: " +
-                                          //Printer.PrStr((OpenLispVal) e.Value, false));                 // Implicitly call ToString()
+                                          //Printer.PrStr((OpenLispVal) e.Value, false));             // Implicitly call ToString()
                                           Printer.PrStr((OpenLispVal)e.Value.ToString(), false));     // Explicitly call ToString()
 
                         continue;
