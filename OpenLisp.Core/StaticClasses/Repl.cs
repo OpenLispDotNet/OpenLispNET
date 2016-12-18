@@ -33,6 +33,13 @@ namespace OpenLisp.Core.StaticClasses
             return x is OpenLispList && ((OpenLispList) x).Size > 0;
         }
 
+        /// <summary>
+        /// Implement quasi-quotes.
+        /// 
+        /// TODO: refactor to move to <see cref="OpenLisp.Core.StaticClasses.CoreNameSpace"/>.
+        /// </summary>
+        /// <param name="ast"></param>
+        /// <returns></returns>
         public static OpenLispVal QuasiQuote(OpenLispVal ast)
         {
             if (!IsPair(ast))
@@ -83,6 +90,14 @@ namespace OpenLisp.Core.StaticClasses
                    func.Macro;
         }
 
+        /// <summary>
+        /// Expands a macro.
+        ///
+        /// TODO: refactor to move to <see cref="OpenLisp.Core.StaticClasses.CoreNameSpace"/>.
+        /// </summary>
+        /// <param name="ast"></param>
+        /// <param name="env"></param>
+        /// <returns></returns>
         public static OpenLispVal MacroExpand(OpenLispVal ast, Env env)
         {
             while (IsMacroCall(ast, env))
@@ -96,6 +111,14 @@ namespace OpenLisp.Core.StaticClasses
             return ast;
         }
 
+        /// <summary>
+        /// Evalues an AST in the environment.
+        /// 
+        /// TODO: refactor to move to <see cref="OpenLisp.Core.StaticClasses.CoreNameSpace"/>.
+        /// </summary>
+        /// <param name="ast"></param>
+        /// <param name="env"></param>
+        /// <returns></returns>
         public static OpenLispVal EvalAst(OpenLispVal ast, Env env)
         {
             var key = ast as OpenLispSymbol;
@@ -128,6 +151,16 @@ namespace OpenLisp.Core.StaticClasses
             return newList;
         }
 
+        /// <summary>
+        /// Evaluate a <see cref="OpenLispVal"/> inside an <seealso cref="Env"/>.
+        /// 
+        /// The core namespace is defined in <seealso cref="OpenLisp.Core.StaticClasses.CoreNameSpace"/>.
+        /// 
+        /// TODO: refactor the switch over a0Sym.  All symbols of the core language should be defined in the same place.
+        /// </summary>
+        /// <param name="origAst"></param>
+        /// <param name="env"></param>
+        /// <returns></returns>
         public static OpenLispVal Eval(OpenLispVal origAst, Env env)
         {
             while (true)
@@ -312,6 +345,7 @@ namespace OpenLisp.Core.StaticClasses
                     string line;
                     try
                     {
+                        // TODO: make user> reflect the current namespace.
                         line = ReadLine.LineReader("user> ");                        
                         if (line != null)
                         {
