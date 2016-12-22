@@ -9,13 +9,23 @@ using OpenLisp.Core.StaticClasses;
 
 namespace OpenLisp.Core
 {
+    /// <summary>
+    /// Reads and tokenizes OpenLisp.NET S-Expressions and forms. 
+    /// </summary>
     public class Reader
     {
+        /// <summary>
+        /// Custom throwable parse error.
+        /// </summary>
         public class ParseError : OpenLispThrowable
         {
             public ParseError(string msg) : base(msg) { }
         }
 
+        /// <summary>
+        /// Allows OpenLisp.NET to peek ahead to the next token and
+        /// return the next token in the collection.
+        /// </summary>
         public class TokensReader
         {
             readonly List<string> _tokens;
@@ -34,6 +44,11 @@ namespace OpenLisp.Core
             public string Next() => _tokens[_position++];
         }
 
+        /// <summary>
+        /// A simple tokenizer to tokenize OpenLisp.NET S-Expressions.
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
         public static List<string> Tokenize(string str)
         {
             string pattern = @"[\s ,]*(~@|[\[\]{}()'`~@]|""(?:[\\].|[^\\""])*""|;.*|[^\s \[\]{}()'""`~@,;]*)";
@@ -45,6 +60,11 @@ namespace OpenLisp.Core
                 .ToList();
         }
 
+        /// <summary>
+        /// Reads an OpenLisp.NET atom.
+        /// </summary>
+        /// <param name="rdr"></param>
+        /// <returns></returns>
         public static OpenLispVal ReadAtom(TokensReader rdr)
         {
             string token = rdr.Next();
@@ -93,6 +113,14 @@ namespace OpenLisp.Core
             return new OpenLispInt(int.Parse(match.Groups[1].Value));
         }
 
+        /// <summary>
+        /// Reads an OpenLisp.NET list expression.
+        /// </summary>
+        /// <param name="rdr"></param>
+        /// <param name="lst"></param>
+        /// <param name="start"></param>
+        /// <param name="end"></param>
+        /// <returns></returns>
         public static OpenLispVal ReadList(TokensReader rdr, OpenLispList lst, char start, char end)
         {
             string token = rdr.Next();
@@ -122,8 +150,8 @@ namespace OpenLisp.Core
         }
 
         /// <summary>
-        /// This recursived static method recursive processes
-        /// OpenLisp.NET S-Expressions and tokenizes them.
+        /// This static method recursively processes
+        /// OpenLisp.NET forms and tokenizes them.
         /// </summary>
         /// <param name="rdr"></param>
         /// <returns></returns>
@@ -173,6 +201,11 @@ namespace OpenLisp.Core
             return form;
         }
 
+        /// <summary>
+        /// Reads an OpenLisp.NET str.
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
         public static OpenLispVal ReadStr(string str)
         {
             return ReadForm(new TokensReader(Tokenize(str)));

@@ -315,6 +315,7 @@ namespace OpenLisp.Core.StaticClasses
                 replEnv.Set(new OpenLispSymbol(entry.Key), entry.Value);
             }
 
+            // TODO: extract this from the Repl
             replEnv.Set(new OpenLispSymbol("eval"), 
                         new OpenLispFunc(a => Eval(a[0], replEnv)));
 
