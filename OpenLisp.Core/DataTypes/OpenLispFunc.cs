@@ -5,6 +5,9 @@ using OpenLisp.Core.StaticClasses;
 
 namespace OpenLisp.Core.DataTypes
 {
+    /// <summary>
+    /// Implementation of a func in OpenLisp.NET
+    /// </summary>
     public class OpenLispFunc : OpenLispVal
     {
         private Func<OpenLispList, OpenLispVal> _lambda = null;
