@@ -6,6 +6,7 @@ using DeepEqual.Syntax;
 using OpenLisp.Core.AbstractClasses;
 using OpenLisp.Core.DataTypes;
 using OpenLisp.Core.StaticClasses.Funcs;
+using System.Diagnostics;
 
 namespace OpenLisp.Core.StaticClasses
 {
@@ -118,7 +119,16 @@ namespace OpenLisp.Core.StaticClasses
                                 {">=",          new OpenLispFunc(x =>
                                                     (OpenLispInt)x[0] >= (OpenLispInt)x[1])},
                                 {"+",           new OpenLispFunc(x =>
-                                                    (OpenLispInt)x[0] + (OpenLispInt)x[1])},
+                                                    //(OpenLispInt)x[0] + (OpenLispInt)x[1])},
+                                                    {
+                                                        OpenLispInt v = new OpenLispInt(0);
+                                                        for (int i = 0; i < x.Value.ToArray().Length; i++)
+                                                        {
+                                                            Debug.WriteLine($"[{DateTime.Now}] x[{i}] = {x[i]}");
+                                                            v += ((OpenLispInt)x[i]);
+                                                        }
+                                                        return v;
+                                                    })},
                                 {"-",           new OpenLispFunc(x =>
                                                     (OpenLispInt)x[0] - (OpenLispInt)x[1])},
                                 {"*",           new OpenLispFunc(x =>

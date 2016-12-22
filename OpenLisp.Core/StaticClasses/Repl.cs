@@ -333,6 +333,7 @@ namespace OpenLisp.Core.StaticClasses
             replEnv.Set(new OpenLispSymbol("*ARGV*"), argv);
 
             // core.oln: defined using the language itself
+            // TODO: move this to its own class or assembly?
             Re("(def! not (fn* (a) (if a false true)))");
             Re("(def! load-file (fn* (f) (eval (read-string (str \"(do \" (slurp f) \")\")))))");
             Re("(defmacro! cond (fn* (& xs) (if (> (count xs) 0) (list 'if (first xs) (if (> (count xs) 1) (nth xs 1) (throw \"odd number of forms to cond\")) (cons 'cond (rest (rest xs)))))))");
