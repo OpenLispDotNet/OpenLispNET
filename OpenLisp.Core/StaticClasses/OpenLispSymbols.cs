@@ -1,4 +1,7 @@
-﻿using System.Security.Policy;
+﻿// NOTE: this file is obsolete, and preserved here, for now, 
+// for historical reference.
+
+//using System.Security.Policy;
 
 /*
  * OpenLISP can have new OpenLispSymbols by adding

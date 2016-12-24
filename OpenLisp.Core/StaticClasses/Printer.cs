@@ -7,13 +7,31 @@ using OpenLisp.Core.DataTypes;
 
 namespace OpenLisp.Core.StaticClasses
 {
+    /// <summary>
+    /// Printer implementation suitable for most OpenLisp.NET REPLs.
+    /// </summary>
     public static class Printer
     {
+        /// <summary>
+        /// Joins a <see cref="IList{OpenLispVal}"/> with a <see cref="string"/> delimeter.
+        /// </summary>
+        /// <param name="values"></param>
+        /// <param name="delim"></param>
+        /// <param name="printReadably">Whether or not to pretty-print the result.</param>
+        /// <returns></returns>
         public static string Join(IList<OpenLispVal> values, string delim, bool printReadably)
         {
             return String.Join(delim, values.Select(v => v.ToString(printReadably)).ToArray());
         }
 
+        /// <summary>
+        /// Joins a <see cref="IDictionary{T1, T2}"/> with <see cref="string"/> keys and
+        /// <see cref="OpenLispVal"/> values using a <see cref="string"/> delimeter.
+        /// </summary>
+        /// <param name="values"></param>
+        /// <param name="delim"></param>
+        /// <param name="printReadably">Whether or not to pretty-print the result.</param>
+        /// <returns></returns>
         public static string Join(IDictionary<string, OpenLispVal> values, string delim, bool printReadably)
         {
             List<string> strings = new List<string>();
@@ -39,16 +57,34 @@ namespace OpenLisp.Core.StaticClasses
             return String.Join(delim, strings.ToArray());
         }
 
+        /// <summary>
+        /// pr-str implementation.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="printReadably"></param>
+        /// <returns></returns>
         public static string PrStr(OpenLispVal value, bool printReadably)
         {
             return value.ToString(printReadably);
         }
 
+        /// <summary>
+        /// pr-str arguments.
+        /// </summary>
+        /// <param name="args"></param>
+        /// <param name="separator"></param>
+        /// <param name="printReadably"></param>
+        /// <returns></returns>
         public static string PrStrArgs(OpenLispList args, String separator, bool printReadably)
         {
             return Join(args.Value, separator, printReadably);
         }
 
+        /// <summary>
+        /// Escapes a string.
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
         public static string EscapeString(string str)
         {
             return Regex.Escape(str);

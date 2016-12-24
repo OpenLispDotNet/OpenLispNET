@@ -36,11 +36,19 @@ namespace OpenLisp.Core
                 _position = 0;
             }
 
+            /// <summary>
+            /// Peeks a token.
+            /// </summary>
+            /// <returns></returns>
             public string Peek()
             {
                 return _position >= _tokens.Count ? null : _tokens[_position];
             }
 
+            /// <summary>
+            /// Gets the next token.
+            /// </summary>
+            /// <returns></returns>
             public string Next() => _tokens[_position++];
         }
 
@@ -143,6 +151,11 @@ namespace OpenLisp.Core
             throw new ParseError("expected '" + start + "'");
         }
 
+        /// <summary>
+        /// Reads a hash map using an instance of <see cref="TokensReader"/>.
+        /// </summary>
+        /// <param name="rdr"></param>
+        /// <returns></returns>
         public static OpenLispVal ReadHashMap(TokensReader rdr)
         {
             OpenLispList lst = (OpenLispList)ReadList(rdr, new OpenLispList(), '{', '}');
