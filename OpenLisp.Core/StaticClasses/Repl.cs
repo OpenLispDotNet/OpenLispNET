@@ -364,8 +364,11 @@ namespace OpenLisp.Core.StaticClasses
             }
             replEnv.Set(new OpenLispSymbol("*ARGV*"), argv);
 
-            // core.oln: defined using the language itself
+            #region core.oln
+            // BEGIN core.oln: defined using the language itself
+            //
             // TODO: move this to its own class or assembly?  They rely on Repl.Eval above.
+            //
             // NOTE: This can look a bit confusing if you aren't comfortable with Lisp.  One way 
             // to learn is start reading Lisp code inside out.  Start with the deepest nested 
             // function call and unwind all the way to the left.  For example:
@@ -408,8 +411,7 @@ namespace OpenLisp.Core.StaticClasses
             // Define a function f(f) to evaluate the slurped, interpolated, and read string as 
             // valid OpenLisp.NET source, and then executes the valid OpenLisp.NET source.
             //
-            // (def! load-file (fn* (f) (eval (read-string (str \"(do \" (slurp f) \")\")))))
-            //
+            // (def! load-file (fn* (f) (eval (read-string (str \"(do \" (slurp f) \")\")))))            
             // Define a symbole named 'load-file' that can be called as a function with the form
             // f(f) that is defined as evaluating the slurped, interpolated, and read strings from
             // a file on disk as valid OpenLisp.NET source code that is directly invoked by the 
@@ -421,6 +423,19 @@ namespace OpenLisp.Core.StaticClasses
 
             // Macros are meta-programs that write code when called or invoked:
             Re("(defmacro! or (fn* (& xs) (if (empty? xs) nil (if (= 1 (count xs)) (first xs) `(let* (or_FIXME ~(first xs)) (if or_FIXME or_FIXME (or ~@(rest xs))))))))");
+            // OpenLisp.NET, like a lot of Lisp dialects, is implicitly and explicitly homiconic.  This means that,
+            // in practice, there is no difference between valid OpenLisp.NET data and valid OpenLisp.NET code.
+            // This means we are able to construct new S-Expressions at run-time, and then use eval to interpret our
+            // code.  A common technique is to build a string that is a lis of functions and parameters, and then
+            // evaluate the string.  This is incredibly powerful in that running programs can modify themselves at
+            // runtime.
+            //
+            // Macros exploit this awesome power to create code that write new code and valid source code at
+            // program run-time, and these macros are exposed to the Engineer with the same calling conventions
+            // as regular functions.
+            //
+            // END core.oln
+            #endregion
 
             if (args.Length <= fileIdx)
             {
