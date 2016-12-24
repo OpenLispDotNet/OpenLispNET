@@ -20,11 +20,23 @@ namespace OpenLisp.Core.DataTypes
 
         private bool _macro = false;
 
+        /// <summary>
+        /// Constructor accepting a <see cref="Func{T, TResult}"/>.
+        /// </summary>
+        /// <param name="lambda"></param>
         public OpenLispFunc(Func<OpenLispList, OpenLispVal> lambda)
         {
             Lambda = lambda;
         }
 
+        /// <summary>
+        /// Constructor accepting an <see cref="OpenLispVal"/>, an <see cref="Env"/>, an <see cref="OpenLispList"/>,
+        /// and a <see cref="Func{T, TResult}"/>.
+        /// </summary>
+        /// <param name="ast"></param>
+        /// <param name="env"></param>
+        /// <param name="fparams"></param>
+        /// <param name="lambda"></param>
         public OpenLispFunc(OpenLispVal ast, Env env, OpenLispList fparams, Func<OpenLispList, OpenLispVal> lambda)
         {
             Ast = ast;
@@ -33,6 +45,9 @@ namespace OpenLisp.Core.DataTypes
             Lambda = lambda;
         }
 
+        /// <summary>
+        /// Publicly Get and privately Set the <see cref="Func{T, TResult}"/>
+        /// </summary>
         public Func<OpenLispList, OpenLispVal> Lambda
         {
             get
@@ -42,6 +57,9 @@ namespace OpenLisp.Core.DataTypes
             private set { _lambda = value; }
         }
 
+        /// <summary>
+        /// Publicly Get and privately Set the <see cref="OpenLispVal"/> representing the AST.
+        /// </summary>
         public OpenLispVal Ast
         {
             get
@@ -51,6 +69,9 @@ namespace OpenLisp.Core.DataTypes
             private set { _ast = value; }
         }
 
+        /// <summary>
+        /// Publicly Get and privately Set the <see cref="Env"/>.
+        /// </summary>
         public Env Env
         {
             get
@@ -60,11 +81,20 @@ namespace OpenLisp.Core.DataTypes
             private set { _env = value; }
         }
 
+        /// <summary>
+        /// Generates a new <see cref="Env"/> from an <see cref="OpenLispList"/> parameter.
+        /// </summary>
+        /// <param name="args"></param>
+        /// <returns></returns>
         public Env GenEnv(OpenLispList args)
         {
             return new Env(Env, FParams, args);
         }
 
+        /// <summary>
+        /// Publicly Get and privately Set the <see cref="OpenLispList"/> parameters
+        /// of an <see cref="OpenLispFunc"/>.
+        /// </summary>
         public OpenLispList FParams
         {
             get
@@ -74,6 +104,9 @@ namespace OpenLisp.Core.DataTypes
             private set { _fparams = value; }
         }
 
+        /// <summary>
+        /// Get or Set whether this <see cref="OpenLispList"/> is a macro.
+        /// </summary>
         public bool Macro
         {
             get { return _macro; }
@@ -92,6 +125,11 @@ namespace OpenLisp.Core.DataTypes
               " " + Printer.PrStr(Ast, true) + ">"
             : "<builtin_function " + Lambda + ">";
 
+        /// <summary>
+        /// Apply the <see cref="OpenLispFunc"/> with an <see cref="OpenLispList"/> of parameters.
+        /// </summary>
+        /// <param name="args"></param>
+        /// <returns></returns>
         public OpenLispVal Apply(OpenLispList args)
         {
             return Lambda(args);
