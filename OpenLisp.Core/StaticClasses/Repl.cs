@@ -173,7 +173,7 @@ namespace OpenLisp.Core.StaticClasses
         }
 
         /// <summary>
-        /// Evaluate a <see cref="OpenLispVal"/> inside an <seealso cref="Env"/>.
+        /// Evaluate an <see cref="OpenLispVal"/> inside an <seealso cref="Env"/>.
         /// 
         /// The core namespace is defined in <seealso cref="OpenLisp.Core.StaticClasses.CoreNameSpace"/>.
         /// 
