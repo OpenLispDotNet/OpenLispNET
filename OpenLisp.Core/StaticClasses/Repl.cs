@@ -18,7 +18,14 @@ namespace OpenLisp.Core.StaticClasses
         static void OnPrintEvent(object sender, PrintEventArgs e) => PrintEvent?.Invoke(sender, e);
         static void OnInputEvent(object sender, PrintEventArgs e) => InputEvent?.Invoke(sender, e);
 
+        /// <summary>
+        /// Printe Event handler.
+        /// </summary>
         public static event EventHandler<PrintEventArgs> PrintEvent;
+
+        /// <summary>
+        /// Input Event handler.
+        /// </summary>
         public static event EventHandler<PrintEventArgs> InputEvent; 
 
         /// <summary>
