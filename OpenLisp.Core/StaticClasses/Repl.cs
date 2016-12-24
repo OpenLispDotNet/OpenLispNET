@@ -365,10 +365,61 @@ namespace OpenLisp.Core.StaticClasses
             replEnv.Set(new OpenLispSymbol("*ARGV*"), argv);
 
             // core.oln: defined using the language itself
-            // TODO: move this to its own class or assembly?
+            // TODO: move this to its own class or assembly?  They rely on Repl.Eval above.
+            // NOTE: This can look a bit confusing if you aren't comfortable with Lisp.  One way 
+            // to learn is start reading Lisp code inside out.  Start with the deepest nested 
+            // function call and unwind all the way to the left.  For example:
+            // 
+            // (def! not (fn* (a) (if a false true)))
+            //
+            // (if a false true)
+            // If 'a' is false, return true.
+            //
+            // (fn* (a) (if a false true))
+            // Define f(a) as: if 'a' is false, return true.
+            //
+            // (def! not (fn* (a) (if a false true)))
+            // Define a symbol named 'not' which has a value of f(a) where f(a)
+            // is defined as: if 'a' is false, return true.
             Re("(def! not (fn* (a) (if a false true)))");
+
+            // (slurp f)
+            // Read the string content of a file named 'f' from disk.
+            //
+            // \"(do \" (slurp f) \")\"
+            // Read the string content of a file name 'f' from disk and interpolate 
+            // the content between two strings: "(do " and ")" respectively.
+            //
+            // (str \"(do \" (slurp f) \")\")
+            // Read the string content of a file name 'f' from disk and interpolate 
+            // the content between two strings: "(do " and ")" respectively.  Store this
+            // as an OpenLisp.NET str.
+            //
+            // (read-string (str \"(do \" (slurp f) \")\"))
+            // Read the string content of a file name 'f' from disk and interpolate 
+            // the content between two strings: "(do " and ")" respectively.  Store this
+            // as an OpenLisp.NET str.  Invoke the function read-string.
+            //
+            // (eval (read-string (str \"(do \" (slurp f) \")\")))
+            // Evaluate the slurped, interpolated, and read string as valid OpenLisp.NET source,
+            // and "do" the commands in the valid OpenLisp.NET source.
+            //
+            // (fn* (f) (eval (read-string (str \"(do \" (slurp f) \")\"))))
+            // Define a function f(f) to evaluate the slurped, interpolated, and read string as 
+            // valid OpenLisp.NET source, and then executes the valid OpenLisp.NET source.
+            //
+            // (def! load-file (fn* (f) (eval (read-string (str \"(do \" (slurp f) \")\")))))
+            //
+            // Define a symbole named 'load-file' that can be called as a function with the form
+            // f(f) that is defined as evaluating the slurped, interpolated, and read strings from
+            // a file on disk as valid OpenLisp.NET source code that is directly invoked by the 
+            // evaluated 'd' command surrounding the slurped file's contents.
             Re("(def! load-file (fn* (f) (eval (read-string (str \"(do \" (slurp f) \")\")))))");
+
+            // Macros are a bit trickier:
             Re("(defmacro! cond (fn* (& xs) (if (> (count xs) 0) (list 'if (first xs) (if (> (count xs) 1) (nth xs 1) (throw \"odd number of forms to cond\")) (cons 'cond (rest (rest xs)))))))");
+
+            // Macros are meta-programs that write code when called or invoked:
             Re("(defmacro! or (fn* (& xs) (if (empty? xs) nil (if (= 1 (count xs)) (first xs) `(let* (or_FIXME ~(first xs)) (if or_FIXME or_FIXME (or ~@(rest xs))))))))");
 
             if (args.Length <= fileIdx)
