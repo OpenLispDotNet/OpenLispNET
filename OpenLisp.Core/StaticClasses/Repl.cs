@@ -10,6 +10,9 @@ using OpenLisp.Core.Events.Args;
 
 namespace OpenLisp.Core.StaticClasses
 {
+    /// <summary>
+    /// Default REPL implementation for OpenLisp.NET
+    /// </summary>
     public static class Repl
     {
         static void OnPrintEvent(object sender, PrintEventArgs e) => PrintEvent?.Invoke(sender, e);
@@ -28,13 +31,18 @@ namespace OpenLisp.Core.StaticClasses
             return Reader.ReadStr(str);
         }
 
+        /// <summary>
+        /// Is this <see cref="OpenLispVal"/> a pair?
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
         public static bool IsPair(OpenLispVal x)
         {
             return x is OpenLispList && ((OpenLispList) x).Size > 0;
         }
 
         /// <summary>
-        /// Implement quasi-quotes.
+        /// Implements quasi-quotes.
         /// 
         /// TODO: refactor to move to <see cref="OpenLisp.Core.StaticClasses.CoreNameSpace"/>.
         /// </summary>
@@ -74,6 +82,12 @@ namespace OpenLisp.Core.StaticClasses
                     QuasiQuote(((OpenLispList) ast).Rest()));
         }
 
+        /// <summary>
+        /// Is this <see cref="OpenLispVal"/> a macro call in the current <see cref="Env"/>?
+        /// </summary>
+        /// <param name="ast"></param>
+        /// <param name="env"></param>
+        /// <returns></returns>
         public static bool IsMacroCall(OpenLispVal ast, Env env)
         {
             var list = ast as OpenLispList;
@@ -187,6 +201,7 @@ namespace OpenLisp.Core.StaticClasses
                 OpenLispVal res;
                 switch (a0Sym)
                 {
+                    // TODO: extract this switch out of the REPL and consolidate in the core NS.
                     case "def!":
                         a1 = ast[1];
                         a2 = ast[2];
@@ -297,11 +312,20 @@ namespace OpenLisp.Core.StaticClasses
             }
         }
 
+        /// <summary>
+        /// Pretty-prints an <see cref="OpenLispVal"/>.
+        /// </summary>
+        /// <param name="exp"></param>
+        /// <returns></returns>
         public static string Print(OpenLispVal exp)
         {
             return Printer.PrStr(exp, true);
         }
 
+        /// <summary>
+        /// Main entry point of the OpenLisp.NET REPL.  
+        /// </summary>
+        /// <param name="args"></param>
         public static void ReplMain(string[] args)
         {
             var replEnv = new Env(null);
