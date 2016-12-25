@@ -51,9 +51,22 @@ namespace OpenLisp.Terminal
         /// </summary>
         public class Completion
         {
+            /// <summary>
+            /// The result of completion.
+            /// </summary>
             public string[] Result;
+
+            /// <summary>
+            /// The prefix for completion.
+            /// </summary>
             public string Prefix;
 
+            /// <summary>
+            /// Constructor accepting a <see cref="string"/> prefix and
+            /// a <see cref="T:string[]"/> result. 
+            /// </summary>
+            /// <param name="prefix"></param>
+            /// <param name="result"></param>
             public Completion(string prefix, string[] result)
             {
                 Prefix = prefix;

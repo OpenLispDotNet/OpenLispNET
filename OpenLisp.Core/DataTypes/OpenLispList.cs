@@ -11,8 +11,14 @@ namespace OpenLisp.Core.DataTypes
     /// </summary>
     public class OpenLispList : OpenLispVal
     {
+        /// <summary>
+        /// Opening token of an <see cref="OpenLispList"/>.
+        /// </summary>
         public string Start = "(";
 
+        /// <summary>
+        /// Ending token of an <see cref="OpenLispList"/>.
+        /// </summary>
         public string End = ")";
 
         private List<OpenLispVal> _value;

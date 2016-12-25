@@ -80,7 +80,7 @@ namespace OpenLisp.Core.DataTypes
         }
 
         /// <summary>
-        /// Constructor accepting a <see cref="Dictionary{string, OpenLispVal}"/>.
+        /// Constructor accepting a <see cref="T:Dictionary{string, OpenLispVal}"/>.
         /// </summary>
         /// <param name="val"></param>
         public OpenLispHashMap(Dictionary<string, OpenLispVal> val)

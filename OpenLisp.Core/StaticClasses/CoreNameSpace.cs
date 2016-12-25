@@ -20,7 +20,14 @@ namespace OpenLisp.Core.StaticClasses
      */
     public partial class CoreNameSpace
     {
+        /// <summary>
+        /// Static volatile instance of <see cref="CoreNameSpace"/>.
+        /// </summary>
         private static volatile CoreNameSpace _instance;
+
+        /// <summary>
+        /// Static instance of an <see cref="object"/> for double-check locking.
+        /// </summary>
         private static object _syncRoot = new object();
 
         /// <summary>
