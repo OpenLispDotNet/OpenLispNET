@@ -116,7 +116,7 @@ namespace OpenLisp.Core.StaticClasses
                                 {"readline",    StringFuncs.OpenLispReadLine},
                                 {"read-string", StringFuncs.ReadString},
                                 {"slurp",       StringFuncs.Slurp},
-
+                                // Operators:
                                 {"<",           new OpenLispFunc(x =>
                                                     (OpenLispInt)x[0] < (OpenLispInt)x[1])},
                                 {"<=",          new OpenLispFunc(x =>
