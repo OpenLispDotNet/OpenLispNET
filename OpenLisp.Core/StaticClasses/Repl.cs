@@ -260,9 +260,9 @@ namespace OpenLisp.Core.StaticClasses
                             var exception = e as OpenLispException;
                             exc = exception != null
                                 ? (OpenLispVal) exception.Value
-#if NOSTACKTRACE // <-- wat
-                 /* --> wat */  : new OpenLispString(e.StackTrace); // <-- wat
-#elif !NOSTACKTRACE
+#if TRACE
+                                : new OpenLispString(e.StackTrace);
+#elif !TRACE
                                 : new OpenLispString("Stack Trace not yet available in OS.");
 #endif
                             return Eval(((OpenLispList)a2)[2],
