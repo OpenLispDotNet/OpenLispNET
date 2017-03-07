@@ -24,8 +24,8 @@ namespace OpenLisp.Core
             /// <summary>
             /// ParseError constructor.
             /// </summary>
-            /// <param name="msg"></param>
-            public ParseError(string msg) : base(msg) { }
+            /// <param name="message"></param>
+            public ParseError(string message) : base(message) { }
         }
 
         /// <summary>
