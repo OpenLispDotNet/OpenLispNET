@@ -138,37 +138,37 @@ namespace OpenLisp.Core.StaticClasses
         /// 
         /// TODO: refactor to move to <see cref="OpenLisp.Core.StaticClasses.CoreNameSpace"/>.
         /// </summary>
-        /// <param name="ast"></param>
-        /// <param name="env"></param>
+        /// <param name="abstractSyntaxTree"></param>
+        /// <param name="environment"></param>
         /// <returns></returns>
-        public static OpenLispVal EvalAst(OpenLispVal ast, Env env)
+        public static OpenLispVal EvalAst(OpenLispVal abstractSyntaxTree, Env environment)
         {
-            var key = ast as OpenLispSymbol;
+            var key = abstractSyntaxTree as OpenLispSymbol;
 
             if (key != null)
             {
-                return env.Get(key);
+                return environment.Get(key);
             }
 
-            var list = ast as OpenLispList;
+            var list = abstractSyntaxTree as OpenLispList;
 
             if (list == null)
             {
-                var map = ast as OpenLispHashMap;
-                if (map == null) return ast;
-                var newDict =
-                    map.Value.ToDictionary<KeyValuePair<string, OpenLispVal>, string, OpenLispVal>(
-                        entry => entry.Key, entry => Eval((OpenLispVal) entry.Value, env));
-                return new OpenLispHashMap(newDict);
+                var map = abstractSyntaxTree as OpenLispHashMap;
+                if (map == null) return abstractSyntaxTree;
+                var newDictionary =
+                    map.Value.ToDictionary(
+                        entry => entry.Key, entry => Eval(entry.Value, environment));
+                return new OpenLispHashMap(newDictionary);
             }
 
             OpenLispList oldList = list;
-            OpenLispList newList = ast.ListQ() ? new OpenLispList()
+            OpenLispList newList = abstractSyntaxTree.ListQ() ? new OpenLispList()
                 : (OpenLispList)new OpenLispVector();
 
-            foreach (OpenLispVal mv in oldList.Value)
+            foreach (OpenLispVal movedValue in oldList.Value)
             {
-                newList.Conj(Eval(mv, env));
+                newList.Conj(Eval(movedValue, environment));
             }
             return newList;
         }
@@ -178,24 +178,23 @@ namespace OpenLisp.Core.StaticClasses
         /// 
         /// The core namespace is defined in <seealso cref="OpenLisp.Core.StaticClasses.CoreNameSpace"/>.
         /// 
-        /// TODO: refactor internal variable/object names to something(s) more meaningful.
-        /// TODO: refactor the switch over a0Sym.  All symbols of the core language should be defined in the same place.
+        /// TODO: refactor the switch over treeHeadSymbol.  All symbols of the core language should be defined in the same place.
         /// </summary>
         /// <param name="originalAbstractSyntaxTree"></param>
-        /// <param name="env"></param>
+        /// <param name="environment"></param>
         /// <returns></returns>
-        public static OpenLispVal Eval(OpenLispVal originalAbstractSyntaxTree, Env env)
+        public static OpenLispVal Eval(OpenLispVal originalAbstractSyntaxTree, Env environment)
         {
             while (true)
             {
                 //Console.WriteLine("EVAL: " + printer._pr_str(orig_ast, true));
                 if (!originalAbstractSyntaxTree.ListQ())
                 {
-                    return EvalAst(originalAbstractSyntaxTree, env);
+                    return EvalAst(originalAbstractSyntaxTree, environment);
                 }
 
                 // apply list
-                OpenLispVal expanded = MacroExpand(originalAbstractSyntaxTree, env);
+                OpenLispVal expanded = MacroExpand(originalAbstractSyntaxTree, environment);
                 if (!expanded.ListQ())
                 {
                     return expanded;
@@ -212,33 +211,34 @@ namespace OpenLisp.Core.StaticClasses
                 var symbol = treeHead as OpenLispSymbol;
                 String treeHeadSymbol = symbol?.ToString() ?? "__<*fn*>__";
 
-                OpenLispVal a1;
-                OpenLispVal a2;
-                OpenLispVal res;
+                // Let's get alchemical in our metaphors:
+                OpenLispVal caputPrimus;    // The First Head.  Here's a vector: [1 lol 2 3 apple].  caputPrimus should be: 1.
+                OpenLispVal caputSecundus;  // The Second Head.  Here's a list: `(1 lol 2 3 apple).  caputSecundus should be: lol.
+                OpenLispVal solutio;
 
                 switch (treeHeadSymbol)
                 {
                     // TODO: extract this switch out of the REPL and consolidate in the core NS.
                     case "def!":
-                        a1 = abstractSyntaxTree[1];
-                        a2 = abstractSyntaxTree[2];
-                        res = Eval(a2, env);
-                        env.Set((OpenLispSymbol)a1, res);
-                        return res;
+                        caputPrimus = abstractSyntaxTree[1];
+                        caputSecundus = abstractSyntaxTree[2];
+                        solutio = Eval(caputSecundus, environment);
+                        environment.Set((OpenLispSymbol)caputPrimus, solutio);
+                        return solutio;
                     case "let*":
-                        a1 = abstractSyntaxTree[1];
-                        a2 = abstractSyntaxTree[2];
+                        caputPrimus = abstractSyntaxTree[1];
+                        caputSecundus = abstractSyntaxTree[2];
                         OpenLispSymbol key;
-                        OpenLispVal val;
-                        Env letEnv = new Env(env);
-                        for (int i = 0; i < ((OpenLispList)a1).Size; i += 2)
+                        OpenLispVal value;
+                        Env letEnvironment = new Env(environment);  // TODO: explain ramifications to memory allocation and protection by creating a new Env object this way.
+                        for (int i = 0; i < ((OpenLispList)caputPrimus).Size; i += 2)
                         {
-                            key = (OpenLispSymbol)((OpenLispList)a1)[i];
-                            val = ((OpenLispList)a1)[i + 1];
-                            letEnv.Set(key, Eval(val, letEnv));
+                            key = (OpenLispSymbol)((OpenLispList)caputPrimus)[i];
+                            value = ((OpenLispList)caputPrimus)[i + 1];
+                            letEnvironment.Set(key, Eval(value, letEnvironment));
                         }
-                        originalAbstractSyntaxTree = a2;
-                        env = letEnv;
+                        originalAbstractSyntaxTree = caputSecundus;
+                        environment = letEnvironment;
                         break;
                     case "quote":
                         return abstractSyntaxTree[1];
@@ -246,47 +246,50 @@ namespace OpenLisp.Core.StaticClasses
                         originalAbstractSyntaxTree = QuasiQuote(abstractSyntaxTree[1]);
                         break;
                     case "defmacro!":
-                        a1 = abstractSyntaxTree[1];
-                        a2 = abstractSyntaxTree[2];
-                        res = Eval(a2, env);
-                        ((OpenLispFunc)res).Macro = true;
-                        env.Set(((OpenLispSymbol)a1), res);
-                        return res;
+                        caputPrimus = abstractSyntaxTree[1];
+                        caputSecundus = abstractSyntaxTree[2];
+                        solutio = Eval(caputSecundus, environment);
+                        ((OpenLispFunc)solutio).Macro = true;
+                        environment.Set(((OpenLispSymbol)caputPrimus), solutio);
+                        return solutio;
                     case "macroexpand":
-                        a1 = abstractSyntaxTree[1];
-                        return MacroExpand(a1, env);
+                        caputPrimus = abstractSyntaxTree[1];
+                        return MacroExpand(caputPrimus, environment);
                     case "try*":
                         try
                         {
-                            return Eval(abstractSyntaxTree[1], env);
+                            return Eval(abstractSyntaxTree[1], environment);
                         }
-                        catch (Exception e)
+                        catch (Exception caught)
                         {
-                            if (abstractSyntaxTree.Size <= 2) throw e;
-                            OpenLispVal exc;
-                            a2 = abstractSyntaxTree[2];
-                            OpenLispVal a20 = ((OpenLispList)a2)[0];
-                            if (((OpenLispSymbol) a20).ToString() != "catch*") throw e;
-                            var exception = e as OpenLispException;
-                            exc = exception != null
+                            if (abstractSyntaxTree.Size <= 2) throw caught;
+
+                            OpenLispVal openLispException;
+
+                            caputSecundus = abstractSyntaxTree[2];
+                            OpenLispVal caputSecundusHead = ((OpenLispList)caputSecundus)[0];
+                            if (((OpenLispSymbol) caputSecundusHead).ToString() != "catch*") throw caught;
+
+                            var exception = caught as OpenLispException;
+                            openLispException = exception != null
                                 ? (OpenLispVal) exception.Value
 #if TRACE
-                                : new OpenLispString(e.StackTrace);
+                                : new OpenLispString(caught.StackTrace);
 #elif !TRACE
                                 : new OpenLispString("Stack Trace not yet available in OS.");
 #endif
-                            return Eval(((OpenLispList)a2)[2],
-                                new Env(env, ((OpenLispList)a2).Slice(1, 2),
-                                    new OpenLispList(exc)));
+                            return Eval(((OpenLispList)caputSecundus)[2],
+                                new Env(environment, ((OpenLispList)caputSecundus).Slice(1, 2),
+                                    new OpenLispList(openLispException)));
                         }
                     case "do":
-                        EvalAst(abstractSyntaxTree.Slice(1, abstractSyntaxTree.Size - 1), env);
+                        EvalAst(abstractSyntaxTree.Slice(1, abstractSyntaxTree.Size - 1), environment);
                         originalAbstractSyntaxTree = abstractSyntaxTree[abstractSyntaxTree.Size - 1];
                         break;
                     case "if":
-                        a1 = abstractSyntaxTree[1];
-                        OpenLispVal cond = Eval(a1, env);
-                        if (cond == StaticOpenLispTypes.Nil || cond == StaticOpenLispTypes.False)
+                        caputPrimus = abstractSyntaxTree[1];
+                        OpenLispVal condition = Eval(caputPrimus, environment);
+                        if (condition == StaticOpenLispTypes.Nil || condition == StaticOpenLispTypes.False)
                         {
                             // eval false slot form
                             if (abstractSyntaxTree.Size > 3)
@@ -305,23 +308,23 @@ namespace OpenLisp.Core.StaticClasses
                         }
                         break;
                     case "fn*":
-                        OpenLispList a1f = (OpenLispList)abstractSyntaxTree[1];
-                        OpenLispVal a2f = abstractSyntaxTree[2];
-                        Env curEnv = env;
-                        return new OpenLispFunc(a2f, env, a1f,
-                            args => Eval(a2f, new Env(curEnv, a1f, args)));
+                        OpenLispList ligarePrimus = (OpenLispList)abstractSyntaxTree[1];
+                        OpenLispVal ligareSecundus = abstractSyntaxTree[2];
+                        Env currentEnvironment = environment;
+                        return new OpenLispFunc(ligareSecundus, environment, ligarePrimus,
+                            arguments => Eval(ligareSecundus, new Env(currentEnvironment, ligarePrimus, arguments)));
                     default:
-                        var el = (OpenLispList)EvalAst(abstractSyntaxTree, env);
-                        var f = (OpenLispFunc)el[0];
-                        OpenLispVal fnast = f.Ast;
-                        if (fnast != null)
+                        var element = (OpenLispList)EvalAst(abstractSyntaxTree, environment);
+                        var f = (OpenLispFunc)element[0];
+                        OpenLispVal functionAbstractSyntaxTree = f.Ast;
+                        if (functionAbstractSyntaxTree != null)
                         {
-                            originalAbstractSyntaxTree = fnast;
-                            env = f.GenEnv(el.Rest());
+                            originalAbstractSyntaxTree = functionAbstractSyntaxTree;
+                            environment = f.GenEnv(element.Rest());
                         }
                         else
                         {
-                            return f.Apply(el.Rest());
+                            return f.Apply(element.Rest());
                         }
                         break;
                 }
@@ -332,47 +335,47 @@ namespace OpenLisp.Core.StaticClasses
         /// <summary>
         /// Pretty-prints an <see cref="OpenLispVal"/>.
         /// </summary>
-        /// <param name="exp"></param>
+        /// <param name="expression"></param>
         /// <returns></returns>
-        public static string Print(OpenLispVal exp)
+        public static string Print(OpenLispVal expression)
         {
-            return Printer.PrStr(exp, true);
+            return Printer.PrStr(expression, true);
         }
 
         /// <summary>
         /// Main entry point of the OpenLisp.NET REPL.  
         /// </summary>
-        /// <param name="args"></param>
-        public static void ReplMain(string[] args)
+        /// <param name="arguments"></param>
+        public static void ReplMain(string[] arguments)
         {
-            var replEnv = new Env(null);
+            var replEnvironment = new Env(null);
 
             // TODO: extract this from the Repl
-            Func<string, OpenLispVal> Re = (string str) => Eval(Read(str), replEnv);
+            Func<string, OpenLispVal> Re = (string str) => Eval(Read(str), replEnvironment);
 
             // Load each OpenLispSymbol 
             foreach (var entry in CoreNameSpace.Ns)
             {
-                replEnv.Set(new OpenLispSymbol(entry.Key), entry.Value);
+                replEnvironment.Set(new OpenLispSymbol(entry.Key), entry.Value);
             }
 
             // TODO: extract this from the Repl
-            replEnv.Set(new OpenLispSymbol("eval"), 
-                        new OpenLispFunc(a => Eval(a[0], replEnv)));
+            replEnvironment.Set(new OpenLispSymbol("eval"), 
+                        new OpenLispFunc(a => Eval(a[0], replEnvironment)));
 
-            int fileIdx = 0;
-            if (args.Length > 0 && args[0] == "--raw")
+            int fileIndex = 0;
+            if (arguments.Length > 0 && arguments[0] == "--raw")
             {
                 ReadLine.Mode = ReadLine.ModeEnum.Raw;
-                fileIdx = 1;
+                fileIndex = 1;
             }
 
             OpenLispList argv = new OpenLispList();
-            for (int i = fileIdx + 1; i < args.Length; i++)
+            for (int i = fileIndex + 1; i < arguments.Length; i++)
             {
-                argv.Conj(new OpenLispString(args[i]));
+                argv.Conj(new OpenLispString(arguments[i]));
             }
-            replEnv.Set(new OpenLispSymbol("*ARGV*"), argv);
+            replEnvironment.Set(new OpenLispSymbol("*ARGV*"), argv);
 
             #region core.oln
             // BEGIN core.oln: defined using the language itself
@@ -447,7 +450,7 @@ namespace OpenLisp.Core.StaticClasses
             // END core.oln
             #endregion
 
-            if (args.Length <= fileIdx)
+            if (arguments.Length <= fileIndex)
             {
                 while (true)
                 {
@@ -509,7 +512,7 @@ namespace OpenLisp.Core.StaticClasses
             }
             else
             {
-                Re("(load-file \"" + args[fileIdx] + "\")");
+                Re("(load-file \"" + arguments[fileIndex] + "\")");
                 return;
             }
 
