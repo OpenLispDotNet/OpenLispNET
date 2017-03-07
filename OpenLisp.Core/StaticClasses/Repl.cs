@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.IO;
 using System.Linq;
 using OpenLisp.Core.AbstractClasses;
@@ -177,47 +178,56 @@ namespace OpenLisp.Core.StaticClasses
         /// 
         /// The core namespace is defined in <seealso cref="OpenLisp.Core.StaticClasses.CoreNameSpace"/>.
         /// 
+        /// TODO: refactor internal variable/object names to something(s) more meaningful.
         /// TODO: refactor the switch over a0Sym.  All symbols of the core language should be defined in the same place.
         /// </summary>
-        /// <param name="origAst"></param>
+        /// <param name="originalAbstractSyntaxTree"></param>
         /// <param name="env"></param>
         /// <returns></returns>
-        public static OpenLispVal Eval(OpenLispVal origAst, Env env)
+        public static OpenLispVal Eval(OpenLispVal originalAbstractSyntaxTree, Env env)
         {
             while (true)
             {
                 //Console.WriteLine("EVAL: " + printer._pr_str(orig_ast, true));
-                if (!origAst.ListQ())
+                if (!originalAbstractSyntaxTree.ListQ())
                 {
-                    return EvalAst(origAst, env);
+                    return EvalAst(originalAbstractSyntaxTree, env);
                 }
 
                 // apply list
-                OpenLispVal expanded = MacroExpand(origAst, env);
-                if (!expanded.ListQ()) { return expanded; }
-                OpenLispList ast = (OpenLispList)expanded;
+                OpenLispVal expanded = MacroExpand(originalAbstractSyntaxTree, env);
+                if (!expanded.ListQ())
+                {
+                    return expanded;
+                }
 
-                if (ast.Size == 0) { return ast; }
-                var a0 = ast[0];
+                OpenLispList abstractSyntaxTree = (OpenLispList)expanded;
+                if (abstractSyntaxTree.Size == 0)
+                {
+                    return abstractSyntaxTree;
+                }
 
-                var symbol = a0 as OpenLispSymbol;
-                String a0Sym = symbol?.ToString() ?? "__<*fn*>__";
+                var treeHead = abstractSyntaxTree[0];
+
+                var symbol = treeHead as OpenLispSymbol;
+                String treeHeadSymbol = symbol?.ToString() ?? "__<*fn*>__";
 
                 OpenLispVal a1;
                 OpenLispVal a2;
                 OpenLispVal res;
-                switch (a0Sym)
+
+                switch (treeHeadSymbol)
                 {
                     // TODO: extract this switch out of the REPL and consolidate in the core NS.
                     case "def!":
-                        a1 = ast[1];
-                        a2 = ast[2];
+                        a1 = abstractSyntaxTree[1];
+                        a2 = abstractSyntaxTree[2];
                         res = Eval(a2, env);
                         env.Set((OpenLispSymbol)a1, res);
                         return res;
                     case "let*":
-                        a1 = ast[1];
-                        a2 = ast[2];
+                        a1 = abstractSyntaxTree[1];
+                        a2 = abstractSyntaxTree[2];
                         OpenLispSymbol key;
                         OpenLispVal val;
                         Env letEnv = new Env(env);
@@ -227,34 +237,34 @@ namespace OpenLisp.Core.StaticClasses
                             val = ((OpenLispList)a1)[i + 1];
                             letEnv.Set(key, Eval(val, letEnv));
                         }
-                        origAst = a2;
+                        originalAbstractSyntaxTree = a2;
                         env = letEnv;
                         break;
                     case "quote":
-                        return ast[1];
+                        return abstractSyntaxTree[1];
                     case "quasiquote":
-                        origAst = QuasiQuote(ast[1]);
+                        originalAbstractSyntaxTree = QuasiQuote(abstractSyntaxTree[1]);
                         break;
                     case "defmacro!":
-                        a1 = ast[1];
-                        a2 = ast[2];
+                        a1 = abstractSyntaxTree[1];
+                        a2 = abstractSyntaxTree[2];
                         res = Eval(a2, env);
                         ((OpenLispFunc)res).Macro = true;
                         env.Set(((OpenLispSymbol)a1), res);
                         return res;
                     case "macroexpand":
-                        a1 = ast[1];
+                        a1 = abstractSyntaxTree[1];
                         return MacroExpand(a1, env);
                     case "try*":
                         try
                         {
-                            return Eval(ast[1], env);
+                            return Eval(abstractSyntaxTree[1], env);
                         }
                         catch (Exception e)
                         {
-                            if (ast.Size <= 2) throw e;
+                            if (abstractSyntaxTree.Size <= 2) throw e;
                             OpenLispVal exc;
-                            a2 = ast[2];
+                            a2 = abstractSyntaxTree[2];
                             OpenLispVal a20 = ((OpenLispList)a2)[0];
                             if (((OpenLispSymbol) a20).ToString() != "catch*") throw e;
                             var exception = e as OpenLispException;
@@ -270,18 +280,18 @@ namespace OpenLisp.Core.StaticClasses
                                     new OpenLispList(exc)));
                         }
                     case "do":
-                        EvalAst(ast.Slice(1, ast.Size - 1), env);
-                        origAst = ast[ast.Size - 1];
+                        EvalAst(abstractSyntaxTree.Slice(1, abstractSyntaxTree.Size - 1), env);
+                        originalAbstractSyntaxTree = abstractSyntaxTree[abstractSyntaxTree.Size - 1];
                         break;
                     case "if":
-                        a1 = ast[1];
+                        a1 = abstractSyntaxTree[1];
                         OpenLispVal cond = Eval(a1, env);
                         if (cond == StaticOpenLispTypes.Nil || cond == StaticOpenLispTypes.False)
                         {
                             // eval false slot form
-                            if (ast.Size > 3)
+                            if (abstractSyntaxTree.Size > 3)
                             {
-                                origAst = ast[3];
+                                originalAbstractSyntaxTree = abstractSyntaxTree[3];
                             }
                             else
                             {
@@ -291,22 +301,22 @@ namespace OpenLisp.Core.StaticClasses
                         else
                         {
                             // eval true slot form
-                            origAst = ast[2];
+                            originalAbstractSyntaxTree = abstractSyntaxTree[2];
                         }
                         break;
                     case "fn*":
-                        OpenLispList a1f = (OpenLispList)ast[1];
-                        OpenLispVal a2f = ast[2];
+                        OpenLispList a1f = (OpenLispList)abstractSyntaxTree[1];
+                        OpenLispVal a2f = abstractSyntaxTree[2];
                         Env curEnv = env;
                         return new OpenLispFunc(a2f, env, a1f,
                             args => Eval(a2f, new Env(curEnv, a1f, args)));
                     default:
-                        var el = (OpenLispList)EvalAst(ast, env);
+                        var el = (OpenLispList)EvalAst(abstractSyntaxTree, env);
                         var f = (OpenLispFunc)el[0];
                         OpenLispVal fnast = f.Ast;
                         if (fnast != null)
                         {
-                            origAst = fnast;
+                            originalAbstractSyntaxTree = fnast;
                             env = f.GenEnv(el.Rest());
                         }
                         else
