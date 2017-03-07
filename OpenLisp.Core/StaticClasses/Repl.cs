@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.Contracts;
 using System.IO;
 using System.Linq;
 using OpenLisp.Core.AbstractClasses;
@@ -54,59 +52,59 @@ namespace OpenLisp.Core.StaticClasses
         /// 
         /// TODO: refactor to move to <see cref="OpenLisp.Core.StaticClasses.CoreNameSpace"/>.
         /// </summary>
-        /// <param name="ast"></param>
+        /// <param name="abstractSyntaxTree"></param>
         /// <returns></returns>
-        public static OpenLispVal QuasiQuote(OpenLispVal ast)
+        public static OpenLispVal QuasiQuote(OpenLispVal abstractSyntaxTree)
         {
-            if (!IsPair(ast))
+            if (!IsPair(abstractSyntaxTree))
             {
-                return new OpenLispList(new OpenLispSymbol("quote"), ast);
+                return new OpenLispList(new OpenLispSymbol("quote"), abstractSyntaxTree);
             }
 
-            OpenLispVal a0 = ((OpenLispList)ast)[0];
+            OpenLispVal caputPrimus = ((OpenLispList)abstractSyntaxTree)[0];
 
-            var symbol = a0 as OpenLispSymbol;
+            var symbol = caputPrimus as OpenLispSymbol;
 
             if ((symbol != null) && (symbol.ToString() == "unquote"))
             {
-                return ((OpenLispList) ast)[1];
+                return ((OpenLispList) abstractSyntaxTree)[1];
             }
 
-            if (!IsPair(a0))
+            if (!IsPair(caputPrimus))
                 return new OpenLispList(new OpenLispSymbol("cons"),
-                    QuasiQuote(a0),
-                    QuasiQuote(((OpenLispList) ast).Rest()));
+                    QuasiQuote(caputPrimus),
+                    QuasiQuote(((OpenLispList) abstractSyntaxTree).Rest()));
 
-            OpenLispVal a00 = ((OpenLispList)a0)[0];
+            OpenLispVal caputSecundus = ((OpenLispList)caputPrimus)[0];
 
-            var lispSymbol = a00 as OpenLispSymbol;
+            var lispSymbol = caputSecundus as OpenLispSymbol;
 
             return (lispSymbol != null) && (lispSymbol.ToString() == "splice-unquote")
                 ? new OpenLispList(new OpenLispSymbol("concat"),
-                    ((OpenLispList) a0)[1],
-                    QuasiQuote(((OpenLispList) ast).Rest()))
+                    ((OpenLispList) caputPrimus)[1],
+                    QuasiQuote(((OpenLispList) abstractSyntaxTree).Rest()))
                 : new OpenLispList(new OpenLispSymbol("cons"),
-                    QuasiQuote(a0),
-                    QuasiQuote(((OpenLispList) ast).Rest()));
+                    QuasiQuote(caputPrimus),
+                    QuasiQuote(((OpenLispList) abstractSyntaxTree).Rest()));
         }
 
         /// <summary>
         /// Is this <see cref="OpenLispVal"/> a macro call in the current <see cref="Env"/>?
         /// </summary>
-        /// <param name="ast"></param>
-        /// <param name="env"></param>
+        /// <param name="abstractSyntaxTree"></param>
+        /// <param name="environment"></param>
         /// <returns></returns>
-        public static bool IsMacroCall(OpenLispVal ast, Env env)
+        public static bool IsMacroCall(OpenLispVal abstractSyntaxTree, Env environment)
         {
-            var list = ast as OpenLispList;
+            var list = abstractSyntaxTree as OpenLispList;
 
-            OpenLispVal a0 = list?[0];
+            OpenLispVal caputPrimus = list?[0];
 
-            if (!(a0 is OpenLispSymbol) || env.Find((OpenLispSymbol) a0) == null) return false;
+            if (!(caputPrimus is OpenLispSymbol) || environment.Find((OpenLispSymbol) caputPrimus) == null) return false;
 
-            OpenLispVal mac = env.Get((OpenLispSymbol)a0);
+            OpenLispVal macro = environment.Get((OpenLispSymbol)caputPrimus);
 
-            var func = mac as OpenLispFunc;
+            var func = macro as OpenLispFunc;
 
             return func != null &&
                    func.Macro;
@@ -117,20 +115,20 @@ namespace OpenLisp.Core.StaticClasses
         ///
         /// TODO: refactor to move to <see cref="OpenLisp.Core.StaticClasses.CoreNameSpace"/>.
         /// </summary>
-        /// <param name="ast"></param>
-        /// <param name="env"></param>
+        /// <param name="abstractSyntaxTree"></param>
+        /// <param name="environment"></param>
         /// <returns></returns>
-        public static OpenLispVal MacroExpand(OpenLispVal ast, Env env)
+        public static OpenLispVal MacroExpand(OpenLispVal abstractSyntaxTree, Env environment)
         {
-            while (IsMacroCall(ast, env))
+            while (IsMacroCall(abstractSyntaxTree, environment))
             {
-                OpenLispSymbol a0 = (OpenLispSymbol)((OpenLispList)ast)[0];
+                OpenLispSymbol caputPrimus = (OpenLispSymbol)((OpenLispList)abstractSyntaxTree)[0];
 
-                OpenLispFunc mac = (OpenLispFunc)env.Get(a0);
+                OpenLispFunc macro = (OpenLispFunc)environment.Get(caputPrimus);
 
-                ast = mac.Apply(((OpenLispList)ast).Rest());
+                abstractSyntaxTree = macro.Apply(((OpenLispList)abstractSyntaxTree).Rest());
             }
-            return ast;
+            return abstractSyntaxTree;
         }
 
         /// <summary>
@@ -348,12 +346,13 @@ namespace OpenLisp.Core.StaticClasses
         /// <param name="arguments"></param>
         public static void ReplMain(string[] arguments)
         {
+            // TODO: extract this from the Repl?
             var replEnvironment = new Env(null);
 
-            // TODO: extract this from the Repl
+            // TODO: extract this from the Repl?
             Func<string, OpenLispVal> Re = (string str) => Eval(Read(str), replEnvironment);
 
-            // Load each OpenLispSymbol 
+            // Load each OpenLispSymbol in the core name space
             foreach (var entry in CoreNameSpace.Ns)
             {
                 replEnvironment.Set(new OpenLispSymbol(entry.Key), entry.Value);
