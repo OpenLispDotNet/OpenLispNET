@@ -30,7 +30,7 @@ namespace OpenLisp.Core.Interfaces
         /// <typeparam name="U">The Data Type bound to in your monad.</typeparam>
         /// <param name="func">The binding function of your monad.</param>
         /// <returns></returns>
-        IOpenLispMonad<U> Bind<U>(Func<T, IOpenLispMonad<U>> func);
+        IOpenLispMonad<U> Bind<U>(Func<IOpenLispMonad<T>, IOpenLispMonad<U>> func);
 
         /// <summary>
         /// A type constructor that defines, for every underlying type, how to obtain a corresponding monadic type.
