@@ -13,7 +13,9 @@ namespace OpenLisp.Core.Interfaces
     /// Any implementation of this interface should be considered the Monadic type.
     /// Any typeparam passed in as type T should be consider the Monadic Data type.
     /// 
-    /// https://en.wikipedia.org/wiki/Monad_(functional_programming)#Formal_definition
+    /// References:
+    ///     https://en.wikipedia.org/wiki/Monad_(functional_programming)#Formal_definition
+    ///     http://mikhail.io/2016/01/monads-explained-in-csharp/
     /// </summary>
     /// <typeparam name="T">The Data Type you want to bind in your monad.</typeparam>
     public interface IOpenLispMonad<T>
