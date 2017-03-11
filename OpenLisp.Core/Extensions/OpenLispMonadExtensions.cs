@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace OpenLisp.Core.Extensions
 {
+    /// <summary>
+    /// OpenLispMonad Extensions
+    /// </summary>
     public static class OpenLispMonadExtensions
     {
         /// <summary>
@@ -28,6 +31,6 @@ namespace OpenLisp.Core.Extensions
         /// <param name="instance"></param>
         /// <param name="env"></param>
         /// <returns></returns>
-        public static OpenLispMonad<T> Return<T>(this T instance, Env env) => new OpenLispMonad<T>(instance, env);
+        public static OpenLispMonad<T> Return<T>(this T instance, Env env) where T : OpenLispVal => new OpenLispMonad<T>(instance, env);
     }
 }

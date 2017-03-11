@@ -27,17 +27,18 @@ namespace OpenLisp.Core.DataTypes
     /// functions while avoiding premature performance optimizations outside the
     /// scope of Monadic function memoization.
     /// </summary>
-    public class OpenLispMonad<OpenLispVal> : IOpenLispMonad<OpenLispVal>
+    public partial class OpenLispMonad<T> : IOpenLispMonad<OpenLispVal>
     {
         /// <summary>
-        /// Private default constructor
+        /// Public default constructor
         /// </summary>
-        private OpenLispMonad<OpenLispVal>() 
+        public OpenLispMonad() 
         {
         }
 
         private Core.Env _env;
         private OpenLispVal _instance;
+        private AbstractClasses.OpenLispVal openLispVal;
 
         /// <summary>
         /// 
@@ -49,17 +50,6 @@ namespace OpenLisp.Core.DataTypes
         /// </summary>
         public OpenLispVal Instance => _instance;
 
-        public static readonly OpenLispMonad<OpenLispVal> Maybe = new MaybeMonad<OpenLispVal>(Instance, Env);
-
-        private class MaybeMonad<OpenLispVal> : OpenLispMonad<OpenLispVal>
-        {
-            public MaybeMonad(OpenLispVal instance, Env env) 
-                : base(instance, env)
-            {
-
-            }
-        }
-
         /// <summary>
         /// Default public constructor.
         /// </summary>
@@ -68,6 +58,16 @@ namespace OpenLisp.Core.DataTypes
         public OpenLispMonad(OpenLispVal instance, Env env)
         {
             _env = env;
+            _instance = instance;
+        }
+
+        /// <summary>
+        /// Public constructor with an <see cref="OpenLispVal"/>
+        /// instance parameter.
+        /// </summary>
+        /// <param name="instance"></param>
+        public OpenLispMonad(OpenLispVal instance)
+        {
             _instance = instance;
         }
 
