@@ -1,7 +1,7 @@
 ﻿using OpenLisp.Core.AbstractClasses;
 using OpenLisp.Core.DataTypes;
 
-namespace ArcanaErp.Core.OpenLisp.Core.StaticClasses.Funcs.Extensions
+namespace OpenLisp.Core.DataTypes.Extensions
 {
     /// <summary>
     /// 

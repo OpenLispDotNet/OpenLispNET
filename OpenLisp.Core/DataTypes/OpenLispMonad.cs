@@ -27,7 +27,7 @@ namespace OpenLisp.Core.DataTypes
     /// functions while avoiding premature performance optimizations outside the
     /// scope of Monadic function memoization.
     /// </summary>
-    public partial class OpenLispMonad<T> : IOpenLispMonad<OpenLispVal>
+    public partial class OpenLispMonad<T> : IOpenLispMonad<OpenLispVal> where T : OpenLispVal
     {
         /// <summary>
         /// Public default constructor
@@ -38,12 +38,11 @@ namespace OpenLisp.Core.DataTypes
 
         private Core.Env _env;
         private OpenLispVal _instance;
-        private AbstractClasses.OpenLispVal openLispVal;
 
         /// <summary>
         /// 
         /// </summary>
-        public  Core.Env Env => _env;
+        public  Env Env => _env;
        
         /// <summary>
         /// 
