@@ -1,4 +1,5 @@
 ﻿using OpenLisp.Core.AbstractClasses;
+using OpenLisp.Core.DataTypes;
 using OpenLisp.Core.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -9,19 +10,74 @@ using System.Threading.Tasks;
 namespace OpenLisp.Core.DataTypes
 {
     /// <summary>
-    /// Currently, we can either wrap a <see cref="OpenLispMonad"/> in
-    /// other compiled types or with another <see cref="OpenLispVal"/>
+    /// Currently, we can wrap a <see cref="OpenLispMonad{OpenLispVal}"/> 
     /// inside the OpenLisp.Net runtime <see cref="Env"/>
+    /// 
+    /// Changes to an instance of <seealso cref="Core.Env"/> should actually
+    /// be thread safe and should be transactional.  Instead of modifying the
+    /// Env instance, instantiate a new instance and clone from the input.
+    /// Previous instances of Env should be stored on a stack and popped off
+    /// if an exception is caught so that we return the unmodified environment
+    /// just as we received it.
+    /// 
+    /// TODO: consider creating an Env state diff utility that actually performs 
+    /// a diff on two JSON payloads.
+    /// 
+    /// TODO: introduce memoization so that we can lazily evaulate Monadic 
+    /// functions while avoiding premature performance optimizations outside the
+    /// scope of Monadic function memoization.
     /// </summary>
-    public class OpenLispMonad : IOpenLispMonad<OpenLispVal>
+    public class OpenLispMonad<OpenLispVal> : IOpenLispMonad<OpenLispVal>
     {
         /// <summary>
+        /// Private default constructor
+        /// </summary>
+        private OpenLispMonad<OpenLispVal>() 
+        {
+        }
+
+        private Core.Env _env;
+        private OpenLispVal _instance;
+
+        /// <summary>
         /// 
+        /// </summary>
+        public  Core.Env Env => _env;
+       
+        /// <summary>
+        /// 
+        /// </summary>
+        public OpenLispVal Instance => _instance;
+
+        public static readonly OpenLispMonad<OpenLispVal> Maybe = new MaybeMonad<OpenLispVal>(Instance, Env);
+
+        private class MaybeMonad<OpenLispVal> : OpenLispMonad<OpenLispVal>
+        {
+            public MaybeMonad(OpenLispVal instance, Env env) 
+                : base(instance, env)
+            {
+
+            }
+        }
+
+        /// <summary>
+        /// Default public constructor.
+        /// </summary>
+        /// <param name="instance"></param>
+        /// <param name="env"></param>
+        public OpenLispMonad(OpenLispVal instance, Env env)
+        {
+            _env = env;
+            _instance = instance;
+        }
+
+        /// <summary>
+        /// Monadic bind function.
         /// </summary>
         /// <typeparam name="U"></typeparam>
         /// <param name="func"></param>
         /// <returns></returns>
-        public IOpenLispMonad<U> Bind<U>(Func<IOpenLispMonad<OpenLispVal>, IOpenLispMonad<U>> func)
+        public virtual IOpenLispMonad<U> Bind<U>(Func<IOpenLispMonad<OpenLispVal>, IOpenLispMonad<U>> func)
         {
             throw new NotImplementedException();
         }
@@ -32,7 +88,7 @@ namespace OpenLisp.Core.DataTypes
         /// <param name="openLispFunc"></param>
         /// <param name="environment"></param>
         /// <returns></returns>
-        public IOpenLispMonad<OpenLispVal> TypeConstructor(OpenLispFunc openLispFunc, Env environment)
+        public virtual IOpenLispMonad<OpenLispVal> TypeConstructor(OpenLispFunc openLispFunc, Env environment)
         {
             throw new NotImplementedException();
         }
@@ -42,7 +98,7 @@ namespace OpenLisp.Core.DataTypes
         /// </summary>
         /// <param name="dataType"></param>
         /// <returns></returns>
-        public IOpenLispMonad<OpenLispVal> UnitFunction(OpenLispVal dataType)
+        public virtual IOpenLispMonad<OpenLispVal> UnitFunction(OpenLispVal dataType)
         {
             throw new NotImplementedException();
         }

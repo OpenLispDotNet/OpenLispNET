@@ -57,11 +57,13 @@
     <Compile Include="DataTypes\OpenLispHashMap.cs" />
     <Compile Include="DataTypes\OpenLispInt.cs" />
     <Compile Include="DataTypes\OpenLispList.cs" />
+    <Compile Include="DataTypes\OpenLispMonad.cs" />
     <Compile Include="DataTypes\OpenLispString.cs" />
     <Compile Include="DataTypes\OpenLispSymbol.cs" />
     <Compile Include="DataTypes\OpenLispVector.cs" />
     <Compile Include="Env.cs" />
     <Compile Include="Events\Args\PrintEventArgs.cs" />
+    <Compile Include="Extensions\OpenLispMonadExtensions.cs" />
     <Compile Include="Interfaces\IBaseLogic.cs" />
     <Compile Include="Interfaces\ILispExpression.cs" />
     <Compile Include="Interfaces\ILispProvider.cs" />
