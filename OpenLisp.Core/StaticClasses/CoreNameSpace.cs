@@ -10,15 +10,16 @@ using System.Diagnostics;
 
 namespace OpenLisp.Core.StaticClasses
 {
-    /*
-     * This partial class can be extended with new namespace members.
-     * 
-     * The Ns member contains a IDictionary of string format OpenLispSymbols
-     * with attached OpenLispFunc, a descendent of OpenLispVal.
-     * 
-     * To extend the core Ns, simply add new elements to the IDictionary.
-     */
+    /// <summary>
+    /// The Ns member contains a IDictionary of string format OpenLispSymbols
+    /// with attached OpenLispFunc, a descendent of OpenLispVal.
+    /// 
+    /// To extend the core Ns, simply add new elements to the IDictionary
+    /// instance at <see cref="Ns"/>.
+    /// </summary>
+#pragma warning disable RECS0001 // Class is declared partial but has only one part
     public partial class CoreNameSpace
+#pragma warning restore RECS0001 // Class is declared partial but has only one part
     {
         /// <summary>
         /// Static volatile instance of <see cref="CoreNameSpace"/>.
