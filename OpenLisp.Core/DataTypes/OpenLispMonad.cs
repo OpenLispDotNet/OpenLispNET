@@ -40,7 +40,7 @@ namespace OpenLisp.Core.DataTypes
         private OpenLispVal _instance;
 
         /// <summary>
-        /// 
+        /// Get the <see cref="Env"/>
         /// </summary>
         public  Env Env => _env;
 
