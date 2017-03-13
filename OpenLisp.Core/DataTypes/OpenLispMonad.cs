@@ -43,11 +43,16 @@ namespace OpenLisp.Core.DataTypes
         /// 
         /// </summary>
         public  Env Env => _env;
-       
+
         /// <summary>
-        /// 
+        /// Access the instance
         /// </summary>
         public OpenLispVal Instance => _instance;
+
+        /// <summary>
+        /// Get a new <see cref="OpenLispMonad{OpenLispVal}"/> instance
+        /// </summary>
+        public static OpenLispMonad<OpenLispVal> Monad => new OpenLispMonad<OpenLispVal>();
 
         /// <summary>
         /// Default public constructor.
