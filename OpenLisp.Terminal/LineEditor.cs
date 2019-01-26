@@ -319,7 +319,17 @@ namespace OpenLisp.Terminal
         /// <param name="screenpos"></param>
         void UpdateHomeRow(int screenpos)
         {
-            int lines = 1 + (screenpos / Console.WindowWidth);
+            int lines = 0;
+            try
+            {
+                lines = 1 + (screenpos / Console.WindowWidth);
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.Message);
+                lines = 0;
+            }
+
 
             _homeRow = Console.CursorTop - (lines - 1);
             if (_homeRow < 0)
@@ -432,9 +442,32 @@ namespace OpenLisp.Terminal
         {
             _cursor = newpos;
 
+            /*
             int actualPos = _shownPrompt.Length + TextToRenderPos(_cursor);
             int row = _homeRow + (actualPos / Console.WindowWidth);
             int col = actualPos % Console.WindowWidth;
+            */
+            int actualPos = 0;
+            int row = 0;
+            int col = 0;
+
+            try
+            {
+                actualPos = _shownPrompt.Length + TextToRenderPos(_cursor);
+                row = _homeRow + (actualPos / Console.WindowWidth);
+                col = actualPos % Console.WindowWidth;
+
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.Message);
+                /*
+                actualPos = 0;
+                row = 0;
+                col = 0;
+                */               
+            }
+
 
             if (row >= Console.BufferHeight)
                 row = Console.BufferHeight - 1;
