@@ -228,6 +228,34 @@ namespace OpenLisp.Core.DataTypes
         private int maxLevels = int.MaxValue;
 
         /// <summary>
+        /// Gets or sets the <see cref="T:OpenLisp.Core.DataTypes.OpenLispSkipList`1"/> at the specified index.
+        /// </summary>
+        /// <param name="index">Index.</param>
+        public T this[T index]
+        {
+            get => this.Find(index).Value;
+            set => this.Add(index);
+        }
+
+        /// <summary>
+        /// Gets the <see cref="T:OpenLisp.Core.DataTypes.OpenLispSkipList`1"/> at the specified index.
+        /// </summary>
+        /// <param name="index">Index.</param>
+        public T this[int index]
+        {
+            get 
+            {
+                var enumerator = this.GetEnumerator();
+
+                for (int i = 0; i < index; i++) {
+                    enumerator.MoveNext();
+                }
+
+                return enumerator.Current;
+            }
+        }
+
+        /// <summary>
         /// Gets the levels.
         /// </summary>
         /// <value>The levels.</value>
@@ -684,6 +712,41 @@ namespace OpenLisp.Core.DataTypes
         IEnumerator IEnumerable.GetEnumerator()
         {
             return this.GetEnumerator();
+        }
+
+        internal void AddRange(List<T> list)
+        {
+            foreach (var l in list) {
+                Add((T)l);
+            }
+        }
+
+        internal OpenLispSkipList<T> GetRange(int start, int end)
+        {
+            var result = new OpenLispSkipList<T>();
+
+            // 1. get enumerator
+            var enumerator = this.GetEnumerator();
+
+            // 2. set enumerator to start
+            if (start > 0) { 
+                //for (int i = 0; i < this.Count - end; i++) {
+                //    result.Add(enumerator.Current);
+                //}
+
+                for (int i = 0; i < start; i++) {
+                    enumerator.MoveNext();
+                }
+            }
+
+            // 3. enumerate until end and grab collection
+            for (int i = 0; i < this.Count - end; i++) {
+                result.Add(enumerator.Current);
+                enumerator.MoveNext();
+            }
+
+            // 4. return collection
+            return result;
         }
 
         /// <summary>

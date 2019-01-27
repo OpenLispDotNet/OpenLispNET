@@ -7,6 +7,7 @@ using OpenLisp.Core.AbstractClasses;
 using OpenLisp.Core.DataTypes;
 using OpenLisp.Core.StaticClasses.Funcs;
 using System.Diagnostics;
+using System.Linq;
 
 namespace OpenLisp.Core.StaticClasses
 {

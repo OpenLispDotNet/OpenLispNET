@@ -36,44 +36,49 @@ namespace OpenLisp.Core.StaticClasses
         /// <returns></returns>
         public static bool OpenLispEqualQ(OpenLispVal a, OpenLispVal b)
         {
-            Type typeA = a.GetType();
-            Type typeB = b.GetType();
+            //Type typeA = a.GetType();
+            //Type typeB = b.GetType();
 
 
-            if ((typeA != typeB) && (!(a is OpenLispList) || !(b is OpenLispList))) return false;
+            //if ((typeA != typeB) && (!(a is OpenLispList) || !(b is OpenLispList))) return false;
 
-            if (a is OpenLispInt)
-            {
-                return ((OpenLispInt) a).Value ==
-                       ((OpenLispInt) b).Value;
-            }
+            //if (a is OpenLispInt)
+            //{
+            //    return ((OpenLispInt) a).Value ==
+            //           ((OpenLispInt) b).Value;
+            //}
 
-            if (a is OpenLispSymbol)
-            {
-                return ((OpenLispSymbol) a).Value ==
-                       ((OpenLispSymbol) b).Value;
-            }
+            //if (a is OpenLispSymbol)
+            //{
+            //    return ((OpenLispSymbol) a).Value ==
+            //           ((OpenLispSymbol) b).Value;
+            //}
 
-            if (a is OpenLispString)
-            {
-                return ((OpenLispString) a).Value ==
-                       ((OpenLispString) b).Value;
-            }
+            //if (a is OpenLispString)
+            //{
+            //    return ((OpenLispString) a).Value ==
+            //           ((OpenLispString) b).Value;
+            //}
 
-            if (!(a is OpenLispList)) return a == b;
+            //if (!(a is OpenLispList)) return a == b;
 
-            if (((OpenLispList) a).Size != ((OpenLispList) b).Size) return false;
+            //if (((OpenLispList) a).Size != ((OpenLispList) b).Size) return false;
 
-            for (int i = 0; i < ((OpenLispList) a).Size; i++)
-            {
-                if (OpenLispEqualQ(((OpenLispList) a)[i], ((OpenLispList) b)[i]))
-                    continue;
+            //for (int i = 0; i < ((OpenLispList) a).Size; i++)
+            //{
+            //    if (OpenLispEqualQ(((OpenLispList) a)[i], ((OpenLispList) b)[i]))
+            //        continue;
 
-                return false;
-            }
+            //    return false;
+            //}
 
-            return true;
+            //return true;
             //return (typeA == typeB) || (a is OpenLispList && b is OpenLispList);
+
+            if (a.IsDeepEqual(b)) return true;
+
+            return false;
+
         }
 
         /// <summary>

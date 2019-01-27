@@ -1,4 +1,5 @@
 ﻿using System;
+using DeepEqual.Syntax;
 using OpenLisp.Core.DataTypes;
 
 namespace OpenLisp.Core.AbstractClasses
@@ -6,7 +7,7 @@ namespace OpenLisp.Core.AbstractClasses
     /// <summary>
     /// Base class used inherited by all valid language contructs and primitives in OpenLisp.NET
     /// </summary>
-    public abstract class OpenLispVal
+    public abstract class OpenLispVal : IComparable
     {
         private OpenLispVal _meta;
 
@@ -45,6 +46,20 @@ namespace OpenLisp.Core.AbstractClasses
         public virtual bool ListQ()
         {
             return false;
+        }
+
+        /// <summary>
+        /// Compares one object to another.
+        /// </summary>
+        /// <returns>The to.</returns>
+        /// <param name="obj">Object.</param>
+        public int CompareTo(object obj)
+        {
+            if (obj == null) return 1;
+
+            if (this.IsDeepEqual(obj)) return 0;
+
+            return -1;
         }
 
         /// <summary>

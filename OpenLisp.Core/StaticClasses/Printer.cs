@@ -19,7 +19,7 @@ namespace OpenLisp.Core.StaticClasses
         /// <param name="delim"></param>
         /// <param name="printReadably">Whether or not to pretty-print the result.</param>
         /// <returns></returns>
-        public static string Join(IList<OpenLispVal> values, string delim, bool printReadably)
+        public static string Join(OpenLispSkipList<OpenLispVal> values, string delim, bool printReadably)
         {
             return String.Join(delim, values.Select(v => v.ToString(printReadably)).ToArray());
         }
