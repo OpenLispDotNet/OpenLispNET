@@ -10,6 +10,7 @@ namespace OpenLisp.Core.DataTypes
     /// Default List implementation for OpenLisp.NET
     ///
     /// TODO: replace List{OpenLispVal} with OpenLispSkipList{OpenLispVal}.
+    /// TODO: aftere replacing backing type, perform benchmarks and tests on large collections: 100k+
     /// </summary>
     public class OpenLispList : OpenLispVal
     {
