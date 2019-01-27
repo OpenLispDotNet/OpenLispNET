@@ -96,8 +96,11 @@ namespace OpenLisp.Core.StaticClasses
                                                         : StaticOpenLispTypes.False)},
                     #elif NOTYPEEQUALITY
                                 {"=",           new OpenLispFunc(x =>
-                                                    (x[0].ToString() == x[1].ToString())
-                                                        ? StaticOpenLispTypes.True
+                                                    //(x[0].ToString() == x[1].ToString())
+                                                        //? StaticOpenLispTypes.True
+                                                        //: StaticOpenLispTypes.False)},
+                                                        x[0].IsDeepEqual(x[1]) 
+                                                        ? StaticOpenLispTypes.True 
                                                         : StaticOpenLispTypes.False)},
                     #endif
 
@@ -129,15 +132,6 @@ namespace OpenLisp.Core.StaticClasses
                                                     (OpenLispInt)x[0] >= (OpenLispInt)x[1])},
                                 {"+",           new OpenLispFunc(x =>
                                                     (OpenLispInt)x[0] + (OpenLispInt)x[1])},
-                                                    //{
-                                                    //    OpenLispInt v = new OpenLispInt(0);
-                                                    //    for (int i = 0; i < x.Value.ToArray().Length; i++)
-                                                    //    {
-                                                    //        Console.WriteLine($"[{DateTime.Now}] x[{i}] = {x[i]}");
-                                                    //        v += ((OpenLispInt)x[i]);
-                                                    //    }
-                                                    //    return v;
-                                                    //})},
                                 {"-",           new OpenLispFunc(x =>
                                                     (OpenLispInt)x[0] - (OpenLispInt)x[1])},
                                 {"*",           new OpenLispFunc(x =>

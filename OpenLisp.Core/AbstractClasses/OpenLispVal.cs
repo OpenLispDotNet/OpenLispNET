@@ -80,5 +80,10 @@ namespace OpenLisp.Core.AbstractClasses
         {
             return new OpenLispInt(v);
         }
+
+        public static explicit operator long(OpenLispVal v)
+        {
+            return ((OpenLispInt)v).Value;
+        }
     }
 }

@@ -27,7 +27,6 @@ namespace OpenLisp.Core.DataTypes
             }
         }
 
-
         /// <summary>
         /// Opening token of an <see cref="OpenLispList"/>.
         /// </summary>
