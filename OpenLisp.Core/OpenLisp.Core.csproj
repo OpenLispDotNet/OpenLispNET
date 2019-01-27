@@ -119,6 +119,7 @@
     <Compile Include="StaticClasses\Printer.cs" />
     <Compile Include="StaticClasses\Repl.cs" />
     <Compile Include="StaticClasses\StaticOpenLispTypes.cs" />
+    <Compile Include="DataTypes\OpenLispSkipList.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Enums\" />

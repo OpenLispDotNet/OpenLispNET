@@ -8,6 +8,8 @@ namespace OpenLisp.Core.DataTypes
 {
     /// <summary>
     /// Default List implementation for OpenLisp.NET
+    ///
+    /// TODO: replace List{OpenLispVal} with OpenLispSkipList{OpenLispVal}.
     /// </summary>
     public class OpenLispList : OpenLispVal
     {
