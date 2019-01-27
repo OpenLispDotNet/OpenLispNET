@@ -84,13 +84,7 @@ TODO: Add architecture diagrams.
 
 IoC Logic (revisit this)
 ========================
-Clients are constructed by ClientProviders.
-Services are constructed by ServiceProviders.
-Contracts are constructed by ContractProviders.
-ClientProviders are constructed by Injectors that provide Contracts that are agreed upon between Client and ServiceProvider.
-ServiceProviders are constructed by Injectors that provie Contracts that are agreed upon between ServiceProvider and Client.
-ContractProviders are constructed by Injectors and provided to Clients and Services.
-Clients and Services communicate via ServiceBuses constructed by Injectors.
+Right now, IoC doesn't appear to provide a clear advantage... no implementation for now.
 
 Any References?
 ===============
