@@ -19,20 +19,13 @@ namespace OpenLisp.Core.DataTypes
         /// Gets the <see cref="T:OpenLisp.Core.DataTypes.OpenLispList"/> at the specified index.
         /// </summary>
         /// <param name="index">Index.</param>
-        public OpenLispVal this[int index]
-        {
-            get
-            {
-                var enumerator = Value.GetEnumerator();
-
-                for (int i = 0; i < index; i++)
-                {
-                    enumerator.MoveNext();
-                }
-
-                return enumerator.Current;
-            }
-        }
+        //public OpenLispVal this[int index]
+        //{
+        //    get
+        //    {
+        //        return this.Value.ToArray()[index];
+        //    }
+        //}
 
 
         /// <summary>
@@ -181,8 +174,8 @@ namespace OpenLisp.Core.DataTypes
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        //public OpenLispVal this[int index] => Value.Count > index ? Value[index] : StaticOpenLispTypes.Nil;
-        public OpenLispVal this[OpenLispVal index] => index != null ? Value[index] : StaticOpenLispTypes.Nil;
+        public OpenLispVal this[int index] => Value.Count > index ? Value[index] : StaticOpenLispTypes.Nil;
+        //public OpenLispVal this[OpenLispVal index] => index != null ? Value[index] : StaticOpenLispTypes.Nil;
 
         /// <summary>
         /// Returns either the rest of an <see cref="OpenLispList"/> or a new, empty instance.

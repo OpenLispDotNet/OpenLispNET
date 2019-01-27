@@ -60,5 +60,9 @@ namespace OpenLisp.Core.DataTypes
         {
             return Value;
         }
+
+        public OpenLispVal ToOpenLispVal() {
+            return (OpenLispVal) this;
+        }
     }
 }
