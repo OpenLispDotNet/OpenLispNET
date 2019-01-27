@@ -103,6 +103,30 @@ Current Requirements
 
 Known Issues
 ============
+  * Null Pointer Exception starting the REPL (top priority)
+
+`$ mono OpenLisp.Repl.exe`
+
+2>  Unhandled Exception:
+2>  System.NullReferenceException: Object reference not set to an instance of an object
+2>    at OpenLisp.Core.DataTypes.OpenLispSkipList`1+OpenLispSkipListEnumerator[T].get_Current () [0x00001] in <120167b455da47279b9bdad06a4dd16e>:0
+2>    at OpenLisp.Core.DataTypes.OpenLispList.get_Item (System.Int32 index) [0x00026] in <120167b455da47279b9bdad06a4dd16e>:0
+2>    at OpenLisp.Core.StaticClasses.Repl.IsMacroCall (OpenLisp.Core.AbstractClasses.OpenLispVal abstractSyntaxTree, OpenLisp.Core.Env environment) [0x0000e] in <120167b455da47279b9bdad06a4dd16e>:0
+2>    at OpenLisp.Core.StaticClasses.Repl.MacroExpand (OpenLisp.Core.AbstractClasses.OpenLispVal abstractSyntaxTree, OpenLisp.Core.Env environment) [0x00037] in <120167b455da47279b9bdad06a4dd16e>:0
+2>    at OpenLisp.Core.StaticClasses.Repl.Eval (OpenLisp.Core.AbstractClasses.OpenLispVal originalAbstractSyntaxTree, OpenLisp.Core.Env environment) [0x00025] in <120167b455da47279b9bdad06a4dd16e>:0
+2>    at OpenLisp.Core.StaticClasses.Repl+<>c__DisplayClass16_0.<ReplMain>b__0 (System.String str) [0x00006] in <120167b455da47279b9bdad06a4dd16e>:0
+2>    at OpenLisp.Core.StaticClasses.Repl.ReplMain (System.String[] arguments) [0x00110] in <120167b455da47279b9bdad06a4dd16e>:0
+2>    at OpenLisp.Repl.Program.Main (System.String[] args) [0x00001] in <4567d7d3f03341e2868c99e90304ef6e>:0
+2>  [ERROR] FATAL UNHANDLED EXCEPTION: System.NullReferenceException: Object reference not set to an instance of an object
+2>    at OpenLisp.Core.DataTypes.OpenLispSkipList`1+OpenLispSkipListEnumerator[T].get_Current () [0x00001] in <120167b455da47279b9bdad06a4dd16e>:0
+2>    at OpenLisp.Core.DataTypes.OpenLispList.get_Item (System.Int32 index) [0x00026] in <120167b455da47279b9bdad06a4dd16e>:0
+2>    at OpenLisp.Core.StaticClasses.Repl.IsMacroCall (OpenLisp.Core.AbstractClasses.OpenLispVal abstractSyntaxTree, OpenLisp.Core.Env environment) [0x0000e] in <120167b455da47279b9bdad06a4dd16e>:0
+2>    at OpenLisp.Core.StaticClasses.Repl.MacroExpand (OpenLisp.Core.AbstractClasses.OpenLispVal abstractSyntaxTree, OpenLisp.Core.Env environment) [0x00037] in <120167b455da47279b9bdad06a4dd16e>:0
+2>    at OpenLisp.Core.StaticClasses.Repl.Eval (OpenLisp.Core.AbstractClasses.OpenLispVal originalAbstractSyntaxTree, OpenLisp.Core.Env environment) [0x00025] in <120167b455da47279b9bdad06a4dd16e>:0
+2>    at OpenLisp.Core.StaticClasses.Repl+<>c__DisplayClass16_0.<ReplMain>b__0 (System.String str) [0x00006] in <120167b455da47279b9bdad06a4dd16e>:0
+2>    at OpenLisp.Core.StaticClasses.Repl.ReplMain (System.String[] arguments) [0x00110] in <120167b455da47279b9bdad06a4dd16e>:0
+2>    at OpenLisp.Repl.Program.Main (System.String[] args) [0x00001] in <4567d7d3f03341e2868c99e90304ef6e>:0  
+
   * Cosmos is having trouble building the Kernel on Windows 8.1, and complains about a call to native code with a missing plug:
 2>	Error: Exception: System.Exception: Native code encountered, plug required. Please see https://github.com/CosmosOS/Cosmos/wiki/Plugs). System.String  System.Exception.StripFileInfo(System.String, System.Boolean).
 2>	 Called from :
