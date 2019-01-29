@@ -119,7 +119,6 @@
     <Compile Include="StaticClasses\Printer.cs" />
     <Compile Include="StaticClasses\Repl.cs" />
     <Compile Include="StaticClasses\StaticOpenLispTypes.cs" />
-    <Compile Include="DataTypes\_OpenLispSkipList.cs" />
     <Compile Include="DataTypes\OpenLispSkipList.cs" />
   </ItemGroup>
   <ItemGroup>

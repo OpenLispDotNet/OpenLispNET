@@ -38,12 +38,12 @@ namespace OpenLisp.Core.DataTypes
         public string End = ")";
 
         //private List<OpenLispVal> _value;
-        private OpenLispSkipList<OpenLispVal> _value;
+        private List<OpenLispVal> _value;
 
         /// <summary>
         /// Get or Set the value of an <see cref="OpenLispList"/> instance.
         /// </summary>
-        public OpenLispSkipList<OpenLispVal> Value
+        public List<OpenLispVal> Value
         {
             get
             {
@@ -72,7 +72,7 @@ namespace OpenLisp.Core.DataTypes
         /// </summary>
         public OpenLispList()
         {
-            Value = new OpenLispSkipList<OpenLispVal>();
+            Value = new List<OpenLispVal>();
         }
 
         /// <summary>
@@ -84,21 +84,12 @@ namespace OpenLisp.Core.DataTypes
         }
 
         /// <summary>
-        /// Constructor accepting a <see cref="List{OpenLispVal}"/> as a parameter.
-        /// </summary>
-        /// <param name="value"></param>
-        public OpenLispList(OpenLispSkipList<OpenLispVal> value)
-        {
-            Value = value;
-        }
-
-        /// <summary>
         /// Constsructor accepting a <see cref="OpenLispVal"/> array for params. 
         /// </summary>
         /// <param name="values"></param>
         public OpenLispList(params OpenLispVal[] values)
         {
-            Value = new OpenLispSkipList<OpenLispVal>();
+            Value = new List<OpenLispVal>();
 
             Conj(values);
         }
@@ -182,24 +173,24 @@ namespace OpenLisp.Core.DataTypes
         /// <returns></returns>
         public OpenLispList Rest()
         {
-            //return Size > 0 ? new OpenLispList(Value.GetRange(1, Value.Count - 1)) : new OpenLispList();
+            return Size > 0 ? new OpenLispList(Value.GetRange(1, Value.Count - 1)) : new OpenLispList();
 
-            if (Size > 0) {
+            //if (Size > 0) {
 
-                var newSkipList = new OpenLispSkipList<OpenLispVal>();
+            //    var newSkipList = new OpenLispSkipList<OpenLispVal>();
 
-                // Return OpenLispSkipList without the HEAD or lowest item on the tree
-                var enumerator = Value.GetEnumerator();
-                enumerator.MoveNext(); // skip HEAD!
+            //    // Return OpenLispSkipList without the HEAD or lowest item on the tree
+            //    var enumerator = Value.GetEnumerator();
+            //    enumerator.MoveNext(); // skip HEAD!
 
-                for (int i = 0; i <= Value.Count - 1; i++) {
-                    newSkipList.Add(enumerator.Current);
-                }
+            //    for (int i = 0; i <= Value.Count - 1; i++) {
+            //        newSkipList.Add(enumerator.Current);
+            //    }
 
-                return new OpenLispList(newSkipList);
-            } else {
-                return new OpenLispList();
-            }
+            //    return new OpenLispList(newSkipList);
+            //} else {
+            //    return new OpenLispList();
+            //}
         }
 
         /// <summary>

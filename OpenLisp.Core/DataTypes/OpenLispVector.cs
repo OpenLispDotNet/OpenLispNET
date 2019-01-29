@@ -21,19 +21,11 @@ namespace OpenLisp.Core.DataTypes
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:OpenLisp.Core.DataTypes.OpenLispVector"/> class.
-        /// </summary>
-        /// <param name="values">Values.</param>
-        public OpenLispVector(List<OpenLispVal> values): base() {
-            Value.AddRange(values);
-        }
-
-        /// <summary>
         /// Constructor accepting a <see cref="List{OpenLispVal}"/> parameter.
         /// An instance of <see cref="OpenLispVector"/> uses square brackets instead of parentheses.
         /// </summary>
         /// <param name="val"></param>
-        public OpenLispVector(OpenLispSkipList<OpenLispVal> val)
+        public OpenLispVector(List<OpenLispVal> val)
             : base(val)
         {
             Start = "[";

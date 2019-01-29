@@ -131,7 +131,7 @@ namespace OpenLisp.Core.StaticClasses
                                 {">=",          new OpenLispFunc(x =>
                                                     (OpenLispInt)x[0] >= (OpenLispInt)x[1])},
                                 {"+",           new OpenLispFunc(x =>
-                                                    (OpenLispInt)x[0] + (OpenLispInt)x[1])},
+                                                    (OpenLispInt)x.Value[0] + (OpenLispInt)x.Value[1])},
                                 {"-",           new OpenLispFunc(x =>
                                                     (OpenLispInt)x[0] - (OpenLispInt)x[1])},
                                 {"*",           new OpenLispFunc(x =>

@@ -1,97 +1,25 @@
-﻿///**
-// * OpenLisp.NET is intended to provide a fast, portable LISP implementation
-// * targeting the .NET Framework.  As we have grown in our experience as a Sr.
-// * Engineer, we have needed the ultimate data type for our distributed system
-// * needs.  We have found such a type in the Skip List: all the beauty and 
-// * elegance of a list with the backing of a tree and an average space-time
-// * complexity for all operations clocking in at log(n).
-// * 
-// * The following implementation is based on the code found at:
-// * 
-// *     * https://jonlabelle.com/snippets/view/csharp/skip-list-in-c
-// * 
-// * Our intention is to make this into an implementation of an OpenLispVal.
-// * 
-// * TODO: After we add the skip list, we'll need to provide a radix sort...
-// * TODO: After testing this collection, make it the core abstraction behind other collections...
-// */
-
-//using System;
+﻿//using System;
 //using System.Collections;
 //using System.Collections.Generic;
-//using DeepEqual.Syntax;
+//using System.Text;
 //using OpenLisp.Core.AbstractClasses;
 //using OpenLisp.Core.StaticClasses;
+//using static OpenLisp.Core.StaticClasses.StaticOpenLispTypes;
 
 //namespace OpenLisp.Core.DataTypes
 //{
 //    /// <summary>
-//    /// The basic data block of a Skip List composed of OpenLispVal.
-//    /// 
-//    /// And, of course, every skip list node is also an OpenLispVal!
+//    /// The basic data block of a Skip List
 //    /// </summary>
-//    public class OpenLispSkipListNode<OpenLispVal> : IDisposable where OpenLispVal : IComparable
+//    public class SkipListNode<OpenLispVal> : IDisposable
+//        where OpenLispVal : IComparable
 //    {
+//        private OpenLispVal value;
+//        private SkipListNode<OpenLispVal> next;
+//        private SkipListNode<OpenLispVal> previous;
+//        private SkipListNode<OpenLispVal> above;
+//        private SkipListNode<OpenLispVal> below;
 
-//        #region IDisposable Support
-//        private bool disposedValue = false; // To detect redundant calls
-
-//        /// <summary>
-//        /// Dispose the object.
-//        /// </summary>
-//        /// <param name="disposing">If set to <c>true</c> disposing.</param>
-//        protected virtual void Dispose(bool disposing)
-//        {
-//            if (!disposedValue)
-//            {
-//                if (disposing)
-//                {
-//                    // TODO: dispose managed state (managed objects).
-//                    value = default(OpenLispVal);
-//                }
-
-//                // TODO: free unmanaged resources (unmanaged objects) and override a finalizer below.
-
-//                // TODO: set large fields to null.
-//                next = null;
-//                previous = null;
-//                above = null;
-//                previous = null;
-
-//                disposedValue = true;
-//            }
-//        }
-
-//        // TODO: override a finalizer only if Dispose(bool disposing) above has code to free unmanaged resources.
-//        // ~OpenLispSkipListNode() {
-//        //   // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
-//        //   Dispose(false);
-//        // }
-
-//        // This code added to correctly implement the disposable pattern.
-//        /// <summary>
-//        /// Releases all resource used by the <see cref="T:OpenLisp.Core.DataTypes.OpenLispSkipListNode`1"/> object.
-//        /// </summary>
-//        public void Dispose()
-//        {
-//            // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
-//            Dispose(true);
-//            // TODO: uncomment the following line if the finalizer is overridden above.
-//            // GC.SuppressFinalize(this);
-//        }
-//        #endregion
-
-
-//        private OpenLispVal value = default(OpenLispVal);
-//        private OpenLispSkipListNode<OpenLispVal> next;
-//        private OpenLispSkipListNode<OpenLispVal> previous;
-//        private OpenLispSkipListNode<OpenLispVal> above;
-//        private OpenLispSkipListNode<OpenLispVal> below;
-
-//        /// <summary>
-//        /// Gets or sets the value.
-//        /// </summary>
-//        /// <value>The value.</value>
 //        public virtual OpenLispVal Value
 //        {
 //            get
@@ -104,11 +32,7 @@
 //            }
 //        }
 
-//        /// <summary>
-//        /// Gets or sets the next value.
-//        /// </summary>
-//        /// <value>The next.</value>
-//        public virtual OpenLispSkipListNode<OpenLispVal> Next
+//        public virtual SkipListNode<OpenLispVal> Next
 //        {
 //            get
 //            {
@@ -120,11 +44,7 @@
 //            }
 //        }
 
-//        /// <summary>
-//        /// Gets or sets the previous value.
-//        /// </summary>
-//        /// <value>The previous.</value>
-//        public virtual OpenLispSkipListNode<OpenLispVal> Previous
+//        public virtual SkipListNode<OpenLispVal> Previous
 //        {
 //            get
 //            {
@@ -136,11 +56,7 @@
 //            }
 //        }
 
-//        /// <summary>
-//        /// Gets or sets the value above.
-//        /// </summary>
-//        /// <value>The above.</value>
-//        public virtual OpenLispSkipListNode<OpenLispVal> Above
+//        public virtual SkipListNode<OpenLispVal> Above
 //        {
 //            get
 //            {
@@ -152,11 +68,7 @@
 //            }
 //        }
 
-//        /// <summary>
-//        /// Gets or sets the value below.
-//        /// </summary>
-//        /// <value>The below.</value>
-//        public virtual OpenLispSkipListNode<OpenLispVal> Below
+//        public virtual SkipListNode<OpenLispVal> Below
 //        {
 //            get
 //            {
@@ -168,43 +80,41 @@
 //            }
 //        }
 
-//        /// <summary>
-//        /// Initializes a new instance of the <see cref="T:OpenLisp.Core.DataTypes.OpenLispSkipListNode`1"/> class.
-//        /// </summary>
-//        /// <param name="value">Value.</param>
-//        public OpenLispSkipListNode(OpenLispVal value) => Value = value;
-
-//        /// <summary>
-//        /// Initializes a new instance of the <see cref="T:OpenLisp.Core.DataTypes.OpenLispSkipListNode`1"/> class.
-//        /// </summary>
-//        public OpenLispSkipListNode() => Value = default(OpenLispVal);
-
-//        /// <summary>
-//        /// Is this the header?
-//        /// </summary>
-//        /// <returns><c>true</c>, if header was ised, <c>false</c> otherwise.</returns>
-//        public virtual bool IsHeader()
+//        public SkipListNode(OpenLispVal value)
 //        {
-//            return this.GetType() == typeof(OpenLispSkipListNodeHeader<OpenLispVal>);
+//            this.Value = value;
 //        }
 
-//        /// <summary>
-//        /// Is this the footer?
-//        /// </summary>
-//        /// <returns><c>true</c>, if footer was ised, <c>false</c> otherwise.</returns>
+//        public void Dispose()
+//        {
+//            value = default(OpenLispVal);
+//            next = null;
+//            previous = null;
+//            above = null;
+//            previous = null;
+//        }
+
+//        public virtual bool IsHeader()
+//        {
+//            return this.GetType() == typeof(SkipListNodeHeader<OpenLispVal>);
+//        }
+
 //        public virtual bool IsFooter()
 //        {
-//            return this.GetType() == typeof(OpenLispSkipListNodeFooter<OpenLispVal>);
+//            return this.GetType() == typeof(SkipListNodeFooter<OpenLispVal>);
 //        }
 //    }
 
 //    /// <summary>
 //    /// Represents a Skip List node that is the header of a level
 //    /// </summary>
-//    class OpenLispSkipListNodeHeader<OpenLispVal> : OpenLispSkipListNode<OpenLispVal>
+//    public class SkipListNodeHeader<OpenLispVal> : SkipListNode<OpenLispVal>
 //        where OpenLispVal : IComparable
 //    {
-//        public OpenLispSkipListNodeHeader()
+//        /// <summary>
+//        /// Initializes a new instance of the <see cref="T:OpenLisp.Core.DataTypes.SkipListNodeHeader`1"/> class.
+//        /// </summary>
+//        public SkipListNodeHeader()
 //        : base(default(OpenLispVal))
 //        {
 //        }
@@ -213,36 +123,30 @@
 //    /// <summary>
 //    /// Represents a Skip List node that is the footer of a level
 //    /// </summary>
-//    class OpenLispSkipListNodeFooter<OpenLispVal> : OpenLispSkipListNode<OpenLispVal>
+//    public class SkipListNodeFooter<OpenLispVal> : SkipListNode<OpenLispVal>
 //        where OpenLispVal : IComparable
 //    {
-//        public OpenLispSkipListNodeFooter()
+//        /// <summary>
+//        /// Initializes a new instance of the <see cref="T:OpenLisp.Core.DataTypes.SkipListNodeFooter`1"/> class.
+//        /// </summary>
+//        public SkipListNodeFooter()
 //        : base(default(OpenLispVal))
 //        {
 //        }
 //    }
 
 //    /// <summary>
-//    /// OpenLisp Skip List.
+//    /// Open lisp skip list.
 //    /// </summary>
-//    public class OpenLispSkipList<OpenLispVal> : ICollection<OpenLispVal> where OpenLispVal : IComparable
+//    public class OpenLispSkipList<OpenLispVal> : ICollection<OpenLispVal>
+//        where OpenLispVal : IComparable
 //    {
-//        internal OpenLispSkipListNode<OpenLispVal> topLeft;
-//        internal OpenLispSkipListNode<OpenLispVal> bottomLeft;
+//        internal SkipListNode<OpenLispVal> topLeft;
+//        internal SkipListNode<OpenLispVal> bottomLeft;
 //        internal Random random;
 //        private int levels;
 //        private int size;
 //        private int maxLevels = int.MaxValue;
-
-//        /// <summary>
-//        /// Gets or sets the <see cref="T:OpenLisp.Core.DataTypes.OpenLispSkipList`1"/> at the specified index.
-//        /// </summary>
-//        /// <param name="index">Index.</param>
-//        public OpenLispVal this[OpenLispVal index]
-//        {
-//            get => this.Find(index).Value;
-//            set => this.Add(index);
-//        }
 
 //        /// <summary>
 //        /// Gets the <see cref="T:OpenLisp.Core.DataTypes.OpenLispSkipList`1"/> at the specified index.
@@ -250,11 +154,12 @@
 //        /// <param name="index">Index.</param>
 //        public OpenLispVal this[int index]
 //        {
-//            get 
+//            get
 //            {
 //                var enumerator = this.GetEnumerator();
 
-//                for (int i = 0; i < index; i++) {
+//                for (int i = 0; i < index; i++)
+//                {
 //                    enumerator.MoveNext();
 //                }
 
@@ -318,7 +223,13 @@
 //        /// Gets the head.
 //        /// </summary>
 //        /// <value>The head.</value>
-//        public virtual OpenLispSkipListNode<OpenLispVal> Head => bottomLeft;
+//        public virtual SkipListNode<OpenLispVal> Head
+//        {
+//            get
+//            {
+//                return bottomLeft;
+//            }
+//        }
 
 //        /// <summary>
 //        /// Initializes a new instance of the <see cref="T:OpenLisp.Core.DataTypes.OpenLispSkipList`1"/> class.
@@ -335,10 +246,10 @@
 //        /// <summary>
 //        /// Creates an empty level with a header and footer node
 //        /// </summary>
-//        protected OpenLispSkipListNode<OpenLispVal> getEmptyLevel()
+//        protected SkipListNode<OpenLispVal> getEmptyLevel()
 //        {
-//            OpenLispSkipListNode<OpenLispVal> negativeInfinity = new OpenLispSkipListNodeHeader<OpenLispVal>();
-//            OpenLispSkipListNode<OpenLispVal> positiveInfinity = new OpenLispSkipListNodeFooter<OpenLispVal>();
+//            SkipListNode<OpenLispVal> negativeInfinity = new SkipListNodeHeader<OpenLispVal>();
+//            SkipListNode<OpenLispVal> positiveInfinity = new SkipListNodeFooter<OpenLispVal>();
 
 //            negativeInfinity.Next = positiveInfinity;
 //            positiveInfinity.Previous = negativeInfinity;
@@ -366,13 +277,13 @@
 //        {
 //            if (this.levels > 1) //more than one level, don't want to remove bottom level
 //            {
-//                OpenLispSkipListNode<OpenLispVal> currentNode = this.topLeft;
+//                SkipListNode<OpenLispVal> currentNode = this.topLeft;
 
 //                while (currentNode != this.bottomLeft) //do not remove the bottom level
 //                {
 //                    if (currentNode.IsHeader() && currentNode.Next.IsFooter())
 //                    {
-//                        OpenLispSkipListNode<OpenLispVal> belowNode = currentNode.Below;
+//                        SkipListNode<OpenLispVal> belowNode = currentNode.Below;
 
 //                        //Remove the empty level
 
@@ -408,7 +319,7 @@
 //            while (newLevelCount > 0)
 //            {
 //                //Create new level
-//                OpenLispSkipListNode<OpenLispVal> newLevel = getEmptyLevel();
+//                SkipListNode<OpenLispVal> newLevel = getEmptyLevel();
 
 //                //Link down
 //                newLevel.Below = this.topLeft;
@@ -421,8 +332,8 @@
 //            }
 
 //            //Insert the value in the proper position, creating as many levels as was randomly determined
-//            OpenLispSkipListNode<OpenLispVal> currentNode = this.topLeft;
-//            OpenLispSkipListNode<OpenLispVal> lastNodeAbove = null; //keeps track of the upper-level nodes in a tower
+//            SkipListNode<OpenLispVal> currentNode = this.topLeft;
+//            SkipListNode<OpenLispVal> lastNodeAbove = null; //keeps track of the upper-level nodes in a tower
 //            int currentLevel = this.levels - 1;
 
 //            while (currentLevel >= 0 && currentNode != null)
@@ -451,7 +362,7 @@
 //                }
 
 //                //Insert the value right after the node found
-//                OpenLispSkipListNode<OpenLispVal> newNode = new OpenLispSkipListNode<OpenLispVal>(value);
+//                SkipListNode<OpenLispVal> newNode = new SkipListNode<OpenLispVal>(value);
 //                newNode.Next = currentNode.Next;
 //                newNode.Previous = currentNode;
 //                newNode.Next.Previous = newNode;
@@ -476,9 +387,9 @@
 //        /// <summary>
 //        /// Returns the first node whose value matches the input value
 //        /// </summary>
-//        public virtual OpenLispSkipListNode<OpenLispVal> Find(OpenLispVal value)
+//        public virtual SkipListNode<OpenLispVal> Find(OpenLispVal value)
 //        {
-//            OpenLispSkipListNode<OpenLispVal> foundNode = this.topLeft;
+//            SkipListNode<OpenLispVal> foundNode = this.topLeft;
 
 //            //Look for the highest-level node with an element value matching the parameter value
 //            while (foundNode != null && foundNode.Next != null)
@@ -507,16 +418,16 @@
 //        /// <summary>
 //        /// Returns the lowest node on the first tower to match the input value
 //        /// </summary>
-//        public virtual OpenLispSkipListNode<OpenLispVal> FindLowest(OpenLispVal value)
+//        public virtual SkipListNode<OpenLispVal> FindLowest(OpenLispVal value)
 //        {
-//            OpenLispSkipListNode<OpenLispVal> valueNode = this.Find(value);
+//            SkipListNode<OpenLispVal> valueNode = this.Find(value);
 //            return this.FindLowest(valueNode);
 //        }
 
 //        /// <summary>
 //        /// Returns the lowest node on the first tower to match the input value
 //        /// </summary>
-//        public virtual OpenLispSkipListNode<OpenLispVal> FindLowest(OpenLispSkipListNode<OpenLispVal> valueNode)
+//        public virtual SkipListNode<OpenLispVal> FindLowest(SkipListNode<OpenLispVal> valueNode)
 //        {
 //            if (valueNode == null)
 //            {
@@ -536,16 +447,16 @@
 //        /// <summary>
 //        /// Returns the highest node on the first tower to match the input value
 //        /// </summary>
-//        public virtual OpenLispSkipListNode<OpenLispVal> FindHighest(OpenLispVal value)
+//        public virtual SkipListNode<OpenLispVal> FindHighest(OpenLispVal value)
 //        {
-//            OpenLispSkipListNode<OpenLispVal> valueNode = this.Find(value);
+//            SkipListNode<OpenLispVal> valueNode = this.Find(value);
 //            return this.FindHighest(valueNode);
 //        }
 
 //        /// <summary>
 //        /// Returns the highest node on the first tower to match the input value
 //        /// </summary>
-//        public virtual OpenLispSkipListNode<OpenLispVal> FindHighest(OpenLispSkipListNode<OpenLispVal> valueNode)
+//        public virtual SkipListNode<OpenLispVal> FindHighest(SkipListNode<OpenLispVal> valueNode)
 //        {
 //            if (valueNode == null)
 //            {
@@ -575,14 +486,14 @@
 //        /// </summary>
 //        public virtual bool Remove(OpenLispVal value)
 //        {
-//            OpenLispSkipListNode<OpenLispVal> valueNode = this.FindHighest(value);
+//            SkipListNode<OpenLispVal> valueNode = this.FindHighest(value);
 //            return this.Remove(valueNode);
 //        }
 
 //        /// <summary>
 //        /// Removes a value or node from the Skip List
 //        /// </summary>
-//        public virtual bool Remove(OpenLispSkipListNode<OpenLispVal> valueNode)
+//        public virtual bool Remove(SkipListNode<OpenLispVal> valueNode)
 //        {
 //            if (valueNode == null)
 //            {
@@ -597,18 +508,18 @@
 //                }
 
 //                //---Delete nodes going down the tower
-//                OpenLispSkipListNode<OpenLispVal> currentNodeDown = valueNode;
+//                SkipListNode<OpenLispVal> currentNodeDown = valueNode;
 //                while (currentNodeDown != null)
 //                {
 //                    //Remove right-left links
-//                    OpenLispSkipListNode<OpenLispVal> previousNode = currentNodeDown.Previous;
-//                    OpenLispSkipListNode<OpenLispVal> nextNode = currentNodeDown.Next;
+//                    SkipListNode<OpenLispVal> previousNode = currentNodeDown.Previous;
+//                    SkipListNode<OpenLispVal> nextNode = currentNodeDown.Next;
 
 //                    //Link the previous and next nodes to each other
 //                    previousNode.Next = nextNode;
 //                    nextNode.Previous = previousNode;
 
-//                    OpenLispSkipListNode<OpenLispVal> belowNode = currentNodeDown.Below; //scan down
+//                    SkipListNode<OpenLispVal> belowNode = currentNodeDown.Below; //scan down
 //                    currentNodeDown.Dispose(); //unlink previous
 
 //                    currentNodeDown = belowNode;
@@ -629,11 +540,11 @@
 //        /// </summary>
 //        public virtual void Clear()
 //        {
-//            OpenLispSkipListNode<OpenLispVal> currentNode = this.Head;
+//            SkipListNode<OpenLispVal> currentNode = this.Head;
 
 //            while (currentNode != null)
 //            {
-//                OpenLispSkipListNode<OpenLispVal> nextNode = currentNode.Next; //save reference to next node
+//                SkipListNode<OpenLispVal> nextNode = currentNode.Next; //save reference to next node
 
 //                if (!currentNode.IsHeader() && !currentNode.IsFooter())
 //                {
@@ -677,17 +588,17 @@
 //        /// </summary>
 //        public virtual int GetHeight(OpenLispVal value)
 //        {
-//            OpenLispSkipListNode<OpenLispVal> valueNode = this.FindLowest(value);
+//            SkipListNode<OpenLispVal> valueNode = this.FindLowest(value);
 //            return this.GetHeight(valueNode);
 //        }
 
 //        /// <summary>
 //        /// Gets the number of levels of a value in the Skip List
 //        /// </summary>
-//        public virtual int GetHeight(OpenLispSkipListNode<OpenLispVal> valueNode)
+//        public virtual int GetHeight(SkipListNode<OpenLispVal> valueNode)
 //        {
 //            int height = 0;
-//            OpenLispSkipListNode<OpenLispVal> currentNode = valueNode;
+//            SkipListNode<OpenLispVal> currentNode = valueNode;
 
 //            //Move all the way down to the bottom first
 //            while (currentNode.Below != null)
@@ -710,7 +621,7 @@
 //        /// </summary>
 //        public IEnumerator<OpenLispVal> GetEnumerator()
 //        {
-//            return new OpenLispSkipListEnumerator(this);
+//            return new SkipListEnumerator(this);
 //        }
 
 //        /// <summary>
@@ -721,10 +632,12 @@
 //            return this.GetEnumerator();
 //        }
 
-//        internal void AddRange(List<OpenLispVal> list)
+//        internal void AddRange(List<OpenLispVal> values)
 //        {
-//            foreach (var l in list) {
-//                Add((OpenLispVal)l);
+//            //throw new NotImplementedException();
+//            foreach (var l in values)
+//            {
+//                Add(l);
 //            }
 //        }
 
@@ -738,18 +651,21 @@
 //            var enumerator = this.GetEnumerator();
 
 //            // 2. set enumerator to start
-//            if (start > 0) { 
+//            if (start > 0)
+//            {
 //                //for (int i = 0; i < this.Count - end; i++) {
 //                //    result.Add(enumerator.Current);
 //                //}
 
-//                for (int i = 0; i < start; i++) {
+//                for (int i = 0; i < start; i++)
+//                {
 //                    enumerator.MoveNext();
 //                }
 //            }
 
 //            // 3. enumerate until end and grab collection
-//            for (int i = 0; i < this.Count - end; i++) {
+//            for (int i = 0; i < this.Count - end; i++)
+//            {
 //                result.Add(enumerator.Current);
 //                enumerator.MoveNext();
 //            }
@@ -761,12 +677,12 @@
 //        /// <summary>
 //        /// Enumerator for a Skip List. Scans across the lowest level of a Skip List.
 //        /// </summary>
-//        internal class OpenLispSkipListEnumerator : IEnumerator<OpenLispVal> 
+//        internal class SkipListEnumerator : IEnumerator<OpenLispVal>
 //        {
-//            private OpenLispSkipListNode<OpenLispVal> current;
+//            private SkipListNode<OpenLispVal> current;
 //            private OpenLispSkipList<OpenLispVal> skipList;
 
-//            public OpenLispSkipListEnumerator(OpenLispSkipList<OpenLispVal> skipList)
+//            public SkipListEnumerator(OpenLispSkipList<OpenLispVal> skipList)
 //            {
 //                this.skipList = skipList;
 //            }
@@ -775,12 +691,23 @@
 //            {
 //                get
 //                {
+//                    //return current.Value.Equals(null) ? default(T) : current.Value;
 
 //                    //return current.Value.Equals(null)
-//                    //? default(OpenLispVal)
-//                    //: current.Value.IsDeepEqual(default(OpenLispVal)) ? current.Value : default(OpenLispVal);
+//                        //? current.Value : Nil.ToOpenLispVal();
+//;
+//                    //: current.Value.IsDeepEqual(default(T)) ? current.Value : default(T);
 
 //                    return current.Value;
+
+//                    //return current.Value != default(null) ? current.Value : Nil;
+
+//                    //if (current.Value == (null)) {
+//                    //    return default(OpenLispVal);
+//                    //} else {
+//                    //    return current.Value;
+//                    //}
+
 //                }
 //            }
 
