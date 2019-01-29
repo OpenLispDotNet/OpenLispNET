@@ -125,6 +125,7 @@
     <Compile Include="SimpleHelpers\NamedLock.cs" />
     <Compile Include="SimpleHelpers\MemoryCache.cs" />
     <Compile Include="DataTypes\Concurrent\OpenLispSkipList.cs" />
+    <Compile Include="DataTypes\Concurrent\OpenLispPriorityQueue.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Enums\" />

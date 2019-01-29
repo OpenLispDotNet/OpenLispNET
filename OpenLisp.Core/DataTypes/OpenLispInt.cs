@@ -30,6 +30,15 @@ namespace OpenLisp.Core.DataTypes
         }
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="T:OpenLisp.Core.DataTypes.OpenLispInt"/> class.
+        /// </summary>
+        /// <param name="value">Value.</param>
+        public OpenLispInt(OpenLispVal value)
+        {
+            Value = ((OpenLispInt)value).Value;
+        }
+
+        /// <summary>
         /// Returns a "copy" of an <see cref="OpenLispInt"/>.
         /// </summary>
         /// <returns></returns>
