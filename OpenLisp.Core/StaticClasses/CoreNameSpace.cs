@@ -7,6 +7,7 @@ using OpenLisp.Core.AbstractClasses;
 using OpenLisp.Core.DataTypes;
 using OpenLisp.Core.StaticClasses.Funcs;
 using System.Diagnostics;
+using OpenLisp.Core.DataTypes.Concurrent;
 
 namespace OpenLisp.Core.StaticClasses
 {
@@ -146,6 +147,10 @@ namespace OpenLisp.Core.StaticClasses
 
                                 {"time-ms",     NumberFuncs.TimeMs},
 
+                                // Concurrent types
+                                {"skip-list",   new OpenLispFunc(x => new OpenLispSkipList(x.Value))},
+
+                                // Non-concurrent types
                                 {"list",        new OpenLispFunc(x => new OpenLispList(x.Value))},
                                 {"list?",       CollectionFuncs.ListQ},
 

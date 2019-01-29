@@ -124,6 +124,7 @@
     <Compile Include="StaticClasses\StaticOpenLispTypes.cs" />
     <Compile Include="SimpleHelpers\NamedLock.cs" />
     <Compile Include="SimpleHelpers\MemoryCache.cs" />
+    <Compile Include="DataTypes\Concurrent\OpenLispSkipList.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Enums\" />
@@ -132,7 +133,7 @@
     <Folder Include="Interfaces\IoC\ServiceBuses\" />
     <Folder Include="Interfaces\IoC\Services\" />
     <Folder Include="SealedClasses\" />
-    <Folder Include="DataTypes\SkipList\" />
+    <Folder Include="DataTypes\Concurrent\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

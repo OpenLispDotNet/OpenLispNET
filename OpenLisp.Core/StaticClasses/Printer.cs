@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using DataStructures;
 using OpenLisp.Core.AbstractClasses;
 using OpenLisp.Core.DataTypes;
 
@@ -22,6 +23,23 @@ namespace OpenLisp.Core.StaticClasses
         public static string Join(IList<OpenLispVal> values, string delim, bool printReadably)
         {
             return String.Join(delim, values.Select(v => v.ToString(printReadably)).ToArray());
+        }
+
+        /// <summary>
+        /// Join the specified values, delim and printReadably.
+        /// </summary>
+        /// <returns>The join.</returns>
+        /// <param name="values">Values.</param>
+        /// <param name="delim">Delim.</param>
+        /// <param name="printReadably">If set to <c>true</c> print readably.</param>
+        public static string Join(ConcurrentSkipList<OpenLispVal> values, string delim, bool printReadably)
+        {
+            var vals = values.ToList().ToArray();
+            //values.CopyTo(vals, 0);
+
+            //Console.WriteLine("Attempting to pretty print vals={}", vals));
+
+            return Join(vals, delim, printReadably);
         }
 
         /// <summary>

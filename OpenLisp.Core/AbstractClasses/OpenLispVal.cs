@@ -6,7 +6,7 @@ namespace OpenLisp.Core.AbstractClasses
     /// <summary>
     /// Base class used inherited by all valid language contructs and primitives in OpenLisp.NET
     /// </summary>
-    public abstract class OpenLispVal
+    public abstract class OpenLispVal : IComparable
     {
         private OpenLispVal _meta;
 
@@ -45,6 +45,23 @@ namespace OpenLisp.Core.AbstractClasses
         public virtual bool ListQ()
         {
             return false;
+        }
+
+        /// <summary>
+        /// Primitive implementation of ComparesTo.
+        /// </summary>
+        /// <returns>The to.</returns>
+        /// <param name="obj">Object.</param>
+        public int CompareTo(object obj)
+        {
+            var thisHash = this.GetHashCode();
+            var thatHash = obj.GetHashCode();
+
+            if (thisHash.Equals(thatHash)) return 0;
+
+            if (thisHash < thatHash) return -1;
+
+            return 1;
         }
 
         /// <summary>

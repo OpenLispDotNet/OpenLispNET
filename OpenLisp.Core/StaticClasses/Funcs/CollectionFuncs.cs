@@ -12,7 +12,10 @@ namespace OpenLisp.Core.StaticClasses.Funcs
         /// Is this an intance of an <see cref="OpenLispList"/>?
         /// </summary>
         public static OpenLispFunc ListQ = new OpenLispFunc(x =>
-            x[0].GetType() == typeof(OpenLispList)
+            //x[0].GetType() == typeof(OpenLispList)
+            //? True
+            //: False);
+            x[0].GetType().IsSubclassOf(typeof(OpenLispList))
                 ? True
                 : False);
 
@@ -20,7 +23,10 @@ namespace OpenLisp.Core.StaticClasses.Funcs
         /// Is this an instance of <see cref="OpenLispVector"/>?
         /// </summary>
         public static OpenLispFunc VectorQ = new OpenLispFunc(x =>
-            x[0].GetType() == typeof(OpenLispVector)
+            //x[0].GetType() == typeof(OpenLispVector)
+                //? True
+                //: False);
+            x[0].GetType().IsSubclassOf(typeof(OpenLispVector))
                 ? True
                 : False);
     }
