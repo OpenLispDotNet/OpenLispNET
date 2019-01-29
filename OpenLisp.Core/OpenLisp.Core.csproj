@@ -43,6 +43,9 @@
     <Reference Include="DeepEqual">
       <HintPath>..\packages\DeepEqual.1.4.0.0\lib\net40\DeepEqual.dll</HintPath>
     </Reference>
+    <Reference Include="DataStructures">
+      <HintPath>..\packages\ConcurrentDataStructures.0.2.0\lib\net45\DataStructures.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AbstractClasses\OpenLispVal.cs" />
@@ -119,6 +122,8 @@
     <Compile Include="StaticClasses\Printer.cs" />
     <Compile Include="StaticClasses\Repl.cs" />
     <Compile Include="StaticClasses\StaticOpenLispTypes.cs" />
+    <Compile Include="SimpleHelpers\NamedLock.cs" />
+    <Compile Include="SimpleHelpers\MemoryCache.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Enums\" />
@@ -127,6 +132,7 @@
     <Folder Include="Interfaces\IoC\ServiceBuses\" />
     <Folder Include="Interfaces\IoC\Services\" />
     <Folder Include="SealedClasses\" />
+    <Folder Include="DataTypes\SkipList\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
