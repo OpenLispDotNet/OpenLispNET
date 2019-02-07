@@ -4,12 +4,14 @@ using DataStructures;
 using OpenLisp.Core.AbstractClasses;
 using OpenLisp.Core.DataTypes.Errors.Throwable;
 using OpenLisp.Core.StaticClasses;
+using OpenLisp.Core.Attributes;
 
 namespace OpenLisp.Core.DataTypes.Concurrent
 {
     /// <summary>
     /// Open lisp skip list.  On average, all operations should be log(n).
     /// </summary>
+    [DocString("OpenLispSkipList implements a thread-safe skip-list that averages O(log(n))... usually.")]
     public class OpenLispSkipList : OpenLispList
     {
         private ConcurrentSkipList<OpenLispVal> _value;
