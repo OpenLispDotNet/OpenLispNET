@@ -1,11 +1,13 @@
 ﻿using System;
 using OpenLisp.Core.DataTypes;
+using OpenLisp.Core.Attributes;
 
 namespace OpenLisp.Core.AbstractClasses
 {
     /// <summary>
     /// Base class used inherited by all valid language contructs and primitives in OpenLisp.NET
     /// </summary>
+    [DocString("OpenLispVal is the abstract base type of all OpenLisp values.")]
     public abstract class OpenLispVal : IComparable
     {
         private OpenLispVal _meta;

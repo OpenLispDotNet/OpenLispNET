@@ -49,6 +49,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AbstractClasses\OpenLispVal.cs" />
+    <Compile Include="Attributes\DocString.cs" />
+    <Compile Include="Attributes\RuntimeAttributeReader.cs" />
     <Compile Include="DataTypes\Errors\OpenLispContinue.cs" />
     <Compile Include="DataTypes\Errors\OpenLispError.cs" />
     <Compile Include="DataTypes\Errors\OpenLispThrowable.cs" />

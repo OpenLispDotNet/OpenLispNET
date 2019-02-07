@@ -8,6 +8,7 @@ using OpenLisp.Core.DataTypes;
 using OpenLisp.Core.StaticClasses.Funcs;
 using System.Diagnostics;
 using OpenLisp.Core.DataTypes.Concurrent;
+using OpenLisp.Core.Attributes;
 
 namespace OpenLisp.Core.StaticClasses
 {
@@ -191,6 +192,7 @@ namespace OpenLisp.Core.StaticClasses
 
                                 {"with-meta",   MetadataFuncs.WithMeta},
                                 {"meta",        MetadataFuncs.Meta},
+                                {"docstring",   MetadataFuncs.ReadDocString},
 
                                 {"atom",        new OpenLispFunc(x => new OpenLispAtom(x[0]))},
                                 {"atom?",       AtomFuncs.AtomQ},

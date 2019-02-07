@@ -27,6 +27,23 @@ $ mono OpenLisp.Repl.exe
 user> (list? (skip-list 1 2 3))
 true
 user>
+
+user> (skip-list 1 2 "a" 3 "dd")
+(2 "dd" "a" 1 3)
+user>
+
+user> (docstring "a")
+("OpenLispVal is the abstract base type of all OpenLisp values.")
+user> (docstring "1")
+("OpenLispVal is the abstract base type of all OpenLisp values.")
+user> (docstring 1)
+Error: Unable to cast object of type 'OpenLisp.Core.DataTypes.OpenLispInt' to type 'OpenLisp.Core.DataTypes.OpenLispString'.
+   at OpenLisp.Core.StaticClasses.Funcs.MetadataFuncs.<>c.<.cctor>b__4_2(OpenLispList x) in C:\src\dotnet\OpenLispNET\OpenLisp.Core\StaticClasses\Funcs\MetadataFuncs.cs:line 28
+   at OpenLisp.Core.DataTypes.OpenLispFunc.Apply(OpenLispList args) in C:\src\dotnet\OpenLispNET\OpenLisp.Core\DataTypes\OpenLispFunc.cs:line 135
+   at OpenLisp.Core.StaticClasses.Repl.Eval(OpenLispVal originalAbstractSyntaxTree, Env environment) in C:\src\dotnet\OpenLispNET\OpenLisp.Core\StaticClasses\Repl.cs:line 325
+   at OpenLisp.Core.StaticClasses.Repl.<>c__DisplayClass16_0.<ReplMain>b__0(String str) in C:\src\dotnet\OpenLispNET\OpenLisp.Core\StaticClasses\Repl.cs:line 353
+   at OpenLisp.Core.StaticClasses.Repl.ReplMain(String[] arguments) in C:\src\dotnet\OpenLispNET\OpenLisp.Core\StaticClasses\Repl.cs:line 484
+user>
 ```
 
 Why another LISP?
