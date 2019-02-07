@@ -1,8 +1,8 @@
 OpenLisp.NET
-v0.0.1
+v0.0.4-alpha
 The Wizard & The Wyrd, LLC
 
-rev: September 19, 2015
+rev: February 6, 2019
 
 Vision
 ======
