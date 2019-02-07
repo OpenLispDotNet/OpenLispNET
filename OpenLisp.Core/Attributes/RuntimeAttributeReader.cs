@@ -22,11 +22,16 @@ namespace OpenLisp.Core.Attributes
             // Top level
             foreach (Object attributes in value.GetType().GetCustomAttributes(true))
             {
-                var docString = (DocString)attributes;
+                var currentObjectType = typeof(object);
 
-                if (docString != null)
+                if (currentObjectType == typeof(OpenLispVal))
                 {
-                    docStrings.Add((OpenLispVal)docString.Text);
+                    var docString = (DocString)attributes;
+
+                    if (docString != null)
+                    {
+                        docStrings.Add((OpenLispVal)docString.Text);
+                    }
                 }
             }
 

@@ -74,7 +74,31 @@ user> (type docstring)
 user> (type (skip-list 1 1 1))
 "OpenLisp.Core.DataTypes.Concurrent.OpenLispSkipList"
 
+user> (docstring skip-list)
+()
+user> (docstring (skip-list(1))
+Error: expected ')', got EOF
+   at OpenLisp.Core.Reader.ReadList(TokensReader reader, OpenLispList openLispList, Char start, Char end) in C:\src\dotnet\OpenLispNET\OpenLisp.Core\Reader.cs:line 160
+   at OpenLisp.Core.Reader.ReadForm(TokensReader reader) in C:\src\dotnet\OpenLispNET\OpenLisp.Core\Reader.cs:line 226
+   at OpenLisp.Core.Reader.ReadStr(String tokens) in C:\src\dotnet\OpenLispNET\OpenLisp.Core\Reader.cs:line 244
+   at OpenLisp.Core.StaticClasses.Repl.Read(String str) in C:\src\dotnet\OpenLispNET\OpenLisp.Core\StaticClasses\Repl.cs:line 37
+   at OpenLisp.Core.StaticClasses.Repl.<>c__DisplayClass16_0.<ReplMain>b__0(String str) in C:\src\dotnet\OpenLispNET\OpenLisp.Core\StaticClasses\Repl.cs:line 353
+   at OpenLisp.Core.StaticClasses.Repl.ReplMain(String[] arguments) in C:\src\dotnet\OpenLispNET\OpenLisp.Core\StaticClasses\Repl.cs:line 484
+user>
 
+user> (docstring skip-list)
+()
+
+user> (docstring (skip-list 1 1 1))
+("OpenLispSkipList implements a thread-safe skip-list that averages O(log(n))... usually.")
+user>
+
+user> (docstring skip-list)
+()
+
+user> (docstring (skip-list 1  1 1   1 ))
+()
+user>
 ```
 
 Why another LISP?
