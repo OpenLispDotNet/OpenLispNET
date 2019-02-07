@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>OpenLisp.Core</RootNamespace>
     <AssemblyName>OpenLisp.Core</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -21,6 +21,7 @@
     <DefineConstants>TRACE;DEBUG;NOSTACKTRACE, NOTYPEEQUALITY</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\OpenLisp.Core.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -31,15 +32,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DeepEqual, Version=1.4.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\DeepEqual.1.4.0.0\lib\net40\DeepEqual.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Collections.Immutable, Version=1.1.37.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Collections.Immutable.1.1.37\lib\dotnet\System.Collections.Immutable.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -47,6 +40,12 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="DeepEqual">
+      <HintPath>..\packages\DeepEqual.1.4.0.0\lib\net40\DeepEqual.dll</HintPath>
+    </Reference>
+    <Reference Include="DataStructures">
+      <HintPath>..\packages\ConcurrentDataStructures.0.2.0\lib\net45\DataStructures.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AbstractClasses\OpenLispVal.cs" />
@@ -54,16 +53,21 @@
     <Compile Include="DataTypes\Errors\OpenLispError.cs" />
     <Compile Include="DataTypes\Errors\OpenLispThrowable.cs" />
     <Compile Include="DataTypes\Errors\Throwable\OpenLispException.cs" />
+    <Compile Include="DataTypes\Extensions\OpenLispMonadExtensions.cs" />
     <Compile Include="DataTypes\OpenLispAtom.cs" />
     <Compile Include="DataTypes\OpenLispConstant.cs" />
     <Compile Include="DataTypes\OpenLispFunc.cs" />
     <Compile Include="DataTypes\OpenLispHashMap.cs" />
     <Compile Include="DataTypes\OpenLispInt.cs" />
     <Compile Include="DataTypes\OpenLispList.cs" />
+    <Compile Include="DataTypes\OpenLispMaybeMonad.cs" />
+    <Compile Include="DataTypes\OpenLispMonad.cs" />
     <Compile Include="DataTypes\OpenLispString.cs" />
     <Compile Include="DataTypes\OpenLispSymbol.cs" />
     <Compile Include="DataTypes\OpenLispVector.cs" />
     <Compile Include="Env.cs" />
+    <Compile Include="Events\Args\PrintEventArgs.cs" />
+    <Compile Include="Extensions\OpenLispMonadExtensions.cs" />
     <Compile Include="Interfaces\IBaseLogic.cs" />
     <Compile Include="Interfaces\ILispExpression.cs" />
     <Compile Include="Interfaces\ILispProvider.cs" />
@@ -98,6 +102,7 @@
     <Compile Include="Interfaces\IoC\Providers\IServiceProvider.cs" />
     <Compile Include="Interfaces\IoC\Providers\ISocketProvider.cs" />
     <Compile Include="Interfaces\IoC\Providers\ITransactionalSoftwareMemoryProvider.cs" />
+    <Compile Include="Interfaces\IOpenLispMonad.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reader.cs" />
     <Compile Include="ReadLine.cs" />
@@ -117,6 +122,10 @@
     <Compile Include="StaticClasses\Printer.cs" />
     <Compile Include="StaticClasses\Repl.cs" />
     <Compile Include="StaticClasses\StaticOpenLispTypes.cs" />
+    <Compile Include="SimpleHelpers\NamedLock.cs" />
+    <Compile Include="SimpleHelpers\MemoryCache.cs" />
+    <Compile Include="DataTypes\Concurrent\OpenLispSkipList.cs" />
+    <Compile Include="DataTypes\Concurrent\OpenLispPriorityQueue.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Enums\" />
@@ -125,6 +134,7 @@
     <Folder Include="Interfaces\IoC\ServiceBuses\" />
     <Folder Include="Interfaces\IoC\Services\" />
     <Folder Include="SealedClasses\" />
+    <Folder Include="DataTypes\Concurrent\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

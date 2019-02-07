@@ -20,6 +20,15 @@ OpenLisp.NET is a tiny Clojure-like LISP written in C# and targeting the .NET pl
 Transactional Memory and have first class support for actor based concurrency and immutable collections.
 The OpenLisp.Core library contains all datatypes, interfaces, classes, utility functions to parse OpenLisp S-Expressions.
 
+Sample Code
+===========
+```
+$ mono OpenLisp.Repl.exe
+user> (list? (skip-list 1 2 3))
+true
+user>
+```
+
 Why another LISP?
 =================
 A valid question!  OpenLisp.NET is primarily an internal research project with the aims of writing a blazingly fast

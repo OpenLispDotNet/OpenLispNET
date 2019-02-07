@@ -39,15 +39,34 @@ namespace OpenLisp.Terminal
     using System.Text;
     using System.Threading.Tasks;
     using System.Threading;
+    using System.Diagnostics;
 
+    /// <summary>
+    /// Provides line editing capabilities in console applications.
+    /// </summary>
     public class LineEditor
     {
-
+        /// <summary>
+        /// Small object to represent line completion state.
+        /// </summary>
         public class Completion
         {
+            /// <summary>
+            /// The result of completion.
+            /// </summary>
             public string[] Result;
+
+            /// <summary>
+            /// The prefix for completion.
+            /// </summary>
             public string Prefix;
 
+            /// <summary>
+            /// Constructor accepting a <see cref="string"/> prefix and
+            /// a <see cref="T:string[]"/> result. 
+            /// </summary>
+            /// <param name="prefix"></param>
+            /// <param name="result"></param>
             public Completion(string prefix, string[] result)
             {
                 Prefix = prefix;
@@ -55,6 +74,12 @@ namespace OpenLisp.Terminal
             }
         }
 
+        /// <summary>
+        /// Delegate to a <see cref="Completion"/> method.
+        /// </summary>
+        /// <param name="text"></param>
+        /// <param name="pos"></param>
+        /// <returns></returns>
         public delegate Completion AutoCompleteHandler(string text, int pos);
 
         //static StreamWriter log;
@@ -105,19 +130,35 @@ namespace OpenLisp.Terminal
         // Used to implement the Kill semantics (multiple Alt-Ds accumulate)
         KeyHandler _lastHandler;
 
+        /// <summary>
+        /// Delegate to a key handler.
+        /// </summary>
         delegate void KeyHandler();
 
+        /// <summary>
+        /// Small struct to represent handler state.
+        /// </summary>
         struct Handler
         {
             public ConsoleKeyInfo CKI;
             public readonly KeyHandler KeyHandler;
 
+            /// <summary>
+            /// Constructor accepting a <see cref="ConsoleKey"/> and a <see cref="LineEditor.KeyHandler"/>.
+            /// </summary>
+            /// <param name="key"></param>
+            /// <param name="h"></param>
             public Handler(ConsoleKey key, KeyHandler h)
             {
                 CKI = new ConsoleKeyInfo((char)0, key, false, false, false);
                 KeyHandler = h;
             }
 
+            /// <summary>
+            /// Constructor accepting a <see cref="char"/> and a <see cref="LineEditor.KeyHandler"/>.
+            /// </summary>
+            /// <param name="c"></param>
+            /// <param name="h"></param>
             private Handler(char c, KeyHandler h)
             {
                 KeyHandler = h;
@@ -125,17 +166,36 @@ namespace OpenLisp.Terminal
                 CKI = new ConsoleKeyInfo(c, ConsoleKey.Zoom, false, false, false);
             }
 
+            /// <summary>
+            /// Constructor accepting a <see cref="ConsoleKeyInfo"/> and a <see cref="LineEditor.KeyHandler"/>.
+            /// </summary>
+            /// <param name="cki"></param>
+            /// <param name="h"></param>
             private Handler(ConsoleKeyInfo cki, KeyHandler h)
             {
                 CKI = cki;
                 KeyHandler = h;
             }
 
+            /// <summary>
+            /// Control method accepting a <see cref="char"/> and a <see cref="LineEditor.KeyHandler"/>.
+            /// </summary>
+            /// <param name="c"></param>
+            /// <param name="h"></param>
+            /// <returns></returns>
             public static Handler Control(char c, KeyHandler h)
             {
                 return new Handler((char)(c - 'A' + 1), h);
             }
 
+            /// <summary>
+            /// Alt method accepting a <see cref="char"/>, a <see cref="ConsoleKey"/>,
+            /// and a <see cref="LineEditor.KeyHandler"/>.
+            /// </summary>
+            /// <param name="c"></param>
+            /// <param name="k"></param>
+            /// <param name="h"></param>
+            /// <returns></returns>
             public static Handler Alt(char c, ConsoleKey k, KeyHandler h)
             {
                 ConsoleKeyInfo cki = new ConsoleKeyInfo((char)c, k, false, true, false);
@@ -157,10 +217,22 @@ namespace OpenLisp.Terminal
         /// </remarks>
         public AutoCompleteHandler AutoCompleteEvent;
 
+        /// <summary>
+        /// An array of <see cref="Handler"/> objects.
+        /// </summary>
         static Handler[] _handlers;
 
+        /// <summary>
+        /// Constructor accepting a <see cref="string"/> parameter.
+        /// </summary>
+        /// <param name="name"></param>
         public LineEditor(string name) : this(name, 10) { }
 
+        /// <summary>
+        /// Constructor accepting <see cref="string"/> and <see cref="int"/> parameters.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="histsize"></param>
         public LineEditor(string name, int histsize)
         {
             _handlers = new[] {
@@ -210,6 +282,9 @@ namespace OpenLisp.Terminal
             //log = File.CreateText ("log"); 
         }
 
+        /// <summary>
+        /// Dump the history, write a new line, and invoke <see cref="Render"/>.
+        /// </summary>
         void CmdDebug()
         {
             _history.Dump();
@@ -217,6 +292,9 @@ namespace OpenLisp.Terminal
             Render();
         }
 
+        /// <summary>
+        /// Render the line editor.
+        /// </summary>
         void Render()
         {
             Console.Write(_shownPrompt);
@@ -235,9 +313,23 @@ namespace OpenLisp.Terminal
             UpdateHomeRow(max);
         }
 
+        /// <summary>
+        /// Updates home row at the position represented by an <see cref="int"/>.
+        /// </summary>
+        /// <param name="screenpos"></param>
         void UpdateHomeRow(int screenpos)
         {
-            int lines = 1 + (screenpos / Console.WindowWidth);
+            int lines = 0;
+            try
+            {
+                lines = 1 + (screenpos / Console.WindowWidth);
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.Message);
+                lines = 0;
+            }
+
 
             _homeRow = Console.CursorTop - (lines - 1);
             if (_homeRow < 0)
@@ -245,6 +337,10 @@ namespace OpenLisp.Terminal
         }
 
 
+        /// <summary>
+        /// Renders from a position represented by an <see cref="int"/>.
+        /// </summary>
+        /// <param name="pos"></param>
         void RenderFrom(int pos)
         {
             int rpos = TextToRenderPos(pos);
@@ -263,6 +359,9 @@ namespace OpenLisp.Terminal
             }
         }
 
+        /// <summary>
+        /// Compute the rendered line editor text.
+        /// </summary>
         void ComputeRendered()
         {
             _renderedText.Length = 0;
@@ -285,6 +384,11 @@ namespace OpenLisp.Terminal
             }
         }
 
+        /// <summary>
+        /// Renders text at a position represented by an <see cref="int"/>.
+        /// </summary>
+        /// <param name="pos"></param>
+        /// <returns></returns>
         int TextToRenderPos(int pos)
         {
             int p = 0;
@@ -306,26 +410,64 @@ namespace OpenLisp.Terminal
             return p;
         }
 
+        /// <summary>
+        /// Renders text to a screen position represented by an <see cref="int"/>.
+        /// </summary>
+        /// <param name="pos"></param>
+        /// <returns></returns>
         int TextToScreenPos(int pos)
         {
             return _shownPrompt.Length + TextToRenderPos(pos);
         }
 
+        /// <summary>
+        /// Get and Set the prompt.
+        /// </summary>
         string Prompt
         {
             get { return _prompt; }
             set { _prompt = value; }
         }
 
+        /// <summary>
+        /// Gets the line editor line count represented by an <see cref="int"/>.
+        /// </summary>
         int LineCount => (_shownPrompt.Length + _renderedText.Length) / Console.WindowWidth;
 
+        /// <summary>
+        /// Forces the cursos to a new position represented by an <see cref="int"/>.
+        /// </summary>
+        /// <param name="newpos"></param>
         void ForceCursor(int newpos)
         {
             _cursor = newpos;
 
+            /*
             int actualPos = _shownPrompt.Length + TextToRenderPos(_cursor);
             int row = _homeRow + (actualPos / Console.WindowWidth);
             int col = actualPos % Console.WindowWidth;
+            */
+            int actualPos = 0;
+            int row = 0;
+            int col = 0;
+
+            try
+            {
+                actualPos = _shownPrompt.Length + TextToRenderPos(_cursor);
+                row = _homeRow + (actualPos / Console.WindowWidth);
+                col = actualPos % Console.WindowWidth;
+
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.Message);
+                /*
+                actualPos = 0;
+                row = 0;
+                col = 0;
+                */               
+            }
+
 
             if (row >= Console.BufferHeight)
                 row = Console.BufferHeight - 1;
@@ -335,6 +477,10 @@ namespace OpenLisp.Terminal
             //log.Flush ();
         }
 
+        /// <summary>
+        /// Updates cursor at a position represented by an <see cref="int"/>.
+        /// </summary>
+        /// <param name="newpos"></param>
         void UpdateCursor(int newpos)
         {
             if (_cursor == newpos)
@@ -343,6 +489,10 @@ namespace OpenLisp.Terminal
             ForceCursor(newpos);
         }
 
+        /// <summary>
+        /// Inserts a single <see cref="char"/>.
+        /// </summary>
+        /// <param name="c"></param>
         void InsertChar(char c)
         {
             int prevLines = LineCount;
@@ -361,15 +511,18 @@ namespace OpenLisp.Terminal
                 ForceCursor(++_cursor);
             }
         }
-
-        //
-        // Commands
-        //
+        
+        /// <summary>
+        /// Done command.
+        /// </summary>
         void CmdDone()
         {
             _done = true;
         }
 
+        /// <summary>
+        /// Tab or Complete command.
+        /// </summary>
         void CmdTabOrComplete()
         {
             bool complete = false;
@@ -448,16 +601,25 @@ namespace OpenLisp.Terminal
             }
         }
 
+        /// <summary>
+        /// Home command.
+        /// </summary>
         void CmdHome()
         {
             UpdateCursor(0);
         }
 
+        /// <summary>
+        /// End command.
+        /// </summary>
         void CmdEnd()
         {
             UpdateCursor(_text.Length);
         }
 
+        /// <summary>
+        /// Left command.
+        /// </summary>
         void CmdLeft()
         {
             if (_cursor == 0)
@@ -466,6 +628,9 @@ namespace OpenLisp.Terminal
             UpdateCursor(_cursor - 1);
         }
 
+        /// <summary>
+        /// Backward Word command.
+        /// </summary>
         void CmdBackwardWord()
         {
             int p = WordBackward(_cursor);
@@ -474,6 +639,9 @@ namespace OpenLisp.Terminal
             UpdateCursor(p);
         }
 
+        /// <summary>
+        /// Forward Word command.
+        /// </summary>
         void CmdForwardWord()
         {
             int p = WordForward(_cursor);
@@ -482,6 +650,9 @@ namespace OpenLisp.Terminal
             UpdateCursor(p);
         }
 
+        /// <summary>
+        /// Right command.
+        /// </summary>
         void CmdRight()
         {
             if (_cursor == _text.Length)
@@ -490,6 +661,10 @@ namespace OpenLisp.Terminal
             UpdateCursor(_cursor + 1);
         }
 
+        /// <summary>
+        /// Render after a position represented by an <see cref="int"/>.
+        /// </summary>
+        /// <param name="p"></param>
         void RenderAfter(int p)
         {
             ForceCursor(p);
@@ -497,6 +672,9 @@ namespace OpenLisp.Terminal
             ForceCursor(_cursor);
         }
 
+        /// <summary>
+        /// Backspace command.
+        /// </summary>
         void CmdBackspace()
         {
             if (_cursor == 0)
@@ -507,6 +685,9 @@ namespace OpenLisp.Terminal
             RenderAfter(_cursor);
         }
 
+        /// <summary>
+        /// Delete Char command.
+        /// </summary>
         void CmdDeleteChar()
         {
             // If there is no input, this behaves like EOF
@@ -525,6 +706,11 @@ namespace OpenLisp.Terminal
             RenderAfter(_cursor);
         }
 
+        /// <summary>
+        /// Word Forward to a position represented by an <see cref="int"/>.
+        /// </summary>
+        /// <param name="p"></param>
+        /// <returns></returns>
         int WordForward(int p)
         {
             if (p >= _text.Length)
@@ -557,6 +743,11 @@ namespace OpenLisp.Terminal
             return -1;
         }
 
+        /// <summary>
+        /// Word Backward to a point represented by an <see cref="int"/>.
+        /// </summary>
+        /// <param name="p"></param>
+        /// <returns></returns>
         int WordBackward(int p)
         {
             if (p == 0)
@@ -595,6 +786,9 @@ namespace OpenLisp.Terminal
             return -1;
         }
 
+        /// <summary>
+        /// Delete Word command.
+        /// </summary>
         void CmdDeleteWord()
         {
             int pos = WordForward(_cursor);
@@ -614,6 +808,9 @@ namespace OpenLisp.Terminal
             RenderAfter(_cursor);
         }
 
+        /// <summary>
+        /// Delete Backword command.
+        /// </summary>
         void CmdDeleteBackword()
         {
             int pos = WordBackward(_cursor);
@@ -632,14 +829,17 @@ namespace OpenLisp.Terminal
             RenderAfter(pos);
         }
 
-        //
-        // Adds the current line to the history if needed
-        //
+        /// <summary>
+        /// Adds the current line to the history if needed
+        /// </summary>
         void HistoryUpdateLine()
         {
             _history.Update(_text.ToString());
         }
 
+        /// <summary>
+        /// Previous History command.
+        /// </summary>
         void CmdHistoryPrev()
         {
             if (!_history.PreviousAvailable())
@@ -650,6 +850,9 @@ namespace OpenLisp.Terminal
             SetText(_history.Previous());
         }
 
+        /// <summary>
+        /// History Next command.
+        /// </summary>
         void CmdHistoryNext()
         {
             if (!_history.NextAvailable())
@@ -660,6 +863,9 @@ namespace OpenLisp.Terminal
 
         }
 
+        /// <summary>
+        /// Kill to EOF command.
+        /// </summary>
         void CmdKillToEOF()
         {
             _killBuffer = _text.ToString(_cursor, _text.Length - _cursor);
@@ -668,11 +874,18 @@ namespace OpenLisp.Terminal
             RenderAfter(_cursor);
         }
 
+        /// <summary>
+        /// Yank command.
+        /// </summary>
         void CmdYank()
         {
             InsertTextAtCursor(_killBuffer);
         }
 
+        /// <summary>
+        /// Insert text represented by a <see cref="string"/> at the cursor.
+        /// </summary>
+        /// <param name="str"></param>
         void InsertTextAtCursor(string str)
         {
             int prev_lines = LineCount;
@@ -694,11 +907,18 @@ namespace OpenLisp.Terminal
             }
         }
 
+        /// <summary>
+        /// Set the Search Prompt.
+        /// </summary>
+        /// <param name="s"></param>
         void SetSearchPrompt(string s)
         {
             SetPrompt("(reverse-i-search)`" + s + "': ");
         }
 
+        /// <summary>
+        /// Reverse Search through <see cref="_text"/>.
+        /// </summary>
         void ReverseSearch()
         {
             int p;
@@ -744,6 +964,9 @@ namespace OpenLisp.Terminal
             }
         }
 
+        /// <summary>
+        /// Reverse Search command.
+        /// </summary>
         void CmdReverseSearch()
         {
             if (_searching == 0)
@@ -771,6 +994,10 @@ namespace OpenLisp.Terminal
             }
         }
 
+        /// <summary>
+        /// Search Append with a <see cref="char"/>.
+        /// </summary>
+        /// <param name="c"></param>
         void SearchAppend(char c)
         {
             _search = _search + c;
@@ -789,6 +1016,9 @@ namespace OpenLisp.Terminal
             ReverseSearch();
         }
 
+        /// <summary>
+        /// Refresh command.
+        /// </summary>
         void CmdRefresh()
         {
             Console.Clear();
@@ -797,6 +1027,11 @@ namespace OpenLisp.Terminal
             ForceCursor(_cursor);
         }
 
+        /// <summary>
+        /// Event to interrupt editing.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="a"></param>
         void InterruptEdit(object sender, ConsoleCancelEventArgs a)
         {
             // Do not abort our program:
@@ -816,6 +1051,9 @@ namespace OpenLisp.Terminal
                 InsertChar(c);
         }
 
+        /// <summary>
+        /// Edit the loop.
+        /// </summary>
         void EditLoop()
         {
             ConsoleKeyInfo cki;
@@ -873,6 +1111,10 @@ namespace OpenLisp.Terminal
             }
         }
 
+        /// <summary>
+        /// Initial text.
+        /// </summary>
+        /// <param name="initial"></param>
         void InitText(string initial)
         {
             _text = new StringBuilder(initial);
@@ -882,12 +1124,20 @@ namespace OpenLisp.Terminal
             ForceCursor(_cursor);
         }
 
+        /// <summary>
+        /// Set text at a cursor with a <see cref="string"/> value.
+        /// </summary>
+        /// <param name="newtext"></param>
         void SetText(string newtext)
         {
             Console.SetCursorPosition(0, _homeRow);
             InitText(newtext);
         }
 
+        /// <summary>
+        /// Set the prompt with a <see cref="string"/> value.
+        /// </summary>
+        /// <param name="newprompt"></param>
         void SetPrompt(string newprompt)
         {
             _shownPrompt = newprompt;
@@ -896,6 +1146,12 @@ namespace OpenLisp.Terminal
             ForceCursor(_cursor);
         }
 
+        /// <summary>
+        /// Edits the line editor.
+        /// </summary>
+        /// <param name="prompt"></param>
+        /// <param name="initial"></param>
+        /// <returns></returns>
         public string Edit(string prompt, string initial)
         {
 #if !NONATIVETHREADS
@@ -949,6 +1205,9 @@ namespace OpenLisp.Terminal
             return result;
         }
 
+        /// <summary>
+        /// Saves the command history.
+        /// </summary>
         public void SaveHistory()
         {
             if (_history != null)
@@ -957,12 +1216,15 @@ namespace OpenLisp.Terminal
             }
         }
 
+        /// <summary>
+        /// Get or Set the tab at start completes.
+        /// </summary>
         public bool TabAtStartCompletes { get; set; }
 
-        //
-        // Emulates the bash-like behavior, where edits done to the
-        // history are recorded
-        //
+        /// <summary>
+        /// Emulates the bash-like behavior, where edits done to the
+        /// history are recorded.
+        /// </summary>
         class History
         {
             string[] history;
@@ -1011,6 +1273,9 @@ namespace OpenLisp.Terminal
                 }
             }
 
+            /// <summary>
+            /// Closes the history file.
+            /// </summary>
             public void Close()
             {
                 if (histfile == null)
@@ -1028,15 +1293,16 @@ namespace OpenLisp.Terminal
                         }
                     }
                 }
-                catch
+                catch (Exception ex)
                 {
-                    // ignore
+                    Debug.WriteLine($"[{DateTime.Now}] Error: {ex.Message}\n{ex.StackTrace}");
                 }
             }
 
-            //
-            // Appends a value to the history
-            //
+            /// <summary>
+            /// Appends a value to the history
+            /// </summary>
+            /// <param name="s"></param>
             public void Append(string s)
             {
                 //Console.WriteLine ("APPENDING {0} head={1} tail={2}", s, head, tail);
@@ -1049,16 +1315,20 @@ namespace OpenLisp.Terminal
                 //Console.WriteLine ("DONE: head={1} tail={2}", s, head, tail);
             }
 
-            //
-            // Updates the current cursor location with the string,
-            // to support editing of history items.   For the current
-            // line to participate, an Append must be done before.
-            //
+            /// <summary>
+            /// Updates the current cursor location with the string,
+            /// to support editing of history items.   For the current
+            /// line to participate, an Append must be done before.
+            /// </summary>
+            /// <param name="s"></param>
             public void Update(string s)
             {
                 history[cursor] = s;
             }
 
+            /// <summary>
+            /// Removes last command from the history.
+            /// </summary>
             public void RemoveLast()
             {
                 head = head - 1;
@@ -1066,6 +1336,10 @@ namespace OpenLisp.Terminal
                     head = history.Length - 1;
             }
 
+            /// <summary>
+            /// Accepts a <see cref="string"/>.
+            /// </summary>
+            /// <param name="s"></param>
             public void Accept(string s)
             {
                 int t = head - 1;
@@ -1075,6 +1349,10 @@ namespace OpenLisp.Terminal
                 history[t] = s;
             }
 
+            /// <summary>
+            /// Is the previous command available?
+            /// </summary>
+            /// <returns></returns>
             public bool PreviousAvailable()
             {
                 //Console.WriteLine ("h={0} t={1} cursor={2}", head, tail, cursor);
@@ -1090,6 +1368,10 @@ namespace OpenLisp.Terminal
                 return true;
             }
 
+            /// <summary>
+            /// Is the next command available?
+            /// </summary>
+            /// <returns></returns>
             public bool NextAvailable()
             {
                 if (count == 0)
@@ -1100,11 +1382,11 @@ namespace OpenLisp.Terminal
                 return true;
             }
 
-
-            //
-            // Returns: a string with the previous line contents, or
-            // nul if there is no data in the history to move to.
-            //
+            /// <summary>
+            /// Returns a string with the previous line contents, or
+            /// null if there is no data in the history to move to.
+            /// </summary>
+            /// <returns></returns>
             public string Previous()
             {
                 if (!PreviousAvailable())
@@ -1117,6 +1399,10 @@ namespace OpenLisp.Terminal
                 return history[cursor];
             }
 
+            /// <summary>
+            /// Gets the next command in the history.
+            /// </summary>
+            /// <returns></returns>
             public string Next()
             {
                 if (!NextAvailable())
@@ -1126,6 +1412,9 @@ namespace OpenLisp.Terminal
                 return history[cursor];
             }
 
+            /// <summary>
+            /// Sets the cursor to the end.
+            /// </summary>
             public void CursorToEnd()
             {
                 if (head == tail)
@@ -1134,6 +1423,9 @@ namespace OpenLisp.Terminal
                 cursor = head;
             }
 
+            /// <summary>
+            /// Dumps the command history.
+            /// </summary>
             public void Dump()
             {
                 Console.WriteLine("Head={0} Tail={1} Cursor={2} count={3}", head, tail, cursor, count);
@@ -1144,6 +1436,11 @@ namespace OpenLisp.Terminal
                 //log.Flush ();
             }
 
+            /// <summary>
+            /// Search backards for a term represented by a <see cref="string"/>.
+            /// </summary>
+            /// <param name="term"></param>
+            /// <returns></returns>
             public string SearchBackward(string term)
             {
                 for (int i = 0; i < count; i++)

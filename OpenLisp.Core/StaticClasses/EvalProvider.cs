@@ -7,8 +7,20 @@ using Microsoft.CSharp;
 
 namespace OpenLisp.Core.StaticClasses
 {
+    /// <summary>
+    /// Evaluation provider suitable for most REPLs wanting to compile assemblies.
+    /// </summary>
     public static class EvalProvider
     {
+        /// <summary>
+        /// Creates an eval method.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="TResult"></typeparam>
+        /// <param name="code"></param>
+        /// <param name="usingStatements"></param>
+        /// <param name="assemblies"></param>
+        /// <returns></returns>
         public static Func<T, TResult> CreateEvalMethod<T, TResult>(string code,
             string[] usingStatements = null,
             string[] assemblies = null)
@@ -65,6 +77,12 @@ namespace {1},
             }
         }
 
+        /// <summary>
+        /// Gets the using statments needed to compile an OpenLisp.NET assembly
+        /// targeting a .NET platform.
+        /// </summary>
+        /// <param name="usingStatements"></param>
+        /// <returns></returns>
         private static string GetUsing(HashSet<string> usingStatements)
         {
             var result = new StringBuilder();

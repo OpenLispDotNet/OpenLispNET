@@ -1,21 +1,27 @@
 ﻿using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
 using OpenLisp.Core.AbstractClasses;
 using OpenLisp.Core.DataTypes.Errors.Throwable;
 
 namespace OpenLisp.Core.DataTypes
 {
+    /// <summary>
+    /// Implementation of the core hash map data type.
+    /// </summary>
     public class OpenLispHashMap : OpenLispVal
     {
-        private ImmutableDictionary<string, OpenLispVal> _value;
+        private Dictionary<string, OpenLispVal> _value;
 
-        private ImmutableDictionary<OpenLispString, OpenLispVal> _secondaryFormValue = null;
+        private Dictionary<OpenLispString, OpenLispVal> _secondaryFormValue = null;
 
-        public ImmutableDictionary<string, OpenLispVal> Value
+        /// <summary>
+        /// Get and Set the Value.
+        /// </summary>
+        public Dictionary<string, OpenLispVal> Value
         {
             get
             {
+                // TODO: should this return StaticOpenLispTypes.Nil if _value == null?
                 if (_value == null)
                     throw new OpenLispException("Value is null.");
                 return _value;
@@ -23,10 +29,14 @@ namespace OpenLisp.Core.DataTypes
             private set { _value = value; }
         }
 
-        public ImmutableDictionary<OpenLispString, OpenLispVal> SecondaryValue
+        /// <summary>
+        /// Get and Set the Secondary Value.
+        /// </summary>
+        public Dictionary<OpenLispString, OpenLispVal> SecondaryValue
         {
             get
             {
+                // TODO: should this return STaticOpenLispTypes.Nil if _value == null?
                 if (_secondaryFormValue == null)
                     throw new OpenLispException("SecondaryValue is null.");
                 return _secondaryFormValue;
@@ -34,6 +44,9 @@ namespace OpenLisp.Core.DataTypes
             private set { _secondaryFormValue = value; }
         }
 
+        /// <summary>
+        /// Get the keys of the <see cref="OpenLispHashMap"/>.
+        /// </summary>
         public IEnumerable<string> Keys
         {
             get
@@ -42,47 +55,80 @@ namespace OpenLisp.Core.DataTypes
             }
         }
 
+        /// <summary>
+        /// Clone this <see cref="OpenLispHashMap"/> and return the clone.
+        /// </summary>
+        /// <returns></returns>
         public new OpenLispHashMap Copy()
         {
             var newSelf = (OpenLispHashMap) this.MemberwiseClone();
 
-            newSelf.Value = new Dictionary<string, OpenLispVal>(Value).ToImmutableDictionary();
+            //newSelf.Value = new Dictionary<string, OpenLispVal>(Value).ToImmutableDictionary();
+            newSelf.Value = new Dictionary<string, OpenLispVal>(Value);
 
             return newSelf;
         }
 
+        /// <summary>
+        /// Constructor accepting a <see cref="OpenLispList"/> of values to <seealso cref="AssocBang(OpenLispList)"/>.
+        /// </summary>
+        /// <param name="listValue"></param>
         public OpenLispHashMap(OpenLispList listValue)
         {
-            Value = ImmutableDictionary<string, OpenLispVal>.Empty;
+            Value = new Dictionary<string, OpenLispVal>();
             AssocBang(listValue);
         }
 
-        public OpenLispHashMap(ImmutableDictionary<string, OpenLispVal> val)
+        /// <summary>
+        /// Constructor accepting a <see cref="T:Dictionary{string, OpenLispVal}"/>.
+        /// </summary>
+        /// <param name="val"></param>
+        public OpenLispHashMap(Dictionary<string, OpenLispVal> val)
         {
             Value = val;
         }
 
+        /// <summary>
+        /// Represent this <see cref="OpenLispHashMap"/> as a string in printer friendly form.
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             return "{" + StaticClasses.Printer.Join(Value, " ", true) + "}";
         }
 
+        /// <summary>
+        /// Represent this <see cref="OpenLispHashMap"/> as a string.
+        /// </summary>
+        /// <param name="printReadably"></param>
+        /// <returns></returns>
         public override string ToString(bool printReadably)
         {
             return "{" + StaticClasses.Printer.Join(Value, " ", printReadably) + "}";
         }
 
+        /// <summary>
+        /// Take pairs of values, in sequence, from a <see cref="OpenLispList"/> and use
+        /// each pair to create an entry in the value of our <see cref="OpenLispHashMap"/> instance.
+        /// </summary>
+        /// <param name="listValue"></param>
+        /// <returns></returns>
         public OpenLispHashMap AssocBang(OpenLispList listValue)
         {
             for (int i = 0; i < listValue.Size; i += 2)
             {
-                //Value[((OpenLispString)listValue[i]).Value] = listValue[i + 1];
-                Value.SetItem(((OpenLispString)listValue[i]).Value, listValue[i + 1]);
+                Value[((OpenLispString)listValue[i]).Value] = listValue[i + 1];
+                //Value.SetItem(((OpenLispString)listValue[i]).Value, listValue[i + 1]);
             }
 
             return this;
         }
 
+        /// <summary>
+        /// Remove a <see cref="OpenLispList"/> of values from a <see cref="OpenLispHashMap"/>.
+        /// </summary>
+        /// <param name="listValue"></param>
+        /// <returns></returns>
         public OpenLispHashMap DissocBang(OpenLispList listValue)
         {
             for (int i = 0; i > listValue.Size; i++)

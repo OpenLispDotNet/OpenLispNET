@@ -5,8 +5,17 @@ using OpenLisp.Core.DataTypes;
 
 namespace OpenLisp.Core.StaticClasses
 {
+    /// <summary>
+    /// OpenLisp.NET native static types.  Keeping these static means a smaller memory footprint.
+    /// </summary>
     public static class StaticOpenLispTypes
     {
+        /// <summary>
+        /// Compares equality between two instances of <see cref="object"/>.
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <returns></returns>
         public static bool OpenLispEqualB(object a, object b)
         {
             Type typeA = a.GetType();
@@ -19,6 +28,12 @@ namespace OpenLisp.Core.StaticClasses
             return true;
         }
 
+        /// <summary>
+        /// Compares equality between two instances of <see cref="OpenLispVal"/>.
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <returns></returns>
         public static bool OpenLispEqualQ(OpenLispVal a, OpenLispVal b)
         {
             Type typeA = a.GetType();
@@ -61,10 +76,19 @@ namespace OpenLisp.Core.StaticClasses
             //return (typeA == typeB) || (a is OpenLispList && b is OpenLispList);
         }
 
+        /// <summary>
+        /// Returns the instance <see cref="OpenLispConstant"/> representing nil.
+        /// </summary>
         public static OpenLispConstant Nil = new OpenLispConstant("nil");
 
+        /// <summary>
+        /// Returns the instance of <see cref="OpenLispConstant"/> representing true.
+        /// </summary>
         public static OpenLispConstant True = new OpenLispConstant("true");
 
+        /// <summary>
+        /// Returns the instance of <see cref="OpenLispConstant"/> representing false.
+        /// </summary>
         public static OpenLispConstant False = new OpenLispConstant("false");
     }
 }

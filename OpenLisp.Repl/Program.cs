@@ -1,20 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OpenLisp.Core;
-using OpenLisp.Core.AbstractClasses;
-using OpenLisp.Core.DataTypes;
-using OpenLisp.Core.DataTypes.Errors;
-using OpenLisp.Core.DataTypes.Errors.Throwable;
-using OpenLisp.Core.StaticClasses;
-
-namespace OpenLisp.Repl
+﻿namespace OpenLisp.Repl
 {
+    /// <summary>
+    /// Simple console app to provide an OpenLisp.NET REPL.
+    /// </summary>
     class Program
     {
+        /// <summary>
+        /// Main entry point in the hosted REPL.
+        /// </summary>
+        /// <param name="args"></param>
         private static void Main(string[] args)
         {
             Core.StaticClasses.Repl.ReplMain(args);

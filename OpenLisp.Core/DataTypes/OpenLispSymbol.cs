@@ -3,10 +3,16 @@ using OpenLisp.Core.DataTypes.Errors.Throwable;
 
 namespace OpenLisp.Core.DataTypes
 {
+    /// <summary>
+    /// Default symbol implementation for OpenLisp.NET
+    /// </summary>
     public class OpenLispSymbol : OpenLispVal
     {
         private string _value;
 
+        /// <summary>
+        /// Publicly Get or privately Set the <see cref="string"/> value of an <see cref="OpenLispSymbol"/>.
+        /// </summary>
         public string Value
         {
             get
@@ -17,26 +23,47 @@ namespace OpenLisp.Core.DataTypes
             private set { _value = value; }
         }
 
+        /// <summary>
+        /// Constructor accepting a <see cref="string"/> value.
+        /// </summary>
+        /// <param name="value"></param>
         public OpenLispSymbol(string value)
         {
             Value = value;
         }
 
+        /// <summary>
+        /// Constructor accepting an <see cref="OpenLispString"/> parameter.
+        /// </summary>
+        /// <param name="value"></param>
         public OpenLispSymbol(OpenLispString value)
         {
             Value = value.Value;
         }
 
+        /// <summary>
+        /// Returns this instance when asked to copy an <see cref="OpenLispSymbol"/>.
+        /// </summary>
+        /// <returns></returns>
         public new OpenLispSymbol Copy()
         {
             return this;
         }
 
+        /// <summary>
+        /// Return the underlying value when printing a string representation of an <see cref="OpenLispSymbol"/>.
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             return Value;
         }
 
+        /// <summary>
+        /// Return the underlying value when printing a string representation of an <see cref="OpenLispSymbol"/>.
+        /// </summary>
+        /// <param name="printReadably">Ignored and present for internal API compatibility.</param>
+        /// <returns></returns>
         public override string ToString(bool printReadably)
         {
             return Value;
