@@ -8,7 +8,6 @@ namespace OpenLisp.Core.Attributes
     /// <summary>
     /// Utility class to read attributes at runtime.
     /// </summary>
-    /// <typeparam name="T"></typeparam>
     public static class RuntimeAttributeReader
     {
         /// <summary>

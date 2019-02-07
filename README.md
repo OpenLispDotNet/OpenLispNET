@@ -34,16 +34,47 @@ user>
 
 user> (docstring "a")
 ("OpenLispVal is the abstract base type of all OpenLisp values.")
-user> (docstring "1")
-("OpenLispVal is the abstract base type of all OpenLisp values.")
+
 user> (docstring 1)
-Error: Unable to cast object of type 'OpenLisp.Core.DataTypes.OpenLispInt' to type 'OpenLisp.Core.DataTypes.OpenLispString'.
-   at OpenLisp.Core.StaticClasses.Funcs.MetadataFuncs.<>c.<.cctor>b__4_2(OpenLispList x) in C:\src\dotnet\OpenLispNET\OpenLisp.Core\StaticClasses\Funcs\MetadataFuncs.cs:line 28
-   at OpenLisp.Core.DataTypes.OpenLispFunc.Apply(OpenLispList args) in C:\src\dotnet\OpenLispNET\OpenLisp.Core\DataTypes\OpenLispFunc.cs:line 135
-   at OpenLisp.Core.StaticClasses.Repl.Eval(OpenLispVal originalAbstractSyntaxTree, Env environment) in C:\src\dotnet\OpenLispNET\OpenLisp.Core\StaticClasses\Repl.cs:line 325
+("OpenLispVal is the abstract base type of all OpenLisp values.")
+
+user> (docstring (+ 1 1))
+("OpenLispVal is the abstract base type of all OpenLisp values.")
+
+user> (docstring (- 1 1 1 1 1))
+("OpenLispVal is the abstract base type of all OpenLisp values.")
+
+user> ((- 1 1 1 1 1))
+Error: Unable to cast object of type 'OpenLisp.Core.DataTypes.OpenLispInt' to type 'OpenLisp.Core.DataTypes.OpenLispFunc'.
+   at OpenLisp.Core.StaticClasses.Repl.Eval(OpenLispVal originalAbstractSyntaxTree, Env environment) in C:\src\dotnet\OpenLispNET\OpenLisp.Core\StaticClasses\Repl.cs:line 316
    at OpenLisp.Core.StaticClasses.Repl.<>c__DisplayClass16_0.<ReplMain>b__0(String str) in C:\src\dotnet\OpenLispNET\OpenLisp.Core\StaticClasses\Repl.cs:line 353
    at OpenLisp.Core.StaticClasses.Repl.ReplMain(String[] arguments) in C:\src\dotnet\OpenLispNET\OpenLisp.Core\StaticClasses\Repl.cs:line 484
-user>
+
+user> (- 1 1 1 1 1)
+-3
+
+user> (skip-list (- 1 1 1 1 1))
+(-3)
+
+user> (skip-list (- 1 1 1 1 1) (+ 1 2 3 (* 2 3))))
+(12 -3)
+
+user> (type 1)
+"OpenLisp.Core.DataTypes.OpenLispInt"
+
+user> (type (docstring 1))
+"OpenLisp.Core.DataTypes.OpenLispList"
+
+user> (type docstring 1)
+"OpenLisp.Core.DataTypes.OpenLispFunc"
+
+user> (type docstring)
+"OpenLisp.Core.DataTypes.OpenLispFunc"
+
+user> (type (skip-list 1 1 1))
+"OpenLisp.Core.DataTypes.Concurrent.OpenLispSkipList"
+
+
 ```
 
 Why another LISP?

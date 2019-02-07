@@ -25,6 +25,6 @@ namespace OpenLisp.Core.StaticClasses.Funcs
         /// <summary>
         /// Get the DocString and stick it in the Meta
         /// </summary>
-        public static OpenLispFunc ReadDocString = new OpenLispFunc(x => x.Meta = RuntimeAttributeReader.GetDocStrings((OpenLispString)x[0]));
+        public static OpenLispFunc ReadDocString = new OpenLispFunc(x => x.Meta = RuntimeAttributeReader.GetDocStrings((OpenLispVal)x[0]));
     }
 }
