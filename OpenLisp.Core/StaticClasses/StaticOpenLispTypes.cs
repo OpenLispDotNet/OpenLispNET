@@ -3,6 +3,7 @@ using DeepEqual.Syntax;
 using OpenLisp.Core.AbstractClasses;
 using OpenLisp.Core.DataTypes;
 using System.Collections.Generic;
+using DataStructures;
 
 namespace OpenLisp.Core.StaticClasses
 {
@@ -108,5 +109,15 @@ namespace OpenLisp.Core.StaticClasses
         /// where TKey is <see cref="OpenLispString"/> and TValue is <see cref="OpenLispVal"/>.
         /// </summary>
         public static Dictionary<OpenLispString, OpenLispVal> EmptySecondaryDictionary = new Dictionary<OpenLispString, OpenLispVal>();
+
+        /// <summary>
+        /// Returns an empty <see cref="ConcurrentSkipList{T}"/> where T is <see cref="OpenLispVal"/>.
+        /// </summary>
+        public static ConcurrentSkipList<OpenLispVal> EmptyConcurrentSkipList = new ConcurrentSkipList<OpenLispVal>();
+
+        /// <summary>
+        /// Returns an empty <see cref="List{T}"/> where T is <see cref="OpenLispVal"/>.
+        /// </summary>
+        public static List<OpenLispVal> EmpyListOpenLispVal = new List<OpenLispVal>();
     }
 }

@@ -23,9 +23,7 @@ namespace OpenLisp.Core.DataTypes
         {
             get
             {
-                // TODO: should this return StaticOpenLispTypes.Nil if _value == null?
                 if (_value == null)
-                    //throw new OpenLispException("Value is null.");
                     _value = StaticOpenLispTypes.EmptyDictionary;
                 return _value;
             }
@@ -39,9 +37,7 @@ namespace OpenLisp.Core.DataTypes
         {
             get
             {
-                // TODO: should this return STaticOpenLispTypes.Nil if _value == null?
                 if (_secondaryFormValue == null)
-                    //throw new OpenLispException("SecondaryValue is null.");
                     _secondaryFormValue = StaticOpenLispTypes.EmptySecondaryDictionary;
                 return _secondaryFormValue;
             }

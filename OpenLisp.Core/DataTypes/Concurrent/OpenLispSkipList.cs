@@ -24,7 +24,11 @@ namespace OpenLisp.Core.DataTypes.Concurrent
         {
             get
             {
-                if (_value == null) throw new OpenLispException("Value is null.");
+                //if (_value == null) throw new OpenLispException("Value is null.");
+                if (_value == null)
+                {
+                    _value = StaticOpenLispTypes.EmptyConcurrentSkipList;
+                }
                 return _value;
             }
             set { _value = value; }
@@ -96,8 +100,6 @@ namespace OpenLisp.Core.DataTypes.Concurrent
             {
                 Value.Add(v);
             }
-
-            //Value.AddRange(values.ToList());
 
             return this;
         }
