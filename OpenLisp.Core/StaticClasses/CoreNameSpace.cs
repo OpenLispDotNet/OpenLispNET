@@ -152,9 +152,29 @@ namespace OpenLisp.Core.StaticClasses
                                                         return v;
                                                     })},
                                 {"*",           new OpenLispFunc(x =>
-                                                    (OpenLispInt)x[0] * (OpenLispInt)x[1])},
+                                                    //(OpenLispInt)x[0] * (OpenLispInt)x[1])},
+                                                    {
+                                                        var values = x.Value.ToArray();
+                                                        OpenLispInt v = new OpenLispInt(values[0]); // Subtract from first value...
+                                                        for (int i = 1; i < x.Value.ToArray().Length; i++) // ... starting with the second value.
+                                                        {
+                                                            Debug.WriteLine($"[{DateTime.Now}] x[{i}] = {x[i]}");
+                                                            v *= ((OpenLispInt)x[i]);
+                                                        }
+                                                        return v;
+                                                    })},
                                 {"/",           new OpenLispFunc(x =>
-                                                    (OpenLispInt)x[0] / (OpenLispInt)x[1])},
+                                                    //(OpenLispInt)x[0] / (OpenLispInt)x[1])},
+                                                    {
+                                                        var values = x.Value.ToArray();
+                                                        OpenLispInt v = new OpenLispInt(values[0]); // Subtract from first value...
+                                                        for (int i = 1; i < x.Value.ToArray().Length; i++) // ... starting with the second value.
+                                                        {
+                                                            Debug.WriteLine($"[{DateTime.Now}] x[{i}] = {x[i]}");
+                                                            v /= ((OpenLispInt)x[i]);
+                                                        }
+                                                        return v;
+                                                    })},
 
                                 {"time-ms",     NumberFuncs.TimeMs},
 

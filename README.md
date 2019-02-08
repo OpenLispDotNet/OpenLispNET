@@ -116,7 +116,23 @@ lol> (m/prompt/d)
 "wizard"
 wizard>
 
+wizard> (* 1 2 3)
+6
 
+wizard> (/ 30 2 7)
+2
+
+wizard> (/ 30.0 2.0 7.0)
+Error: unrecognized '30.0'
+   at OpenLisp.Core.Reader.ReadAtom(TokensReader reader) in C:\src\dotnet\OpenLispNET\OpenLisp.Core\Reader.cs:line 119
+   at OpenLisp.Core.Reader.ReadForm(TokensReader reader) in C:\src\dotnet\OpenLispNET\OpenLisp.Core\Reader.cs:line 232
+   at OpenLisp.Core.Reader.ReadList(TokensReader reader, OpenLispList openLispList, Char start, Char end) in C:\src\dotnet\OpenLispNET\OpenLisp.Core\Reader.cs:line 155
+   at OpenLisp.Core.Reader.ReadForm(TokensReader reader) in C:\src\dotnet\OpenLispNET\OpenLisp.Core\Reader.cs:line 226
+   at OpenLisp.Core.Reader.ReadStr(String tokens) in C:\src\dotnet\OpenLispNET\OpenLisp.Core\Reader.cs:line 244
+   at OpenLisp.Core.StaticClasses.Repl.Read(String str) in C:\src\dotnet\OpenLispNET\OpenLisp.Core\StaticClasses\Repl.cs:line 59
+   at OpenLisp.Core.StaticClasses.Repl.<>c__DisplayClass21_0.<ReplMain>b__0(String str) in C:\src\dotnet\OpenLispNET\OpenLisp.Core\StaticClasses\Repl.cs:line 375
+   at OpenLisp.Core.StaticClasses.Repl.ReplMain(String[] arguments) in C:\src\dotnet\OpenLispNET\OpenLisp.Core\StaticClasses\Repl.cs:line 507
+wizard> 
 ```
 
 Why another LISP?
