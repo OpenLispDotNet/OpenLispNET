@@ -2,6 +2,7 @@
 using DeepEqual.Syntax;
 using OpenLisp.Core.AbstractClasses;
 using OpenLisp.Core.DataTypes;
+using System.Collections.Generic;
 
 namespace OpenLisp.Core.StaticClasses
 {
@@ -90,5 +91,15 @@ namespace OpenLisp.Core.StaticClasses
         /// Returns the instance of <see cref="OpenLispConstant"/> representing false.
         /// </summary>
         public static OpenLispConstant False = new OpenLispConstant("false");
+
+        /// <summary>
+        /// Returns a map of only Nil values.
+        /// </summary>
+        //public static OpenLispHashMap NilMap = new OpenLispHashMap(new OpenLispList(new List<OpenLispVal>() {Nil, Nil}));
+
+        /// <summary>
+        /// Returns and empty dictionary of <see cref="Dictionary{TKey, TValue}"/>
+        /// </summary>
+        public static Dictionary<string, OpenLispVal> EmptyDictionary = new Dictionary<string, OpenLispVal>();
     }
 }

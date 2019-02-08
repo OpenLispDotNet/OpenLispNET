@@ -22,6 +22,11 @@ namespace OpenLisp.Core.AbstractClasses
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        public virtual OpenLispVal Value { get; internal set; }
+
+        /// <summary>
         /// Performs a memberwise clone of an <see cref="OpenLispVal"/> instance.
         /// </summary>
         /// <returns></returns>
@@ -89,9 +94,10 @@ namespace OpenLisp.Core.AbstractClasses
         /// String operator
         /// </summary>
         /// <param name="v"></param>
-        public static explicit operator string(OpenLispVal v)
+        public static explicit operator String(OpenLispVal v)
         {
-            return (string)new OpenLispString(v);
+            v.Value = v;
+            return v.ToString();
         }
     }
 }

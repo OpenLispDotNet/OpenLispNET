@@ -75,5 +75,14 @@ namespace OpenLisp.Core.DataTypes
             }
             return Value;
         }
+
+        /// <summary>
+        /// Return a new OpenLispInt from a OpenLispString.
+        /// </summary>
+        /// <param name="v"></param>
+        public static explicit operator OpenLispInt(OpenLispString v)
+        {
+            return new OpenLispInt(long.Parse(v.ToString(false)));
+        }
     }
 }

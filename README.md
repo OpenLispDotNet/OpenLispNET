@@ -133,6 +133,22 @@ Error: unrecognized '30.0'
    at OpenLisp.Core.StaticClasses.Repl.<>c__DisplayClass21_0.<ReplMain>b__0(String str) in C:\src\dotnet\OpenLispNET\OpenLisp.Core\StaticClasses\Repl.cs:line 375
    at OpenLisp.Core.StaticClasses.Repl.ReplMain(String[] arguments) in C:\src\dotnet\OpenLispNET\OpenLisp.Core\StaticClasses\Repl.cs:line 507
 wizard> 
+
+wizard> (hash-map 1 1)
+Error: Unable to cast object of type 'OpenLisp.Core.DataTypes.OpenLispInt' to type 'OpenLisp.Core.DataTypes.OpenLispString'.
+   at OpenLisp.Core.DataTypes.OpenLispHashMap.AssocBang(OpenLispList listValue) in C:\src\dotnet\OpenLispNET\OpenLisp.Core\DataTypes\OpenLispHashMap.cs:line 124
+   at OpenLisp.Core.DataTypes.OpenLispHashMap..ctor(OpenLispList listValue) in C:\src\dotnet\OpenLispNET\OpenLisp.Core\DataTypes\OpenLispHashMap.cs:line 82
+   at OpenLisp.Core.StaticClasses.CoreNameSpace.<>c.<get_Ns>b__9_12(OpenLispList x) in C:\src\dotnet\OpenLispNET\OpenLisp.Core\StaticClasses\CoreNameSpace.cs:line 191
+   at OpenLisp.Core.DataTypes.OpenLispFunc.Apply(OpenLispList args) in C:\src\dotnet\OpenLispNET\OpenLisp.Core\DataTypes\OpenLispFunc.cs:line 135
+   at OpenLisp.Core.StaticClasses.Repl.Eval(OpenLispVal originalAbstractSyntaxTree, Env environment) in C:\src\dotnet\OpenLispNET\OpenLisp.Core\StaticClasses\Repl.cs:line 347
+   at OpenLisp.Core.StaticClasses.Repl.<>c__DisplayClass21_0.<ReplMain>b__0(String str) in C:\src\dotnet\OpenLispNET\OpenLisp.Core\StaticClasses\Repl.cs:line 375
+   at OpenLisp.Core.StaticClasses.Repl.ReplMain(String[] arguments) in C:\src\dotnet\OpenLispNET\OpenLisp.Core\StaticClasses\Repl.cs:line 507
+
+wizard> (skip-list 1 (+ 1 1 1 1 1 1))
+(6 1)
+
+wizard> (skip-list (+ 1 1 1 1 1 1) 1)
+(1 6)
 ```
 
 Why another LISP?
