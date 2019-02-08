@@ -2,10 +2,14 @@ OpenLisp.NET
 v0.0.4-alpha
 The Wizard & The Wyrd, LLC
 
-rev: February 6, 2019
+rev: February 7, 2019
 
 Vision
 ======
+`OpenLisp.NET` is envisioned to be a multi-purpose, high performance Lisp useful for
+high performance scripting in a .NET world.
+
+## OpenLisp Machine
 "Create a modern portable LISP Machine using commodity hardware and OpenList.NET."
 
 The goal of OpenLisp.NET is to form the basis of an OpenLisp.NET EMACS-like environment as the primary shell of an
@@ -98,7 +102,21 @@ user> (docstring skip-list)
 
 user> (docstring (skip-list 1  1 1   1 ))
 ()
-user>
+
+user> (m/type ())
+"OpenLisp.Core.DataTypes.OpenLispList"
+
+wizard> (m/prompt "lol")
+"lol"
+
+lol> (+ 1 1 1 )
+3
+
+lol> (m/prompt/d)
+"wizard"
+wizard>
+
+
 ```
 
 Why another LISP?

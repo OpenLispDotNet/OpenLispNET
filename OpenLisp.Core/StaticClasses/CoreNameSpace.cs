@@ -194,6 +194,8 @@ namespace OpenLisp.Core.StaticClasses
                                 {"meta",        MetadataFuncs.Meta},
                                 {"m/docstring", MetadataFuncs.ReadDocString},
                                 {"m/type",      new OpenLispFunc(x => new OpenLispString(x[0].GetType().ToString()))},
+                                {"m/prompt/d",  new OpenLispFunc(x => (OpenLispVal)(Repl.Prompt = Repl.DefaultPrompt))},
+                                {"m/prompt",    new OpenLispFunc(x => (OpenLispVal)(Repl.Prompt = x[0].ToString(false)))},
 
                                 {"atom",        new OpenLispFunc(x => new OpenLispAtom(x[0]))},
                                 {"atom?",       AtomFuncs.AtomQ},

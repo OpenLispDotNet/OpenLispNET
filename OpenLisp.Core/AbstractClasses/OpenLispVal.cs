@@ -84,5 +84,14 @@ namespace OpenLisp.Core.AbstractClasses
         {
             return new OpenLispInt(v);
         }
+
+        /// <summary>
+        /// String operator
+        /// </summary>
+        /// <param name="v"></param>
+        public static explicit operator string(OpenLispVal v)
+        {
+            return (string)new OpenLispString(v);
+        }
     }
 }

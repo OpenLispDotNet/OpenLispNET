@@ -33,6 +33,15 @@ namespace OpenLisp.Core.DataTypes
         }
 
         /// <summary>
+        /// Constructor accepting a <see cref="OpenLispVal"/>
+        /// </summary>
+        /// <param name="value"></param>
+        public OpenLispString(OpenLispVal value)
+        {
+            Value = value.ToString();
+        }
+
+        /// <summary>
         /// Copy this instance by returning this instance.
         /// </summary>
         /// <returns></returns>
