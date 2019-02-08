@@ -55,7 +55,6 @@
     <Compile Include="DataTypes\Errors\OpenLispError.cs" />
     <Compile Include="DataTypes\Errors\OpenLispThrowable.cs" />
     <Compile Include="DataTypes\Errors\Throwable\OpenLispException.cs" />
-    <Compile Include="DataTypes\ExplicitOperators\String.cs" />
     <Compile Include="DataTypes\Extensions\OpenLispMonadExtensions.cs" />
     <Compile Include="DataTypes\OpenLispAtom.cs" />
     <Compile Include="DataTypes\OpenLispConstant.cs" />

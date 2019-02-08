@@ -99,7 +99,14 @@ namespace OpenLisp.Core.StaticClasses
 
         /// <summary>
         /// Returns and empty dictionary of <see cref="Dictionary{TKey, TValue}"/>
+        /// where TKey is <see cref="String"/> and TValue is <see cref="OpenLispVal"/>.
         /// </summary>
         public static Dictionary<string, OpenLispVal> EmptyDictionary = new Dictionary<string, OpenLispVal>();
+
+        /// <summary>
+        /// Returns an empty secondary dictionary of <see cref="Dictionary{TKey, TValue}"/>
+        /// where TKey is <see cref="OpenLispString"/> and TValue is <see cref="OpenLispVal"/>.
+        /// </summary>
+        public static Dictionary<OpenLispString, OpenLispVal> EmptySecondaryDictionary = new Dictionary<OpenLispString, OpenLispVal>();
     }
 }

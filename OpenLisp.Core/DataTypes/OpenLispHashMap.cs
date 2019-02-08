@@ -19,7 +19,7 @@ namespace OpenLisp.Core.DataTypes
         /// <summary>
         /// Get and Set the Value.
         /// </summary>
-        public Dictionary<String, OpenLispVal> Value
+        new public Dictionary<String, OpenLispVal> Value
         {
             get
             {
@@ -41,7 +41,8 @@ namespace OpenLisp.Core.DataTypes
             {
                 // TODO: should this return STaticOpenLispTypes.Nil if _value == null?
                 if (_secondaryFormValue == null)
-                    throw new OpenLispException("SecondaryValue is null.");
+                    //throw new OpenLispException("SecondaryValue is null.");
+                    _secondaryFormValue = StaticOpenLispTypes.EmptySecondaryDictionary;
                 return _secondaryFormValue;
             }
             private set { _secondaryFormValue = value; }
@@ -97,7 +98,7 @@ namespace OpenLisp.Core.DataTypes
         /// <returns></returns>
         public override string ToString()
         {
-            return "{" + StaticClasses.Printer.Join(Value, "=>", true) + "}";
+            return "{" + StaticClasses.Printer.Join(Value, " ", true) + "}";
         }
 
         /// <summary>
@@ -107,7 +108,7 @@ namespace OpenLisp.Core.DataTypes
         /// <returns></returns>
         public override string ToString(bool printReadably)
         {
-            return "{" + StaticClasses.Printer.Join(Value, "=>", printReadably) + "}";
+            return "{" + StaticClasses.Printer.Join(Value, " ", printReadably) + "}";
         }
 
         /// <summary>

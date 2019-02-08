@@ -2,7 +2,7 @@ OpenLisp.NET
 v0.0.4-alpha
 The Wizard & The Wyrd, LLC
 
-rev: February 7, 2019
+rev: February 8, 2019
 
 Vision
 ======
@@ -10,12 +10,25 @@ Vision
 high performance scripting in a .NET world.
 
 ## OpenLisp Machine
-"Create a modern portable LISP Machine using commodity hardware and OpenList.NET."
+`"Create a modern portable LISP Machine using commodity hardware and OpenList.NET."`
 
 The goal of OpenLisp.NET is to form the basis of an OpenLisp.NET EMACS-like environment as the primary shell of an
 operating system created on CosmosOS (https://github.com/CosmosOS/Cosmos).  The target hardware for this project
 includes, as primary build targets, an NetDuino and RaspberryPI, and other tiny devices.  Amongst these devices,
 we will support virtual machines with the goal of creating a portable OpenLisp.NET operating system.
+
+## Portable Lisp as a Library
+`"Drop in a high performance Lisp as a NuGet Package"`
+
+This is fairly straight forward.  We want Lisp-with-REPL-as-package that is trivial to extend,
+and fun to hack on.  Imagine being able to have homiconic datastructures and abstractions in
+domains where `AI` is starting to come of age:
+  * Game Engines
+  * Web Services
+  * Expert Systems
+  * Machine Learning
+
+All of these domains, and more, benefit from the wild-eyed promises of Lisp for Artificial Intelligence.
 
 Summary
 =======
@@ -149,6 +162,25 @@ wizard> (skip-list 1 (+ 1 1 1 1 1 1))
 
 wizard> (skip-list (+ 1 1 1 1 1 1) 1)
 (1 6)
+
+wizard> (hash-map )
+{}
+
+wizard> (hash-map nil nil)
+Error: Unable to cast object of type 'OpenLisp.Core.DataTypes.OpenLispConstant' to type 'OpenLisp.Core.DataTypes.OpenLispString'.
+   at OpenLisp.Core.DataTypes.OpenLispHashMap.AssocBang(OpenLispList listValue) in C:\src\dotnet\OpenLispNET\OpenLisp.Core\DataTypes\OpenLispHashMap.cs:line 128
+   at OpenLisp.Core.DataTypes.OpenLispHashMap..ctor(OpenLispList listValue) in C:\src\dotnet\OpenLispNET\OpenLisp.Core\DataTypes\OpenLispHashMap.cs:line 83
+   at OpenLisp.Core.StaticClasses.CoreNameSpace.<>c.<get_Ns>b__9_12(OpenLispList x) in C:\src\dotnet\OpenLispNET\OpenLisp.Core\StaticClasses\CoreNameSpace.cs:line 191
+   at OpenLisp.Core.DataTypes.OpenLispFunc.Apply(OpenLispList args) in C:\src\dotnet\OpenLispNET\OpenLisp.Core\DataTypes\OpenLispFunc.cs:line 135
+   at OpenLisp.Core.StaticClasses.Repl.Eval(OpenLispVal originalAbstractSyntaxTree, Env environment) in C:\src\dotnet\OpenLispNET\OpenLisp.Core\StaticClasses\Repl.cs:line 347
+   at OpenLisp.Core.StaticClasses.Repl.<>c__DisplayClass21_0.<ReplMain>b__0(String str) in C:\src\dotnet\OpenLispNET\OpenLisp.Core\StaticClasses\Repl.cs:line 375
+   at OpenLisp.Core.StaticClasses.Repl.ReplMain(String[] arguments) in C:\src\dotnet\OpenLispNET\OpenLisp.Core\StaticClasses\Repl.cs:line 507
+
+wizard> (hash-map "nil" nil)
+{"nil" nil}
+
+wizard> (hash-map "nil" nil "nil" "lol")
+{"nil" "lol"}
 ```
 
 Why another LISP?
