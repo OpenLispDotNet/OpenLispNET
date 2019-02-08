@@ -30,6 +30,12 @@ domains where `AI` is starting to come of age:
 
 All of these domains, and more, benefit from the wild-eyed promises of Lisp for Artificial Intelligence.
 
+## Powerful Native Libraries
+"Portable Lisp as a Library capable of emitting .NET assemblies"
+
+It sure would be nice to finish the AST and assembly emitter.  Take well-known Lisp functions that have 
+become part of your standard library, and emit them as .NET assemblies usable by any .NET language and run-time.
+
 Summary
 =======
 OpenLisp.NET aims to be compatible with the Common Lisp standard library while providing first class for .NET objects.
