@@ -16,5 +16,18 @@ namespace OpenLisp.IDE
         {
             InitializeComponent();
         }
+
+        private void TextBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+            Console.WriteLine(sender.ToString());
+            Console.WriteLine(e.ToString());
+        }
+
+        private void Button1_Click(object sender, EventArgs e)
+        {
+            // TODO: add REPL to background worker
+            // TODO: send TextBox1 text to REPL for eval
+            // TODO: append output from REPL to RichextBox1
+        }
     }
 }
