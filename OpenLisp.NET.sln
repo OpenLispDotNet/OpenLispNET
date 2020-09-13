@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28803.352
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenLisp.Core", "OpenLisp.Core\OpenLisp.Core.csproj", "{296028DC-C3F3-4296-A6DF-2851BC066620}"
 EndProject
@@ -16,6 +16,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenLisp.Terminal", "OpenLisp.Terminal\OpenLisp.Terminal.csproj", "{66E6CA76-71EC-481C-B92E-F56CD284A72D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenLisp.Repl", "OpenLisp.Repl\OpenLisp.Repl.csproj", "{648A6B9E-B246-4E70-93C8-4483D0B91435}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenLisp.IDE", "OpenLisp.IDE\OpenLisp.IDE.csproj", "{91CE4623-3653-428A-A8AF-8004D9EA1901}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -93,8 +95,27 @@ Global
 		{648A6B9E-B246-4E70-93C8-4483D0B91435}.Release|x64.Build.0 = Release|Any CPU
 		{648A6B9E-B246-4E70-93C8-4483D0B91435}.Release|x86.ActiveCfg = Release|Any CPU
 		{648A6B9E-B246-4E70-93C8-4483D0B91435}.Release|x86.Build.0 = Release|Any CPU
+		{91CE4623-3653-428A-A8AF-8004D9EA1901}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91CE4623-3653-428A-A8AF-8004D9EA1901}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91CE4623-3653-428A-A8AF-8004D9EA1901}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{91CE4623-3653-428A-A8AF-8004D9EA1901}.Debug|ARM.Build.0 = Debug|Any CPU
+		{91CE4623-3653-428A-A8AF-8004D9EA1901}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{91CE4623-3653-428A-A8AF-8004D9EA1901}.Debug|x64.Build.0 = Debug|Any CPU
+		{91CE4623-3653-428A-A8AF-8004D9EA1901}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{91CE4623-3653-428A-A8AF-8004D9EA1901}.Debug|x86.Build.0 = Debug|Any CPU
+		{91CE4623-3653-428A-A8AF-8004D9EA1901}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91CE4623-3653-428A-A8AF-8004D9EA1901}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91CE4623-3653-428A-A8AF-8004D9EA1901}.Release|ARM.ActiveCfg = Release|Any CPU
+		{91CE4623-3653-428A-A8AF-8004D9EA1901}.Release|ARM.Build.0 = Release|Any CPU
+		{91CE4623-3653-428A-A8AF-8004D9EA1901}.Release|x64.ActiveCfg = Release|Any CPU
+		{91CE4623-3653-428A-A8AF-8004D9EA1901}.Release|x64.Build.0 = Release|Any CPU
+		{91CE4623-3653-428A-A8AF-8004D9EA1901}.Release|x86.ActiveCfg = Release|Any CPU
+		{91CE4623-3653-428A-A8AF-8004D9EA1901}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9CE79A77-0304-479B-B321-21712B4BA72C}
 	EndGlobalSection
 EndGlobal
