@@ -8,12 +8,12 @@ namespace OpenLisp.Core.StaticClasses.Funcs
     /// <summary>
     /// Funcs used by <see cref="OpenLispList"/>.
     /// </summary>
-    public class ListFuncs
+    public static class ListFuncs
     {
         /// <summary>
         /// Applies a <see cref="List{OpenLispVal}"/> of parameters to an <see cref="OpenLispFunc"/>.
         /// </summary>
-        public static OpenLispFunc Apply = new OpenLispFunc(x =>
+        public static readonly OpenLispFunc Apply = new OpenLispFunc(x =>
         {
             var f = (OpenLispFunc)x[0];
             //var dataList = new List<OpenLispVal>();
@@ -29,7 +29,7 @@ namespace OpenLisp.Core.StaticClasses.Funcs
         /// Maps a source list of <see cref="OpenLispList"/> to a new list of <see cref="OpenLispList"/>
         /// by applying an <see cref="OpenLispFunc"/>.
         /// </summary>
-        public static OpenLispFunc Map = new OpenLispFunc(x =>
+        public static readonly OpenLispFunc Map = new OpenLispFunc(x =>
         {
             OpenLispFunc f = (OpenLispFunc)x[0];
             var sourceList = ((OpenLispList)x[1]).Value;

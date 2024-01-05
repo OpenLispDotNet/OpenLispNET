@@ -13,7 +13,7 @@ namespace OpenLisp.Core.StaticClasses.Funcs
         /// <summary>
         /// Is this sequential?
         /// </summary>
-        public static OpenLispFunc SequentialQ = new OpenLispFunc(x => 
+        public static readonly OpenLispFunc SequentialQ = new OpenLispFunc(x => 
             x[0] is OpenLispList 
                 ? StaticOpenLispTypes.True 
                 : StaticOpenLispTypes.False);
@@ -21,7 +21,7 @@ namespace OpenLisp.Core.StaticClasses.Funcs
         /// <summary>
         /// Perform a cons operation.
         /// </summary>
-        public static OpenLispFunc Cons = new OpenLispFunc(x =>
+        public static readonly OpenLispFunc Cons = new OpenLispFunc(x =>
         {
             var listData = new List<OpenLispVal> {x[0]};
 
@@ -33,7 +33,7 @@ namespace OpenLisp.Core.StaticClasses.Funcs
         /// <summary>
         /// Perform a concat operation.
         /// </summary>
-        public static OpenLispFunc Concat = new OpenLispFunc(x =>
+        public static readonly OpenLispFunc Concat = new OpenLispFunc(x =>
         {
             if (x.Size == 0) return new OpenLispList();
 
@@ -51,7 +51,7 @@ namespace OpenLisp.Core.StaticClasses.Funcs
         /// <summary>
         /// Get the Nth item an <see cref="OpenLispList"/> using an <see cref="OpenLispInt"/> index.
         /// </summary>
-        public static OpenLispFunc Nth = new OpenLispFunc(x =>
+        public static readonly OpenLispFunc Nth = new OpenLispFunc(x =>
         {
             var index = (int)((OpenLispInt)x[1]).Value;
 
@@ -67,18 +67,18 @@ namespace OpenLisp.Core.StaticClasses.Funcs
         /// Get the head of an <see cref="OpenLispList"/> wrapped in 
         /// the context of an <see cref="OpenLispFunc"/>.
         /// </summary>
-        public static OpenLispFunc First = new OpenLispFunc(x => ((OpenLispList)x[0])[0]);
+        public static readonly OpenLispFunc First = new OpenLispFunc(x => ((OpenLispList)x[0])[0]);
 
         /// <summary>
         /// Get the tail of an <see cref="OpenLispList"/> wrapped in
         /// the context of an <see cref="OpenLispFunc"/>.
         /// </summary>
-        public static OpenLispFunc Rest = new OpenLispFunc(x => ((OpenLispList)x[0]).Rest());
+        public static readonly OpenLispFunc Rest = new OpenLispFunc(x => ((OpenLispList)x[0]).Rest());
 
         /// <summary>
         /// Is this <see cref="OpenLispList"/> empty?
         /// </summary>
-        public static OpenLispFunc EmptyQ = new OpenLispFunc(x =>
+        public static readonly OpenLispFunc EmptyQ = new OpenLispFunc(x =>
             ((OpenLispList) x[0]).Size == 0
                 ? StaticOpenLispTypes.True
                 : StaticOpenLispTypes.False);
@@ -87,7 +87,7 @@ namespace OpenLisp.Core.StaticClasses.Funcs
         /// Get the count of an <see cref="OpenLispList"/> as an <see cref="OpenLispInt"/>
         /// wrapped in the context of an <see cref="OpenLispFunc"/>.
         /// </summary>
-        public static OpenLispFunc Count = new OpenLispFunc(x => 
+        public static readonly OpenLispFunc Count = new OpenLispFunc(x => 
             (x[0] == StaticOpenLispTypes.Nil)
                 ? new OpenLispInt(0)
                 : new OpenLispInt(((OpenLispList)x[0]).Size));
@@ -95,7 +95,7 @@ namespace OpenLisp.Core.StaticClasses.Funcs
         /// <summary>
         /// Performs a conj operation.
         /// </summary>
-        public static OpenLispFunc Conj = new OpenLispFunc(x =>
+        public static readonly OpenLispFunc Conj = new OpenLispFunc(x =>
         {
             var sourceList = ((OpenLispList)x[0]).Value;
             var newList = new List<OpenLispVal>();

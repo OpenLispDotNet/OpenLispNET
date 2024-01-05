@@ -66,13 +66,13 @@ namespace OpenLisp.Core.SimpleHelpers
     /// </remarks>
     public class MemoryCache<T> where T : class
     {
-        private static readonly System.Collections.Concurrent.ConcurrentDictionary <string, CachedItem> m_cacheMap = new System.Collections.Concurrent.ConcurrentDictionary<string, CachedItem> (StringComparer.Ordinal);
+        private static readonly System.Collections.Concurrent.ConcurrentDictionary <string, CachedItem> MCacheMap = new System.Collections.Concurrent.ConcurrentDictionary<string, CachedItem> (StringComparer.Ordinal);
 
-        private static TimeSpan m_timeout = TimeSpan.FromMinutes (5);
+        private static TimeSpan _mTimeout = TimeSpan.FromMinutes (5);
         
-        private static TimeSpan m_maintenanceStep = TimeSpan.FromMinutes (5);
+        private static TimeSpan _mMaintenanceStep = TimeSpan.FromMinutes (5);
         
-        private static bool m_ignoreNullValues = true;
+        private static bool _mIgnoreNullValues = true;
 
         /// <summary>
         /// Expiration TimeSpan of stored items.
@@ -80,8 +80,8 @@ namespace OpenLisp.Core.SimpleHelpers
         /// </summary>
         public static TimeSpan Expiration
         {
-            get { return m_timeout; }
-            set { m_timeout = value; }
+            get => _mTimeout;
+            set => _mTimeout = value;
         }
 
         /// <summary>
@@ -90,12 +90,12 @@ namespace OpenLisp.Core.SimpleHelpers
         /// </summary>
         public static TimeSpan MaintenanceStep
         {
-            get { return m_maintenanceStep; }
+            get => _mMaintenanceStep;
             set
             {
-                if (m_maintenanceStep != value)
+                if (_mMaintenanceStep != value)
                 {
-                    m_maintenanceStep = value;
+                    _mMaintenanceStep = value;
                     StopMaintenance ();
                     StartMaintenance ();
                 }
@@ -108,8 +108,8 @@ namespace OpenLisp.Core.SimpleHelpers
         /// </summary>
         public static bool IgnoreNullValues 
         { 
-            get { return m_ignoreNullValues; }            
-            set { m_ignoreNullValues = value; } 
+            get => _mIgnoreNullValues;
+            set => _mIgnoreNullValues = value;
         }
 
         #region *   Events and Event Handlers   *
@@ -138,10 +138,7 @@ namespace OpenLisp.Core.SimpleHelpers
         /// <summary>
         /// Gets the current number of item stored in the cache.
         /// </summary>
-        public static int Count
-        {
-            get { return m_cacheMap.Count; }
-        }
+        public static int Count => MCacheMap.Count;
 
         /// <summary>
         /// Gets the stored value associated with the specified key.
@@ -149,12 +146,11 @@ namespace OpenLisp.Core.SimpleHelpers
         /// </summary>
         /// <param name="key">The key.</param>
         /// <returns>Stored value for the key or default value if not found</returns>
-        public static T Get (string key)
+        protected static T Get (string key)
         {
             if (key != null)
             {
-                CachedItem item;
-                if (m_cacheMap.TryGetValue (key, out item))
+                if (MCacheMap.TryGetValue (key, out var item))
                     return item.Data;
             }
             return null;
@@ -165,13 +161,13 @@ namespace OpenLisp.Core.SimpleHelpers
         /// </summary>
         /// <param name="key">The key.</param>
         /// <param name="data">Stored value.</param>
-        public static void Set (string key, T data)
+        private static void Set (string key, T data)
         {
-            if (String.IsNullOrEmpty (key))
+            if (string.IsNullOrEmpty (key))
             {
-                if (m_ignoreNullValues)
+                if (_mIgnoreNullValues)
                     return;
-                throw new System.ArgumentNullException ("key");
+                throw new System.ArgumentNullException (nameof(key));
             }
             if (data == null)
             {
@@ -181,7 +177,7 @@ namespace OpenLisp.Core.SimpleHelpers
             else
             {
                 // add or update item
-                m_cacheMap[key] = new CachedItem
+                MCacheMap[key] = new CachedItem
                 {
                     Updated = DateTime.UtcNow,
                     Data = data
@@ -197,10 +193,9 @@ namespace OpenLisp.Core.SimpleHelpers
         /// <param name="key">The cached item key.</param>
         public static void Renew (string key)
         {
-            if (String.IsNullOrEmpty (key))
+            if (string.IsNullOrEmpty (key))
                 return;
-            CachedItem item;
-            if (m_cacheMap.TryGetValue (key, out item))
+            if (MCacheMap.TryGetValue (key, out var item))
                 item.Updated = DateTime.UtcNow;
         }
 
@@ -210,12 +205,11 @@ namespace OpenLisp.Core.SimpleHelpers
         /// </summary>
         /// <param name="key">The key.</param>
         /// <returns>Stored value for the key or default value if not found</returns>
-        public static T Remove (string key)
+        protected static T Remove (string key)
         {
-            if (!String.IsNullOrEmpty (key))
+            if (!string.IsNullOrEmpty (key))
             {
-                CachedItem item;
-                if (m_cacheMap.TryRemove (key, out item))                
+                if (MCacheMap.TryRemove (key, out var item))                
                     return item.Data;
             }
             return default (T);
@@ -230,10 +224,9 @@ namespace OpenLisp.Core.SimpleHelpers
         {
             if (prefix == null)
                 return;
-            CachedItem item;
-            foreach (var i in m_cacheMap.Keys)
+            foreach (var i in MCacheMap.Keys)
                 if (i.StartsWith (prefix, comparison))
-                    m_cacheMap.TryRemove (i, out item);
+                    MCacheMap.TryRemove (i, out var item);
         }
 
         /// <summary>
@@ -241,7 +234,7 @@ namespace OpenLisp.Core.SimpleHelpers
         /// </summary>
         public static void Clear ()
         {
-            m_cacheMap.Clear ();
+            MCacheMap.Clear ();
         }
 
         /// <summary>
@@ -253,15 +246,14 @@ namespace OpenLisp.Core.SimpleHelpers
         /// <returns>Stored value for the key or default value if not found</returns>
         public static T GetOrAdd (string key, Func<string, T> valueFactory)
         {
-            if (String.IsNullOrEmpty (key))
+            if (string.IsNullOrEmpty (key))
                 return default (T);
-            CachedItem item;
-            if (!m_cacheMap.TryGetValue (key, out item))
+            if (!MCacheMap.TryGetValue (key, out var item))
             {
                 if (valueFactory == null)
-                    throw new System.ArgumentNullException ("valueFactory");                    
+                    throw new System.ArgumentNullException (nameof(valueFactory));                    
                 // create the new value
-                T data = valueFactory (key);
+                var data = valueFactory (key);
                 // add or update cache
                 Set (key, data);
                 // get again to ensure we have the correct item
@@ -304,8 +296,7 @@ namespace OpenLisp.Core.SimpleHelpers
         {
             if (String.IsNullOrEmpty (key))
                 return default (T);
-            CachedItem item;
-            if (!m_cacheMap.TryGetValue (key, out item))
+            if (!MCacheMap.TryGetValue (key, out var item))
             {
                 // create a lock for this key
                 using (var padlock = new NamedLock (key))
@@ -337,7 +328,7 @@ namespace OpenLisp.Core.SimpleHelpers
                 {
                     if (m_maintenanceTask == null)
                     {
-                        m_maintenanceTask = new System.Threading.Timer (ExecuteMaintenance, null, m_maintenanceStep, m_maintenanceStep);
+                        m_maintenanceTask = new System.Threading.Timer (ExecuteMaintenance, null, _mMaintenanceStep, _mMaintenanceStep);
                     }
                 }
             }
@@ -362,24 +353,24 @@ namespace OpenLisp.Core.SimpleHelpers
             try
             {
                 // stop timed task if queue is empty
-                if (m_cacheMap.Count == 0)
+                if (MCacheMap.Count == 0)
                 {
                     StopMaintenance ();
                     // check again if the queue is empty
-                    if (m_cacheMap.Count != 0)
+                    if (MCacheMap.Count != 0)
                         StartMaintenance ();
                 }
                 else
                 {
                     CachedItem item;
-                    DateTime oldThreshold = DateTime.UtcNow - m_timeout;
+                    DateTime oldThreshold = DateTime.UtcNow - _mTimeout;
                     bool hasEvents = HasEventListeners ();
                     // select elegible records
-                    var expiredItems = m_cacheMap.Where (i => i.Value.Updated < oldThreshold).Select (i => i.Key);
+                    var expiredItems = MCacheMap.Where (i => i.Value.Updated < oldThreshold).Select (i => i.Key);
                     // remove from cache and fire OnExpiration event
                     foreach (var key in expiredItems)
                     {
-                        m_cacheMap.TryRemove (key, out item);
+                        MCacheMap.TryRemove (key, out item);
                         if (hasEvents)
                         {
                             OnExpiration (key, item.Data);

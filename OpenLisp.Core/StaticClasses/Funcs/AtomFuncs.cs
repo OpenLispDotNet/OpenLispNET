@@ -9,12 +9,12 @@ namespace OpenLisp.Core.StaticClasses.Funcs
     /// <summary>
     /// Funcs used by <see cref="OpenLispAtom"/>.
     /// </summary>
-    public class AtomFuncs
+    public static class AtomFuncs
     {
         /// <summary>
         /// Is this an atom?
         /// </summary>
-        public static OpenLispFunc AtomQ = new OpenLispFunc(x => 
+        public static readonly OpenLispFunc AtomQ = new OpenLispFunc(x => 
             x[0] is OpenLispAtom 
                 ? StaticOpenLispTypes.True 
                 : StaticOpenLispTypes.False);
@@ -22,17 +22,17 @@ namespace OpenLisp.Core.StaticClasses.Funcs
         /// <summary>
         /// Dereference an atom.
         /// </summary>
-        public static OpenLispFunc Deref = new OpenLispFunc(x => ((OpenLispAtom)x[0]).Value);
+        public static readonly OpenLispFunc Deref = new OpenLispFunc(x => ((OpenLispAtom)x[0]).Value);
 
         /// <summary>
         /// reset! an atom.
         /// </summary>
-        public static OpenLispFunc ResetBang = new OpenLispFunc(x => ((OpenLispAtom)x[0]).Value = x[1]);
+        public static readonly OpenLispFunc ResetBang = new OpenLispFunc(x => ((OpenLispAtom)x[0]).Value = x[1]);
 
         /// <summary>
         /// swap! an atom.
         /// </summary>
-        public static OpenLispFunc SwapBang = new OpenLispFunc(x =>
+        public static readonly OpenLispFunc SwapBang = new OpenLispFunc(x =>
         {
             OpenLispAtom dataAtom = (OpenLispAtom)x[0];
             OpenLispFunc f = (OpenLispFunc)x[1];

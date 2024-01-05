@@ -10,12 +10,6 @@ namespace OpenLisp.Core.DataTypes
     /// </summary>
     public class OpenLispFunc : OpenLispVal
     {
-        private Func<OpenLispList, OpenLispVal> _lambda = null;
-
-        private OpenLispVal _ast = null;
-
-        private Env _env = null;
-
         private OpenLispList _fparams;
 
         // TODO: prove our macros work =)
@@ -49,38 +43,17 @@ namespace OpenLisp.Core.DataTypes
         /// <summary>
         /// Publicly Get and privately Set the <see cref="Func{T, TResult}"/>
         /// </summary>
-        public Func<OpenLispList, OpenLispVal> Lambda
-        {
-            get
-            {
-                return _lambda;
-            }
-            private set { _lambda = value; }
-        }
+        private Func<OpenLispList, OpenLispVal> Lambda { get; set; } = null;
 
         /// <summary>
         /// Publicly Get and privately Set the <see cref="OpenLispVal"/> representing the AST.
         /// </summary>
-        public OpenLispVal Ast
-        {
-            get
-            {
-                return _ast;
-            }
-            private set { _ast = value; }
-        }
+        public OpenLispVal Ast { get; private set; } = null;
 
         /// <summary>
         /// Publicly Get and privately Set the <see cref="Env"/>.
         /// </summary>
-        public Env Env
-        {
-            get
-            {
-                return _env;
-            }
-            private set { _env = value; }
-        }
+        private Env Env { get; set; } = null;
 
         /// <summary>
         /// Generates a new <see cref="Env"/> from an <see cref="OpenLispList"/> parameter.
@@ -96,13 +69,10 @@ namespace OpenLisp.Core.DataTypes
         /// Publicly Get and privately Set the <see cref="OpenLispList"/> parameters
         /// of an <see cref="OpenLispFunc"/>.
         /// </summary>
-        public OpenLispList FParams
+        private OpenLispList FParams
         {
-            get
-            {
-                return _fparams;
-            }
-            private set { _fparams = value; }
+            get => _fparams;
+            set => _fparams = value;
         }
 
         /// <summary>
@@ -110,9 +80,9 @@ namespace OpenLisp.Core.DataTypes
         /// </summary>
         public bool Macro
         {
-            get { return _macro; }
+            get => _macro;
             //private set { _macro = value; }
-            set { _macro = value; }
+            set => _macro = value;
         }
 
         /// <summary>

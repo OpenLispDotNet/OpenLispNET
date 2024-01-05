@@ -22,13 +22,7 @@ namespace OpenLisp.Core.DataTypes
         /// <summary>
         /// Expose the Maybe singleton as a public field.
         /// </summary>
-        public static OpenLispMonad<OpenLispVal> Maybe
-        {
-            get
-            {
-                return _maybe as OpenLispMonad<OpenLispVal>;
-            }
-        }
+        public static OpenLispMonad<OpenLispVal> Maybe => _maybe as OpenLispMonad<OpenLispVal>;
 
         class MaybeMonad<U> where U : OpenLispVal
         {

@@ -13,14 +13,14 @@ namespace OpenLisp.Core.DataTypes
         /// <summary>
         /// Get or Set the Value of this <see cref="OpenLispConstant"/>.
         /// </summary>
-        new public string Value
+        private new string Value
         {
             get
             {
                 if (string.IsNullOrWhiteSpace(_value)) throw new OpenLispException("Value is null, empty, or white-space.");
                 return _value;
             }
-            private set { _value = value; }
+            set => _value = value;
         }
 
         /// <summary>

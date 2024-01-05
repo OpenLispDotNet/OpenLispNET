@@ -32,22 +32,19 @@ namespace OpenLisp.Core.DataTypes
         /// <summary>
         /// Public default constructor
         /// </summary>
-        public OpenLispMonad() 
+        private OpenLispMonad() 
         {
         }
-
-        private Core.Env _env;
-        private OpenLispVal _instance;
 
         /// <summary>
         /// Get the <see cref="Env"/>
         /// </summary>
-        public  Env Env => _env;
+        public  Env Env { get; }
 
         /// <summary>
         /// Access the instance
         /// </summary>
-        public OpenLispVal Instance => _instance;
+        public OpenLispVal Instance { get; }
 
         /// <summary>
         /// Get a new <see cref="OpenLispMonad{OpenLispVal}"/> instance
@@ -61,8 +58,8 @@ namespace OpenLisp.Core.DataTypes
         /// <param name="env"></param>
         public OpenLispMonad(OpenLispVal instance, Env env)
         {
-            _env = env;
-            _instance = instance;
+            Env = env;
+            Instance = instance;
         }
 
         /// <summary>
@@ -72,7 +69,7 @@ namespace OpenLisp.Core.DataTypes
         /// <param name="instance"></param>
         public OpenLispMonad(OpenLispVal instance)
         {
-            _instance = instance;
+            Instance = instance;
         }
 
         /// <summary>

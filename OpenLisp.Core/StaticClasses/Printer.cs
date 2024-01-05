@@ -22,7 +22,7 @@ namespace OpenLisp.Core.StaticClasses
         /// <returns></returns>
         public static string Join(IList<OpenLispVal> values, string delim, bool printReadably)
         {
-            return String.Join(delim, values.Select(v => v.ToString(printReadably)).ToArray());
+            return string.Join(delim, values.Select(v => v.ToString(printReadably)).ToArray());
         }
 
         /// <summary>

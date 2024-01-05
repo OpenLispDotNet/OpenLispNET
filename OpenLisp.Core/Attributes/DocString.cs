@@ -10,8 +10,6 @@ namespace OpenLisp.Core.Attributes
         AllowMultiple = true)]
     public class DocString : System.Attribute
     {
-        private string text;
-
         /// <summary>
         /// Default constructor.
         /// </summary>
@@ -23,6 +21,6 @@ namespace OpenLisp.Core.Attributes
         /// <summary>
         /// DocString Text
         /// </summary>
-        public string Text { get => text; set => text = value; }
+        public string Text { get; set; }
     }
 }

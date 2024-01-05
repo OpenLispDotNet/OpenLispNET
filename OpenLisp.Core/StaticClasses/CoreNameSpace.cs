@@ -31,7 +31,7 @@ namespace OpenLisp.Core.StaticClasses
         /// <summary>
         /// Static instance of an <see cref="object"/> for double-check locking.
         /// </summary>
-        private static object _syncRoot = new object();
+        private static readonly object SyncRoot = new object();
 
         /// <summary>
         /// Default private constructor.
@@ -52,7 +52,7 @@ namespace OpenLisp.Core.StaticClasses
             {
                 if (_instance == null)
                 {
-                    lock (_syncRoot)
+                    lock (SyncRoot)
                     {
                         if (_instance == null)
                         {
@@ -66,8 +66,8 @@ namespace OpenLisp.Core.StaticClasses
         }
 
         private static volatile IDictionary<string, OpenLispVal> _defaultNameSpaceInstance;
-        private static object _nsGetLock = new object();
-        private static object _nsSetLock = new object();
+        private static readonly object NsGetLock = new object();
+        private static readonly object NsSetLock = new object();
 
         /// <summary>
         /// Contains the singleton of the Ns object.
@@ -83,7 +83,7 @@ namespace OpenLisp.Core.StaticClasses
             {
                 if (_defaultNameSpaceInstance == null)
                 {
-                    lock (_nsGetLock)
+                    lock (NsGetLock)
                     {
                         if (_defaultNameSpaceInstance == null)
                         {
@@ -235,7 +235,7 @@ namespace OpenLisp.Core.StaticClasses
             {
                 if (_defaultNameSpaceInstance != null)
                 {
-                    lock (_nsSetLock)
+                    lock (NsSetLock)
                     {
                         if (_defaultNameSpaceInstance != null)
                         {

@@ -19,7 +19,7 @@ namespace OpenLisp.Core
         /// 
         /// TODO: move to OpenLisp.Core.DataTypes.Errors.Throwable?
         /// </summary>
-        public class ParseError : OpenLispThrowable
+        private class ParseError : OpenLispThrowable
         {
             /// <summary>
             /// ParseError constructor.
@@ -68,7 +68,7 @@ namespace OpenLisp.Core
         /// </summary>
         /// <param name="tokens"></param>
         /// <returns></returns>
-        public static List<string> Tokenize(string tokens)
+        private static List<string> Tokenize(string tokens)
         {
             // WARNING: while a regular expression may not be ideal, Lisp is small enough of a language
             //          where a single small regular expression can match every possible S-Expression
@@ -89,7 +89,7 @@ namespace OpenLisp.Core
         /// </summary>
         /// <param name="reader"></param>
         /// <returns></returns>
-        public static OpenLispVal ReadAtom(TokensReader reader)
+        private static OpenLispVal ReadAtom(TokensReader reader)
         {
             string token = reader.Next();
 

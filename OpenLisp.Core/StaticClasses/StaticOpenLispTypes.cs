@@ -20,8 +20,8 @@ namespace OpenLisp.Core.StaticClasses
         /// <returns></returns>
         public static bool OpenLispEqualB(object a, object b)
         {
-            Type typeA = a.GetType();
-            Type typeB = b.GetType();
+            var typeA = a.GetType();
+            var typeB = b.GetType();
 
             if (!(typeA == typeB) && !(a.IsDeepEqual(b)))
             {
@@ -38,8 +38,8 @@ namespace OpenLisp.Core.StaticClasses
         /// <returns></returns>
         public static bool OpenLispEqualQ(OpenLispVal a, OpenLispVal b)
         {
-            Type typeA = a.GetType();
-            Type typeB = b.GetType();
+            var typeA = a.GetType();
+            var typeB = b.GetType();
 
 
             if ((typeA != typeB) && (!(a is OpenLispList) || !(b is OpenLispList))) return false;
