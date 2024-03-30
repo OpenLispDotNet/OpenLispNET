@@ -385,18 +385,18 @@ namespace OpenLisp.Core.StaticClasses
                         new OpenLispFunc(a => Eval(a[0], replEnvironment)));
 
             int fileIndex = 0;
-            if (arguments.Length > 0 && arguments[0] == "--raw")
-            {
-                ReadLine.Mode = ReadLine.ModeEnum.Raw;
-                fileIndex = 1;
-            }
+            //if (arguments.Length > 0 && arguments[0] == "--raw")
+            //{
+            //    ReadLine.Mode = ReadLine.ModeEnum.Raw;
+            //    fileIndex = 1;
+            //}
 
-            OpenLispList argv = new OpenLispList();
-            for (int i = fileIndex + 1; i < arguments.Length; i++)
-            {
-                argv.Conj(new OpenLispString(arguments[i]));
-            }
-            replEnvironment.Set(new OpenLispSymbol("*ARGV*"), argv);
+            //OpenLispList argv = new OpenLispList();
+            //for (int i = fileIndex + 1; i < arguments.Length; i++)
+            //{
+            //    argv.Conj(new OpenLispString(arguments[i]));
+            //}
+            //replEnvironment.Set(new OpenLispSymbol("*ARGV*"), argv);
 
             #region core.oln
             // BEGIN core.oln: defined using the language itself
@@ -480,7 +480,8 @@ namespace OpenLisp.Core.StaticClasses
                     {
                         // TODO: make user> reflect the current namespace.
                         //line = ReadLine.LineReader("user> ");
-                        line = ReadLine.LineReader(String.Format("{0}> ", Repl.Prompt));
+                        //line = ReadLine.LineReader(String.Format("{0}> ", Repl.Prompt));
+                        line = Console.ReadLine();
                         if (line != null)
                         {
                             if (line == "")
