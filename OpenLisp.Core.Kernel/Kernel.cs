@@ -1,5 +1,12 @@
-﻿using System;
+﻿using OpenLisp.Core.AbstractClasses;
+using OpenLisp.Core.DataTypes.Errors.Throwable;
+using OpenLisp.Core.DataTypes.Errors;
+using OpenLisp.Core.DataTypes;
+using OpenLisp.Core.Events.Args;
+using OpenLisp.Core.StaticClasses;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using Sys = Cosmos.System;
 
@@ -35,10 +42,15 @@ namespace OpenLisp.Core.Kernel
 
         protected override void Run()
         {
-            Console.Write("Input: ");
-            var input = Console.ReadLine();
-            Console.Write("Text typed: ");
-            Console.WriteLine(input);
+            //Console.Write("Input: ");
+            //var input = Console.ReadLine();
+            //Console.Write("Text typed: ");
+            //Console.WriteLine(input);
+
+            //Console.Write("wizard> ");
+            //var input = Console.ReadLine();
+
+            Core.StaticClasses.Repl.ReplMain(new[] { "" });
         }
     }
 }

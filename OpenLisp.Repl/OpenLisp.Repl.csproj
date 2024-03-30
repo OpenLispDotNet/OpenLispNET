@@ -56,10 +56,6 @@
       <Project>{296028dc-c3f3-4296-a6df-2851bc066620}</Project>
       <Name>OpenLisp.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\OpenLisp.Terminal\OpenLisp.Terminal.csproj">
-      <Project>{66e6ca76-71ec-481c-b92e-f56cd284a72d}</Project>
-      <Name>OpenLisp.Terminal</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

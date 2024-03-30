@@ -25,4 +25,8 @@
         <PackageReference Include="Cosmos.System2" Version="0-*" NoWarn="NU1604" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\OpenLisp.Core\OpenLisp.Core.csproj" />
+    </ItemGroup>
+
 </Project>
