@@ -10,12 +10,12 @@ namespace OpenLisp.Core.DataTypes.Errors
         /// <summary>
         /// Default constructor.
         /// </summary>
-        public OpenLispThrowable() : base() { }
+        protected OpenLispThrowable() : base() { }
 
         /// <summary>
         /// Constructor accepting a <see cref="string"/> parameter.
         /// </summary>
         /// <param name="msg"></param>
-        public OpenLispThrowable(string msg) : base(msg) { }
+        protected OpenLispThrowable(string msg) : base(msg) { }
     }
 }

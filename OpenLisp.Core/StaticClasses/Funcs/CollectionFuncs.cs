@@ -6,12 +6,12 @@ namespace OpenLisp.Core.StaticClasses.Funcs
     /// <summary>
     /// Funcs used by classes that derive from <see cref="OpenLispList"/>.
     /// </summary>
-    public class CollectionFuncs
+    public static class CollectionFuncs
     {
         /// <summary>
         /// Is this an intance of an <see cref="OpenLispList"/>?
         /// </summary>
-        public static OpenLispFunc ListQ = new OpenLispFunc(x =>
+        public static readonly OpenLispFunc ListQ = new OpenLispFunc(x =>
             //x[0].GetType() == typeof(OpenLispList)
             //? True
             //: False);
@@ -22,7 +22,7 @@ namespace OpenLisp.Core.StaticClasses.Funcs
         /// <summary>
         /// Is this an instance of <see cref="OpenLispVector"/>?
         /// </summary>
-        public static OpenLispFunc VectorQ = new OpenLispFunc(x =>
+        public static readonly OpenLispFunc VectorQ = new OpenLispFunc(x =>
             //x[0].GetType() == typeof(OpenLispVector)
                 //? True
                 //: False);

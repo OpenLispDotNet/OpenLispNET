@@ -20,7 +20,7 @@ namespace OpenLisp.Core.Attributes
             List<OpenLispVal> docStrings = new List<OpenLispVal>(); 
 
             // Top level
-            foreach (Object attributes in value.GetType().GetCustomAttributes(true))
+            foreach (object attributes in value.GetType().GetCustomAttributes(true))
             {
                 var currentObjectType = typeof(object);
 

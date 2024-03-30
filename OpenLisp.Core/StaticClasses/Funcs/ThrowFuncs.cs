@@ -12,9 +12,6 @@ namespace OpenLisp.Core.StaticClasses.Funcs
         /// <summary>
         /// Throws a new <see cref="OpenLispException"/> that wraps an <see cref="OpenLispVal"/>.
         /// </summary>
-        public static OpenLispFunc OpenLispThrow = new OpenLispFunc(x =>
-        {
-            throw new OpenLispException(x[0]);
-        });
+        public static readonly OpenLispFunc OpenLispThrow = new OpenLispFunc(x => throw new OpenLispException(x[0]));
     }
 }

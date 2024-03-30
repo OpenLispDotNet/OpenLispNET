@@ -11,7 +11,7 @@ namespace OpenLisp.Core.DataTypes.Concurrent
     public class OpenLispPriorityQueue : OpenLispVal
     {
         /// <summary>
-        /// Default contstructor.
+        /// Default constructor.
         /// </summary>
         public OpenLispPriorityQueue()
         {

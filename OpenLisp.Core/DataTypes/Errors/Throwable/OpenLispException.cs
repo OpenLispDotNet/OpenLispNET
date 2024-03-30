@@ -7,9 +7,6 @@ namespace OpenLisp.Core.DataTypes.Errors.Throwable
     /// </summary>
     public class OpenLispException : OpenLispThrowable
     {
-        private DateTime _dateTimeStamp;
-        private object _value;
-
         /// <summary>
         /// Private constructor to initialize the privately
         /// mutable _dateTimeStamp and assign <see cref="DateTime.Now"/>.
@@ -18,7 +15,7 @@ namespace OpenLisp.Core.DataTypes.Errors.Throwable
         /// </summary>
         private OpenLispException()
         {
-            _dateTimeStamp = DateTime.Now;
+            DateTimeStamp = DateTime.Now;
         }
 
         /// <summary>
@@ -28,16 +25,12 @@ namespace OpenLisp.Core.DataTypes.Errors.Throwable
         /// DateTime values are useful for tracing and auditing
         /// execution paths.
         /// </summary>
-        public DateTime DateTimeStamp => _dateTimeStamp;
+        public DateTime DateTimeStamp { get; }
 
         /// <summary>
         /// The value of the <see cref="OpenLispException"/>
         /// </summary>
-        public object Value
-        {
-            get { return _value; }
-            set { _value = value; }
-        }
+        public object Value { get; set; }
 
         /// <summary>
         /// Constructor accepting an <see cref="object"/> parameter.
@@ -45,7 +38,7 @@ namespace OpenLisp.Core.DataTypes.Errors.Throwable
         /// <param name="value"></param>
         public OpenLispException(object value)
         {
-            _value = value;
+            Value = value;
         }
 
         /// <summary>
@@ -54,7 +47,7 @@ namespace OpenLisp.Core.DataTypes.Errors.Throwable
         /// <param name="value"></param>
         public OpenLispException(string value) : base(value)
         {
-            _value = value;
+            Value = value;
         }
     }
 }

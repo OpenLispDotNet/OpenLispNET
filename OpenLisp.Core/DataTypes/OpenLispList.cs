@@ -14,30 +14,24 @@ namespace OpenLisp.Core.DataTypes
         /// <summary>
         /// Opening token of an <see cref="OpenLispList"/>.
         /// </summary>
-        public string Start = "(";
+        protected string Start = "(";
 
         /// <summary>
         /// Ending token of an <see cref="OpenLispList"/>.
         /// </summary>
-        public string End = ")";
+        protected string End = ")";
 
         private List<OpenLispVal> _value;
 
         /// <summary>
         /// Get or Set the value of an <see cref="OpenLispList"/> instance.
         /// </summary>
-        new public List<OpenLispVal> Value
+        public new List<OpenLispVal> Value
         {
-            get
-            {
+            get { return
                 //if (_value == null) throw new OpenLispException("Value is null.");
-                if (_value == null)
-                {
-                    _value = StaticOpenLispTypes.EmpyListOpenLispVal;
-                }
-                return _value;
-            }
-            set { _value = value; }
+                _value ?? (_value = StaticOpenLispTypes.EmpyListOpenLispVal); }
+            private set => _value = value;
         }
 
         /// <summary>

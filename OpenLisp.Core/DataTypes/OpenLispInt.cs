@@ -14,10 +14,10 @@ namespace OpenLisp.Core.DataTypes
         /// <summary>
         /// All <see cref="OpenLispInt"/> Values box <see cref="Int64"/> instances.
         /// </summary>
-        new public Int64 Value
+        public new Int64 Value
         {
-            get { return _value; }
-            private set { _value = value; }
+            get => _value;
+            private set => _value = value;
         }
 
         /// <summary>

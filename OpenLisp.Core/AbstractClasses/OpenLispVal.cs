@@ -17,8 +17,8 @@ namespace OpenLisp.Core.AbstractClasses
         /// </summary>
         public OpenLispVal Meta
         {
-            get { return _meta; }
-            set { _meta = value; }
+            get => _meta;
+            set => _meta = value;
         }
 
         /// <summary>

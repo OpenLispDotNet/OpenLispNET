@@ -13,7 +13,7 @@ namespace OpenLisp.Core.DataTypes
         /// <summary>
         /// Publicly Get or privately Set the non-null, non-empty, non-whitespace string.
         /// </summary>
-        new public string Value
+        public new string Value
         {
             get
             {
@@ -24,7 +24,7 @@ namespace OpenLisp.Core.DataTypes
                 }
                 return _value;
             }
-            private set { _value = value; }
+            private set => _value = value;
         }
 
         /// <summary>

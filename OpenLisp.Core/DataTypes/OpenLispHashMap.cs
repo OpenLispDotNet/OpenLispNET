@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using OpenLisp.Core.AbstractClasses;
-using OpenLisp.Core.DataTypes.Errors.Throwable;
 using OpenLisp.Core.StaticClasses;
 using System;
 
@@ -19,15 +18,10 @@ namespace OpenLisp.Core.DataTypes
         /// <summary>
         /// Get and Set the Value.
         /// </summary>
-        new public Dictionary<String, OpenLispVal> Value
+        public new Dictionary<string, OpenLispVal> Value
         {
-            get
-            {
-                if (_value == null)
-                    _value = StaticOpenLispTypes.EmptyDictionary;
-                return _value;
-            }
-            private set { _value = value; }
+            get { return _value ?? (_value = StaticOpenLispTypes.EmptyDictionary); }
+            private set => _value = value;
         }
 
         /// <summary>
@@ -35,13 +29,8 @@ namespace OpenLisp.Core.DataTypes
         /// </summary>
         public Dictionary<OpenLispString, OpenLispVal> SecondaryValue
         {
-            get
-            {
-                if (_secondaryFormValue == null)
-                    _secondaryFormValue = StaticOpenLispTypes.EmptySecondaryDictionary;
-                return _secondaryFormValue;
-            }
-            private set { _secondaryFormValue = value; }
+            get { return _secondaryFormValue ?? (_secondaryFormValue = StaticOpenLispTypes.EmptySecondaryDictionary); }
+            private set => _secondaryFormValue = value;
         }
 
         /// <summary>
@@ -115,7 +104,7 @@ namespace OpenLisp.Core.DataTypes
         /// <returns></returns>
         public OpenLispHashMap AssocBang(OpenLispList listValue)
         {
-            for (int i = 0; i < listValue.Size; i += 2)
+            for (var i = 0; i < listValue.Size; i += 2)
             {
                 //Value[(String)(listValue[i]).Value] = listValue[i + 1];
 
@@ -134,7 +123,7 @@ namespace OpenLisp.Core.DataTypes
         /// <returns></returns>
         public OpenLispHashMap DissocBang(OpenLispList listValue)
         {
-            for (int i = 0; i > listValue.Size; i++)
+            for (var i = 0; i > listValue.Size; i++)
             {
                 Value.Remove(((OpenLispString) listValue[i]).Value);
             }
