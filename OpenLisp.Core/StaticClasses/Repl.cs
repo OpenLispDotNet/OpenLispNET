@@ -446,7 +446,7 @@ namespace OpenLisp.Core.StaticClasses
             // valid OpenLisp.NET source, and then executes the valid OpenLisp.NET source.
             //
             // (def! load-file (fn* (f) (eval (read-string (str \"(do \" (slurp f) \")\")))))            
-            // Define a symbole named 'load-file' that can be called as a function with the form
+            // Define a symbol named 'load-file' that can be called as a function with the form
             // f(f) that is defined as evaluating the slurped, interpolated, and read strings from
             // a file on disk as valid OpenLisp.NET source code that is directly invoked by the 
             // evaluated 'd' command surrounding the slurped file's contents.
@@ -457,7 +457,7 @@ namespace OpenLisp.Core.StaticClasses
 
             // Macros are meta-programs that write code when called or invoked:
             Re("(defmacro! or (fn* (& xs) (if (empty? xs) nil (if (= 1 (count xs)) (first xs) `(let* (or_FIXME ~(first xs)) (if or_FIXME or_FIXME (or ~@(rest xs))))))))");
-            // OpenLisp.NET, like a lot of Lisp dialects, is implicitly and explicitly homiconic.  This means that,
+            // OpenLisp.NET, like a lot of Lisp dialects, is implicitly and explicitly homoiconic.  This means that,
             // in practice, there is no difference between valid OpenLisp.NET data and valid OpenLisp.NET code.
             // This means we are able to construct new S-Expressions at run-time, and then use eval to interpret our
             // code.  A common technique is to build a string that is a lis of functions and parameters, and then
@@ -481,6 +481,7 @@ namespace OpenLisp.Core.StaticClasses
                         // TODO: make user> reflect the current namespace.
                         //line = ReadLine.LineReader("user> ");
                         //line = ReadLine.LineReader(String.Format("{0}> ", Repl.Prompt));
+                        Console.Write($"{Repl.Prompt}> ");
                         line = Console.ReadLine();
                         if (line != null)
                         {
