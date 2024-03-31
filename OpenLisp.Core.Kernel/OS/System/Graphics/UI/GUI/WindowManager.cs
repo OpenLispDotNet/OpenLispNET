@@ -5,6 +5,9 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OpenLisp.Core.Kernel.OS.System.Processing.Processes;
+using OpenLisp.Core.Kernel.OS.System.Users;
+using OpenLisp.Core.Kernel.OS.System.Utils;
 using Rectangle = OpenLisp.Core.Kernel.OS.System.Graphics.UI.GUI.Rectangle;
 using Component = OpenLisp.Core.Kernel.OS.System.Graphics.UI.GUI.Components.Component;
 

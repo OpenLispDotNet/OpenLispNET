@@ -2,6 +2,7 @@
 using Cosmos.HAL;
 using System.IO;
 using Cosmos.System;
+using OpenLisp.Core.Kernel.OS.System.Utils;
 
 namespace OpenLisp.Core.Kernel.Plugs
 {
@@ -19,7 +20,7 @@ namespace OpenLisp.Core.Kernel.Plugs
             // This is part of the "minimal" boot to allow output.
             Cosmos.System.Global.Console = new Console(textScreen);
 
-            Kernel.TextmodeConsole = new Graphics.UI.CUI.Console(textScreen);
+            Kernel.TextmodeConsole = new OpenLisp.Core.Kernel.OS.System.Graphics.UI.CUI.Console(textScreen);
 
             CustomConsole.WriteLineInfo("Starting the OpenLisp.NET Machine v" + Kernel.Version + "-" + Kernel.Revision);
 
@@ -27,7 +28,7 @@ namespace OpenLisp.Core.Kernel.Plugs
             Cosmos.HAL.Global.Init(textScreen, initScrollWheel, initPS2, initNetwork, ideInit);
 
             CustomConsole.WriteLineInfo("Initializing the network stack...");
-            Cosmos.System.Network.NetworkStack.Initialize();
+            Cosmos.System.Network.NetworkStack.Init();
 
             Cosmos.System.Global.NumLock = false;
             Cosmos.System.Global.CapsLock = false;

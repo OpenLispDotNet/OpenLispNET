@@ -1,8 +1,19 @@
 ﻿using Cosmos.System.Network;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using OpenLisp.Core.Kernel.OS.System.Graphics.UI.GUI;
+using OpenLisp.Core.Kernel.OS.System.Processing.Interpreter.Commands.c_Console;
+using OpenLisp.Core.Kernel.OS.System.Processing.Interpreter.Commands.Compression;
+using OpenLisp.Core.Kernel.OS.System.Processing.Interpreter.Commands.Filesystem;
+using OpenLisp.Core.Kernel.OS.System.Processing.Interpreter.Commands.Graphics;
+using OpenLisp.Core.Kernel.OS.System.Processing.Interpreter.Commands.Information;
+using OpenLisp.Core.Kernel.OS.System.Processing.Interpreter.Commands.Network;
+using OpenLisp.Core.Kernel.OS.System.Processing.Interpreter.Commands.Power;
+using OpenLisp.Core.Kernel.OS.System.Processing.Interpreter.Commands.Processing;
+using OpenLisp.Core.Kernel.OS.System.Processing.Interpreter.Commands.Util;
+using OpenLisp.Core.Kernel.OS.System.Utils;
 
 namespace OpenLisp.Core.Kernel.OS.System.Processing.Interpreter.Commands
 {

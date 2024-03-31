@@ -3,6 +3,7 @@ using OpenLisp.Core.Kernel.OS.System.Graphics.UI.GUI.Components;
 using System;
 using System.Collections.Generic;
 using Cosmos.HAL;
+using OpenLisp.Core.Kernel.OS.System.Processing.Processes;
 
 namespace OpenLisp.Core.Kernel.OS.System.Graphics.UI.GUI
 {
@@ -23,7 +24,7 @@ namespace OpenLisp.Core.Kernel.OS.System.Graphics.UI.GUI
             Shutdown = new Button(Kernel.ResourceManager.GetIcon("24-shutdown.bmp"), "Shut Down.", 3, Height - 35 - 3, Width - 6, 35);
             Shutdown.Click = new Action(() =>
             {
-                Power.Shutdown();
+                Power.ACPIShutdown();
             });
             AddChild(Shutdown);
 
@@ -31,7 +32,7 @@ namespace OpenLisp.Core.Kernel.OS.System.Graphics.UI.GUI
             Reboot = new Button(Kernel.ResourceManager.GetIcon("24-reboot.bmp"), "Reboot.", 3, Height - 70 - 3, Width - 6, 35);
             Reboot.Click = new Action(() =>
             {
-                Power.Reboot();
+                Power.CPUReboot();
             });
             AddChild(Reboot);
 

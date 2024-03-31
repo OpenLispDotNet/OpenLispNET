@@ -1,5 +1,7 @@
-﻿using Cosmos.System.Graphics;
+﻿using System;
+using Cosmos.System.Graphics;
 using System.Collections.Generic;
+using OpenLisp.Core.Kernel.OS.System.Utils;
 
 namespace OpenLisp.Core.Kernel.OS.System.Graphics
 {
@@ -41,7 +43,7 @@ namespace OpenLisp.Core.Kernel.OS.System.Graphics
         /// </summary>
         /// <param name="key">The name of the icon to retrieve.</param>
         /// <returns>The bitmap icon associated with the given name.</returns>
-        /// <exception cref="System.Exception">Thrown when the icon is not found.</exception>
+        /// <exception cref="Exception">Thrown when the icon is not found.</exception>
         public Bitmap GetIcon(string key)
         {
             try

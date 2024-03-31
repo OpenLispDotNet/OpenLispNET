@@ -6,14 +6,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Cosmos.HAL.Drivers.PCI.Video;
+//using Cosmos.HAL.Drivers.PCI.Video;
 
 namespace OpenLisp.Core.Kernel.Plugs
 {
     [Plug(Target = typeof(SVGAIICanvas))]
     internal class SVGAIICanvasImpl
     {
-        public static void DrawImage(SVGAIICanvas aThis, Image image, int x, int y, [FieldAccess(Name = "Cosmos.HAL.Drivers.Video.SVGAII.VMWareSVGAII Cosmos.System.Graphics.SVGAIICanvas.driver")] ref VMWareSVGAII driver)
+        public static void DrawImage(SVGAIICanvas aThis, Image image, int x, int y, [FieldAccess(Name = "Cosmos.HAL.Drivers.Video.SVGAII.VMWareSVGAII Cosmos.System.Graphics.SVGAIICanvas.driver")] ref Cosmos.HAL.Drivers.Video.SVGAII.VMWareSVGAII driver)
         {
             var width = (int)image.Width;
             var height = (int)image.Height;
@@ -25,7 +25,7 @@ namespace OpenLisp.Core.Kernel.Plugs
             }
         }
 
-        public static void Display(SVGAIICanvas aThis, [FieldAccess(Name = "Cosmos.HAL.Drivers.Video.SVGAII.VMWareSVGAII Cosmos.System.Graphics.SVGAIICanvas.driver")] ref VMWareSVGAII driver)
+        public static void Display(SVGAIICanvas aThis, [FieldAccess(Name = "Cosmos.HAL.Drivers.Video.SVGAII.VMWareSVGAII Cosmos.System.Graphics.SVGAIICanvas.driver")] ref Cosmos.HAL.Drivers.Video.SVGAII.VMWareSVGAII driver)
         {
             driver.Update(0, 0, aThis.Mode.Width, aThis.Mode.Height);
         }

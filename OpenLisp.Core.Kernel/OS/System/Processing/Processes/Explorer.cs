@@ -5,6 +5,9 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Cosmos.System;
+using OpenLisp.Core.Kernel.OS.System.Users;
+using OpenLisp.Core.Kernel.OS.System.Utils;
 
 namespace OpenLisp.Core.Kernel.OS.System.Processing.Processes
 {

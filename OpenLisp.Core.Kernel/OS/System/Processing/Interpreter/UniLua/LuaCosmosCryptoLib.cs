@@ -3,6 +3,7 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Text;
+using OpenLisp.Core.Kernel;
 using UniLua;
 
 namespace UniLua
@@ -30,7 +31,7 @@ namespace UniLua
         private static int CRYPTO_md5(ILuaState lua)
         {
             string input = lua.L_CheckString(1);
-            var hashBytes = Aura_OS.System.Security.MD5.hash(input);
+            var hashBytes = OpenLisp.Core.Kernel.OS.System.Security.MD5.hash(input);
             lua.PushString(hashBytes);
             return 1;
         }
@@ -38,7 +39,7 @@ namespace UniLua
         private static int CRYPTO_sha256(ILuaState lua)
         {
             string input = lua.L_CheckString(1);
-            var hashBytes = Aura_OS.System.Security.Sha256.hash(Encoding.UTF8.GetBytes(input));
+            var hashBytes = OpenLisp.Core.Kernel.OS.System.Security.Sha256.hash(Encoding.UTF8.GetBytes(input));
             lua.PushString(hashBytes);
             return 1;
         }
@@ -68,7 +69,7 @@ namespace UniLua
         {
             string filePath = Path.Combine(Kernel.CurrentDirectory, lua.L_CheckString(1));
             byte[] file = File.ReadAllBytes(filePath);
-            var hashBytes = Aura_OS.System.Security.Sha256.hash(file);
+            var hashBytes = OpenLisp.Core.Kernel.OS.System.Security.Sha256.hash(file);
             lua.PushString(hashBytes);
             return 1;
         }
@@ -87,7 +88,7 @@ namespace UniLua
 
         private static string ToHexString(byte[] bytes)
         {
-            return Aura_OS.Utils.Conversion.Hex(bytes);
+            return OpenLisp.Core.Kernel.OS.System.Utils.Conversion.Hex(bytes);
         }
     }
 }
