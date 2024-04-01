@@ -1,4 +1,5 @@
 using System;
+using Codice.Client.GameUI.Explorer;
 using OpenLisp.Core;
 using OpenLisp.Core.AbstractClasses;
 using OpenLisp.Core.DataTypes;
@@ -35,7 +36,21 @@ namespace OpenLisp.Games.Unity
             LispEnv.Set(new OpenLispSymbol("eval"),
                 new OpenLispFunc(a => Repl.Eval(a[0], LispEnv)));
 
-            LispEnv.Set(new OpenLispSymbol("game-object-invoke"), new OpenLispFunc(a => ));
+            LispEnv.Set(new OpenLispSymbol("game-object-invoke"), new OpenLispFunc(a =>
+            {
+                try
+                {
+                    var gameObjectToCall = GameObject.Find(a[0].ToString());
+                    if (gameObjectToCall != null)
+                    {
+                        gameObjectToCall.
+                    }
+                }
+                catch (Exception e)
+                {
+                    return new OpenLispList(new OpenLispString("error"), new OpenLispString(e.Message));
+                }
+            }));
         }
 
         // Update is called once per frame
