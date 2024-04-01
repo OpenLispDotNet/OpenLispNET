@@ -80,7 +80,7 @@ namespace OpenLisp.Core.DataTypes.Concurrent
         }
 
         /// <summary>
-        /// Constsructor accepting a <see cref="OpenLispVal"/> array for params. 
+        /// Constructor accepting a <see cref="OpenLispVal"/> array for params. 
         /// </summary>
         /// <param name="value"></param>
         public OpenLispSkipList(params OpenLispVal[] value)
