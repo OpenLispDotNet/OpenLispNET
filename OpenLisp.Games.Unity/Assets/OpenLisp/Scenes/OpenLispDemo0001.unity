@@ -216,7 +216,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1100288797}
-  - component: {fileID: 1100288796}
   m_Layer: 0
   m_Name: OpenLisp.Games.Unity
   m_TagString: Untagged
@@ -224,18 +223,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1100288796
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1100288795}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21b6079a0d30d7645ac35207c13797b0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1100288797
 Transform:
   m_ObjectHideFlags: 0

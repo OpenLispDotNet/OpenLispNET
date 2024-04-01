@@ -45,19 +45,18 @@
     <Reference Include="UnityEngine">
       <HintPath>..\..\..\..\..\Program Files\Unity\Hub\Editor\2021.3.21f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>..\..\..\..\..\Program Files\Unity\Hub\Editor\2021.3.21f1\Editor\Data\Managed\UnityEngine\UnityEngine.CoreModule.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="LispMachine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\OpenLisp.Core\OpenLisp.Core.csproj">
       <Project>{296028dc-c3f3-4296-a6df-2851bc066620}</Project>
       <Name>OpenLisp.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OpenLisp.Games.Unity\Assembly-CSharp.csproj">
-      <Project>{be1c8ae0-11d7-acc8-999a-b714e688b732}</Project>
-      <Name>Assembly-CSharp</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
