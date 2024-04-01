@@ -40,7 +40,7 @@ namespace OpenLisp.Games.Unity
 
         public void EvaluateInput()
         {
-            if (this.Input == null)
+            if (Input == null || Output == null)
             {
                 Debug.LogError("Input or Output is null - can't read and eval an S-Expression.");
                 return;
@@ -50,7 +50,7 @@ namespace OpenLisp.Games.Unity
             var outputValue = Re(inputExpression, this.env);
             if (outputValue != null)
             {
-                Debug.Log($"S-Expression result: {outputValue}");
+                Debug.Log($"S-Expression result: {outputValue.Value}");
                 Output.text = outputValue.ToString();
             }
         }

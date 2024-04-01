@@ -5,7 +5,7 @@ using OpenLisp.Core.Attributes;
 namespace OpenLisp.Core.AbstractClasses
 {
     /// <summary>
-    /// Base class used inherited by all valid language contructs and primitives in OpenLisp.NET
+    /// Base class used inherited by all valid language constructs and primitives in OpenLisp.NET
     /// </summary>
     [DocString("OpenLispVal is the abstract base type of all OpenLisp values.")]
     public abstract class OpenLispVal : IComparable
@@ -22,7 +22,7 @@ namespace OpenLisp.Core.AbstractClasses
         }
 
         /// <summary>
-        /// 
+        /// Used when calling .ToString() on any OpenLispVal.
         /// </summary>
         public virtual OpenLispVal Value { get; internal set; }
 
