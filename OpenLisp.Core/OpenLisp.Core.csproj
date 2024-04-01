@@ -143,7 +143,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\OpenLisp.Terminal\OpenLisp.Terminal.csproj">
-      <Project>{66e6ca76-71ec-481c-b92e-f56cd284a72d}</Project>
+      <Project>{66E6CA76-71EC-481C-B92E-F56CD284A72D}</Project>
       <Name>OpenLisp.Terminal</Name>
     </ProjectReference>
   </ItemGroup>

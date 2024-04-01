@@ -59,6 +59,12 @@
     <Compile Include="Assets\OpenLisp\Scripts\LispMachine.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\OpenLisp\DLLs\OpenLisp.Games.Unity.SDK.dll" />
+    <None Include="Assets\OpenLisp\DLLs\OpenLisp.Terminal.dll" />
+    <None Include="Assets\OpenLisp\DLLs\OpenLisp.Core.dll" />
+    <None Include="Assets\OpenLisp\DLLs\DataStructures.dll" />
+  </ItemGroup>
+  <ItemGroup>
     <Reference Include="UnityEngine">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2021.3.21f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>
@@ -322,6 +328,18 @@
     </Reference>
     <Reference Include="Unity.VisualScripting.Antlr3.Runtime">
       <HintPath>Library\PackageCache\com.unity.visualscripting@1.8.0\Runtime\VisualScripting.Flow\Dependencies\NCalc\Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenLisp.Games.Unity.SDK">
+      <HintPath>Assets\OpenLisp\DLLs\OpenLisp.Games.Unity.SDK.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenLisp.Terminal">
+      <HintPath>Assets\OpenLisp\DLLs\OpenLisp.Terminal.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenLisp.Core">
+      <HintPath>Assets\OpenLisp\DLLs\OpenLisp.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DataStructures">
+      <HintPath>Assets\OpenLisp\DLLs\DataStructures.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Android.Types">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2021.3.21f1\Editor\Data\PlaybackEngines\AndroidPlayer\Unity.Android.Types.dll</HintPath>
