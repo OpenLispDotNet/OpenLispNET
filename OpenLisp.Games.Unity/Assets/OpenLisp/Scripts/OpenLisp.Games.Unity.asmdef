@@ -1,0 +1,14 @@
+{
+    "name": "OpenLisp.Games.Unity",
+    "rootNamespace": "OpenLisp.Games.Unity",
+    "references": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

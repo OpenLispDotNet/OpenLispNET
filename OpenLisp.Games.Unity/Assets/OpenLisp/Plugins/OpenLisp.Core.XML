@@ -1,0 +1,2339 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>OpenLisp.Core</name>
+    </assembly>
+    <members>
+        <member name="T:OpenLisp.Core.AbstractClasses.OpenLispVal">
+            <summary>
+            Base class used inherited by all valid language contructs and primitives in OpenLisp.NET
+            </summary>
+        </member>
+        <member name="P:OpenLisp.Core.AbstractClasses.OpenLispVal.Meta">
+            <summary>
+            Get and Set the meta <see cref="T:OpenLisp.Core.AbstractClasses.OpenLispVal"/>.
+            </summary>
+        </member>
+        <member name="P:OpenLisp.Core.AbstractClasses.OpenLispVal.Value">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:OpenLisp.Core.AbstractClasses.OpenLispVal.Copy">
+            <summary>
+            Performs a memberwise clone of an <see cref="T:OpenLisp.Core.AbstractClasses.OpenLispVal"/> instance.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:OpenLisp.Core.AbstractClasses.OpenLispVal.ToString(System.Boolean)">
+            <summary>
+            Gets the string representation of an <see cref="T:OpenLisp.Core.AbstractClasses.OpenLispVal"/> instance.
+            </summary>
+            <param name="printReadably"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OpenLisp.Core.AbstractClasses.OpenLispVal.ListQ">
+            <summary>
+            By default, an <see cref="T:OpenLisp.Core.AbstractClasses.OpenLispVal"/> is not a List or collection of any kind.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:OpenLisp.Core.AbstractClasses.OpenLispVal.CompareTo(System.Object)">
+            <summary>
+            Primitive implementation of ComparesTo.
+            </summary>
+            <returns>The to.</returns>
+            <param name="obj">Object.</param>
+        </member>
+        <member name="M:OpenLisp.Core.AbstractClasses.OpenLispVal.op_Explicit(System.String)~OpenLisp.Core.AbstractClasses.OpenLispVal">
+            <summary>
+            An explicit conversion from OpenLispVal to an OpenLispString.
+            </summary>
+            <param name="v"></param>
+        </member>
+        <member name="M:OpenLisp.Core.AbstractClasses.OpenLispVal.op_Explicit(System.Int32)~OpenLisp.Core.AbstractClasses.OpenLispVal">
+            <summary>
+            Returns a new <see cref="T:OpenLisp.Core.DataTypes.OpenLispInt"/>.
+            </summary>
+            <param name="v"></param>
+        </member>
+        <member name="M:OpenLisp.Core.AbstractClasses.OpenLispVal.op_Explicit(OpenLisp.Core.AbstractClasses.OpenLispVal)~System.String">
+            <summary>
+            String operator
+            </summary>
+            <param name="v"></param>
+        </member>
+        <member name="T:OpenLisp.Core.Attributes.DocString">
+            <summary>
+            Provide doc strings to any Class.
+            </summary>
+        </member>
+        <member name="M:OpenLisp.Core.Attributes.DocString.#ctor(System.String)">
+            <summary>
+            Default constructor.
+            </summary>
+        </member>
+        <member name="P:OpenLisp.Core.Attributes.DocString.Text">
+            <summary>
+            DocString Text
+            </summary>
+        </member>
+        <member name="T:OpenLisp.Core.Attributes.RuntimeAttributeReader">
+            <summary>
+            Utility class to read attributes at runtime.
+            </summary>
+        </member>
+        <member name="M:OpenLisp.Core.Attributes.RuntimeAttributeReader.GetDocStrings(System.Object)">
+            <summary>
+            Get the DocStrings as an OpenLispList.
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="T:OpenLisp.Core.DataTypes.Errors.OpenLispContinue">
+            <summary>
+            Thrown when OpenLisp.NET experiences a continuable error.
+            </summary>
+        </member>
+        <member name="T:OpenLisp.Core.DataTypes.Errors.OpenLispError">
+            <summary>
+            Exception when OpenLisp.NET has an error.
+            </summary>
+        </member>
+        <member name="M:OpenLisp.Core.DataTypes.Errors.OpenLispError.#ctor(System.String)">
+            <summary>
+            Constructor accepting a <see cref="T:System.String"/> parameter passed to the base constructor.
+            </summary>
+            <param name="msg"></param>
+        </member>
+        <member name="T:OpenLisp.Core.DataTypes.Errors.OpenLispThrowable">
+            <summary>
+            Basic OpenLisp.NET excpetion type that other exceptions MUST inherit from.
+            </summary>
+        </member>
+        <member name="M:OpenLisp.Core.DataTypes.Errors.OpenLispThrowable.#ctor">
+            <summary>
+            Default constructor.
+            </summary>
+        </member>
+        <member name="M:OpenLisp.Core.DataTypes.Errors.OpenLispThrowable.#ctor(System.String)">
+            <summary>
+            Constructor accepting a <see cref="T:System.String"/> parameter.
+            </summary>
+            <param name="msg"></param>
+        </member>
+        <member name="T:OpenLisp.Core.DataTypes.Errors.Throwable.OpenLispException">
+            <summary>
+            An exception that can be thrown by OpenLisp.NET
+            </summary>
+        </member>
+        <member name="M:OpenLisp.Core.DataTypes.Errors.Throwable.OpenLispException.#ctor">
+            <summary>
+            Private constructor to initialize the privately
+            mutable _dateTimeStamp and assign <see cref="P:System.DateTime.Now"/>.
+            
+            <seealso cref="P:OpenLisp.Core.DataTypes.Errors.Throwable.OpenLispException.DateTimeStamp"/>
+            </summary>
+        </member>
+        <member name="P:OpenLisp.Core.DataTypes.Errors.Throwable.OpenLispException.DateTimeStamp">
+            <summary>
+            Get the <see cref="T:System.DateTime"/> Stamp at
+            the time of Exception.  This field should never
+            be mutable by an external client.  Precise
+            DateTime values are useful for tracing and auditing
+            execution paths.
+            </summary>
+        </member>
+        <member name="P:OpenLisp.Core.DataTypes.Errors.Throwable.OpenLispException.Value">
+            <summary>
+            The value of the <see cref="T:OpenLisp.Core.DataTypes.Errors.Throwable.OpenLispException"/>
+            </summary>
+        </member>
+        <member name="M:OpenLisp.Core.DataTypes.Errors.Throwable.OpenLispException.#ctor(System.Object)">
+            <summary>
+            Constructor accepting an <see cref="T:System.Object"/> parameter.
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:OpenLisp.Core.DataTypes.Errors.Throwable.OpenLispException.#ctor(System.String)">
+            <summary>
+            Constructor accepting a <see cref="T:System.String"/> parameter which is passed to :base(value).
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="T:OpenLisp.Core.DataTypes.Extensions.OpenLispMonadExtensions">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:OpenLisp.Core.DataTypes.Extensions.OpenLispMonadExtensions.NullToMonad``1(``0)">
+            <summary>
+            Encapsulate a null value into the OpenLispMonad.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OpenLisp.Core.DataTypes.Extensions.OpenLispMonadExtensions.NullToMaybe``1(``0)">
+            <summary>
+            Lift a null value into the Maybe monad.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="T:OpenLisp.Core.DataTypes.OpenLispAtom">
+            <summary>
+            Implementation of an atom in OpenLisp.NET
+            </summary>
+        </member>
+        <member name="P:OpenLisp.Core.DataTypes.OpenLispAtom.Value">
+            <summary>
+            Get or Set the Value of this <see cref="T:OpenLisp.Core.DataTypes.OpenLispAtom"/>.
+            </summary>
+        </member>
+        <member name="M:OpenLisp.Core.DataTypes.OpenLispAtom.#ctor(OpenLisp.Core.AbstractClasses.OpenLispVal)">
+            <summary>
+            Constructor accepting a <see cref="T:OpenLisp.Core.AbstractClasses.OpenLispVal"/>.
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:OpenLisp.Core.DataTypes.OpenLispAtom.ToString">
+            <summary>
+            Print a string representation of this <see cref="T:OpenLisp.Core.DataTypes.OpenLispAtom"/> in a printer friendly form.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:OpenLisp.Core.DataTypes.OpenLispAtom.ToString(System.Boolean)">
+            <summary>
+            Print a representation of this <see cref="T:OpenLisp.Core.DataTypes.OpenLispAtom"/>.
+            </summary>
+            <param name="printReadably"></param>
+            <returns></returns>
+        </member>
+        <member name="T:OpenLisp.Core.DataTypes.OpenLispConstant">
+            <summary>
+            Implementation of constants in OpenLisp.NET
+            </summary>
+        </member>
+        <member name="P:OpenLisp.Core.DataTypes.OpenLispConstant.Value">
+            <summary>
+            Get or Set the Value of this <see cref="T:OpenLisp.Core.DataTypes.OpenLispConstant"/>.
+            </summary>
+        </member>
+        <member name="M:OpenLisp.Core.DataTypes.OpenLispConstant.#ctor(System.String)">
+            <summary>
+            Constructor accepting a <see cref="T:System.String"/>.
+            </summary>
+            <param name="name"></param>
+        </member>
+        <member name="M:OpenLisp.Core.DataTypes.OpenLispConstant.Copy">
+            <summary>
+            Returns a "copy" of this constant.  Since it is a constant, just return this instance.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:OpenLisp.Core.DataTypes.OpenLispConstant.ToString">
+            <summary>
+            Represent a <see cref="T:OpenLisp.Core.DataTypes.OpenLispConstant"/> as a string.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:OpenLisp.Core.DataTypes.OpenLispConstant.ToString(System.Boolean)">
+            <summary>
+            Represent a <see cref="T:OpenLisp.Core.DataTypes.OpenLispConstant"/> as a string.
+            Here for completeness.
+            </summary>
+            <param name="printReadably"></param>
+            <returns></returns>
+        </member>
+        <member name="T:OpenLisp.Core.DataTypes.OpenLispFunc">
+            <summary>
+            Implementation of a func in OpenLisp.NET
+            </summary>
+        </member>
+        <member name="M:OpenLisp.Core.DataTypes.OpenLispFunc.#ctor(System.Func{OpenLisp.Core.DataTypes.OpenLispList,OpenLisp.Core.AbstractClasses.OpenLispVal})">
+            <summary>
+            Constructor accepting a <see cref="T:System.Func`2"/>.
+            </summary>
+            <param name="lambda"></param>
+        </member>
+        <member name="M:OpenLisp.Core.DataTypes.OpenLispFunc.#ctor(OpenLisp.Core.AbstractClasses.OpenLispVal,OpenLisp.Core.Env,OpenLisp.Core.DataTypes.OpenLispList,System.Func{OpenLisp.Core.DataTypes.OpenLispList,OpenLisp.Core.AbstractClasses.OpenLispVal})">
+            <summary>
+            Constructor accepting an <see cref="T:OpenLisp.Core.AbstractClasses.OpenLispVal"/>, an <see cref="P:OpenLisp.Core.DataTypes.OpenLispFunc.Env"/>, an <see cref="T:OpenLisp.Core.DataTypes.OpenLispList"/>,
+            and a <see cref="T:System.Func`2"/>.
+            </summary>
+            <param name="ast"></param>
+            <param name="env"></param>
+            <param name="fparams"></param>
+            <param name="lambda"></param>
+        </member>
+        <member name="P:OpenLisp.Core.DataTypes.OpenLispFunc.Lambda">
+            <summary>
+            Publicly Get and privately Set the <see cref="T:System.Func`2"/>
+            </summary>
+        </member>
+        <member name="P:OpenLisp.Core.DataTypes.OpenLispFunc.Ast">
+            <summary>
+            Publicly Get and privately Set the <see cref="T:OpenLisp.Core.AbstractClasses.OpenLispVal"/> representing the AST.
+            </summary>
+        </member>
+        <member name="P:OpenLisp.Core.DataTypes.OpenLispFunc.Env">
+            <summary>
+            Publicly Get and privately Set the <see cref="P:OpenLisp.Core.DataTypes.OpenLispFunc.Env"/>.
+            </summary>
+        </member>
+        <member name="M:OpenLisp.Core.DataTypes.OpenLispFunc.GenEnv(OpenLisp.Core.DataTypes.OpenLispList)">
+            <summary>
+            Generates a new <see cref="P:OpenLisp.Core.DataTypes.OpenLispFunc.Env"/> from an <see cref="T:OpenLisp.Core.DataTypes.OpenLispList"/> parameter.
+            </summary>
+            <param name="args"></param>
+            <returns></returns>
+        </member>
+        <member name="P:OpenLisp.Core.DataTypes.OpenLispFunc.FParams">
+            <summary>
+            Publicly Get and privately Set the <see cref="T:OpenLisp.Core.DataTypes.OpenLispList"/> parameters
+            of an <see cref="T:OpenLisp.Core.DataTypes.OpenLispFunc"/>.
+            </summary>
+        </member>
+        <member name="P:OpenLisp.Core.DataTypes.OpenLispFunc.Macro">
+            <summary>
+            Get or Set whether this <see cref="T:OpenLisp.Core.DataTypes.OpenLispList"/> is a macro.
+            </summary>
+        </member>
+        <member name="M:OpenLisp.Core.DataTypes.OpenLispFunc.ToString">
+            <summary>
+            Returns a string representation of an OpenLispFunc.
+            
+            TODO: create a parameterized version that can override "builtin_function" per package.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:OpenLisp.Core.DataTypes.OpenLispFunc.Apply(OpenLisp.Core.DataTypes.OpenLispList)">
+            <summary>
+            Apply the <see cref="T:OpenLisp.Core.DataTypes.OpenLispFunc"/> with an <see cref="T:OpenLisp.Core.DataTypes.OpenLispList"/> of parameters.
+            </summary>
+            <param name="args"></param>
+            <returns></returns>
+        </member>
+        <member name="T:OpenLisp.Core.DataTypes.OpenLispHashMap">
+            <summary>
+            Implementation of the core hash map data type.
+            </summary>
+        </member>
+        <member name="P:OpenLisp.Core.DataTypes.OpenLispHashMap.Value">
+            <summary>
+            Get and Set the Value.
+            </summary>
+        </member>
+        <member name="P:OpenLisp.Core.DataTypes.OpenLispHashMap.SecondaryValue">
+            <summary>
+            Get and Set the Secondary Value.
+            </summary>
+        </member>
+        <member name="P:OpenLisp.Core.DataTypes.OpenLispHashMap.Keys">
+            <summary>
+            Get the keys of the <see cref="T:OpenLisp.Core.DataTypes.OpenLispHashMap"/>.
+            </summary>
+        </member>
+        <member name="M:OpenLisp.Core.DataTypes.OpenLispHashMap.Copy">
+            <summary>
+            Clone this <see cref="T:OpenLisp.Core.DataTypes.OpenLispHashMap"/> and return the clone.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:OpenLisp.Core.DataTypes.OpenLispHashMap.#ctor(OpenLisp.Core.DataTypes.OpenLispList)">
+            <summary>
+            Constructor accepting a <see cref="T:OpenLisp.Core.DataTypes.OpenLispList"/> of values to <seealso cref="M:OpenLisp.Core.DataTypes.OpenLispHashMap.AssocBang(OpenLisp.Core.DataTypes.OpenLispList)"/>.
+            </summary>
+            <param name="listValue"></param>
+        </member>
+        <member name="M:OpenLisp.Core.DataTypes.OpenLispHashMap.#ctor(System.Collections.Generic.Dictionary{System.String,OpenLisp.Core.AbstractClasses.OpenLispVal})">
+            <summary>
+            Constructor accepting a <see cref="T:Dictionary{string, OpenLispVal}"/>.
+            </summary>
+            <param name="val"></param>
+        </member>
+        <member name="M:OpenLisp.Core.DataTypes.OpenLispHashMap.ToString">
+            <summary>
+            Represent this <see cref="T:OpenLisp.Core.DataTypes.OpenLispHashMap"/> as a string in printer friendly form.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:OpenLisp.Core.DataTypes.OpenLispHashMap.ToString(System.Boolean)">
+            <summary>
+            Represent this <see cref="T:OpenLisp.Core.DataTypes.OpenLispHashMap"/> as a string.
+            </summary>
+            <param name="printReadably"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OpenLisp.Core.DataTypes.OpenLispHashMap.AssocBang(OpenLisp.Core.DataTypes.OpenLispList)">
+            <summary>
+            Take pairs of values, in sequence, from a <see cref="T:OpenLisp.Core.DataTypes.OpenLispList"/> and use
+            each pair to create an entry in the value of our <see cref="T:OpenLisp.Core.DataTypes.OpenLispHashMap"/> instance.
+            </summary>
+            <param name="listValue"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OpenLisp.Core.DataTypes.OpenLispHashMap.DissocBang(OpenLisp.Core.DataTypes.OpenLispList)">
+            <summary>
+            Remove a <see cref="T:OpenLisp.Core.DataTypes.OpenLispList"/> of values from a <see cref="T:OpenLisp.Core.DataTypes.OpenLispHashMap"/>.
+            </summary>
+            <param name="listValue"></param>
+            <returns></returns>
+        </member>
+        <member name="T:OpenLisp.Core.DataTypes.OpenLispInt">
+            <summary>
+            Default int implementation of OpenLisp.NET
+            </summary>
+        </member>
+        <member name="P:OpenLisp.Core.DataTypes.OpenLispInt.Value">
+            <summary>
+            All <see cref="T:OpenLisp.Core.DataTypes.OpenLispInt"/> Values box <see cref="T:System.Int64"/> instances.
+            </summary>
+        </member>
+        <member name="M:OpenLisp.Core.DataTypes.OpenLispInt.#ctor(System.Int64)">
+            <summary>
+            Constructor accepting an <see cref="T:System.Int64"/> parameter.
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:OpenLisp.Core.DataTypes.OpenLispInt.#ctor(OpenLisp.Core.AbstractClasses.OpenLispVal)">
+            <summary>
+            Initializes a new instance of the <see cref="T:OpenLisp.Core.DataTypes.OpenLispInt"/> class.
+            </summary>
+            <param name="value">Value.</param>
+        </member>
+        <member name="M:OpenLisp.Core.DataTypes.OpenLispInt.Copy">
+            <summary>
+            Returns a "copy" of an <see cref="T:OpenLisp.Core.DataTypes.OpenLispInt"/>.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:OpenLisp.Core.DataTypes.OpenLispInt.ToString">
+            <summary>
+            Pretty-print an <see cref="T:OpenLisp.Core.DataTypes.OpenLispInt"/> as a string.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:OpenLisp.Core.DataTypes.OpenLispInt.ToString(System.Boolean)">
+            <summary>
+            Prints an <see cref="T:OpenLisp.Core.DataTypes.OpenLispInt"/> as a string with optional pretty-printing.
+            </summary>
+            <param name="printReadably"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OpenLisp.Core.DataTypes.OpenLispInt.op_LessThan(OpenLisp.Core.DataTypes.OpenLispInt,OpenLisp.Core.DataTypes.OpenLispInt)">
+            <summary>
+            Override the less than operator for <see cref="T:OpenLisp.Core.DataTypes.OpenLispInt"/>.
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OpenLisp.Core.DataTypes.OpenLispInt.op_LessThanOrEqual(OpenLisp.Core.DataTypes.OpenLispInt,OpenLisp.Core.DataTypes.OpenLispInt)">
+            <summary>
+            Override the less than or equal to operator for <see cref="T:OpenLisp.Core.DataTypes.OpenLispInt"/>.
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OpenLisp.Core.DataTypes.OpenLispInt.op_GreaterThan(OpenLisp.Core.DataTypes.OpenLispInt,OpenLisp.Core.DataTypes.OpenLispInt)">
+            <summary>
+            Override the greater than operator for <see cref="T:OpenLisp.Core.DataTypes.OpenLispInt"/>.
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OpenLisp.Core.DataTypes.OpenLispInt.op_GreaterThanOrEqual(OpenLisp.Core.DataTypes.OpenLispInt,OpenLisp.Core.DataTypes.OpenLispInt)">
+            <summary>
+            Override the greater than or equal to operator for <see cref="T:OpenLisp.Core.DataTypes.OpenLispInt"/>.
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OpenLisp.Core.DataTypes.OpenLispInt.op_Addition(OpenLisp.Core.DataTypes.OpenLispInt,OpenLisp.Core.DataTypes.OpenLispInt)">
+            <summary>
+            Override the addition operator for <see cref="T:OpenLisp.Core.DataTypes.OpenLispInt"/>
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OpenLisp.Core.DataTypes.OpenLispInt.op_Subtraction(OpenLisp.Core.DataTypes.OpenLispInt,OpenLisp.Core.DataTypes.OpenLispInt)">
+            <summary>
+            Override the substraction operator for <see cref="T:OpenLisp.Core.DataTypes.OpenLispInt"/>.
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OpenLisp.Core.DataTypes.OpenLispInt.op_Multiply(OpenLisp.Core.DataTypes.OpenLispInt,OpenLisp.Core.DataTypes.OpenLispInt)">
+            <summary>
+            Override the mutiplication operator for <see cref="T:OpenLisp.Core.DataTypes.OpenLispInt"/>.
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OpenLisp.Core.DataTypes.OpenLispInt.op_Division(OpenLisp.Core.DataTypes.OpenLispInt,OpenLisp.Core.DataTypes.OpenLispInt)">
+            <summary>
+            Override the division operator for <see cref="T:OpenLisp.Core.DataTypes.OpenLispInt"/>.
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OpenLisp.Core.DataTypes.OpenLispInt.op_Explicit(OpenLisp.Core.DataTypes.OpenLispInt)~OpenLisp.Core.DataTypes.OpenLispString">
+            <summary>
+            Returns a new <see cref="T:OpenLisp.Core.DataTypes.OpenLispString"/>.
+            </summary>
+            <param name="v"></param>
+        </member>
+        <member name="M:OpenLisp.Core.DataTypes.OpenLispInt.op_Explicit(OpenLisp.Core.DataTypes.OpenLispString)~OpenLisp.Core.DataTypes.OpenLispInt">
+            <summary>
+            Return a new OpenLispInt.
+            </summary>
+            <param name="v"></param>
+        </member>
+        <member name="M:OpenLisp.Core.DataTypes.OpenLispInt.op_Explicit(OpenLisp.Core.DataTypes.OpenLispInt)~System.String">
+            <summary>
+            Returns a new string without pretty printing.
+            </summary>
+            <param name="v"></param>
+        </member>
+        <member name="T:OpenLisp.Core.DataTypes.OpenLispList">
+            <summary>
+            Default List implementation for OpenLisp.NET
+            </summary>
+        </member>
+        <member name="F:OpenLisp.Core.DataTypes.OpenLispList.Start">
+            <summary>
+            Opening token of an <see cref="T:OpenLisp.Core.DataTypes.OpenLispList"/>.
+            </summary>
+        </member>
+        <member name="F:OpenLisp.Core.DataTypes.OpenLispList.End">
+            <summary>
+            Ending token of an <see cref="T:OpenLisp.Core.DataTypes.OpenLispList"/>.
+            </summary>
+        </member>
+        <member name="P:OpenLisp.Core.DataTypes.OpenLispList.Value">
+            <summary>
+            Get or Set the value of an <see cref="T:OpenLisp.Core.DataTypes.OpenLispList"/> instance.
+            </summary>
+        </member>
+        <member name="P:OpenLisp.Core.DataTypes.OpenLispList.Size">
+            <summary>
+            Get the size of an <see cref="T:OpenLisp.Core.DataTypes.OpenLispList"/> collection.
+            </summary>
+        </member>
+        <member name="M:OpenLisp.Core.DataTypes.OpenLispList.ListQ">
+            <summary>
+            Always return true when determining if this a list.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:OpenLisp.Core.DataTypes.OpenLispList.#ctor">
+            <summary>
+            Default constructor.
+            </summary>
+        </member>
+        <member name="M:OpenLisp.Core.DataTypes.OpenLispList.#ctor(System.Collections.Generic.List{OpenLisp.Core.AbstractClasses.OpenLispVal})">
+            <summary>
+            Constructor accepting a <see cref="T:System.Collections.Generic.List`1"/> as a parameter.
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:OpenLisp.Core.DataTypes.OpenLispList.#ctor(OpenLisp.Core.AbstractClasses.OpenLispVal[])">
+            <summary>
+            Constsructor accepting a <see cref="T:OpenLisp.Core.AbstractClasses.OpenLispVal"/> array for params. 
+            </summary>
+            <param name="values"></param>
+        </member>
+        <member name="M:OpenLisp.Core.DataTypes.OpenLispList.Conj(OpenLisp.Core.AbstractClasses.OpenLispVal[])">
+            <summary>
+            Conj operation accepting a <see cref="T:OpenLisp.Core.AbstractClasses.OpenLispVal"/> array for params.
+            </summary>
+            <param name="values"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OpenLisp.Core.DataTypes.OpenLispList.ToString">
+            <summary>
+            Pretty-prints an <see cref="T:OpenLisp.Core.DataTypes.OpenLispList"/> instance.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:OpenLisp.Core.DataTypes.OpenLispList.ToString(System.Boolean)">
+            <summary>
+            Prints a string representation of an <see cref="T:OpenLisp.Core.DataTypes.OpenLispList"/> with optional pretty-print.
+            </summary>
+            <param name="printReadably"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OpenLisp.Core.DataTypes.OpenLispList.Nth(System.Int32)">
+            <summary>
+            Retrieves the Nth member of an <see cref="T:OpenLisp.Core.DataTypes.OpenLispList"/> by index.
+            </summary>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="P:OpenLisp.Core.DataTypes.OpenLispList.Item(System.Int32)">
+            <summary>
+            Retrieves an indexed value from an <see cref="T:OpenLisp.Core.DataTypes.OpenLispList"/> or returns
+            <see cref="F:OpenLisp.Core.StaticClasses.StaticOpenLispTypes.Nil"/> if the index exceeds the size of the collection.
+            </summary>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OpenLisp.Core.DataTypes.OpenLispList.Rest">
+            <summary>
+            Returns either the rest of an <see cref="T:OpenLisp.Core.DataTypes.OpenLispList"/> or a new, empty instance.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:OpenLisp.Core.DataTypes.OpenLispList.Slice(System.Int32)">
+            <summary>
+            Retrieves a slice from the underlying array.
+            </summary>
+            <param name="start">The starting index.</param>
+            <returns></returns>
+        </member>
+        <member name="M:OpenLisp.Core.DataTypes.OpenLispList.Slice(System.Int32,System.Int32)">
+            <summary>
+            Retrieves a slice from the underlying array.
+            </summary>
+            <param name="start">The starting index.</param>
+            <param name="end">The ending index.</param>
+            <returns></returns>
+        </member>
+        <member name="T:OpenLisp.Core.DataTypes.OpenLispMonad`1">
+            <summary>
+            Currently, we can wrap a <see cref="T:OpenLisp.Core.DataTypes.OpenLispMonad`1"/> 
+            inside the OpenLisp.Net runtime <see cref="P:OpenLisp.Core.DataTypes.OpenLispMonad`1.Env"/>
+            
+            Changes to an instance of <seealso cref="T:OpenLisp.Core.Env"/> should actually
+            be thread safe and should be transactional.  Instead of modifying the
+            Env instance, instantiate a new instance and clone from the input.
+            Previous instances of Env should be stored on a stack and popped off
+            if an exception is caught so that we return the unmodified environment
+            just as we received it.
+            
+            TODO: consider creating an Env state diff utility that actually performs 
+            a diff on two JSON payloads.
+            
+            TODO: introduce memoization so that we can lazily evaluate Monadic 
+            functions while avoiding premature performance optimizations outside the
+            scope of Monadic function memoization.
+            </summary>
+        </member>
+        <member name="P:OpenLisp.Core.DataTypes.OpenLispMonad`1.Maybe">
+            <summary>
+            Expose the Maybe singleton as a public field.
+            </summary>
+        </member>
+        <member name="M:OpenLisp.Core.DataTypes.OpenLispMonad`1.#ctor">
+            <summary>
+            Public default constructor
+            </summary>
+        </member>
+        <member name="P:OpenLisp.Core.DataTypes.OpenLispMonad`1.Env">
+            <summary>
+            Get the <see cref="P:OpenLisp.Core.DataTypes.OpenLispMonad`1.Env"/>
+            </summary>
+        </member>
+        <member name="P:OpenLisp.Core.DataTypes.OpenLispMonad`1.Instance">
+            <summary>
+            Access the instance
+            </summary>
+        </member>
+        <member name="P:OpenLisp.Core.DataTypes.OpenLispMonad`1.Monad">
+            <summary>
+            Get a new <see cref="T:OpenLisp.Core.DataTypes.OpenLispMonad`1"/> instance
+            </summary>
+        </member>
+        <member name="M:OpenLisp.Core.DataTypes.OpenLispMonad`1.#ctor(OpenLisp.Core.AbstractClasses.OpenLispVal,OpenLisp.Core.Env)">
+            <summary>
+            Default public constructor.
+            </summary>
+            <param name="instance"></param>
+            <param name="env"></param>
+        </member>
+        <member name="M:OpenLisp.Core.DataTypes.OpenLispMonad`1.#ctor(OpenLisp.Core.AbstractClasses.OpenLispVal)">
+            <summary>
+            Public constructor with an <see cref="T:OpenLisp.Core.AbstractClasses.OpenLispVal"/>
+            instance parameter.
+            </summary>
+            <param name="instance"></param>
+        </member>
+        <member name="M:OpenLisp.Core.DataTypes.OpenLispMonad`1.Bind``1(System.Func{OpenLisp.Core.Interfaces.IOpenLispMonad{OpenLisp.Core.AbstractClasses.OpenLispVal},OpenLisp.Core.Interfaces.IOpenLispMonad{``0}})">
+            <summary>
+            Monadic bind function.
+            </summary>
+            <typeparam name="U"></typeparam>
+            <param name="func"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OpenLisp.Core.DataTypes.OpenLispMonad`1.TypeConstructor(OpenLisp.Core.DataTypes.OpenLispFunc,OpenLisp.Core.Env)">
+            <summary>
+            
+            </summary>
+            <param name="openLispFunc"></param>
+            <param name="environment"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OpenLisp.Core.DataTypes.OpenLispMonad`1.UnitFunction(OpenLisp.Core.AbstractClasses.OpenLispVal)">
+            <summary>
+            
+            </summary>
+            <param name="dataType"></param>
+            <returns></returns>
+        </member>
+        <member name="T:OpenLisp.Core.DataTypes.OpenLispString">
+            <summary>
+            Default str implementation for OpenLisp.NET
+            </summary>
+        </member>
+        <member name="P:OpenLisp.Core.DataTypes.OpenLispString.Value">
+            <summary>
+            Publicly Get or privately Set the non-null, non-empty, non-whitespace string.
+            </summary>
+        </member>
+        <member name="M:OpenLisp.Core.DataTypes.OpenLispString.#ctor(System.String)">
+            <summary>
+            Constructor accepting a <see cref="T:System.String"/>.
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:OpenLisp.Core.DataTypes.OpenLispString.#ctor(OpenLisp.Core.AbstractClasses.OpenLispVal)">
+            <summary>
+            Constructor accepting a <see cref="T:OpenLisp.Core.AbstractClasses.OpenLispVal"/>
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:OpenLisp.Core.DataTypes.OpenLispString.Copy">
+            <summary>
+            Copy this instance by returning this instance.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:OpenLisp.Core.DataTypes.OpenLispString.ToString">
+            <summary>
+            Pretty-print an <see cref="T:OpenLisp.Core.DataTypes.OpenLispString"/> surrounding by quotation marks.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:OpenLisp.Core.DataTypes.OpenLispString.ToString(System.Boolean)">
+            <summary>
+            Gets a string representation of a <see cref="T:OpenLisp.Core.DataTypes.OpenLispString"/> with optional pretty-print.
+            </summary>
+            <param name="printReadably"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OpenLisp.Core.DataTypes.OpenLispString.op_Explicit(OpenLisp.Core.DataTypes.OpenLispString)~OpenLisp.Core.DataTypes.OpenLispInt">
+            <summary>
+            Return a new OpenLispInt from a OpenLispString.
+            </summary>
+            <param name="v"></param>
+        </member>
+        <member name="T:OpenLisp.Core.DataTypes.OpenLispSymbol">
+            <summary>
+            Default symbol implementation for OpenLisp.NET
+            </summary>
+        </member>
+        <member name="P:OpenLisp.Core.DataTypes.OpenLispSymbol.Value">
+            <summary>
+            Publicly Get or privately Set the <see cref="T:System.String"/> value of an <see cref="T:OpenLisp.Core.DataTypes.OpenLispSymbol"/>.
+            </summary>
+        </member>
+        <member name="M:OpenLisp.Core.DataTypes.OpenLispSymbol.#ctor(System.String)">
+            <summary>
+            Constructor accepting a <see cref="T:System.String"/> value.
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:OpenLisp.Core.DataTypes.OpenLispSymbol.#ctor(OpenLisp.Core.DataTypes.OpenLispString)">
+            <summary>
+            Constructor accepting an <see cref="T:OpenLisp.Core.DataTypes.OpenLispString"/> parameter.
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:OpenLisp.Core.DataTypes.OpenLispSymbol.Copy">
+            <summary>
+            Returns this instance when asked to copy an <see cref="T:OpenLisp.Core.DataTypes.OpenLispSymbol"/>.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:OpenLisp.Core.DataTypes.OpenLispSymbol.ToString">
+            <summary>
+            Return the underlying value when printing a string representation of an <see cref="T:OpenLisp.Core.DataTypes.OpenLispSymbol"/>.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:OpenLisp.Core.DataTypes.OpenLispSymbol.ToString(System.Boolean)">
+            <summary>
+            Return the underlying value when printing a string representation of an <see cref="T:OpenLisp.Core.DataTypes.OpenLispSymbol"/>.
+            </summary>
+            <param name="printReadably">Ignored and present for internal API compatibility.</param>
+            <returns></returns>
+        </member>
+        <member name="T:OpenLisp.Core.DataTypes.OpenLispVector">
+            <summary>
+            Default vector implementation for OpenLisp.NET
+            </summary>
+        </member>
+        <member name="M:OpenLisp.Core.DataTypes.OpenLispVector.#ctor">
+            <summary>
+            Default constructor that invokes the base constructor in <see cref="T:OpenLisp.Core.DataTypes.OpenLispList"/>.
+            An instance of <see cref="T:OpenLisp.Core.DataTypes.OpenLispVector"/> uses square brackets instead of parentheses.
+            </summary>
+        </member>
+        <member name="M:OpenLisp.Core.DataTypes.OpenLispVector.#ctor(System.Collections.Generic.List{OpenLisp.Core.AbstractClasses.OpenLispVal})">
+            <summary>
+            Constructor accepting a <see cref="T:System.Collections.Generic.List`1"/> parameter.
+            An instance of <see cref="T:OpenLisp.Core.DataTypes.OpenLispVector"/> uses square brackets instead of parentheses.
+            </summary>
+            <param name="val"></param>
+        </member>
+        <member name="M:OpenLisp.Core.DataTypes.OpenLispVector.ListQ">
+            <summary>
+            An instance of <see cref="T:OpenLisp.Core.DataTypes.OpenLispVector"/> does NOT behave like 
+            an instance of <see cref="T:OpenLisp.Core.DataTypes.OpenLispList"/>.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:OpenLisp.Core.DataTypes.OpenLispVector.Slice(System.Int32,System.Int32)">
+            <summary>
+            Returns a slice of the underlying array.
+            </summary>
+            <param name="start">The starting index.</param>
+            <param name="end">The ending index.</param>
+            <returns></returns>
+        </member>
+        <member name="T:OpenLisp.Core.DataTypes.Concurrent.OpenLispSkipList">
+            <summary>
+            Open lisp skip list.  On average, all operations should be log(n).
+            </summary>
+        </member>
+        <member name="P:OpenLisp.Core.DataTypes.Concurrent.OpenLispSkipList.Value">
+            <summary>
+            Gets or sets the value.
+            </summary>
+            <value>The value.</value>
+        </member>
+        <member name="M:OpenLisp.Core.DataTypes.Concurrent.OpenLispSkipList.ListQ">
+            <summary>
+            Is this object a list?
+            </summary>
+            <returns><c>true</c>, if q was listed, <c>false</c> otherwise.</returns>
+        </member>
+        <member name="M:OpenLisp.Core.DataTypes.Concurrent.OpenLispSkipList.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:OpenLisp.Core.DataTypes.Concurrent.OpenLispSkipList"/> class.
+            </summary>
+        </member>
+        <member name="M:OpenLisp.Core.DataTypes.Concurrent.OpenLispSkipList.#ctor(System.Collections.Generic.List{OpenLisp.Core.AbstractClasses.OpenLispVal})">
+            <summary>
+            Initializes a new instance of the <see cref="T:OpenLisp.Core.DataTypes.Concurrent.OpenLispSkipList"/> class.
+            </summary>
+            <param name="value">Value.</param>
+        </member>
+        <member name="M:OpenLisp.Core.DataTypes.Concurrent.OpenLispSkipList.#ctor(OpenLisp.Core.DataTypes.OpenLispList)">
+            <summary>
+            Initializes a new instance of the <see cref="T:OpenLisp.Core.DataTypes.Concurrent.OpenLispSkipList"/> class.
+            </summary>
+            <param name="value">Value.</param>
+        </member>
+        <member name="M:OpenLisp.Core.DataTypes.Concurrent.OpenLispSkipList.#ctor(OpenLisp.Core.AbstractClasses.OpenLispVal[])">
+            <summary>
+            Constsructor accepting a <see cref="T:OpenLisp.Core.AbstractClasses.OpenLispVal"/> array for params. 
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:OpenLisp.Core.DataTypes.Concurrent.OpenLispSkipList.Conj(OpenLisp.Core.AbstractClasses.OpenLispVal[])">
+            <summary>
+            Conj operation accepting a <see cref="T:OpenLisp.Core.AbstractClasses.OpenLispVal"/> array for params.
+            </summary>
+            <param name="values"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OpenLisp.Core.DataTypes.Concurrent.OpenLispSkipList.ToString">
+            <summary>
+            Returns a <see cref="T:System.String"/> that represents the current <see cref="T:OpenLisp.Core.DataTypes.Concurrent.OpenLispSkipList"/>.
+            </summary>
+            <returns>A <see cref="T:System.String"/> that represents the current <see cref="T:OpenLisp.Core.DataTypes.Concurrent.OpenLispSkipList"/>.</returns>
+        </member>
+        <member name="M:OpenLisp.Core.DataTypes.Concurrent.OpenLispSkipList.ToString(System.Boolean)">
+            <summary>
+            Returns a string representation of the skip list.
+            </summary>
+            <returns>The string.</returns>
+            <param name="printReadably">If set to <c>true</c> print readably.</param>
+        </member>
+        <member name="T:OpenLisp.Core.DataTypes.Concurrent.OpenLispPriorityQueue">
+            <summary>
+            Type to implement a thread-safe priority queue.
+            </summary>
+        </member>
+        <member name="M:OpenLisp.Core.DataTypes.Concurrent.OpenLispPriorityQueue.#ctor">
+            <summary>
+            Default constructor.
+            </summary>
+        </member>
+        <member name="T:OpenLisp.Core.Env">
+            <summary>
+            Manages the OpenLisp.NET environment containing OpenLispSymbol and OpenLispVal objects.
+            </summary>
+        </member>
+        <member name="M:OpenLisp.Core.Env.#ctor(OpenLisp.Core.Env)">
+            <summary>
+            Constructor accepting an outer <see cref="T:OpenLisp.Core.Env"/>.
+            </summary>
+            <param name="outer"><see cref="T:OpenLisp.Core.Env"/></param>
+        </member>
+        <member name="M:OpenLisp.Core.Env.#ctor(OpenLisp.Core.Env,OpenLisp.Core.DataTypes.OpenLispList,OpenLisp.Core.DataTypes.OpenLispList)">
+            <summary>
+            Constructor accepting an outer <see cref="T:OpenLisp.Core.Env"/> with binds and expressions.
+            </summary>
+            <param name="outer"><see cref="T:OpenLisp.Core.Env"/></param>
+            <param name="binds"><see cref="T:OpenLisp.Core.DataTypes.OpenLispList"/></param>
+            <param name="expressions"><see cref="T:OpenLisp.Core.DataTypes.OpenLispList"/></param>
+        </member>
+        <member name="M:OpenLisp.Core.Env.Find(OpenLisp.Core.DataTypes.OpenLispSymbol)">
+            <summary>
+            Finds an <see cref="T:OpenLisp.Core.DataTypes.OpenLispSymbol"/> in <see cref="F:OpenLisp.Core.Env._data"/>.
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OpenLisp.Core.Env.Get(OpenLisp.Core.DataTypes.OpenLispSymbol)">
+            <summary>
+            Gets an <see cref="T:OpenLisp.Core.DataTypes.OpenLispSymbol"/> from <see cref="T:OpenLisp.Core.Env"/>.
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OpenLisp.Core.Env.Set(OpenLisp.Core.DataTypes.OpenLispSymbol,OpenLisp.Core.AbstractClasses.OpenLispVal)">
+            <summary>
+            Sets an <see cref="T:OpenLisp.Core.DataTypes.OpenLispSymbol"/> key's value to an instance of <see cref="T:OpenLisp.Core.AbstractClasses.OpenLispVal"/>.
+            </summary>
+            <param name="key"></param>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OpenLisp.Core.Env.ToString">
+            <summary>
+            Return the name of the Type when <see cref="M:OpenLisp.Core.Env.ToString"/> is invoked.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:OpenLisp.Core.Events.Args.PrintEventArgs">
+            <summary>
+            Event arguments used when printing expressions in OpenLisp.NET REPLs, etc.
+            </summary>
+        </member>
+        <member name="M:OpenLisp.Core.Events.Args.PrintEventArgs.#ctor(System.String)">
+            <summary>
+            Constructor accepting a <see cref="T:System.String"/> parameter.
+            </summary>
+            <param name="p"></param>
+        </member>
+        <member name="P:OpenLisp.Core.Events.Args.PrintEventArgs.Line">
+            <summary>
+            Get the line that was printed.
+            </summary>
+        </member>
+        <member name="T:OpenLisp.Core.Extensions.OpenLispMonadExtensions">
+            <summary>
+            OpenLispMonad Extensions
+            </summary>
+        </member>
+        <member name="M:OpenLisp.Core.Extensions.OpenLispMonadExtensions.Return``1(``0,OpenLisp.Core.Env)">
+            <summary>
+            Fluent monadic return function.
+            
+            Example:
+            
+                immutableValue0
+                    .Return()
+                    .Bind(result0 => transformedIntoResult1(result0))
+                    .Bind(result1 => transformedIntoResult2(result1))
+                    .Bind(result2 => transformedIntoResult3(result2))
+                    .Bind(result3 => transformedIntoResult4(result3))
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="instance"></param>
+            <param name="env"></param>
+            <returns></returns>
+        </member>
+        <member name="T:OpenLisp.Core.Interfaces.IBaseLogic">
+            <summary>
+            Interface to describe base logic.
+            </summary>
+        </member>
+        <member name="P:OpenLisp.Core.Interfaces.IBaseLogic.Id">
+            <summary>
+            <see cref="T:System.Guid"/> Id
+            </summary>
+        </member>
+        <member name="P:OpenLisp.Core.Interfaces.IBaseLogic.Name">
+            <summary>
+            <see cref="T:System.String"/> Name
+            </summary>
+        </member>
+        <member name="P:OpenLisp.Core.Interfaces.IBaseLogic.Logger">
+            <summary>
+            Instance of <see cref="T:OpenLisp.Core.Interfaces.IoC.Contracts.ILoggerContract"/> implementation. 
+            </summary>
+        </member>
+        <member name="T:OpenLisp.Core.Interfaces.ILispExpression`1">
+            <summary>
+            Generic interface describing a collection of a list of symbols used to store expressions.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:OpenLisp.Core.Interfaces.ILispExpression`1.OpenLispExpression">
+            <summary>
+            <see cref="T:System.Collections.IList"/> collection of <see cref="T:OpenLisp.Core.Interfaces.ILispSymbol`1"/>.
+            </summary>
+        </member>
+        <member name="T:OpenLisp.Core.Interfaces.ILispProvider">
+            <summary>
+            Interface to describe an OpenLisp.NET provider
+            </summary>
+        </member>
+        <member name="P:OpenLisp.Core.Interfaces.ILispProvider.Name">
+            <summary>
+            <see cref="T:System.String"/> Name
+            </summary>
+        </member>
+        <member name="P:OpenLisp.Core.Interfaces.ILispProvider.Tokenizer">
+            <summary>
+            <see cref="T:System.Object"/> Tokenizer 
+            </summary>
+        </member>
+        <member name="P:OpenLisp.Core.Interfaces.ILispProvider.Parser">
+            <summary>
+            <see cref="T:System.Object"/> Parser
+            </summary>
+        </member>
+        <member name="P:OpenLisp.Core.Interfaces.ILispProvider.Terminal">
+            <summary>
+            <see cref="T:System.Object"/> Terminal / REPL
+            </summary>
+        </member>
+        <member name="T:OpenLisp.Core.Interfaces.ILispSymbol`1">
+            <summary>
+            Interface to describe an instance of an OpenLisp.NET symbol.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:OpenLisp.Core.Interfaces.ILispSymbol`1.OpenLispSymbol">
+            <summary>
+            String representation of an OpenLisp.NET symbol.
+            </summary>
+        </member>
+        <member name="P:OpenLisp.Core.Interfaces.ILispSymbol`1.OpenLispMethodFunc">
+            <summary>
+            <see cref="T:System.Func`1"/> of an OpenLisp.NET function returning void.
+            </summary>
+        </member>
+        <member name="T:OpenLisp.Core.Interfaces.IoC.Contracts.IClientContract">
+            <summary>
+            Interface to describe the client contract.
+            </summary>
+        </member>
+        <member name="T:OpenLisp.Core.Interfaces.IoC.Contracts.ICryptoContract">
+            <summary>
+            Interface to describe the crypto contract.
+            </summary>
+        </member>
+        <member name="T:OpenLisp.Core.Interfaces.IoC.Contracts.IDispatchContract">
+            <summary>
+            Interface to describe the dispatch contract.
+            </summary>
+        </member>
+        <member name="T:OpenLisp.Core.Interfaces.IoC.Contracts.IEventSourceContract">
+            <summary>
+            Interface to describe the event source contract.
+            </summary>
+        </member>
+        <member name="T:OpenLisp.Core.Interfaces.IoC.Contracts.IInjectorContract">
+            <summary>
+            Interface to describe the injector contract.
+            </summary>
+        </member>
+        <member name="T:OpenLisp.Core.Interfaces.IoC.Contracts.ILoggerContract">
+            <summary>
+            Interface to describe the logger contract.
+            </summary>
+        </member>
+        <member name="T:OpenLisp.Core.Interfaces.IoC.Contracts.IProviderContract">
+            <summary>
+            Interface to describe the provider contract.
+            </summary>
+        </member>
+        <member name="T:OpenLisp.Core.Interfaces.IoC.Contracts.IQueueContract">
+            <summary>
+            Interface to describe the queue contract.
+            </summary>
+        </member>
+        <member name="T:OpenLisp.Core.Interfaces.IoC.Contracts.IServiceContract">
+            <summary>
+            Interface to describe the service contract.
+            </summary>
+        </member>
+        <member name="T:OpenLisp.Core.Interfaces.IoC.Contracts.IUniqueNameContract">
+            <summary>
+            Interface to describe the unique name contract.
+            </summary>
+        </member>
+        <member name="P:OpenLisp.Core.Interfaces.IoC.Contracts.IUniqueNameContract.Crypto">
+            <summary>
+            <see cref="T:System.Collections.Generic.IEnumerable`1"/> collection.
+            </summary>
+        </member>
+        <member name="T:OpenLisp.Core.Interfaces.IoC.IContract">
+            <summary>
+            Interface to describe a contract implementation.
+            </summary>
+        </member>
+        <member name="T:OpenLisp.Core.Interfaces.IoC.IInjector">
+            <summary>
+            Interface to describe an injector implementation.
+            </summary>
+        </member>
+        <member name="P:OpenLisp.Core.Interfaces.IoC.IInjector.Services">
+            <summary>
+            <see cref="T:System.Collections.Generic.IEnumerable`1"/> collection of Services contracts.
+            </summary>
+        </member>
+        <member name="P:OpenLisp.Core.Interfaces.IoC.IInjector.Providers">
+            <summary>
+            <see cref="T:System.Collections.Generic.IEnumerable`1"/> collection of Providers contracts.
+            </summary>
+        </member>
+        <member name="P:OpenLisp.Core.Interfaces.IoC.IInjector.Injectors">
+            <summary>
+            <see cref="T:System.Collections.Generic.IEnumerable`1"/> collection of Injectors contracts.
+            </summary>
+        </member>
+        <member name="P:OpenLisp.Core.Interfaces.IoC.IInjector.Clients">
+            <summary>
+            <see cref="T:System.Collections.Generic.IEnumerable`1"/> collection of Clients contracts.
+            </summary>
+        </member>
+        <member name="T:OpenLisp.Core.Interfaces.IoC.IProvider">
+            <summary>
+            Interface to describe a provider implementation.
+            </summary>
+        </member>
+        <member name="T:OpenLisp.Core.Interfaces.IoC.IService">
+            <summary>
+            Interface to describe a service implementation.
+            </summary>
+        </member>
+        <member name="T:OpenLisp.Core.Interfaces.IoC.IServiceBus">
+            <summary>
+            Interface to describe a service bus implementation.
+            </summary>
+        </member>
+        <member name="P:OpenLisp.Core.Interfaces.IoC.IServiceBus.EventSources">
+            <summary>
+            <see cref="T:System.Collections.Generic.IEnumerable`1"/> collection of Event Sources contracts.
+            </summary>
+        </member>
+        <member name="P:OpenLisp.Core.Interfaces.IoC.IServiceBus.Dispatch">
+            <summary>
+            Instance of an implementation of <see cref="T:OpenLisp.Core.Interfaces.IoC.Contracts.IDispatchContract"/>.
+            </summary>
+        </member>
+        <member name="P:OpenLisp.Core.Interfaces.IoC.IServiceBus.IncomingQueue">
+            <summary>
+            Instance of an implementation of <see cref="T:OpenLisp.Core.Interfaces.IoC.Contracts.IQueueContract"/> for incoming queues.
+            </summary>
+        </member>
+        <member name="P:OpenLisp.Core.Interfaces.IoC.IServiceBus.OutgoingQueue">
+            <summary>
+            Instance of an implementation of <see cref="T:OpenLisp.Core.Interfaces.IoC.Contracts.IQueueContract"/> for outgoing queues.
+            </summary>
+        </member>
+        <member name="P:OpenLisp.Core.Interfaces.IoC.IServiceBus.Services">
+            <summary>
+            <see cref="T:System.Collections.Generic.IEnumerable`1"/> collection of Service Provider contracts.
+            </summary>
+        </member>
+        <member name="P:OpenLisp.Core.Interfaces.IoC.IServiceBus.Providers">
+            <summary>
+            <see cref="T:System.Collections.Generic.IEnumerable`1"/> collections of Providers.
+            </summary>
+        </member>
+        <member name="P:OpenLisp.Core.Interfaces.IoC.IServiceBus.Contracts">
+            <summary>
+            <see cref="T:System.Collections.Generic.IEnumerable`1"/> collection of Contracts.
+            </summary>
+        </member>
+        <member name="T:OpenLisp.Core.Interfaces.IoC.Providers.IAssemblyProvider">
+            <summary>
+            Interface describing an assembly provider.
+            </summary>
+        </member>
+        <member name="P:OpenLisp.Core.Interfaces.IoC.Providers.IAssemblyProvider.AssemblyName">
+            <summary>
+            The assembly name.
+            </summary>
+        </member>
+        <member name="P:OpenLisp.Core.Interfaces.IoC.Providers.IAssemblyProvider.NameSpace">
+            <summary>
+            The assembly namespace.
+            </summary>
+        </member>
+        <member name="P:OpenLisp.Core.Interfaces.IoC.Providers.IAssemblyProvider.Version">
+            <summary>
+            The assembly version.
+            </summary>
+        </member>
+        <member name="T:OpenLisp.Core.Interfaces.IoC.Providers.IContractProvider">
+            <summary>
+            Interface describing a contract provider.
+            </summary>
+        </member>
+        <member name="T:OpenLisp.Core.Interfaces.IoC.Providers.ICryptoProvider">
+            <summary>
+            Interface describing a crypto provider.
+            </summary>
+        </member>
+        <member name="T:OpenLisp.Core.Interfaces.IoC.Providers.IDataProvider">
+            <summary>
+            Interface describing a data provider.
+            </summary>
+        </member>
+        <member name="T:OpenLisp.Core.Interfaces.IoC.Providers.IDriverProvider">
+            <summary>
+            Interface describing a driver provider.
+            </summary>
+        </member>
+        <member name="T:OpenLisp.Core.Interfaces.IoC.Providers.IFactoryProvider">
+            <summary>
+            Interface describing a factory provider.
+            </summary>
+        </member>
+        <member name="T:OpenLisp.Core.Interfaces.IoC.Providers.IHardwareProvider">
+            <summary>
+            Interface describing a hardware provider.
+            </summary>
+        </member>
+        <member name="T:OpenLisp.Core.Interfaces.IoC.Providers.IInjectorProvider">
+            <summary>
+            Interface describing an injector provider.
+            </summary>
+        </member>
+        <member name="T:OpenLisp.Core.Interfaces.IoC.Providers.IModelProvider">
+            <summary>
+            Interface describing a model provider.
+            </summary>
+        </member>
+        <member name="T:OpenLisp.Core.Interfaces.IoC.Providers.INetworkProvider`4">
+            <summary>
+            Interface describing a network provider.
+            </summary>
+            <typeparam name="T1"></typeparam>
+            <typeparam name="T2"></typeparam>
+            <typeparam name="T3"></typeparam>
+            <typeparam name="T4"></typeparam>
+        </member>
+        <member name="P:OpenLisp.Core.Interfaces.IoC.Providers.INetworkProvider`4.Adapters">
+            <summary>
+            <see cref="T:System.Collections.Generic.IEnumerable`1"/> collection of Adapter.
+            </summary>
+        </member>
+        <member name="P:OpenLisp.Core.Interfaces.IoC.Providers.INetworkProvider`4.Networks">
+            <summary>
+            <see cref="T:System.Collections.Generic.IEnumerable`1"/> collection of Networks.
+            </summary>
+        </member>
+        <member name="P:OpenLisp.Core.Interfaces.IoC.Providers.INetworkProvider`4.InputStreams">
+            <summary>
+            <see cref="T:System.Collections.Generic.IEnumerable`1"/> collection of Input Streams.
+            </summary>
+        </member>
+        <member name="P:OpenLisp.Core.Interfaces.IoC.Providers.INetworkProvider`4.OutputStreams">
+            <summary>
+            <see cref="T:System.Collections.Generic.IEnumerable`1"/> collection of Output Streams
+            </summary>
+        </member>
+        <member name="P:OpenLisp.Core.Interfaces.IoC.Providers.INetworkProvider`4.Sockets">
+            <summary>
+            <see cref="T:System.Collections.Generic.IEnumerable`1"/> collection of Sockets.
+            </summary>
+        </member>
+        <member name="P:OpenLisp.Core.Interfaces.IoC.Providers.INetworkProvider`4.Hosts">
+            <summary>
+            <see cref="T:System.Collections.Generic.IEnumerable`1"/> collection of Hosts.
+            </summary>
+        </member>
+        <member name="M:OpenLisp.Core.Interfaces.IoC.Providers.INetworkProvider`4.Socket(OpenLisp.Core.Interfaces.IoC.Providers.INetworkProvider{`0,`1,`2,`3})">
+            <summary>
+            Method to manipulate a Socket.
+            </summary>
+            <param name="networkProvider"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OpenLisp.Core.Interfaces.IoC.Providers.INetworkProvider`4.HostLookup(OpenLisp.Core.Interfaces.IoC.Providers.INetworkProvider{`0,`1,`2,`3},System.Collections.Generic.IEnumerable{System.Object})">
+            <summary>
+            Method to perform a host lookup operation.
+            </summary>
+            <param name="networkProvider"></param>
+            <param name="hosts"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OpenLisp.Core.Interfaces.IoC.Providers.INetworkProvider`4.ReverseHostLookup(OpenLisp.Core.Interfaces.IoC.Providers.INetworkProvider{`0,`1,`2,`3},System.Collections.Generic.IEnumerable{System.Object})">
+            <summary>
+            Method to perform a host lookup operation via reverse DNS.
+            </summary>
+            <param name="networkProvider"></param>
+            <param name="hosts"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OpenLisp.Core.Interfaces.IoC.Providers.INetworkProvider`4.Command``1(OpenLisp.Core.Interfaces.IoC.Providers.INetworkProvider{`0,`1,`2,`3})">
+            <summary>
+            Method to manipulate a Command to an implementation of <see cref="T:OpenLisp.Core.Interfaces.IoC.Providers.INetworkProvider`4"/>.
+            </summary>
+            <typeparam name="T5"></typeparam>
+            <param name="networkProvider"></param>
+            <returns></returns>
+        </member>
+        <member name="T:OpenLisp.Core.Interfaces.IoC.Providers.IObjectProvider">
+            <summary>
+            Interface to describe an object provider.
+            </summary>
+        </member>
+        <member name="P:OpenLisp.Core.Interfaces.IoC.Providers.IObjectProvider.Object">
+            <summary>
+            Late-binding Object reference.
+            </summary>
+        </member>
+        <member name="T:OpenLisp.Core.Interfaces.IoC.Providers.IServiceBusProvider">
+            <summary>
+            Interface to describe a service bus provider.
+            </summary>
+        </member>
+        <member name="T:OpenLisp.Core.Interfaces.IoC.Providers.IServiceProvider">
+            <summary>
+            Interface to describe a service provider.
+            </summary>
+        </member>
+        <member name="T:OpenLisp.Core.Interfaces.IoC.Providers.ISocketProvider">
+            <summary>
+            Interface to descrive a socket provider.
+            </summary>
+        </member>
+        <member name="P:OpenLisp.Core.Interfaces.IoC.Providers.ISocketProvider.Origin">
+            <summary>
+            Socket origin reference.
+            </summary>
+        </member>
+        <member name="P:OpenLisp.Core.Interfaces.IoC.Providers.ISocketProvider.Destination">
+            <summary>
+            Socjet destination reference.
+            </summary>
+        </member>
+        <member name="P:OpenLisp.Core.Interfaces.IoC.Providers.ISocketProvider.Streams">
+            <summary>
+            <see cref="T:System.Collections.Generic.IEnumerable`1"/> collection of streams over an individual instance
+            of an implementation of <see cref="T:OpenLisp.Core.Interfaces.IoC.Providers.ISocketProvider"/>.
+            </summary>
+        </member>
+        <member name="T:OpenLisp.Core.Interfaces.IoC.Providers.ITransactionalSoftwareMemoryProvider">
+            <summary>
+            Interface to describe a transactional software memory provider.
+            </summary>
+        </member>
+        <member name="T:OpenLisp.Core.Interfaces.IOpenLispMonad`1">
+            <summary>
+            Interface to describe an implementation of a monad in OpenLisp.NET
+            
+            Any implementation of this interface should be considered the Monadic type.
+            Any typeparam passed in as type T should be consider the Monadic Data type.
+            
+            References:
+                https://en.wikipedia.org/wiki/Monad_(functional_programming)#Formal_definition
+                http://mikhail.io/2016/01/monads-explained-in-csharp/
+            </summary>
+            <typeparam name="T">The Data Type you want to bind in your monad.</typeparam>
+        </member>
+        <member name="M:OpenLisp.Core.Interfaces.IOpenLispMonad`1.Bind``1(System.Func{OpenLisp.Core.Interfaces.IOpenLispMonad{`0},OpenLisp.Core.Interfaces.IOpenLispMonad{``0}})">
+            <summary>
+            Bind to <see cref="T:OpenLisp.Core.Interfaces.IOpenLispMonad`1"/> using a <see cref="T:System.Func`2"/>
+            
+            Formally: 
+            
+                (M t) -> (t -> M u) -> (M u)
+            
+            TODO: represent with the ">>=" to correspond to the familiar binding operation of Haskell.
+            </summary>
+            <typeparam name="U">The Data Type bound to in your monad.</typeparam>
+            <param name="func">The binding function of your monad.</param>
+            <returns></returns>
+        </member>
+        <member name="M:OpenLisp.Core.Interfaces.IOpenLispMonad`1.TypeConstructor(OpenLisp.Core.DataTypes.OpenLispFunc,OpenLisp.Core.Env)">
+            <summary>
+            A type constructor that defines, for every underlying type, how to obtain a corresponding monadic type.
+            </summary>
+            <param name="openLispFunc"></param>
+            <param name="environment"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OpenLisp.Core.Interfaces.IOpenLispMonad`1.UnitFunction(`0)">
+            <summary>
+            Injects a value in an underlying type to a value in the 
+            corresponding monadic type.
+            
+            Formally:
+            
+                t -> M t
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:OpenLisp.Core.Reader">
+            <summary>
+            Reads and tokenizes OpenLisp.NET S-Expressions and forms. 
+            </summary>
+        </member>
+        <member name="T:OpenLisp.Core.Reader.ParseError">
+            <summary>
+            Custom throwable parse error.
+            
+            TODO: move to OpenLisp.Core.DataTypes.Errors.Throwable?
+            </summary>
+        </member>
+        <member name="M:OpenLisp.Core.Reader.ParseError.#ctor(System.String)">
+            <summary>
+            ParseError constructor.
+            </summary>
+            <param name="message"></param>
+        </member>
+        <member name="T:OpenLisp.Core.Reader.TokensReader">
+            <summary>
+            Allows OpenLisp.NET to peek ahead to the next token and
+            return the next token in the collection.
+            </summary>
+        </member>
+        <member name="M:OpenLisp.Core.Reader.TokensReader.#ctor(System.Collections.Generic.List{System.String})">
+            <summary>
+            TokensReader constructor.
+            </summary>
+            <param name="tokens"></param>
+        </member>
+        <member name="M:OpenLisp.Core.Reader.TokensReader.Peek">
+            <summary>
+            Peeks a token.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:OpenLisp.Core.Reader.TokensReader.Next">
+            <summary>
+            Gets the next token.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:OpenLisp.Core.Reader.Tokenize(System.String)">
+            <summary>
+            A simple tokenizer to tokenize OpenLisp.NET S-Expressions.
+            </summary>
+            <param name="tokens"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OpenLisp.Core.Reader.ReadAtom(OpenLisp.Core.Reader.TokensReader)">
+            <summary>
+            Reads an OpenLisp.NET atom.
+            </summary>
+            <param name="reader"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OpenLisp.Core.Reader.ReadList(OpenLisp.Core.Reader.TokensReader,OpenLisp.Core.DataTypes.OpenLispList,System.Char,System.Char)">
+            <summary>
+            Reads an OpenLisp.NET list expression.
+            </summary>
+            <param name="reader"></param>
+            <param name="openLispList"></param>
+            <param name="start"></param>
+            <param name="end"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OpenLisp.Core.Reader.ReadHashMap(OpenLisp.Core.Reader.TokensReader)">
+            <summary>
+            Reads a hash map using an instance of <see cref="T:OpenLisp.Core.Reader.TokensReader"/>.
+            </summary>
+            <param name="reader"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OpenLisp.Core.Reader.ReadForm(OpenLisp.Core.Reader.TokensReader)">
+            <summary>
+            This static method recursively processes
+            OpenLisp.NET forms and tokenizes them.
+            </summary>
+            <param name="reader"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OpenLisp.Core.Reader.ReadStr(System.String)">
+            <summary>
+            Reads an OpenLisp.NET str.
+            </summary>
+            <param name="tokens"></param>
+            <returns></returns>
+        </member>
+        <member name="T:OpenLisp.Core.ReadLine">
+            <summary>
+            Read line object; mostly used by the OpenLisp.NET REPL.
+            </summary>
+        </member>
+        <member name="T:OpenLisp.Core.ReadLine.ModeEnum">
+            <summary>
+            Terminal or Raw mode reading?
+            
+            TODO: put into its own source file to decouple the enum from <see cref="T:OpenLisp.Core.ReadLine"/>.
+            </summary>
+        </member>
+        <member name="F:OpenLisp.Core.ReadLine.ModeEnum.Terminal">
+            <summary>
+            Suitable for user-visible shells and REPLs.
+            </summary>
+        </member>
+        <member name="F:OpenLisp.Core.ReadLine.ModeEnum.Raw">
+            <summary>
+            Suitable for non-interactive CLI tools and REPL background services.
+            </summary>
+        </member>
+        <member name="F:OpenLisp.Core.ReadLine.Mode">
+            <summary>
+            Readline instances default to <see cref="F:OpenLisp.Core.ReadLine.ModeEnum.Terminal"/>.
+            </summary>
+        </member>
+        <member name="F:OpenLisp.Core.ReadLine._lineEditor">
+            <summary>
+            The <see cref="T:OpenLisp.Terminal.LineEditor"/> singleton.
+            </summary>
+        </member>
+        <member name="M:OpenLisp.Core.ReadLine.LineReader(System.String)">
+            <summary>
+            Static method to present a prompt in a REPL.
+            </summary>
+            <param name="prompt"></param>
+            <returns></returns>
+        </member>
+        <member name="T:OpenLisp.Core.StaticClasses.EvalProvider">
+            <summary>
+            Evaluation provider suitable for most REPLs wanting to compile assemblies.
+            </summary>
+        </member>
+        <member name="M:OpenLisp.Core.StaticClasses.EvalProvider.CreateEvalMethod``2(System.String,System.String[],System.String[])">
+            <summary>
+            Creates an eval method.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <typeparam name="TResult"></typeparam>
+            <param name="code"></param>
+            <param name="usingStatements"></param>
+            <param name="assemblies"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OpenLisp.Core.StaticClasses.EvalProvider.GetUsing(System.Collections.Generic.HashSet{System.String})">
+            <summary>
+            Gets the using statments needed to compile an OpenLisp.NET assembly
+            targeting a .NET platform.
+            </summary>
+            <param name="usingStatements"></param>
+            <returns></returns>
+        </member>
+        <member name="T:OpenLisp.Core.StaticClasses.ExtensionMethods">
+            <summary>
+            Extension methods useful to all types in OpenLisp.NET
+            </summary>
+        </member>
+        <member name="M:OpenLisp.Core.StaticClasses.ExtensionMethods.ToFunc(OpenLisp.Core.AbstractClasses.OpenLispVal)">
+            <summary>
+            Wrap any <see cref="T:OpenLisp.Core.AbstractClasses.OpenLispVal"/> in a first class function.
+            </summary>
+            <param name="v"></param>
+            <returns></returns>
+        </member>
+        <member name="T:OpenLisp.Core.StaticClasses.Funcs.AtomFuncs">
+            <summary>
+            Funcs used by <see cref="T:OpenLisp.Core.DataTypes.OpenLispAtom"/>.
+            </summary>
+        </member>
+        <member name="F:OpenLisp.Core.StaticClasses.Funcs.AtomFuncs.AtomQ">
+            <summary>
+            Is this an atom?
+            </summary>
+        </member>
+        <member name="F:OpenLisp.Core.StaticClasses.Funcs.AtomFuncs.Deref">
+            <summary>
+            Dereference an atom.
+            </summary>
+        </member>
+        <member name="F:OpenLisp.Core.StaticClasses.Funcs.AtomFuncs.ResetBang">
+            <summary>
+            reset! an atom.
+            </summary>
+        </member>
+        <member name="F:OpenLisp.Core.StaticClasses.Funcs.AtomFuncs.SwapBang">
+            <summary>
+            swap! an atom.
+            </summary>
+        </member>
+        <member name="T:OpenLisp.Core.StaticClasses.Funcs.CollectionFuncs">
+            <summary>
+            Funcs used by classes that derive from <see cref="T:OpenLisp.Core.DataTypes.OpenLispList"/>.
+            </summary>
+        </member>
+        <member name="F:OpenLisp.Core.StaticClasses.Funcs.CollectionFuncs.ListQ">
+            <summary>
+            Is this an intance of an <see cref="T:OpenLisp.Core.DataTypes.OpenLispList"/>?
+            </summary>
+        </member>
+        <member name="F:OpenLisp.Core.StaticClasses.Funcs.CollectionFuncs.VectorQ">
+            <summary>
+            Is this an instance of <see cref="T:OpenLisp.Core.DataTypes.OpenLispVector"/>?
+            </summary>
+        </member>
+        <member name="T:OpenLisp.Core.StaticClasses.Funcs.CollectionFuncs`1">
+            <summary>
+            Generic functions for types inheriting from <see cref="T:OpenLisp.Core.DataTypes.OpenLispList"/>.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="F:OpenLisp.Core.StaticClasses.Funcs.CollectionFuncs`1.GenericQ">
+            <summary>
+            Is this a type of T?
+            </summary>
+        </member>
+        <member name="T:OpenLisp.Core.StaticClasses.Funcs.HashMapFuncs">
+            <summary>
+            Funcs used by <see cref="T:OpenLisp.Core.DataTypes.OpenLispHashMap"/>.
+            </summary>
+        </member>
+        <member name="F:OpenLisp.Core.StaticClasses.Funcs.HashMapFuncs.HashMapQ">
+            <summary>
+            Is this a hash map?
+            </summary>
+        </member>
+        <member name="F:OpenLisp.Core.StaticClasses.Funcs.HashMapFuncs.ContainsQ">
+            <summary>
+            Does this contain collection contain the first parameter?
+            </summary>
+        </member>
+        <member name="F:OpenLisp.Core.StaticClasses.Funcs.HashMapFuncs.Assoc">
+            <summary>
+            Associate a hash key with a value.
+            </summary>
+        </member>
+        <member name="F:OpenLisp.Core.StaticClasses.Funcs.HashMapFuncs.Dissoc">
+            <summary>
+            Dissassociate a hash key and a value.
+            </summary>
+        </member>
+        <member name="F:OpenLisp.Core.StaticClasses.Funcs.HashMapFuncs.Get">
+            <summary>
+            Get the first parameter from an <see cref="T:OpenLisp.Core.DataTypes.OpenLispHashMap"/>.
+            </summary>
+        </member>
+        <member name="F:OpenLisp.Core.StaticClasses.Funcs.HashMapFuncs.Keys">
+            <summary>
+            Gets the keys of an <see cref="T:OpenLisp.Core.DataTypes.OpenLispHashMap"/>.
+            </summary>
+        </member>
+        <member name="F:OpenLisp.Core.StaticClasses.Funcs.HashMapFuncs.Values">
+            <summary>
+            Gets the values of an <see cref="T:OpenLisp.Core.DataTypes.OpenLispHashMap"/>.
+            </summary>
+        </member>
+        <member name="T:OpenLisp.Core.StaticClasses.Funcs.HashMapFuncs`2">
+            <summary>
+            A generic Contains method for OpenLispHashMap objects.
+            </summary>
+            <typeparam name="T1">A Dictionary key type.</typeparam>
+            <typeparam name="T2">A Dictionary value type.</typeparam>
+        </member>
+        <member name="F:OpenLisp.Core.StaticClasses.Funcs.HashMapFuncs`2.ContainsQ">
+            <summary>
+            Does this <see cref="T:OpenLisp.Core.DataTypes.OpenLispHashMap"/> intance contain an instance of <see cref="T:T1"/>
+            </summary>
+        </member>
+        <member name="T:OpenLisp.Core.StaticClasses.Funcs.ListFuncs">
+            <summary>
+            Funcs used by <see cref="T:OpenLisp.Core.DataTypes.OpenLispList"/>.
+            </summary>
+        </member>
+        <member name="F:OpenLisp.Core.StaticClasses.Funcs.ListFuncs.Apply">
+            <summary>
+            Applies a <see cref="T:System.Collections.Generic.List`1"/> of parameters to an <see cref="T:OpenLisp.Core.DataTypes.OpenLispFunc"/>.
+            </summary>
+        </member>
+        <member name="F:OpenLisp.Core.StaticClasses.Funcs.ListFuncs.Map">
+            <summary>
+            Maps a source list of <see cref="T:OpenLisp.Core.DataTypes.OpenLispList"/> to a new list of <see cref="T:OpenLisp.Core.DataTypes.OpenLispList"/>
+            by applying an <see cref="T:OpenLisp.Core.DataTypes.OpenLispFunc"/>.
+            </summary>
+        </member>
+        <member name="T:OpenLisp.Core.StaticClasses.Funcs.MetadataFuncs">
+            <summary>
+            Funcs used to manipulate OpenLisp.NET metadata.
+            </summary>
+        </member>
+        <member name="F:OpenLisp.Core.StaticClasses.Funcs.MetadataFuncs.Meta">
+            <summary>
+            Returns an <see cref="T:OpenLisp.Core.DataTypes.OpenLispFunc"/> containing the meta of an instance of <see cref="T:OpenLisp.Core.AbstractClasses.OpenLispVal"/>.
+            </summary>
+        </member>
+        <member name="F:OpenLisp.Core.StaticClasses.Funcs.MetadataFuncs.WithMeta">
+            <summary>
+            Returns an <see cref="T:OpenLisp.Core.DataTypes.OpenLispFunc"/> as a new instance of an <see cref="T:OpenLisp.Core.DataTypes.OpenLispFunc"/> that
+            has had the first parameter invoke <see cref="M:OpenLisp.Core.AbstractClasses.OpenLispVal.Copy"/>, retrieve that new instance's
+            <see cref="P:OpenLisp.Core.AbstractClasses.OpenLispVal.Meta"/>, and assign the value of that meta to the <see cref="T:OpenLisp.Core.AbstractClasses.OpenLispVal"/>
+            instance that is the second parameter of the invocation.
+            </summary>
+        </member>
+        <member name="F:OpenLisp.Core.StaticClasses.Funcs.MetadataFuncs.ReadDocString">
+            <summary>
+            Get the DocString and stick it in the Meta
+            </summary>
+        </member>
+        <member name="T:OpenLisp.Core.StaticClasses.Funcs.NumberFuncs">
+            <summary>
+            Number funcs used by OpenLisp.NET
+            </summary>
+        </member>
+        <member name="F:OpenLisp.Core.StaticClasses.Funcs.NumberFuncs.TimeMs">
+            <summary>
+            Returns the current time in milliseconds.
+            </summary>
+        </member>
+        <member name="T:OpenLisp.Core.StaticClasses.Funcs.ScalarFuncs">
+            <summary>
+            Funcs used by scalar values in OpenLisp.NET
+            </summary>
+        </member>
+        <member name="F:OpenLisp.Core.StaticClasses.Funcs.ScalarFuncs.NilQ">
+            <summary>
+            Is it <see cref="F:OpenLisp.Core.StaticClasses.StaticOpenLispTypes.Nil"/>?
+            </summary>
+        </member>
+        <member name="F:OpenLisp.Core.StaticClasses.Funcs.ScalarFuncs.TrueQ">
+            <summary>
+            Is it <see cref="F:OpenLisp.Core.StaticClasses.StaticOpenLispTypes.True"/>?
+            </summary>
+        </member>
+        <member name="F:OpenLisp.Core.StaticClasses.Funcs.ScalarFuncs.FalseQ">
+            <summary>
+            Is it <see cref="F:OpenLisp.Core.StaticClasses.StaticOpenLispTypes.False"/>?
+            </summary>
+        </member>
+        <member name="F:OpenLisp.Core.StaticClasses.Funcs.ScalarFuncs.SymbolQ">
+            <summary>
+            Is this an <see cref="T:OpenLisp.Core.DataTypes.OpenLispSymbol"/>?
+            </summary>
+        </member>
+        <member name="F:OpenLisp.Core.StaticClasses.Funcs.ScalarFuncs.Symbol">
+            <summary>
+            Returns a new <see cref="T:OpenLisp.Core.DataTypes.OpenLispSymbol"/> built on an <see cref="T:OpenLisp.Core.DataTypes.OpenLispString"/>,
+            and wrapped in the context of an <see cref="T:OpenLisp.Core.DataTypes.OpenLispFunc"/>.
+            </summary>
+        </member>
+        <member name="F:OpenLisp.Core.StaticClasses.Funcs.ScalarFuncs.Keyword">
+            <summary>
+            Creates a new keyword wrapped in the context of an <see cref="T:OpenLisp.Core.DataTypes.OpenLispFunc"/>.
+            </summary>
+        </member>
+        <member name="F:OpenLisp.Core.StaticClasses.Funcs.ScalarFuncs.KeywordQ">
+            <summary>
+            Is this an OpenLisp.NET keyword?
+            </summary>
+        </member>
+        <member name="T:OpenLisp.Core.StaticClasses.Funcs.SequenceFuncs">
+            <summary>
+            Funcs used when working with OpenLisp.NET sequences.
+            </summary>
+        </member>
+        <member name="F:OpenLisp.Core.StaticClasses.Funcs.SequenceFuncs.SequentialQ">
+            <summary>
+            Is this sequential?
+            </summary>
+        </member>
+        <member name="F:OpenLisp.Core.StaticClasses.Funcs.SequenceFuncs.Cons">
+            <summary>
+            Perform a cons operation.
+            </summary>
+        </member>
+        <member name="F:OpenLisp.Core.StaticClasses.Funcs.SequenceFuncs.Concat">
+            <summary>
+            Perform a concat operation.
+            </summary>
+        </member>
+        <member name="F:OpenLisp.Core.StaticClasses.Funcs.SequenceFuncs.Nth">
+            <summary>
+            Get the Nth item an <see cref="T:OpenLisp.Core.DataTypes.OpenLispList"/> using an <see cref="T:OpenLisp.Core.DataTypes.OpenLispInt"/> index.
+            </summary>
+        </member>
+        <member name="F:OpenLisp.Core.StaticClasses.Funcs.SequenceFuncs.First">
+            <summary>
+            Get the head of an <see cref="T:OpenLisp.Core.DataTypes.OpenLispList"/> wrapped in 
+            the context of an <see cref="T:OpenLisp.Core.DataTypes.OpenLispFunc"/>.
+            </summary>
+        </member>
+        <member name="F:OpenLisp.Core.StaticClasses.Funcs.SequenceFuncs.Rest">
+            <summary>
+            Get the tail of an <see cref="T:OpenLisp.Core.DataTypes.OpenLispList"/> wrapped in
+            the context of an <see cref="T:OpenLisp.Core.DataTypes.OpenLispFunc"/>.
+            </summary>
+        </member>
+        <member name="F:OpenLisp.Core.StaticClasses.Funcs.SequenceFuncs.EmptyQ">
+            <summary>
+            Is this <see cref="T:OpenLisp.Core.DataTypes.OpenLispList"/> empty?
+            </summary>
+        </member>
+        <member name="F:OpenLisp.Core.StaticClasses.Funcs.SequenceFuncs.Count">
+            <summary>
+            Get the count of an <see cref="T:OpenLisp.Core.DataTypes.OpenLispList"/> as an <see cref="T:OpenLisp.Core.DataTypes.OpenLispInt"/>
+            wrapped in the context of an <see cref="T:OpenLisp.Core.DataTypes.OpenLispFunc"/>.
+            </summary>
+        </member>
+        <member name="F:OpenLisp.Core.StaticClasses.Funcs.SequenceFuncs.Conj">
+            <summary>
+            Performs a conj operation.
+            </summary>
+        </member>
+        <member name="T:OpenLisp.Core.StaticClasses.Funcs.StringFuncs">
+            <summary>
+            Funcs used by <see cref="T:OpenLisp.Core.DataTypes.OpenLispString"/>.
+            </summary>
+        </member>
+        <member name="F:OpenLisp.Core.StaticClasses.Funcs.StringFuncs.PrStr">
+            <summary>
+            Pretty-prints an <see cref="T:OpenLisp.Core.DataTypes.OpenLispString"/> wrapped
+            in the context of an <see cref="T:OpenLisp.Core.DataTypes.OpenLispFunc"/>.
+            </summary>
+        </member>
+        <member name="F:OpenLisp.Core.StaticClasses.Funcs.StringFuncs.Str">
+            <summary>
+            Prints an <see cref="T:OpenLisp.Core.DataTypes.OpenLispString"/> wrapped
+            in the context of an <see cref="T:OpenLisp.Core.DataTypes.OpenLispFunc"/>.
+            </summary>
+        </member>
+        <member name="F:OpenLisp.Core.StaticClasses.Funcs.StringFuncs.Prn">
+            <summary>
+            Pretty-prints an <see cref="T:OpenLisp.Core.DataTypes.OpenLispString"/> and returns
+            <see cref="F:OpenLisp.Core.StaticClasses.StaticOpenLispTypes.Nil"/> wrapped in the contet of
+            an <see cref="T:OpenLisp.Core.DataTypes.OpenLispFunc"/>; like returning void in C#, etc.
+            </summary>
+        </member>
+        <member name="F:OpenLisp.Core.StaticClasses.Funcs.StringFuncs.PrintLn">
+            <summary>
+            Prints an <see cref="T:OpenLisp.Core.DataTypes.OpenLispString"/> and returns
+            <see cref="F:OpenLisp.Core.StaticClasses.StaticOpenLispTypes.Nil"/> wrapped in the contet of
+            an <see cref="T:OpenLisp.Core.DataTypes.OpenLispFunc"/>; like returning void in C#, etc.
+            </summary>
+        </member>
+        <member name="F:OpenLisp.Core.StaticClasses.Funcs.StringFuncs.OpenLispReadLine">
+            <summary>
+            Reads a line as an <see cref="T:OpenLisp.Core.AbstractClasses.OpenLispVal"/> wrapped
+            in the context of an <see cref="T:OpenLisp.Core.DataTypes.OpenLispFunc"/>.
+            </summary>
+        </member>
+        <member name="F:OpenLisp.Core.StaticClasses.Funcs.StringFuncs.ReadString">
+            <summary>
+            Reads an <see cref="T:OpenLisp.Core.DataTypes.OpenLispString"/> wrapped in the context of an <see cref="T:OpenLisp.Core.DataTypes.OpenLispFunc"/>.
+            </summary>
+        </member>
+        <member name="F:OpenLisp.Core.StaticClasses.Funcs.StringFuncs.Slurp">
+            <summary>
+            Slurps a file from disk into a new <see cref="T:OpenLisp.Core.DataTypes.OpenLispString"/> that
+            can then be evaluated to return an instance of an object inheriting from <see cref="T:OpenLisp.Core.AbstractClasses.OpenLispVal"/>.
+            </summary>
+        </member>
+        <member name="T:OpenLisp.Core.StaticClasses.Funcs.ThrowFuncs">
+            <summary>
+            Funcs useful for throwing an exception in OpenLisp.NET
+            </summary>
+        </member>
+        <member name="F:OpenLisp.Core.StaticClasses.Funcs.ThrowFuncs.OpenLispThrow">
+            <summary>
+            Throws a new <see cref="T:OpenLisp.Core.DataTypes.Errors.Throwable.OpenLispException"/> that wraps an <see cref="T:OpenLisp.Core.AbstractClasses.OpenLispVal"/>.
+            </summary>
+        </member>
+        <member name="T:OpenLisp.Core.StaticClasses.CoreNameSpace">
+            <summary>
+            The Ns member contains a IDictionary of string format OpenLispSymbols
+            with attached OpenLispFunc, a descendent of OpenLispVal.
+            
+            To extend the core Ns, simply add new elements to the IDictionary
+            instance at <see cref="P:OpenLisp.Core.StaticClasses.CoreNameSpace.Ns"/>.
+            </summary>
+        </member>
+        <member name="F:OpenLisp.Core.StaticClasses.CoreNameSpace._instance">
+            <summary>
+            Static volatile instance of <see cref="T:OpenLisp.Core.StaticClasses.CoreNameSpace"/>.
+            </summary>
+        </member>
+        <member name="F:OpenLisp.Core.StaticClasses.CoreNameSpace.SyncRoot">
+            <summary>
+            Static instance of an <see cref="T:System.Object"/> for double-check locking.
+            </summary>
+        </member>
+        <member name="M:OpenLisp.Core.StaticClasses.CoreNameSpace.#ctor">
+            <summary>
+            Default private constructor.
+            </summary>
+        </member>
+        <member name="P:OpenLisp.Core.StaticClasses.CoreNameSpace.Instance">
+            <summary>
+            Uses double-check locking to retrieve a CoreNameSpace singleton.
+            
+            Under most circumstances, this should be thread-safe.
+            </summary>
+        </member>
+        <member name="P:OpenLisp.Core.StaticClasses.CoreNameSpace.Ns">
+            <summary>
+            Contains the singleton of the Ns object.
+            
+            All get and set operations implemented using double-check locking.
+            
+            Before setting the value of this property, you must first
+            get the default instance.
+            </summary>
+        </member>
+        <member name="T:OpenLisp.Core.StaticClasses.Printer">
+            <summary>
+            Printer implementation suitable for most OpenLisp.NET REPLs.
+            </summary>
+        </member>
+        <member name="M:OpenLisp.Core.StaticClasses.Printer.Join(System.Collections.Generic.IList{OpenLisp.Core.AbstractClasses.OpenLispVal},System.String,System.Boolean)">
+            <summary>
+            Joins a <see cref="T:System.Collections.Generic.IList`1"/> with a <see cref="T:System.String"/> delimeter.
+            </summary>
+            <param name="values"></param>
+            <param name="delim"></param>
+            <param name="printReadably">Whether or not to pretty-print the result.</param>
+            <returns></returns>
+        </member>
+        <member name="M:OpenLisp.Core.StaticClasses.Printer.Join(DataStructures.ConcurrentSkipList{OpenLisp.Core.AbstractClasses.OpenLispVal},System.String,System.Boolean)">
+            <summary>
+            Join the specified values, delim and printReadably.
+            </summary>
+            <returns>The join.</returns>
+            <param name="values">Values.</param>
+            <param name="delim">Delim.</param>
+            <param name="printReadably">If set to <c>true</c> print readably.</param>
+        </member>
+        <member name="M:OpenLisp.Core.StaticClasses.Printer.Join(System.Collections.Generic.IDictionary{System.String,OpenLisp.Core.AbstractClasses.OpenLispVal},System.String,System.Boolean)">
+            <summary>
+            Joins a <see cref="T:System.Collections.Generic.IDictionary`2"/> with <see cref="T:System.String"/> keys and
+            <see cref="T:OpenLisp.Core.AbstractClasses.OpenLispVal"/> values using a <see cref="T:System.String"/> delimeter.
+            </summary>
+            <param name="values"></param>
+            <param name="delim"></param>
+            <param name="printReadably">Whether or not to pretty-print the result.</param>
+            <returns></returns>
+        </member>
+        <member name="M:OpenLisp.Core.StaticClasses.Printer.PrStr(OpenLisp.Core.AbstractClasses.OpenLispVal,System.Boolean)">
+            <summary>
+            pr-str implementation.
+            </summary>
+            <param name="value"></param>
+            <param name="printReadably"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OpenLisp.Core.StaticClasses.Printer.PrStrArgs(OpenLisp.Core.DataTypes.OpenLispList,System.String,System.Boolean)">
+            <summary>
+            pr-str arguments.
+            </summary>
+            <param name="args"></param>
+            <param name="separator"></param>
+            <param name="printReadably"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OpenLisp.Core.StaticClasses.Printer.EscapeString(System.String)">
+            <summary>
+            Escapes a string.
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="T:OpenLisp.Core.StaticClasses.Repl">
+            <summary>
+            Default REPL implementation for OpenLisp.NET
+            </summary>
+        </member>
+        <member name="F:OpenLisp.Core.StaticClasses.Repl.DefaultPrompt">
+            <summary>
+            Enable us to retrieve the default prompt value at any time.
+            </summary>
+        </member>
+        <member name="P:OpenLisp.Core.StaticClasses.Repl.Prompt">
+            <summary>
+            Get or set the REPL prompt.
+            </summary>
+        </member>
+        <member name="E:OpenLisp.Core.StaticClasses.Repl.PrintEvent">
+            <summary>
+            Printe Event handler.
+            </summary>
+        </member>
+        <member name="E:OpenLisp.Core.StaticClasses.Repl.InputEvent">
+            <summary>
+            Input Event handler.
+            </summary>
+        </member>
+        <member name="M:OpenLisp.Core.StaticClasses.Repl.Read(System.String)">
+            <summary>
+            Use the Reader to read a string and return an OpenLispVal.
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OpenLisp.Core.StaticClasses.Repl.IsPair(OpenLisp.Core.AbstractClasses.OpenLispVal)">
+            <summary>
+            Is this <see cref="T:OpenLisp.Core.AbstractClasses.OpenLispVal"/> a pair?
+            </summary>
+            <param name="x"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OpenLisp.Core.StaticClasses.Repl.QuasiQuote(OpenLisp.Core.AbstractClasses.OpenLispVal)">
+            <summary>
+            Implements quasi-quotes.
+            
+            TODO: refactor to move to <see cref="T:OpenLisp.Core.StaticClasses.CoreNameSpace"/>.
+            </summary>
+            <param name="abstractSyntaxTree"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OpenLisp.Core.StaticClasses.Repl.IsMacroCall(OpenLisp.Core.AbstractClasses.OpenLispVal,OpenLisp.Core.Env)">
+            <summary>
+            Is this <see cref="T:OpenLisp.Core.AbstractClasses.OpenLispVal"/> a macro call in the current <see cref="T:OpenLisp.Core.Env"/>?
+            </summary>
+            <param name="abstractSyntaxTree"></param>
+            <param name="environment"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OpenLisp.Core.StaticClasses.Repl.MacroExpand(OpenLisp.Core.AbstractClasses.OpenLispVal,OpenLisp.Core.Env)">
+             <summary>
+             Expands a macro.
+            
+             TODO: refactor to move to <see cref="T:OpenLisp.Core.StaticClasses.CoreNameSpace"/>.
+             </summary>
+             <param name="abstractSyntaxTree"></param>
+             <param name="environment"></param>
+             <returns></returns>
+        </member>
+        <member name="M:OpenLisp.Core.StaticClasses.Repl.EvalAst(OpenLisp.Core.AbstractClasses.OpenLispVal,OpenLisp.Core.Env)">
+            <summary>
+            Evalues an AST in the environment.
+            
+            TODO: refactor to move to <see cref="T:OpenLisp.Core.StaticClasses.CoreNameSpace"/>.
+            </summary>
+            <param name="abstractSyntaxTree"></param>
+            <param name="environment"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OpenLisp.Core.StaticClasses.Repl.Eval(OpenLisp.Core.AbstractClasses.OpenLispVal,OpenLisp.Core.Env)">
+            <summary>
+            Evaluate an <see cref="T:OpenLisp.Core.AbstractClasses.OpenLispVal"/> inside an <seealso cref="T:OpenLisp.Core.Env"/>.
+            
+            The core namespace is defined in <seealso cref="T:OpenLisp.Core.StaticClasses.CoreNameSpace"/>.
+            
+            TODO: refactor the switch over treeHeadSymbol.  All symbols of the core language should be defined in the same place.
+            </summary>
+            <param name="originalAbstractSyntaxTree"></param>
+            <param name="environment"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OpenLisp.Core.StaticClasses.Repl.Print(OpenLisp.Core.AbstractClasses.OpenLispVal)">
+            <summary>
+            Pretty-prints an <see cref="T:OpenLisp.Core.AbstractClasses.OpenLispVal"/>.
+            </summary>
+            <param name="expression"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OpenLisp.Core.StaticClasses.Repl.ReplMain(System.String[])">
+            <summary>
+            Main entry point of the OpenLisp.NET REPL.  
+            </summary>
+            <param name="arguments"></param>
+        </member>
+        <member name="T:OpenLisp.Core.StaticClasses.StaticOpenLispTypes">
+            <summary>
+            OpenLisp.NET native static types.  Keeping these static means a smaller memory footprint.
+            </summary>
+        </member>
+        <member name="M:OpenLisp.Core.StaticClasses.StaticOpenLispTypes.OpenLispEqualB(System.Object,System.Object)">
+            <summary>
+            Compares equality between two instances of <see cref="T:System.Object"/>.
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OpenLisp.Core.StaticClasses.StaticOpenLispTypes.OpenLispEqualQ(OpenLisp.Core.AbstractClasses.OpenLispVal,OpenLisp.Core.AbstractClasses.OpenLispVal)">
+            <summary>
+            Compares equality between two instances of <see cref="T:OpenLisp.Core.AbstractClasses.OpenLispVal"/>.
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="F:OpenLisp.Core.StaticClasses.StaticOpenLispTypes.Nil">
+            <summary>
+            Returns the instance <see cref="T:OpenLisp.Core.DataTypes.OpenLispConstant"/> representing nil.
+            </summary>
+        </member>
+        <member name="F:OpenLisp.Core.StaticClasses.StaticOpenLispTypes.True">
+            <summary>
+            Returns the instance of <see cref="T:OpenLisp.Core.DataTypes.OpenLispConstant"/> representing true.
+            </summary>
+        </member>
+        <member name="F:OpenLisp.Core.StaticClasses.StaticOpenLispTypes.False">
+            <summary>
+            Returns the instance of <see cref="T:OpenLisp.Core.DataTypes.OpenLispConstant"/> representing false.
+            </summary>
+        </member>
+        <member name="F:OpenLisp.Core.StaticClasses.StaticOpenLispTypes.EmptyDictionary">
+            <summary>
+            Returns and empty dictionary of <see cref="T:System.Collections.Generic.Dictionary`2"/>
+            where TKey is <see cref="T:System.String"/> and TValue is <see cref="T:OpenLisp.Core.AbstractClasses.OpenLispVal"/>.
+            </summary>
+        </member>
+        <member name="F:OpenLisp.Core.StaticClasses.StaticOpenLispTypes.EmptySecondaryDictionary">
+            <summary>
+            Returns an empty secondary dictionary of <see cref="T:System.Collections.Generic.Dictionary`2"/>
+            where TKey is <see cref="T:OpenLisp.Core.DataTypes.OpenLispString"/> and TValue is <see cref="T:OpenLisp.Core.AbstractClasses.OpenLispVal"/>.
+            </summary>
+        </member>
+        <member name="F:OpenLisp.Core.StaticClasses.StaticOpenLispTypes.EmptyConcurrentSkipList">
+            <summary>
+            Returns an empty <see cref="T:DataStructures.ConcurrentSkipList`1"/> where T is <see cref="T:OpenLisp.Core.AbstractClasses.OpenLispVal"/>.
+            </summary>
+        </member>
+        <member name="F:OpenLisp.Core.StaticClasses.StaticOpenLispTypes.EmpyListOpenLispVal">
+            <summary>
+            Returns an empty <see cref="T:System.Collections.Generic.List`1"/> where T is <see cref="T:OpenLisp.Core.AbstractClasses.OpenLispVal"/>.
+            </summary>
+        </member>
+        <member name="T:OpenLisp.Core.SimpleHelpers.NamedLock">
+            <summary>
+            Synchronization helper: a static lock collection associated with a key.
+            NamedLock manages the lifetime of critical sections that can be accessed by a key (name) throughout the application. 
+            It also have some helper methods to allow a maximum wait time (timeout) to aquire the lock and safelly release it.    
+            Note: this nuget package contains c# source code and depends on System.Collections.Concurrent introduced in .Net 4.0.
+            </summary>
+            <example>
+            // create a lock for this key
+            using (var padlock = new NamedLock (key))
+            {
+                if (padlock.Enter (TimeSpan.FromMilliseconds (100)))
+                {
+                    // do something
+                }
+                else
+                {
+                    // do some other thing
+                }
+            }
+            </example>
+        </member>
+        <member name="P:OpenLisp.Core.SimpleHelpers.NamedLock.IsLocked">
+            <summary>
+            Check if a lock was aquired.
+            </summary>
+        </member>
+        <member name="P:OpenLisp.Core.SimpleHelpers.NamedLock.Key">
+            <summary>
+            Gets the lock key name.
+            </summary>
+        </member>
+        <member name="P:OpenLisp.Core.SimpleHelpers.NamedLock.Lock">
+            <summary>
+            Gets the internal lock object.
+            </summary>
+        </member>
+        <member name="M:OpenLisp.Core.SimpleHelpers.NamedLock.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:OpenLisp.Core.SimpleHelpers.NamedLock" /> class.
+            </summary>
+            <param name="key">The named lock key.</param>
+        </member>
+        <member name="M:OpenLisp.Core.SimpleHelpers.NamedLock.Dispose">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing,
+            or resetting unmanaged resources.
+            Releases aquired lock and related resources.
+            </summary>
+        </member>
+        <member name="M:OpenLisp.Core.SimpleHelpers.NamedLock.Enter">
+            <summary>
+            Tries to aquire a lock.
+            </summary>
+        </member>
+        <member name="M:OpenLisp.Core.SimpleHelpers.NamedLock.Enter(System.Int32)">
+            <summary>
+            Tries to aquire a lock respecting the specified timeout.
+            </summary>
+            <param name="waitTimeoutMilliseconds">The wait timeout milliseconds.</param>
+            <returns>If the lock was aquired in the specified timeout</returns>
+        </member>
+        <member name="M:OpenLisp.Core.SimpleHelpers.NamedLock.Enter(System.TimeSpan)">
+            <summary>
+            Tries to aquire a lock respecting the specified timeout.
+            </summary>
+            <param name="waitTimeout">The wait timeout.</param>
+            <returns>If the lock was aquired in the specified timeout</returns>
+        </member>
+        <member name="M:OpenLisp.Core.SimpleHelpers.NamedLock.Exit">
+            <summary>
+            Releases the lock if it was already aquired.
+            Called also at "Dispose".
+            </summary>
+        </member>
+        <member name="M:OpenLisp.Core.SimpleHelpers.NamedLock.CreateAndEnter(System.String)">
+            <summary>
+            Creates a new instance and tries to aquire a lock.
+            </summary>
+            <param name="key">The named lock key.</param>
+        </member>
+        <member name="M:OpenLisp.Core.SimpleHelpers.NamedLock.CreateAndEnter(System.String,System.Int32)">
+            <summary>
+            Creates a new instance and tries to aquire a lock.
+            </summary>
+            <param name="key">The named lock key.</param>
+            <param name="waitTimeoutMilliseconds">The wait timeout milliseconds.</param>
+        </member>
+        <member name="M:OpenLisp.Core.SimpleHelpers.NamedLock.CreateAndEnter(System.String,System.TimeSpan)">
+            <summary>
+            Creates a new instance and tries to aquire a lock.
+            </summary>
+            <param name="key">The named lock key.</param>
+            <param name="waitTimeout">The wait timeout.</param>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:OpenLisp.Core.SimpleHelpers.MemoryCache`1" -->
+        <member name="P:OpenLisp.Core.SimpleHelpers.MemoryCache`1.Expiration">
+            <summary>
+            Expiration TimeSpan of stored items.
+            Default value is 5 minutes.
+            </summary>
+        </member>
+        <member name="P:OpenLisp.Core.SimpleHelpers.MemoryCache`1.MaintenanceStep">
+            <summary>
+            Interval duration between checks for expired cached items by the internal timer thread.
+            Default value is 5 minutes.
+            </summary>
+        </member>
+        <member name="P:OpenLisp.Core.SimpleHelpers.MemoryCache`1.IgnoreNullValues">
+            <summary>
+            If the Set method should silently ignore any null value.
+            Default value is true.
+            </summary>
+        </member>
+        <member name="P:OpenLisp.Core.SimpleHelpers.MemoryCache`1.Count">
+            <summary>
+            Gets the current number of item stored in the cache.
+            </summary>
+        </member>
+        <member name="M:OpenLisp.Core.SimpleHelpers.MemoryCache`1.Get(System.String)">
+            <summary>
+            Gets the stored value associated with the specified key.
+            Return the default value if not found.
+            </summary>
+            <param name="key">The key.</param>
+            <returns>Stored value for the key or default value if not found</returns>
+        </member>
+        <member name="M:OpenLisp.Core.SimpleHelpers.MemoryCache`1.Set(System.String,`0)">
+            <summary>
+            Stores or updates the value associated with the key.
+            </summary>
+            <param name="key">The key.</param>
+            <param name="data">Stored value.</param>
+        </member>
+        <member name="M:OpenLisp.Core.SimpleHelpers.MemoryCache`1.Renew(System.String)">
+            <summary>
+            Renews the expiration due time for the specified cached item.
+            </summary>
+            <param name="key">The cached item key.</param>
+        </member>
+        <member name="M:OpenLisp.Core.SimpleHelpers.MemoryCache`1.Remove(System.String)">
+            <summary>
+            Removes and returns the value associated with the specified key.
+            Return the default value if not found.
+            </summary>
+            <param name="key">The key.</param>
+            <returns>Stored value for the key or default value if not found</returns>
+        </member>
+        <member name="M:OpenLisp.Core.SimpleHelpers.MemoryCache`1.ClearByPrefix(System.String,System.StringComparison)">
+            <summary>
+            Remove all cached items with the matching prefix.
+            </summary>
+            <param name="prefix">The prefix.</param>
+            <param name="comparison">The comparison method.</param>
+        </member>
+        <member name="M:OpenLisp.Core.SimpleHelpers.MemoryCache`1.Clear">
+            <summary>
+            Remove all cached items.
+            </summary>
+        </member>
+        <member name="M:OpenLisp.Core.SimpleHelpers.MemoryCache`1.GetOrAdd(System.String,System.Func{System.String,`0})">
+            <summary>
+            Gets the stored value associated with the specified key or store a new value
+            generated by the provided factory function and return it.
+            </summary>
+            <param name="key">The key.</param>
+            <param name="valueFactory">The value factory function.</param>
+            <returns>Stored value for the key or default value if not found</returns>
+        </member>
+        <member name="M:OpenLisp.Core.SimpleHelpers.MemoryCache`1.GetOrSyncAdd(System.String,System.Func{System.String,`0},System.TimeSpan)">
+            <summary>
+            Gets the stored value associated with the specified key or store a new value
+            generated by the provided factory function and return it.
+            If the value factory function is called to create a new item, a lock is aquired to supress
+            multiple call to the factory function for the specified key (calls to others keys are not blocked). 
+            If the lock times out (i.e. the factory takes more waitTimeout to create then new instance), the default value for the type is returned.
+            </summary>
+            <param name="key">The key.</param>
+            <param name="valueFactory">The value factory function.</param>
+            <param name="waitTimeout">The wait timeout to sync.</param>
+            <returns>Stored value for the key or default value if not found</returns>
+        </member>
+        <member name="M:OpenLisp.Core.SimpleHelpers.MemoryCache`1.GetOrSyncAdd(System.String,System.Func{System.String,`0},System.Int32)">
+            <summary>
+            Gets the stored value associated with the specified key or store a new value
+            generated by the provided factory function and return it.
+            If the value factory function is called to create a new item, a lock is aquired to supress
+            multiple call to the factory function for the specified key (calls to others keys are not blocked).
+            If the lock times out (i.e. the factory takes more waitTimeout to create then new instance), the default value for the type is returned.
+            </summary>
+            <param name="key">The key.</param>
+            <param name="valueFactory">The value factory function.</param>
+            <param name="waitTimeoutMilliseconds">The wait timeout milliseconds.</param>
+            <returns>Stored value for the key or default value if not found</returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:OpenLisp.Core.SimpleHelpers.MemoryCache" -->
+        <member name="M:OpenLisp.Core.SimpleHelpers.MemoryCache.GetAs``1(System.String)">
+            <summary>
+            Gets the stored value associated with the specified key and cast it to desired type.
+            Returns null if not found or if the type cast failed.
+            </summary>
+            <param name="key">The key.</param>
+            <returns>The key value or null if not found or if the type cast failed.</returns>
+        </member>
+        <member name="M:OpenLisp.Core.SimpleHelpers.MemoryCache.RemoveAs``1(System.String)">
+            <summary>
+            Removes and returns the value associated with the specified key.
+            Returns null if not found or if the type cast failed.
+            </summary>
+            <param name="key">The key.</param>
+            <returns>The key value or null if not found or if the type cast failed.</returns>
+        </member>
+    </members>
+</doc>
