@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\OpenLisp\Scripts\LispMachine.cs" />
+    <Compile Include="Assets\OpenLisp\Scripts\DataTypes\OpenLispGameObject.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\OpenLisp\Scripts\OpenLisp.Games.Unity.asmdef" />

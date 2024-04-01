@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using DataStructures;
 using OpenLisp.Core.AbstractClasses;
-using OpenLisp.Core.DataTypes.Errors.Throwable;
 using OpenLisp.Core.StaticClasses;
 using OpenLisp.Core.Attributes;
 
@@ -50,8 +48,8 @@ namespace OpenLisp.Core.DataTypes.Concurrent
             :base()
         {
             // TODO: finalize skip list start and end tokens
-            //Start = "o(";
-            //End = ")o";
+            //Start = "~";
+            //End = "~";
 
             Value = new ConcurrentSkipList<OpenLispVal>();
         }

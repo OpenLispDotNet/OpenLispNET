@@ -6,7 +6,7 @@
     <members>
         <member name="T:OpenLisp.Core.AbstractClasses.OpenLispVal">
             <summary>
-            Base class used inherited by all valid language contructs and primitives in OpenLisp.NET
+            Base class used inherited by all valid language constructs and primitives in OpenLisp.NET
             </summary>
         </member>
         <member name="P:OpenLisp.Core.AbstractClasses.OpenLispVal.Meta">
@@ -16,7 +16,7 @@
         </member>
         <member name="P:OpenLisp.Core.AbstractClasses.OpenLispVal.Value">
             <summary>
-            
+            Used when calling .ToString() on any OpenLispVal.
             </summary>
         </member>
         <member name="M:OpenLisp.Core.AbstractClasses.OpenLispVal.Copy">
@@ -848,7 +848,7 @@
         </member>
         <member name="M:OpenLisp.Core.DataTypes.Concurrent.OpenLispSkipList.#ctor(OpenLisp.Core.AbstractClasses.OpenLispVal[])">
             <summary>
-            Constsructor accepting a <see cref="T:OpenLisp.Core.AbstractClasses.OpenLispVal"/> array for params. 
+            Constructor accepting a <see cref="T:OpenLisp.Core.AbstractClasses.OpenLispVal"/> array for params. 
             </summary>
             <param name="value"></param>
         </member>

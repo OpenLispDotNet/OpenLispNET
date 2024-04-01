@@ -14,22 +14,28 @@ namespace OpenLisp.Games.Unity
     {
         Func<string, Env, OpenLispVal> Re = (string str, Env env) => Repl.Eval(Repl.Read(str), env);
 
-        public Env env = new Env(null);
+        public Env LispEnv = new(null);
         public Text Input;
         public Text Output;
 
-        // Start is called before the first frame update
+        /**
+         * Build the Lisp Environment with a standard library.
+         *
+         * Start is called before the first frame update
+         */
         void Start()
         {
             // Load each OpenLispSymbol in the core name space
             foreach (var entry in CoreNameSpace.Ns)
             {
-                this.env.Set(new OpenLispSymbol(entry.Key), entry.Value);
+                LispEnv.Set(new OpenLispSymbol(entry.Key), entry.Value);
             }
 
             // TODO: extract this from the Repl
-            this.env.Set(new OpenLispSymbol("eval"),
-                new OpenLispFunc(a => Repl.Eval(a[0], env)));
+            LispEnv.Set(new OpenLispSymbol("eval"),
+                new OpenLispFunc(a => Repl.Eval(a[0], LispEnv)));
+
+            LispEnv.Set(new OpenLispSymbol("game-object-invoke"), new OpenLispFunc(a => ));
         }
 
         // Update is called once per frame
@@ -47,7 +53,7 @@ namespace OpenLisp.Games.Unity
             }
 
             var inputExpression = this.Input.text;
-            var outputValue = Re(inputExpression, this.env);
+            var outputValue = Re(inputExpression, this.LispEnv);
             if (outputValue != null)
             {
                 Debug.Log($"S-Expression result: {outputValue.Value}");
