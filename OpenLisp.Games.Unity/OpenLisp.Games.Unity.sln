@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34607.119
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{BE1C8AE0-11D7-ACC8-999A-B714E688B732}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenLisp.Core", "..\OpenLisp.Core\OpenLisp.Core.csproj", "{296028DC-C3F3-4296-A6DF-2851BC066620}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenLisp.Repl", "..\OpenLisp.Repl\OpenLisp.Repl.csproj", "{648A6B9E-B246-4E70-93C8-4483D0B91435}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenLisp.Games.Unity.SDK", "..\OpenLisp.Games.Unity.SDK\OpenLisp.Games.Unity.SDK.csproj", "{8B1CFD70-D98A-461C-AF94-71DA85385760}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BE1C8AE0-11D7-ACC8-999A-B714E688B732}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE1C8AE0-11D7-ACC8-999A-B714E688B732}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE1C8AE0-11D7-ACC8-999A-B714E688B732}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE1C8AE0-11D7-ACC8-999A-B714E688B732}.Release|Any CPU.Build.0 = Release|Any CPU
+		{296028DC-C3F3-4296-A6DF-2851BC066620}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{296028DC-C3F3-4296-A6DF-2851BC066620}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{296028DC-C3F3-4296-A6DF-2851BC066620}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{296028DC-C3F3-4296-A6DF-2851BC066620}.Release|Any CPU.Build.0 = Release|Any CPU
+		{648A6B9E-B246-4E70-93C8-4483D0B91435}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{648A6B9E-B246-4E70-93C8-4483D0B91435}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{648A6B9E-B246-4E70-93C8-4483D0B91435}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{648A6B9E-B246-4E70-93C8-4483D0B91435}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B1CFD70-D98A-461C-AF94-71DA85385760}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B1CFD70-D98A-461C-AF94-71DA85385760}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B1CFD70-D98A-461C-AF94-71DA85385760}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B1CFD70-D98A-461C-AF94-71DA85385760}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
