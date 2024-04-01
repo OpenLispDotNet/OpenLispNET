@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace OpenLisp.Games.Unity.DataTypes
 {
+    /// <summary>
+    /// Unity GameObject boxed as an OpenLispVal.
+    /// </summary>
     public class OpenLispGameObject : OpenLispVal
     {
         private GameObject _value;
