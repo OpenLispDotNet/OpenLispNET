@@ -1,5 +1,5 @@
 ﻿using System;
-using OpenLisp.Terminal;
+//using OpenLisp.Terminal;
 
 namespace OpenLisp.Core
 {
@@ -33,7 +33,7 @@ namespace OpenLisp.Core
         /// <summary>
         /// The <see cref="LineEditor"/> singleton.
         /// </summary>
-        private static LineEditor _lineEditor = null;
+        //private static LineEditor _lineEditor = null;
 
         /// <summary>
         /// Static method to present a prompt in a REPL.
@@ -42,17 +42,17 @@ namespace OpenLisp.Core
         /// <returns></returns>
         public static string LineReader(string prompt)
         {
-            if (Mode == ModeEnum.Terminal)
-            {
-                if (_lineEditor == null)
-                {
-                    _lineEditor = new LineEditor("OpenLisp.NET");
-                }
+            //if (Mode == ModeEnum.Terminal)
+            //{
+            //    if (_lineEditor == null)
+            //    {
+            //        _lineEditor = new LineEditor("OpenLisp.NET");
+            //    }
 
-                return _lineEditor.Edit(prompt, "");
-            }
+            //    return _lineEditor.Edit(prompt, "");
+            //}
 
-            Console.WriteLine(prompt);
+            Console.Write(prompt);
             Console.Out.Flush();
             return Console.ReadLine();
         }
