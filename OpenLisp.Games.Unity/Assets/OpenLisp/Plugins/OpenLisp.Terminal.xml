@@ -1,0 +1,458 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>OpenLisp.Terminal</name>
+    </assembly>
+    <members>
+        <member name="T:OpenLisp.Terminal.LineEditor">
+            <summary>
+            Provides line editing capabilities in console applications.
+            </summary>
+        </member>
+        <member name="T:OpenLisp.Terminal.LineEditor.Completion">
+            <summary>
+            Small object to represent line completion state.
+            </summary>
+        </member>
+        <member name="F:OpenLisp.Terminal.LineEditor.Completion.Result">
+            <summary>
+            The result of completion.
+            </summary>
+        </member>
+        <member name="F:OpenLisp.Terminal.LineEditor.Completion.Prefix">
+            <summary>
+            The prefix for completion.
+            </summary>
+        </member>
+        <member name="M:OpenLisp.Terminal.LineEditor.Completion.#ctor(System.String,System.String[])">
+            <summary>
+            Constructor accepting a <see cref="T:System.String"/> prefix and
+            a <see cref="T:string[]"/> result. 
+            </summary>
+            <param name="prefix"></param>
+            <param name="result"></param>
+        </member>
+        <member name="T:OpenLisp.Terminal.LineEditor.AutoCompleteHandler">
+            <summary>
+            Delegate to a <see cref="T:OpenLisp.Terminal.LineEditor.Completion"/> method.
+            </summary>
+            <param name="text"></param>
+            <param name="pos"></param>
+            <returns></returns>
+        </member>
+        <member name="T:OpenLisp.Terminal.LineEditor.KeyHandler">
+            <summary>
+            Delegate to a key handler.
+            </summary>
+        </member>
+        <member name="T:OpenLisp.Terminal.LineEditor.Handler">
+            <summary>
+            Small struct to represent handler state.
+            </summary>
+        </member>
+        <member name="M:OpenLisp.Terminal.LineEditor.Handler.#ctor(System.ConsoleKey,OpenLisp.Terminal.LineEditor.KeyHandler)">
+            <summary>
+            Constructor accepting a <see cref="T:System.ConsoleKey"/> and a <see cref="T:OpenLisp.Terminal.LineEditor.KeyHandler"/>.
+            </summary>
+            <param name="key"></param>
+            <param name="h"></param>
+        </member>
+        <member name="M:OpenLisp.Terminal.LineEditor.Handler.#ctor(System.Char,OpenLisp.Terminal.LineEditor.KeyHandler)">
+            <summary>
+            Constructor accepting a <see cref="T:System.Char"/> and a <see cref="T:OpenLisp.Terminal.LineEditor.KeyHandler"/>.
+            </summary>
+            <param name="c"></param>
+            <param name="h"></param>
+        </member>
+        <member name="M:OpenLisp.Terminal.LineEditor.Handler.#ctor(System.ConsoleKeyInfo,OpenLisp.Terminal.LineEditor.KeyHandler)">
+            <summary>
+            Constructor accepting a <see cref="T:System.ConsoleKeyInfo"/> and a <see cref="T:OpenLisp.Terminal.LineEditor.KeyHandler"/>.
+            </summary>
+            <param name="cki"></param>
+            <param name="h"></param>
+        </member>
+        <member name="M:OpenLisp.Terminal.LineEditor.Handler.Control(System.Char,OpenLisp.Terminal.LineEditor.KeyHandler)">
+            <summary>
+            Control method accepting a <see cref="T:System.Char"/> and a <see cref="T:OpenLisp.Terminal.LineEditor.KeyHandler"/>.
+            </summary>
+            <param name="c"></param>
+            <param name="h"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OpenLisp.Terminal.LineEditor.Handler.Alt(System.Char,System.ConsoleKey,OpenLisp.Terminal.LineEditor.KeyHandler)">
+            <summary>
+            Alt method accepting a <see cref="T:System.Char"/>, a <see cref="T:System.ConsoleKey"/>,
+            and a <see cref="T:OpenLisp.Terminal.LineEditor.KeyHandler"/>.
+            </summary>
+            <param name="c"></param>
+            <param name="k"></param>
+            <param name="h"></param>
+            <returns></returns>
+        </member>
+        <member name="F:OpenLisp.Terminal.LineEditor.AutoCompleteEvent">
+             <summary>
+               Invoked when the user requests auto-completion using the tab character
+             </summary>
+             <remarks>
+                The result is null for no values found, an array with a single
+                string, in that case the string should be the text to be inserted
+                for example if the word at pos is "T", the result for a completion
+                of "ToString" should be "oString", not "ToString".
+            
+                When there are multiple results, the result should be the full
+                text
+             </remarks>
+        </member>
+        <member name="F:OpenLisp.Terminal.LineEditor._handlers">
+            <summary>
+            An array of <see cref="T:OpenLisp.Terminal.LineEditor.Handler"/> objects.
+            </summary>
+        </member>
+        <member name="M:OpenLisp.Terminal.LineEditor.#ctor(System.String)">
+            <summary>
+            Constructor accepting a <see cref="T:System.String"/> parameter.
+            </summary>
+            <param name="name"></param>
+        </member>
+        <member name="M:OpenLisp.Terminal.LineEditor.#ctor(System.String,System.Int32)">
+            <summary>
+            Constructor accepting <see cref="T:System.String"/> and <see cref="T:System.Int32"/> parameters.
+            </summary>
+            <param name="name"></param>
+            <param name="histsize"></param>
+        </member>
+        <member name="M:OpenLisp.Terminal.LineEditor.CmdDebug">
+            <summary>
+            Dump the history, write a new line, and invoke <see cref="M:OpenLisp.Terminal.LineEditor.Render"/>.
+            </summary>
+        </member>
+        <member name="M:OpenLisp.Terminal.LineEditor.Render">
+            <summary>
+            Render the line editor.
+            </summary>
+        </member>
+        <member name="M:OpenLisp.Terminal.LineEditor.UpdateHomeRow(System.Int32)">
+            <summary>
+            Updates home row at the position represented by an <see cref="T:System.Int32"/>.
+            </summary>
+            <param name="screenpos"></param>
+        </member>
+        <member name="M:OpenLisp.Terminal.LineEditor.RenderFrom(System.Int32)">
+            <summary>
+            Renders from a position represented by an <see cref="T:System.Int32"/>.
+            </summary>
+            <param name="pos"></param>
+        </member>
+        <member name="M:OpenLisp.Terminal.LineEditor.ComputeRendered">
+            <summary>
+            Compute the rendered line editor text.
+            </summary>
+        </member>
+        <member name="M:OpenLisp.Terminal.LineEditor.TextToRenderPos(System.Int32)">
+            <summary>
+            Renders text at a position represented by an <see cref="T:System.Int32"/>.
+            </summary>
+            <param name="pos"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OpenLisp.Terminal.LineEditor.TextToScreenPos(System.Int32)">
+            <summary>
+            Renders text to a screen position represented by an <see cref="T:System.Int32"/>.
+            </summary>
+            <param name="pos"></param>
+            <returns></returns>
+        </member>
+        <member name="P:OpenLisp.Terminal.LineEditor.Prompt">
+            <summary>
+            Get and Set the prompt.
+            </summary>
+        </member>
+        <member name="P:OpenLisp.Terminal.LineEditor.LineCount">
+            <summary>
+            Gets the line editor line count represented by an <see cref="T:System.Int32"/>.
+            </summary>
+        </member>
+        <member name="M:OpenLisp.Terminal.LineEditor.ForceCursor(System.Int32)">
+            <summary>
+            Forces the cursos to a new position represented by an <see cref="T:System.Int32"/>.
+            </summary>
+            <param name="newpos"></param>
+        </member>
+        <member name="M:OpenLisp.Terminal.LineEditor.UpdateCursor(System.Int32)">
+            <summary>
+            Updates cursor at a position represented by an <see cref="T:System.Int32"/>.
+            </summary>
+            <param name="newpos"></param>
+        </member>
+        <member name="M:OpenLisp.Terminal.LineEditor.InsertChar(System.Char)">
+            <summary>
+            Inserts a single <see cref="T:System.Char"/>.
+            </summary>
+            <param name="c"></param>
+        </member>
+        <member name="M:OpenLisp.Terminal.LineEditor.CmdDone">
+            <summary>
+            Done command.
+            </summary>
+        </member>
+        <member name="M:OpenLisp.Terminal.LineEditor.CmdTabOrComplete">
+            <summary>
+            Tab or Complete command.
+            </summary>
+        </member>
+        <member name="M:OpenLisp.Terminal.LineEditor.CmdHome">
+            <summary>
+            Home command.
+            </summary>
+        </member>
+        <member name="M:OpenLisp.Terminal.LineEditor.CmdEnd">
+            <summary>
+            End command.
+            </summary>
+        </member>
+        <member name="M:OpenLisp.Terminal.LineEditor.CmdLeft">
+            <summary>
+            Left command.
+            </summary>
+        </member>
+        <member name="M:OpenLisp.Terminal.LineEditor.CmdBackwardWord">
+            <summary>
+            Backward Word command.
+            </summary>
+        </member>
+        <member name="M:OpenLisp.Terminal.LineEditor.CmdForwardWord">
+            <summary>
+            Forward Word command.
+            </summary>
+        </member>
+        <member name="M:OpenLisp.Terminal.LineEditor.CmdRight">
+            <summary>
+            Right command.
+            </summary>
+        </member>
+        <member name="M:OpenLisp.Terminal.LineEditor.RenderAfter(System.Int32)">
+            <summary>
+            Render after a position represented by an <see cref="T:System.Int32"/>.
+            </summary>
+            <param name="p"></param>
+        </member>
+        <member name="M:OpenLisp.Terminal.LineEditor.CmdBackspace">
+            <summary>
+            Backspace command.
+            </summary>
+        </member>
+        <member name="M:OpenLisp.Terminal.LineEditor.CmdDeleteChar">
+            <summary>
+            Delete Char command.
+            </summary>
+        </member>
+        <member name="M:OpenLisp.Terminal.LineEditor.WordForward(System.Int32)">
+            <summary>
+            Word Forward to a position represented by an <see cref="T:System.Int32"/>.
+            </summary>
+            <param name="p"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OpenLisp.Terminal.LineEditor.WordBackward(System.Int32)">
+            <summary>
+            Word Backward to a point represented by an <see cref="T:System.Int32"/>.
+            </summary>
+            <param name="p"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OpenLisp.Terminal.LineEditor.CmdDeleteWord">
+            <summary>
+            Delete Word command.
+            </summary>
+        </member>
+        <member name="M:OpenLisp.Terminal.LineEditor.CmdDeleteBackword">
+            <summary>
+            Delete Backword command.
+            </summary>
+        </member>
+        <member name="M:OpenLisp.Terminal.LineEditor.HistoryUpdateLine">
+            <summary>
+            Adds the current line to the history if needed
+            </summary>
+        </member>
+        <member name="M:OpenLisp.Terminal.LineEditor.CmdHistoryPrev">
+            <summary>
+            Previous History command.
+            </summary>
+        </member>
+        <member name="M:OpenLisp.Terminal.LineEditor.CmdHistoryNext">
+            <summary>
+            History Next command.
+            </summary>
+        </member>
+        <member name="M:OpenLisp.Terminal.LineEditor.CmdKillToEOF">
+            <summary>
+            Kill to EOF command.
+            </summary>
+        </member>
+        <member name="M:OpenLisp.Terminal.LineEditor.CmdYank">
+            <summary>
+            Yank command.
+            </summary>
+        </member>
+        <member name="M:OpenLisp.Terminal.LineEditor.InsertTextAtCursor(System.String)">
+            <summary>
+            Insert text represented by a <see cref="T:System.String"/> at the cursor.
+            </summary>
+            <param name="str"></param>
+        </member>
+        <member name="M:OpenLisp.Terminal.LineEditor.SetSearchPrompt(System.String)">
+            <summary>
+            Set the Search Prompt.
+            </summary>
+            <param name="s"></param>
+        </member>
+        <member name="M:OpenLisp.Terminal.LineEditor.ReverseSearch">
+            <summary>
+            Reverse Search through <see cref="F:OpenLisp.Terminal.LineEditor._text"/>.
+            </summary>
+        </member>
+        <member name="M:OpenLisp.Terminal.LineEditor.CmdReverseSearch">
+            <summary>
+            Reverse Search command.
+            </summary>
+        </member>
+        <member name="M:OpenLisp.Terminal.LineEditor.SearchAppend(System.Char)">
+            <summary>
+            Search Append with a <see cref="T:System.Char"/>.
+            </summary>
+            <param name="c"></param>
+        </member>
+        <member name="M:OpenLisp.Terminal.LineEditor.CmdRefresh">
+            <summary>
+            Refresh command.
+            </summary>
+        </member>
+        <member name="M:OpenLisp.Terminal.LineEditor.InterruptEdit(System.Object,System.ConsoleCancelEventArgs)">
+            <summary>
+            Event to interrupt editing.
+            </summary>
+            <param name="sender"></param>
+            <param name="a"></param>
+        </member>
+        <member name="M:OpenLisp.Terminal.LineEditor.EditLoop">
+            <summary>
+            Edit the loop.
+            </summary>
+        </member>
+        <member name="M:OpenLisp.Terminal.LineEditor.InitText(System.String)">
+            <summary>
+            Initial text.
+            </summary>
+            <param name="initial"></param>
+        </member>
+        <member name="M:OpenLisp.Terminal.LineEditor.SetText(System.String)">
+            <summary>
+            Set text at a cursor with a <see cref="T:System.String"/> value.
+            </summary>
+            <param name="newtext"></param>
+        </member>
+        <member name="M:OpenLisp.Terminal.LineEditor.SetPrompt(System.String)">
+            <summary>
+            Set the prompt with a <see cref="T:System.String"/> value.
+            </summary>
+            <param name="newprompt"></param>
+        </member>
+        <member name="M:OpenLisp.Terminal.LineEditor.Edit(System.String,System.String)">
+            <summary>
+            Edits the line editor.
+            </summary>
+            <param name="prompt"></param>
+            <param name="initial"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OpenLisp.Terminal.LineEditor.SaveHistory">
+            <summary>
+            Saves the command history.
+            </summary>
+        </member>
+        <member name="P:OpenLisp.Terminal.LineEditor.TabAtStartCompletes">
+            <summary>
+            Get or Set the tab at start completes.
+            </summary>
+        </member>
+        <member name="T:OpenLisp.Terminal.LineEditor.History">
+            <summary>
+            Emulates the bash-like behavior, where edits done to the
+            history are recorded.
+            </summary>
+        </member>
+        <member name="M:OpenLisp.Terminal.LineEditor.History.Close">
+            <summary>
+            Closes the history file.
+            </summary>
+        </member>
+        <member name="M:OpenLisp.Terminal.LineEditor.History.Append(System.String)">
+            <summary>
+            Appends a value to the history
+            </summary>
+            <param name="s"></param>
+        </member>
+        <member name="M:OpenLisp.Terminal.LineEditor.History.Update(System.String)">
+            <summary>
+            Updates the current cursor location with the string,
+            to support editing of history items.   For the current
+            line to participate, an Append must be done before.
+            </summary>
+            <param name="s"></param>
+        </member>
+        <member name="M:OpenLisp.Terminal.LineEditor.History.RemoveLast">
+            <summary>
+            Removes last command from the history.
+            </summary>
+        </member>
+        <member name="M:OpenLisp.Terminal.LineEditor.History.Accept(System.String)">
+            <summary>
+            Accepts a <see cref="T:System.String"/>.
+            </summary>
+            <param name="s"></param>
+        </member>
+        <member name="M:OpenLisp.Terminal.LineEditor.History.PreviousAvailable">
+            <summary>
+            Is the previous command available?
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:OpenLisp.Terminal.LineEditor.History.NextAvailable">
+            <summary>
+            Is the next command available?
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:OpenLisp.Terminal.LineEditor.History.Previous">
+            <summary>
+            Returns a string with the previous line contents, or
+            null if there is no data in the history to move to.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:OpenLisp.Terminal.LineEditor.History.Next">
+            <summary>
+            Gets the next command in the history.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:OpenLisp.Terminal.LineEditor.History.CursorToEnd">
+            <summary>
+            Sets the cursor to the end.
+            </summary>
+        </member>
+        <member name="M:OpenLisp.Terminal.LineEditor.History.Dump">
+            <summary>
+            Dumps the command history.
+            </summary>
+        </member>
+        <member name="M:OpenLisp.Terminal.LineEditor.History.SearchBackward(System.String)">
+            <summary>
+            Search backards for a term represented by a <see cref="T:System.String"/>.
+            </summary>
+            <param name="term"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

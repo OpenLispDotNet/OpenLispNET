@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using OpenLisp.Core.AbstractClasses;
-using OpenLisp.Core.DataTypes.Errors.Throwable;
 using OpenLisp.Core.StaticClasses;
 
 namespace OpenLisp.Core.DataTypes
@@ -66,7 +65,7 @@ namespace OpenLisp.Core.DataTypes
         }
 
         /// <summary>
-        /// Constsructor accepting a <see cref="OpenLispVal"/> array for params. 
+        /// Constructor accepting a <see cref="OpenLispVal"/> array for params. 
         /// </summary>
         /// <param name="values"></param>
         public OpenLispList(params OpenLispVal[] values)

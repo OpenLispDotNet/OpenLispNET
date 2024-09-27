@@ -8,10 +8,10 @@
 ```
 
 OpenLisp.NET
-v0.0.5-alpha
+v0.0.7-alpha
 (c) The Wizard & The Wyrd, LLC
 
-rev: November 17, 2023
+rev: March 31, 2024
 
 Vision
 ======
