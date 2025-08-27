@@ -62,6 +62,7 @@
     <Compile Include="DataTypes\OpenLispHashMap.cs" />
     <Compile Include="DataTypes\OpenLispInt.cs" />
     <Compile Include="DataTypes\OpenLispList.cs" />
+    <Compile Include="DataTypes\OpenLispMatrix.cs" />
     <Compile Include="DataTypes\OpenLispMaybeMonad.cs" />
     <Compile Include="DataTypes\OpenLispMonad.cs" />
     <Compile Include="DataTypes\OpenLispString.cs" />

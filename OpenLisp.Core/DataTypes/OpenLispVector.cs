@@ -11,6 +11,8 @@ namespace OpenLisp.Core.DataTypes
         /// <summary>
         /// Default constructor that invokes the base constructor in <see cref="OpenLispList"/>.
         /// An instance of <see cref="OpenLispVector"/> uses square brackets instead of parentheses.
+        /// Given the orientation of standard text input patterns, each vector is a row matrix of 1 x n dimensional space.
+        /// Column matrices of n x 1 appears to be a less efficient way to encode a vector.
         /// </summary>
         public OpenLispVector() 
             : base()

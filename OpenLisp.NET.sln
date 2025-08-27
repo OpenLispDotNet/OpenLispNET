@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34607.119
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenLisp.Core", "OpenLisp.Core\OpenLisp.Core.csproj", "{296028DC-C3F3-4296-A6DF-2851BC066620}"
 EndProject
@@ -16,6 +16,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenLisp.Terminal", "OpenLisp.Terminal\OpenLisp.Terminal.csproj", "{66E6CA76-71EC-481C-B92E-F56CD284A72D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenLisp.Repl", "OpenLisp.Repl\OpenLisp.Repl.csproj", "{648A6B9E-B246-4E70-93C8-4483D0B91435}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenLisp.OS", "OpenLisp.OS\OpenLisp.OS.csproj", "{4782FE22-5110-4A27-AFC8-6D51D46D869F}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Corlib", "Corlib\Corlib.shproj", "{51E1B402-1D4F-4C9B-831C-45C8603353D5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -93,8 +97,30 @@ Global
 		{648A6B9E-B246-4E70-93C8-4483D0B91435}.Release|x64.Build.0 = Release|Any CPU
 		{648A6B9E-B246-4E70-93C8-4483D0B91435}.Release|x86.ActiveCfg = Release|Any CPU
 		{648A6B9E-B246-4E70-93C8-4483D0B91435}.Release|x86.Build.0 = Release|Any CPU
+		{4782FE22-5110-4A27-AFC8-6D51D46D869F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4782FE22-5110-4A27-AFC8-6D51D46D869F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4782FE22-5110-4A27-AFC8-6D51D46D869F}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{4782FE22-5110-4A27-AFC8-6D51D46D869F}.Debug|ARM.Build.0 = Debug|Any CPU
+		{4782FE22-5110-4A27-AFC8-6D51D46D869F}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{4782FE22-5110-4A27-AFC8-6D51D46D869F}.Debug|x64.Build.0 = Debug|Any CPU
+		{4782FE22-5110-4A27-AFC8-6D51D46D869F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{4782FE22-5110-4A27-AFC8-6D51D46D869F}.Debug|x86.Build.0 = Debug|Any CPU
+		{4782FE22-5110-4A27-AFC8-6D51D46D869F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4782FE22-5110-4A27-AFC8-6D51D46D869F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4782FE22-5110-4A27-AFC8-6D51D46D869F}.Release|ARM.ActiveCfg = Release|Any CPU
+		{4782FE22-5110-4A27-AFC8-6D51D46D869F}.Release|ARM.Build.0 = Release|Any CPU
+		{4782FE22-5110-4A27-AFC8-6D51D46D869F}.Release|x64.ActiveCfg = Release|Any CPU
+		{4782FE22-5110-4A27-AFC8-6D51D46D869F}.Release|x64.Build.0 = Release|Any CPU
+		{4782FE22-5110-4A27-AFC8-6D51D46D869F}.Release|x86.ActiveCfg = Release|Any CPU
+		{4782FE22-5110-4A27-AFC8-6D51D46D869F}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3B0708C4-9A09-42B9-9BC3-9961A4AFB2E5}
+	EndGlobalSection
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Corlib\Corlib.projitems*{51e1b402-1d4f-4c9b-831c-45c8603353d5}*SharedItemsImports = 13
 	EndGlobalSection
 EndGlobal

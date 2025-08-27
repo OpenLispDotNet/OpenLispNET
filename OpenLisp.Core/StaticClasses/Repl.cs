@@ -54,7 +54,7 @@ namespace OpenLisp.Core.StaticClasses
         /// </summary>
         /// <param name="str"></param>
         /// <returns></returns>
-        static OpenLispVal Read(string str)
+        public static OpenLispVal Read(string str)
         {
             return Reader.ReadStr(str);
         }
