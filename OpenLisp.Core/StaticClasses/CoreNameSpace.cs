@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using DeepEqual.Syntax;
+// using DeepEqual.Syntax;
 using OpenLisp.Core.AbstractClasses;
 using OpenLisp.Core.DataTypes;
 using OpenLisp.Core.StaticClasses.Funcs;
@@ -179,7 +179,7 @@ namespace OpenLisp.Core.StaticClasses
                                 {"time-ms",     NumberFuncs.TimeMs},
 
                                 // Concurrent types
-                                {"skip-list",   new OpenLispFunc(x => new OpenLispSkipList(x.Value))},
+                                // {"skip-list",   new OpenLispFunc(x => new OpenLispSkipList(x.Value))},
 
                                 // Non-concurrent types
                                 {"list",        new OpenLispFunc(x => new OpenLispList(x.Value))},

@@ -40,12 +40,6 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
-    <Reference Include="DeepEqual">
-      <HintPath>..\packages\DeepEqual.1.4.0.0\lib\net40\DeepEqual.dll</HintPath>
-    </Reference>
-    <Reference Include="DataStructures">
-      <HintPath>..\packages\ConcurrentDataStructures.0.2.0\lib\net45\DataStructures.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AbstractClasses\OpenLispVal.cs" />

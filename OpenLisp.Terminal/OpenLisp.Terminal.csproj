@@ -46,9 +46,6 @@
     <Reference Include="System.ValueTuple">
       <HintPath>..\packages\System.ValueTuple.4.3.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
     </Reference>
-    <Reference Include="DeepEqual">
-      <HintPath>..\packages\DeepEqual.2.0.0\lib\net462\DeepEqual.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="LineEditor.cs" />

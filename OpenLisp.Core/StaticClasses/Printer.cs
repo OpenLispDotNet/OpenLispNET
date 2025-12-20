@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using DataStructures;
+// using DataStructures;
 using OpenLisp.Core.AbstractClasses;
 using OpenLisp.Core.DataTypes;
 
@@ -32,12 +32,12 @@ namespace OpenLisp.Core.StaticClasses
         /// <param name="values">Values.</param>
         /// <param name="delim">Delim.</param>
         /// <param name="printReadably">If set to <c>true</c> print readably.</param>
-        public static string Join(ConcurrentSkipList<OpenLispVal> values, string delim, bool printReadably)
-        {
-            var vals = values.ToList().ToArray();           
-
-            return Join(vals, delim, printReadably);
-        }
+        // public static string Join(ConcurrentSkipList<OpenLispVal> values, string delim, bool printReadably)
+        // {
+        //     var vals = values.ToList().ToArray();           
+        //
+        //     return Join(vals, delim, printReadably);
+        // }
 
         /// <summary>
         /// Joins a <see cref="IDictionary{T1, T2}"/> with <see cref="string"/> keys and

@@ -1,9 +1,9 @@
 ﻿using System;
-using DeepEqual.Syntax;
+// using DeepEqual.Syntax;
 using OpenLisp.Core.AbstractClasses;
 using OpenLisp.Core.DataTypes;
 using System.Collections.Generic;
-using DataStructures;
+// using DataStructures;
 
 namespace OpenLisp.Core.StaticClasses
 {
@@ -18,17 +18,17 @@ namespace OpenLisp.Core.StaticClasses
         /// <param name="a"></param>
         /// <param name="b"></param>
         /// <returns></returns>
-        public static bool OpenLispEqualB(object a, object b)
-        {
-            var typeA = a.GetType();
-            var typeB = b.GetType();
-
-            if (!(typeA == typeB) && !(a.IsDeepEqual(b)))
-            {
-                return false;
-            }
-            return true;
-        }
+        // public static bool OpenLispEqualB(object a, object b)
+        // {
+        //     var typeA = a.GetType();
+        //     var typeB = b.GetType();
+        //
+        //     if (!(typeA == typeB) && !(a.IsDeepEqual(b)))
+        //     {
+        //         return false;
+        //     }
+        //     return true;
+        // }
 
         /// <summary>
         /// Compares equality between two instances of <see cref="OpenLispVal"/>.
@@ -113,7 +113,7 @@ namespace OpenLisp.Core.StaticClasses
         /// <summary>
         /// Returns an empty <see cref="ConcurrentSkipList{T}"/> where T is <see cref="OpenLispVal"/>.
         /// </summary>
-        public static ConcurrentSkipList<OpenLispVal> EmptyConcurrentSkipList = new ConcurrentSkipList<OpenLispVal>();
+        // public static ConcurrentSkipList<OpenLispVal> EmptyConcurrentSkipList = new ConcurrentSkipList<OpenLispVal>();
 
         /// <summary>
         /// Returns an empty <see cref="List{T}"/> where T is <see cref="OpenLispVal"/>.
